@@ -65,6 +65,13 @@ export async function generateMetadata({
       url: `${BASE_URL}/${locale}`,
       siteName: "Salto",
       type: "website",
+      images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "Salto — Alavanque suas vendas" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: titles[locale] ?? titles.pt,
+      description: descriptions[locale] ?? descriptions.pt,
+      images: [`${BASE_URL}/og-image.png`],
     },
   };
 }
@@ -84,8 +91,32 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Salto",
+    url: BASE_URL,
+    logo: `${BASE_URL}/icon.svg`,
+    description: "Estratégia comercial e tecnologia integradas para alavancar as vendas do seu negócio.",
+    founder: { "@type": "Person", name: "Bruno Vieira" },
+    sameAs: ["https://www.wbdigitalsolutions.com"],
+    serviceType: ["Sales Strategy", "Digital Marketing", "CRM", "Sales Training"],
+    areaServed: ["BR", "US", "ES", "IT"],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      availableLanguage: ["Portuguese", "English", "Spanish", "Italian"],
+    },
+  };
+
   return (
     <html lang={locale}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${montserrat.variable} font-sans antialiased bg-base text-text-primary`}>
         <NextIntlClientProvider messages={messages}>
           <LocaleDetector currentLocale={locale} />
