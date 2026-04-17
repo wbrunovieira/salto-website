@@ -10,7 +10,7 @@ import LocaleDetector from "@/components/LocaleDetector";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import "../globals.css";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://salto.com.br";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://saltoup.com";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
