@@ -157,6 +157,7 @@ export default function Contact() {
                     defaultCountry={defaultCountry}
                     value={form.phone}
                     onChange={(phone) => setForm((prev) => ({ ...prev, phone }))}
+                    placeholder={t("form.phone")}
                     className="phone-input-container"
                   />
                 </div>

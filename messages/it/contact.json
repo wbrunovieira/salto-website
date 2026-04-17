@@ -7,9 +7,9 @@
     "whatsapp": "Chatta su WhatsApp",
     "whatsappSub": "Risposta rapida",
     "form": {
-      "name": "Nome",
-      "email": "Email",
-      "phone": "Telefono",
+      "name": "Il tuo nome",
+      "email": "La tua migliore email",
+      "phone": "Seleziona il paese e inserisci con prefisso",
       "business": "Raccontaci un po' del tuo business",
       "submit": "Voglio la mia diagnosi gratuita",
       "submitting": "Invio in corso...",

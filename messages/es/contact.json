@@ -7,9 +7,9 @@
     "whatsapp": "Hablar por WhatsApp",
     "whatsappSub": "Respuesta rápida",
     "form": {
-      "name": "Nombre",
-      "email": "Correo",
-      "phone": "Teléfono",
+      "name": "Tu nombre",
+      "email": "Tu mejor correo",
+      "phone": "Selecciona el país e ingresa con código",
       "business": "Cuéntanos un poco sobre tu negocio",
       "submit": "Quiero mi diagnóstico gratis",
       "submitting": "Enviando...",

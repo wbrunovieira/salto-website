@@ -7,9 +7,9 @@
     "whatsapp": "Chat on WhatsApp",
     "whatsappSub": "Quick response",
     "form": {
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
+      "name": "Your name",
+      "email": "Your best email",
+      "phone": "Select country and enter with area code",
       "business": "Tell us a bit about your business",
       "submit": "Get my free diagnosis",
       "submitting": "Sending...",
