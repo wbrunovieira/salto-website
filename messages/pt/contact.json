@@ -18,6 +18,12 @@
     },
     "infoTitle": "Por onde prefere?",
     "guarantee": "Diagnóstico 100% gratuito e sem compromisso.",
-    "whatsappMessage": "Olá! Vim pelo site da Salto e gostaria de saber como vocês podem ajudar o meu negócio."
+    "whatsappMessage": "Olá! Vim pelo site da Salto e gostaria de saber como vocês podem ajudar o meu negócio.",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Telefone",
+    "whatsappLabel": "WhatsApp",
+    "email": "bruno@saltoup.com",
+    "phoneNumber": "+55 11 5026-4203",
+    "whatsappNumber": "+55 11 98286-4581"
   }
 }
