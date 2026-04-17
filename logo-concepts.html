@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salto — Conceitos de Logo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0E0E0E;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 72px;
+      padding: 80px 60px;
+    }
+
+    .concept {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    .card {
+      background: #141414;
+      border: 1px solid #252525;
+      border-radius: 20px;
+      padding: 52px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #FF5C00;
+    }
+
+    /* ── CONCEPT 1: A com seta ── */
+    .logo-c1 {
+      display: flex;
+      align-items: flex-end;
+      font-family: 'Montserrat', 'Arial Black', sans-serif;
+      font-weight: 900;
+      font-size: 100px;
+      line-height: 1;
+      letter-spacing: -3px;
+      color: #F5F5F5;
+      user-select: none;
+    }
+
+    .a-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .a-arrow-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    /* ── CONCEPT 2: ícone + texto ── */
+    .logo-c2 {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo-c2-text {
+      font-family: 'Montserrat', 'Arial Black', sans-serif;
+      font-weight: 900;
+      font-size: 100px;
+      line-height: 1;
+      letter-spacing: -3px;
+      color: #F5F5F5;
+      user-select: none;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #1E1E1E;
+      max-width: 600px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ─────────── CONCEITO 1 — Seta dentro do A ─────────── -->
+  <div class="concept">
+    <span class="label">Conceito 1 — seta dentro do A</span>
+    <div class="card">
+      <div class="logo-c1" id="logo1">
+        <span>S</span>
+        <span class="a-wrap" id="aWrap">
+          <span id="aChar">A</span>
+          <!-- SVG arrow overlay — posicionado via JS após render -->
+          <svg class="a-arrow-svg" id="arrowSvg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <!-- Arrow line: diagonal ascendente (bottom-left → top-right do interior do A) -->
+            <line id="arrowLine" x1="22" y1="72" x2="78" y2="28"
+                  stroke="#FF5C00" stroke-width="9" stroke-linecap="round"/>
+            <!-- Arrowhead -->
+            <polyline id="arrowHead" points="54,22 78,28 72,52"
+                      fill="none" stroke="#FF5C00" stroke-width="9"
+                      stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>LTO</span>
+      </div>
+      <div class="tagline">alavanque suas vendas</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ─────────── CONCEITO 2 — Ícone de seta + nome ─────────── -->
+  <div class="concept">
+    <span class="label">Conceito 2 — ícone de seta + nome</span>
+    <div class="card">
+      <div class="logo-c2">
+        <!-- Bold upward arrow icon -->
+        <svg width="62" height="86" viewBox="0 0 62 86" fill="none">
+          <!-- Shaft -->
+          <rect x="22" y="40" width="18" height="44" rx="5" fill="#FF5C00"/>
+          <!-- Head -->
+          <polygon points="0,44 31,2 62,44" fill="#FF5C00"/>
+        </svg>
+        <span class="logo-c2-text">SALTO</span>
+      </div>
+      <div class="tagline">alavanque suas vendas</div>
+    </div>
+  </div>
+
+  <!-- ─────────── BÔNUS: versão menor / ícone ─────────── -->
+  <div class="divider"></div>
+
+  <div class="concept">
+    <span class="label">Versão compacta (ícone)</span>
+    <div class="card" style="flex-direction: row; gap: 48px; padding: 40px 64px;">
+
+      <!-- Ícone só com a seta + S inicial -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <rect width="64" height="64" rx="14" fill="#FF5C00"/>
+          <polygon points="10,40 32,14 54,40" fill="#0E0E0E"/>
+          <rect x="24" y="36" width="16" height="18" rx="3" fill="#0E0E0E"/>
+        </svg>
+        <span style="font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; color:#444; text-transform:uppercase;">icon c2</span>
+      </div>
+
+      <!-- Ícone do A com seta -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <rect width="64" height="64" rx="14" fill="#FF5C00"/>
+          <!-- A shape -->
+          <polygon points="8,56 16,56 32,10 48,56 56,56 50,56 32,16 14,56" fill="#0E0E0E"/>
+          <!-- Crossbar arrow -->
+          <line x1="18" y1="42" x2="44" y2="26" stroke="#0E0E0E" stroke-width="5" stroke-linecap="round"/>
+          <polyline points="33,22 44,26 40,37" fill="none" stroke="#0E0E0E" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <span style="font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; color:#444; text-transform:uppercase;">icon c1</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

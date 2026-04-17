@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salto — Variações Logo C2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0E0E0E;
+      min-height: 100vh;
+      padding: 72px 60px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 64px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #141414;
+      border: 1px solid #222;
+      border-radius: 20px;
+      padding: 48px 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+    }
+
+    .v-label {
+      position: absolute;
+      top: 18px;
+      left: 22px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #FF5C00;
+      margin-top: 4px;
+    }
+
+    .tagline-gray {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* ── font mixin ── */
+    .t { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 80px; line-height: 1; letter-spacing: -2px; color: #F5F5F5; user-select:none; }
+    .t-lg { font-size: 88px; letter-spacing: -3px; }
+    .t-sm { font-size: 72px; }
+    .t-wide { letter-spacing: 8px; }
+    .flex-row { display: flex; align-items: center; gap: 16px; }
+    .flex-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  </style>
+</head>
+<body>
+
+  <h1>Salto — variações conceito 2</h1>
+
+  <div class="grid">
+
+    <!-- V1 — Original (referência) -->
+    <div class="card">
+      <span class="v-label">V1 — original</span>
+      <div class="flex-row">
+        <svg width="56" height="76" viewBox="0 0 56 76" fill="none">
+          <rect x="19" y="36" width="18" height="38" rx="5" fill="#FF5C00"/>
+          <polygon points="0,40 28,2 56,40" fill="#FF5C00"/>
+        </svg>
+        <span class="t t-lg">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+    <!-- V2 — Chevron (^) limpo -->
+    <div class="card">
+      <span class="v-label">V2 — chevron</span>
+      <div class="flex-row">
+        <svg width="58" height="76" viewBox="0 0 58 76" fill="none">
+          <polyline points="4,66 29,10 54,66"
+                    fill="none" stroke="#FF5C00" stroke-width="14"
+                    stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <span class="t t-lg">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+    <!-- V3 — Seta diagonal (45°) dinâmica -->
+    <div class="card">
+      <span class="v-label">V3 — diagonal</span>
+      <div class="flex-row" style="gap:12px;">
+        <svg width="64" height="76" viewBox="0 0 64 76" fill="none">
+          <line x1="8" y1="70" x2="58" y2="8"
+                stroke="#FF5C00" stroke-width="11" stroke-linecap="round"/>
+          <polyline points="34,4 58,8 54,32"
+                    fill="none" stroke="#FF5C00" stroke-width="11"
+                    stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <span class="t t-lg">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+    <!-- V4 — Seta em badge círculo laranja -->
+    <div class="card">
+      <span class="v-label">V4 — badge círculo</span>
+      <div class="flex-row">
+        <svg width="74" height="74" viewBox="0 0 74 74" fill="none">
+          <circle cx="37" cy="37" r="37" fill="#FF5C00"/>
+          <rect x="29" y="36" width="16" height="22" rx="4" fill="#0E0E0E"/>
+          <polygon points="14,40 37,14 60,40" fill="#0E0E0E"/>
+        </svg>
+        <span class="t t-lg">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+    <!-- V5 — Seta slim / premium -->
+    <div class="card">
+      <span class="v-label">V5 — slim / premium</span>
+      <div class="flex-row" style="gap:14px;">
+        <svg width="42" height="76" viewBox="0 0 42 76" fill="none">
+          <line x1="21" y1="74" x2="21" y2="8"
+                stroke="#FF5C00" stroke-width="4" stroke-linecap="round"/>
+          <polyline points="4,28 21,6 38,28"
+                    fill="none" stroke="#FF5C00" stroke-width="4"
+                    stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <span class="t t-lg" style="font-weight:700; letter-spacing: 6px; font-size:72px;">SALTO</span>
+      </div>
+      <span class="tagline-gray">alavanque suas vendas</span>
+    </div>
+
+    <!-- V6 — Badge quadrado (app icon style) + texto -->
+    <div class="card">
+      <span class="v-label">V6 — badge quadrado</span>
+      <div class="flex-row">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+          <rect width="72" height="72" rx="16" fill="#FF5C00"/>
+          <rect x="28" y="36" width="16" height="22" rx="4" fill="#0E0E0E"/>
+          <polygon points="12,40 36,12 60,40" fill="#0E0E0E"/>
+        </svg>
+        <span class="t t-lg">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+    <!-- V7 — Layout stacked (ícone acima do texto) -->
+    <div class="card">
+      <span class="v-label">V7 — stacked / vertical</span>
+      <div class="flex-col">
+        <svg width="52" height="66" viewBox="0 0 52 66" fill="none">
+          <rect x="17" y="32" width="18" height="32" rx="5" fill="#FF5C00"/>
+          <polygon points="0,36 26,2 52,36" fill="#FF5C00"/>
+        </svg>
+        <span class="t" style="font-size:86px; letter-spacing: 2px;">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+    <!-- V8 — Texto duas cores + seta -->
+    <div class="card">
+      <span class="v-label">V8 — dois tons no texto</span>
+      <div class="flex-row">
+        <svg width="56" height="76" viewBox="0 0 56 76" fill="none">
+          <polyline points="4,66 28,10 52,66"
+                    fill="none" stroke="#FF5C00" stroke-width="14"
+                    stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div style="display:flex; align-items:flex-end; letter-spacing:-2px; line-height:1;">
+          <span class="t t-lg">SALT</span><span class="t t-lg" style="color:#FF5C00;">O</span>
+        </div>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+
+  </div>
+
+  <!-- Comparação fundo claro -->
+  <div style="max-width:1000px; margin: 64px auto 0;">
+    <p style="text-align:center; font-size:11px; font-weight:700; letter-spacing:6px; color:#333; text-transform:uppercase; margin-bottom: 32px;">
+      em fundo claro (variante)
+    </p>
+    <div style="background:#F5F5F5; border-radius:20px; padding: 48px 52px; display:flex; align-items:center; justify-content:center; gap:64px; flex-wrap:wrap;">
+
+      <!-- C2 original no branco -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <svg width="48" height="64" viewBox="0 0 56 76" fill="none">
+            <rect x="19" y="36" width="18" height="38" rx="5" fill="#FF5C00"/>
+            <polygon points="0,40 28,2 56,40" fill="#FF5C00"/>
+          </svg>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:72px;line-height:1;letter-spacing:-2px;color:#0E0E0E;">SALTO</span>
+        </div>
+        <span style="font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#FF5C00;">alavanque suas vendas</span>
+      </div>
+
+      <!-- Chevron no branco -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <svg width="50" height="64" viewBox="0 0 58 76" fill="none">
+            <polyline points="4,66 29,10 54,66" fill="none" stroke="#FF5C00" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:72px;line-height:1;letter-spacing:-2px;color:#0E0E0E;">SALTO</span>
+        </div>
+        <span style="font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#FF5C00;">alavanque suas vendas</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
