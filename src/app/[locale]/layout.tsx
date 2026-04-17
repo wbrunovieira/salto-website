@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import HeaderClient from "@/components/layout/HeaderClient";
 import FooterClient from "@/components/layout/FooterClient";
 import LocaleDetector from "@/components/LocaleDetector";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import "../globals.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://salto.com.br";
@@ -90,6 +91,7 @@ export default async function LocaleLayout({
           <HeaderClient locale={locale} />
           {children}
           <FooterClient />
+          <WhatsAppFloat />
         </NextIntlClientProvider>
       </body>
     </html>
