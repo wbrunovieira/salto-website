@@ -1,17 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const STATS = [
-  { value: "200+", labelKey: "statsProjects" },
-  { value: "4",    labelKey: "statsCountries" },
-  { value: "3×",   labelKey: "statsRoi" },
-];
 
 const containerVariants: Variants = {
   hidden: {},
@@ -23,35 +16,9 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
 };
 
-function StatCard({ value, label, index }: { value: string; label: string; index: number }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: EASE }}
-      className="flex flex-col items-center gap-1.5"
-    >
-      <span className="text-3xl md:text-4xl font-black text-text-primary tabular-nums">
-        {value}
-      </span>
-      <span className="text-[11px] font-semibold text-text-muted uppercase tracking-[3px] text-center max-w-[90px]">
-        {label}
-      </span>
-    </motion.div>
-  );
-}
 
 export default function Hero() {
   const t = useTranslations("hero");
-
-  const statsNodes = STATS.flatMap((stat, i) => [
-    i > 0 ? <div key={`sep-${i}`} className="w-px h-10 bg-border/60 hidden sm:block" /> : null,
-    <StatCard key={stat.labelKey} value={stat.value} label={t(stat.labelKey)} index={i} />,
-  ]).filter(Boolean);
 
   return (
     <section
@@ -68,7 +35,7 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex flex-col items-center text-center max-w-5xl w-full mx-auto gap-8 flex-1 justify-center pt-[68px] pb-24"
+        className="relative z-10 flex flex-col items-center text-center max-w-5xl w-full mx-auto gap-10 flex-1 justify-center pt-32 pb-28"
       >
         {/* Badge */}
         <motion.div variants={itemVariants}>
@@ -136,13 +103,6 @@ export default function Hero() {
           </Link>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center gap-8 sm:gap-14 pt-6 border-t border-border/40 w-full justify-center"
-        >
-          {statsNodes}
-        </motion.div>
       </motion.div>
 
       {/* Scroll indicator — fora do flex-1, fica naturalmente no final */}
