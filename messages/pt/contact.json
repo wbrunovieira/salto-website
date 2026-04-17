@@ -1,15 +1,22 @@
 {
   "contact": {
-    "title": "Vamos conversar?",
-    "subtitle": "Conte-nos sobre seu negócio e descubra como a Salto pode alavancar suas vendas.",
+    "label": "Contato",
+    "title": "Pronto para dar",
+    "titleAccent": "o próximo salto?",
+    "subtitle": "Vamos conversar sobre o seu negócio. Sem compromisso, sem enrolação.",
+    "whatsapp": "Falar no WhatsApp",
+    "whatsappSub": "Resposta rápida",
     "form": {
       "name": "Seu nome",
       "email": "Seu e-mail",
-      "phone": "WhatsApp",
-      "message": "Como podemos ajudar?",
-      "submit": "Enviar mensagem"
+      "phone": "WhatsApp com DDD",
+      "business": "Conta um pouco sobre seu negócio",
+      "submit": "Quero meu diagnóstico grátis",
+      "submitting": "Enviando...",
+      "success": "Mensagem enviada! Entraremos em contato em breve.",
+      "error": "Algo deu errado. Tente novamente ou fale pelo WhatsApp."
     },
-    "success": "Mensagem enviada! Entraremos em contato em breve.",
-    "whatsapp": "Falar no WhatsApp"
+    "infoTitle": "Por onde prefere?",
+    "guarantee": "Diagnóstico 100% gratuito e sem compromisso."
   }
 }

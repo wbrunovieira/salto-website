@@ -8,6 +8,7 @@ import Hero from "./sections/Hero";
 import Services from "./sections/Services";
 import Process from "./sections/Process";
 import About from "./sections/About";
+import Contact from "./sections/Contact";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -174,6 +175,34 @@ export default function ScrollScene() {
           scrollTrigger: { trigger: "#tech-stack", start: "top 85%", once: true },
         }
       );
+
+      // ═══════════════════════════════════════════════════════
+      // CONTACT → slide up sobre About + montagem
+      // ═══════════════════════════════════════════════════════
+      gsap.fromTo("#contact", { y: 80 }, {
+        y: 0, ease: "none",
+        scrollTrigger: { trigger: "#contact", start: "top 100%", end: "top 20%", scrub: 1.2 },
+      });
+
+      gsap.timeline({
+        scrollTrigger: { trigger: "#contact", start: "top 62%", once: true },
+      })
+        .from("#contact-label",    { opacity: 0, y: -20, duration: 0.5, ease: "power2.out" })
+        .from("#contact-title1",   { y: "105%", duration: 0.7, ease: "power4.out" }, "-=0.2")
+        .from("#contact-title2",   { y: "105%", duration: 0.7, ease: "power4.out" }, "-=0.5")
+        .from("#contact-subtitle", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out" }, "-=0.3");
+
+      gsap.fromTo("#contact-left",
+        { opacity: 0, x: -50 },
+        { opacity: 1, x: 0, duration: 0.7, ease: "power3.out",
+          scrollTrigger: { trigger: "#contact-left", start: "top 80%", once: true } }
+      );
+
+      gsap.fromTo("#contact-right",
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 0.7, delay: 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: "#contact-right", start: "top 80%", once: true } }
+      );
     },
     { scope: containerRef, dependencies: [] }
   );
@@ -200,6 +229,11 @@ export default function ScrollScene() {
       {/* About sobe sobre Process */}
       <div className="-mt-[30vh] relative z-30">
         <About />
+      </div>
+
+      {/* Contact sobe sobre About */}
+      <div className="-mt-[30vh] relative z-40">
+        <Contact />
       </div>
     </div>
   );

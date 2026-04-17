@@ -1,9 +1,22 @@
 {
   "contact": {
-    "title": "¿Hablamos?",
-    "subtitle": "Cuéntanos sobre tu negocio y descubre cómo Salto puede impulsar tus ventas.",
-    "form": { "name": "Tu nombre", "email": "Tu correo", "phone": "WhatsApp", "message": "¿Cómo podemos ayudarte?", "submit": "Enviar mensaje" },
-    "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
-    "whatsapp": "Hablar por WhatsApp"
+    "label": "Contacto",
+    "title": "¿Listo para dar",
+    "titleAccent": "el próximo salto?",
+    "subtitle": "Hablemos sobre tu negocio. Sin compromiso, sin rodeos.",
+    "whatsapp": "Hablar por WhatsApp",
+    "whatsappSub": "Respuesta rápida",
+    "form": {
+      "name": "Tu nombre",
+      "email": "Tu correo",
+      "phone": "WhatsApp con código de área",
+      "business": "Cuéntanos un poco sobre tu negocio",
+      "submit": "Quiero mi diagnóstico gratis",
+      "submitting": "Enviando...",
+      "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
+      "error": "Algo salió mal. Inténtalo de nuevo o escríbenos por WhatsApp."
+    },
+    "infoTitle": "¿Por dónde prefieres?",
+    "guarantee": "Diagnóstico 100% gratuito y sin compromiso."
   }
 }

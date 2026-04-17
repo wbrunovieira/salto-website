@@ -1,9 +1,22 @@
 {
   "contact": {
-    "title": "Let's talk?",
-    "subtitle": "Tell us about your business and discover how Salto can boost your sales.",
-    "form": { "name": "Your name", "email": "Your email", "phone": "WhatsApp", "message": "How can we help?", "submit": "Send message" },
-    "success": "Message sent! We'll get back to you shortly.",
-    "whatsapp": "Chat on WhatsApp"
+    "label": "Contact",
+    "title": "Ready to take",
+    "titleAccent": "the next leap?",
+    "subtitle": "Let's talk about your business. No commitment, no runaround.",
+    "whatsapp": "Chat on WhatsApp",
+    "whatsappSub": "Quick response",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "phone": "WhatsApp number",
+      "business": "Tell us a bit about your business",
+      "submit": "Get my free diagnosis",
+      "submitting": "Sending...",
+      "success": "Message sent! We'll get back to you soon.",
+      "error": "Something went wrong. Try again or reach us via WhatsApp."
+    },
+    "infoTitle": "How would you prefer?",
+    "guarantee": "100% free diagnosis, no commitment."
   }
 }
