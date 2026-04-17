@@ -9,7 +9,7 @@ type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function Contact() {
   const t = useTranslations("contact");
-  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [state, setState] = useState<FormState>("idle");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -121,18 +121,18 @@ export default function Contact() {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.name")}</label>
+                    <label htmlFor="contact-name" className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.name")}</label>
                     <input
-                      name="name" value={form.name} onChange={handleChange} required
+                      id="contact-name" name="name" value={form.name} onChange={handleChange} required
                       autoComplete="name"
                       className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.name")}
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.email")}</label>
+                    <label htmlFor="contact-email" className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.email")}</label>
                     <input
-                      name="email" type="email" value={form.email} onChange={handleChange} required
+                      id="contact-email" name="email" type="email" value={form.email} onChange={handleChange} required
                       autoComplete="email"
                       className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.email")}
@@ -141,9 +141,9 @@ export default function Contact() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.phone")}</label>
+                  <label htmlFor="contact-phone" className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.phone")}</label>
                   <input
-                    name="phone" type="tel" value={form.phone} onChange={handleChange} required
+                    id="contact-phone" name="phone" type="tel" value={form.phone} onChange={handleChange} required
                     autoComplete="tel"
                     className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                     placeholder={t("form.phone")}
