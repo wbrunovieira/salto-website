@@ -51,6 +51,10 @@ export async function generateMetadata({
         routing.locales.map((loc) => [loc, `${BASE_URL}/${loc}`])
       ),
     },
+    icons: {
+      icon: "/icon.svg",
+      apple: "/icon.svg",
+    },
     openGraph: {
       title: titles[locale] ?? titles.pt,
       description: descriptions[locale] ?? descriptions.pt,
