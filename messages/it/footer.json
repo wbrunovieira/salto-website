@@ -1,1 +1,18 @@
-{ "footer": { "rights": "Tutti i diritti riservati.", "partner": "Tecnologia di WB Digital Solutions" } }
+{
+  "footer": {
+    "tagline": "Potenzia le tue vendite",
+    "description": "Strategia commerciale e tecnologia integrate per portare il tuo business al livello successivo.",
+    "nav": "Navigazione",
+    "links": {
+      "home": "Home",
+      "services": "Servizi",
+      "process": "Come funziona",
+      "about": "Chi siamo",
+      "contact": "Contatti"
+    },
+    "contact": "Contattaci",
+    "rights": "Tutti i diritti riservati.",
+    "partner": "Tecnologia di",
+    "partnerName": "WB Digital Solutions"
+  }
+}

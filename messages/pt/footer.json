@@ -1,6 +1,18 @@
 {
   "footer": {
+    "tagline": "Alavanque suas vendas",
+    "description": "Estratégia comercial e tecnologia integradas para fazer o seu negócio dar o próximo salto.",
+    "nav": "Navegação",
+    "links": {
+      "home": "Início",
+      "services": "Serviços",
+      "process": "Como funciona",
+      "about": "Sobre",
+      "contact": "Contato"
+    },
+    "contact": "Fale conosco",
     "rights": "Todos os direitos reservados.",
-    "partner": "Tecnologia por WB Digital Solutions"
+    "partner": "Tecnologia por",
+    "partnerName": "WB Digital Solutions"
   }
 }

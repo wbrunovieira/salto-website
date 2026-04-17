@@ -1,1 +1,18 @@
-{ "footer": { "rights": "All rights reserved.", "partner": "Technology by WB Digital Solutions" } }
+{
+  "footer": {
+    "tagline": "Boost your sales",
+    "description": "Integrated sales strategy and technology to take your business to the next level.",
+    "nav": "Navigation",
+    "links": {
+      "home": "Home",
+      "services": "Services",
+      "process": "How it works",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "contact": "Get in touch",
+    "rights": "All rights reserved.",
+    "partner": "Technology by",
+    "partnerName": "WB Digital Solutions"
+  }
+}

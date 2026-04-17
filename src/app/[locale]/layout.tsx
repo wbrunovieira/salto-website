@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import HeaderClient from "@/components/layout/HeaderClient";
+import FooterClient from "@/components/layout/FooterClient";
 import LocaleDetector from "@/components/LocaleDetector";
 import "../globals.css";
 
@@ -88,6 +89,7 @@ export default async function LocaleLayout({
           <LocaleDetector currentLocale={locale} />
           <HeaderClient locale={locale} />
           {children}
+          <FooterClient />
         </NextIntlClientProvider>
       </body>
     </html>
