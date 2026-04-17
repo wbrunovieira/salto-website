@@ -1,1 +1,9 @@
-{ "cookies": { "title": "Usiamo i cookie", "description": "Utilizziamo i cookie per migliorare la tua esperienza. Accettando, acconsenti alla nostra politica sulla privacy.", "accept": "Accetta", "decline": "Rifiuta" } }
+{
+  "cookies": {
+    "title": "Usiamo i cookie",
+    "description": "Utilizziamo i cookie per migliorare la tua esperienza.",
+    "accept": "Accetta",
+    "decline": "Rifiuta",
+    "policy": "Informativa sulla Privacy"
+  }
+}

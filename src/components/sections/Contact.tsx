@@ -20,7 +20,7 @@ export default function Contact() {
   const t = useTranslations("contact");
   const locale = useLocale();
   const defaultCountry = LOCALE_COUNTRY[locale] ?? "br";
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", _trap: "" });
   const [state, setState] = useState<FormState>("idle");
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -195,6 +195,14 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 className="p-8 rounded-2xl border border-border bg-surface/40 flex flex-col gap-4"
               >
+                {/* Honeypot — invisível para humanos, bots preenchem */}
+                <input
+                  name="_trap" value={form._trap}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="contact-name" className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.name")}</label>
@@ -210,9 +218,16 @@ export default function Contact() {
                     <input
                       id="contact-email" name="email" type="email" value={form.email} onChange={handleChange} required
                       autoComplete="email"
-                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-accent placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
+                      className={`bg-[#0E0E0E] border rounded-xl px-4 py-3 text-sm text-accent placeholder:text-text-muted/50 focus:outline-none transition-colors duration-200 ${
+                        form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
+                          ? "border-red-500/60 focus:border-red-500"
+                          : "border-border focus:border-accent/50"
+                      }`}
                       placeholder={t("form.email")}
                     />
+                    {form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) && (
+                      <p className="text-[11px] text-red-400 mt-1">E-mail inválido</p>
+                    )}
                   </div>
                 </div>
 

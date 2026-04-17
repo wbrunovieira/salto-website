@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const COOKIE_KEY = "salto_cookie_consent";
 
@@ -48,7 +49,10 @@ export default function CookieBanner() {
             {/* Text */}
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold text-text-primary mb-0.5">{t("title")}</p>
-              <p className="text-xs text-text-muted leading-relaxed">{t("description")}</p>
+              <p className="text-xs text-text-muted leading-relaxed">
+                {t("description")}{" "}
+                <Link href="/privacidade" className="text-accent hover:underline">{t("policy")}</Link>
+              </p>
             </div>
 
             {/* Actions */}

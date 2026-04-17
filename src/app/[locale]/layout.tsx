@@ -9,6 +9,8 @@ import FooterClient from "@/components/layout/FooterClient";
 import LocaleDetector from "@/components/LocaleDetector";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import CookieBanner from "@/components/CookieBanner";
+import { Analytics } from "@vercel/analytics/next";
+import ScrollToTop from "@/components/ScrollToTop";
 import "../globals.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://saltoup.com";
@@ -127,6 +129,8 @@ export default async function LocaleLayout({
           <FooterClient />
           <WhatsAppFloat />
           <CookieBanner />
+          <Analytics />
+          <ScrollToTop />
         </NextIntlClientProvider>
       </body>
     </html>
