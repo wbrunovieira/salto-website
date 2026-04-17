@@ -1,0 +1,14 @@
+{
+  "process": {
+    "label": "Come funziona",
+    "title": "Dalla diagnosi",
+    "titleAccent": "al risultato.",
+    "subtitle": "Un processo chiaro, basato sui dati e costruito per generare risultati reali — non solo report.",
+    "steps": {
+      "diagnosis": { "number": "01", "title": "Diagnosi", "description": "Ci immergiamo nel tuo business. Mappiamo il mercato, i concorrenti, il cliente ideale e ciò che funziona già (o no) prima di qualsiasi azione." },
+      "strategy": { "number": "02", "title": "Strategia", "description": "Creiamo un piano esclusivo con obiettivi chiari, canali definiti e azioni specifiche per il tuo momento e obiettivo." },
+      "execution": { "number": "03", "title": "Esecuzione", "description": "Mettiamo tutto in pratica — annunci, offerte, CRM, assistenza e tecnologia integrati e in funzione insieme." },
+      "scale": { "number": "04", "title": "Scala", "description": "Misuriamo quotidianamente, ottimizziamo in tempo reale e scaliamo ciò che funziona. Crescita costante, senza supposizioni." }
+    }
+  }
+}
