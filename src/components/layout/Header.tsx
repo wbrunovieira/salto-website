@@ -70,10 +70,11 @@ export default function Header({ locale }: { locale: string }) {
   }, []);
 
   const navLinks = [
-    { href: "/",         label: t("nav.home"),     section: "hero" },
+    { href: "/",          label: t("nav.home"),     section: "hero" },
     { href: "/#services", label: t("nav.services"), section: "services" },
-    { href: "/#about",   label: t("nav.about"),    section: "about" },
-    { href: "/#contact", label: t("nav.contact"),  section: "contact" },
+    { href: "/#process",  label: t("nav.process"),  section: "process" },
+    { href: "/#about",    label: t("nav.about"),    section: "about" },
+    { href: "/#contact",  label: t("nav.contact"),  section: "contact" },
   ];
 
   return (

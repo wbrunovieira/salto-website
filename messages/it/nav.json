@@ -1,1 +1,9 @@
-{ "nav": { "home": "Home", "services": "Servizi", "about": "Chi siamo", "contact": "Contatti" } }
+{
+  "nav": {
+    "home": "Home",
+    "services": "Servizi",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "process": "Come funziona"
+  }
+}
