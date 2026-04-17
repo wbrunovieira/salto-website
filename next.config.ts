@@ -9,23 +9,27 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
+    const isProd = process.env.NODE_ENV === "production";
     return [
+      // Cache imutável — ativar apenas em produção (hashes garantem segurança)
+      // Em dev, Cache-Control: immutable impede o browser de baixar chunks atualizados
+      ...(isProd
+        ? [
+            {
+              source: "/_next/static/:path*",
+              headers: [
+                { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+              ],
+            },
+            {
+              source: "/static/:path*",
+              headers: [
+                { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+              ],
+            },
+          ]
+        : []),
       {
-        // Imutável — hashes no nome do arquivo garantem segurança
-        source: "/_next/static/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
-      },
-      {
-        // Assets públicos (fontes, imagens, svgs)
-        source: "/static/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
-      },
-      {
-        // Páginas HTML — revalidação rápida, sem stale
         source: "/:path*",
         headers: [
           { key: "X-DNS-Prefetch-Control", value: "on" },

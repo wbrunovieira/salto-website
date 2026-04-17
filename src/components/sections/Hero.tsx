@@ -30,12 +30,19 @@ export default function Hero() {
       <div className="hero-glow-corner absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none opacity-[0.07]" />
       <div className="hero-noise absolute inset-0 pointer-events-none" />
 
+      {/* concentric rings */}
+      <div className="hero-ring hero-ring-1" />
+      <div className="hero-ring hero-ring-2" />
+      <div className="hero-ring hero-ring-3" />
+      <div className="hero-ring hero-ring-4" />
+      <div className="hero-ring hero-ring-5" />
+
       {/* main content — flex-1 centers vertically inside min-h-screen */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex flex-col items-center text-center max-w-5xl w-full mx-auto gap-10 flex-1 justify-center pt-32 pb-28"
+        className="relative z-10 flex flex-col items-center text-center max-w-5xl w-full mx-auto flex-1 justify-center pt-40 pb-32"
       >
         {/* Badge */}
         <motion.div variants={itemVariants}>
@@ -46,7 +53,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <div className="flex flex-col items-center gap-1 md:gap-2">
+        <div className="flex flex-col items-center gap-1 md:gap-2 mt-14">
           <motion.h1
             variants={itemVariants}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight text-text-primary"
@@ -70,7 +77,7 @@ export default function Hero() {
         {/* Subheadline */}
         <motion.p
           variants={itemVariants}
-          className="max-w-2xl text-base md:text-lg text-text-muted leading-relaxed"
+          className="max-w-xl text-lg md:text-xl text-text-muted leading-relaxed mt-14"
         >
           {t("subheadline")}
         </motion.p>
@@ -78,23 +85,25 @@ export default function Hero() {
         {/* CTAs */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center gap-4"
+          className="flex flex-col sm:flex-row items-center gap-4 mt-12"
         >
+          {/* Primary */}
           <Link
             href="/#contact"
-            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden"
+            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
-            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_40px_rgba(255,92,0,0.55)]" />
+            <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
             <span className="relative">{t("cta")}</span>
             <svg className="relative w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
 
+          {/* Secondary */}
           <Link
             href="/#services"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border hover:border-text-muted hover:text-text-primary transition-all duration-300 group"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-all duration-300 hover:-translate-y-[3px] hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
           >
             {t("ctaSecondary")}
             <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" viewBox="0 0 16 16" fill="none">

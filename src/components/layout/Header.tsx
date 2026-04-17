@@ -46,6 +46,7 @@ export default function Header({ locale }: { locale: string }) {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -53,11 +54,26 @@ export default function Header({ locale }: { locale: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = ["hero", "services", "about", "contact"];
+    const observers = sections.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { threshold: 0.4 }
+      );
+      observer.observe(el);
+      return observer;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, []);
+
   const navLinks = [
-    { href: "/", label: t("nav.home") },
-    { href: "/#services", label: t("nav.services") },
-    { href: "/#about", label: t("nav.about") },
-    { href: "/#contact", label: t("nav.contact") },
+    { href: "/",         label: t("nav.home"),     section: "hero" },
+    { href: "/#services", label: t("nav.services"), section: "services" },
+    { href: "/#about",   label: t("nav.about"),    section: "about" },
+    { href: "/#contact", label: t("nav.contact"),  section: "contact" },
   ];
 
   return (
@@ -110,17 +126,24 @@ export default function Header({ locale }: { locale: string }) {
             animate="visible"
             className="hidden md:flex items-center gap-8"
           >
-            {navLinks.map((link) => (
-              <motion.div key={link.href} variants={navItemVariants}>
-                <Link
-                  href={link.href}
-                  className="relative text-sm font-semibold text-text-muted hover:text-text-primary transition-colors duration-200 group py-1"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-0.5 left-0 h-[2px] w-0 rounded-full bg-gradient-to-r from-accent to-accent-hover group-hover:w-full transition-all duration-300" />
-                </Link>
-              </motion.div>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.section;
+              return (
+                <motion.div key={link.href} variants={navItemVariants}>
+                  <Link
+                    href={link.href}
+                    className={`relative text-sm font-semibold transition-colors duration-200 group py-1 ${
+                      isActive ? "text-text-primary" : "text-text-muted hover:text-text-primary"
+                    }`}
+                  >
+                    {link.label}
+                    <span className={`absolute -bottom-0.5 left-0 h-[2px] rounded-full bg-gradient-to-r from-accent to-accent-hover transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`} />
+                  </Link>
+                </motion.div>
+              );
+            })}
           </motion.nav>
 
           {/* ── Right: lang switcher + CTA ── */}
@@ -150,9 +173,10 @@ export default function Header({ locale }: { locale: string }) {
             {/* CTA */}
             <Link
               href="/#contact"
-              className="relative px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden group"
+              className="relative px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden group transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover transition-all duration-300 group-hover:shadow-[0_0_24px_rgba(255,92,0,0.5)]" />
+              <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover transition-all duration-300" />
+              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
               <span className="relative">{t("actions.getStarted")}</span>
             </Link>
           </motion.div>
@@ -184,22 +208,27 @@ export default function Header({ locale }: { locale: string }) {
               className="md:hidden overflow-hidden bg-surface/95 backdrop-blur-lg border-t border-border"
             >
               <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ x: -16, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: i * 0.07, ease: "easeOut" }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-base font-semibold text-text-muted hover:text-text-primary transition-colors"
+                {navLinks.map((link, i) => {
+                  const isActive = activeSection === link.section;
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ x: -16, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: i * 0.07, ease: "easeOut" }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={`text-base font-semibold transition-colors ${
+                          isActive ? "text-accent" : "text-text-muted hover:text-text-primary"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
 
                 <div className="flex items-center justify-between pt-4 border-t border-border">
                   <div className="flex gap-1">
