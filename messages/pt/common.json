@@ -1,0 +1,18 @@
+{
+  "app": {
+    "name": "Salto",
+    "tagline": "Alavanque suas vendas"
+  },
+  "actions": {
+    "learnMore": "Saiba mais",
+    "getStarted": "Começar agora",
+    "contact": "Fale conosco",
+    "send": "Enviar",
+    "back": "Voltar"
+  },
+  "errors": {
+    "unexpected": "Erro inesperado. Tente novamente.",
+    "network": "Erro de conexão. Verifique sua internet.",
+    "required": "Este campo é obrigatório."
+  }
+}

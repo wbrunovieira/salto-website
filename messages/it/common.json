@@ -1,0 +1,5 @@
+{
+  "app": { "name": "Salto", "tagline": "Potenzia le tue vendite" },
+  "actions": { "learnMore": "Scopri di più", "getStarted": "Inizia ora", "contact": "Contattaci", "send": "Invia", "back": "Indietro" },
+  "errors": { "unexpected": "Errore imprevisto. Per favore riprova.", "network": "Errore di connessione. Controlla internet.", "required": "Questo campo è obbligatorio." }
+}

@@ -1,0 +1,12 @@
+{
+  "services": {
+    "title": "Cosa facciamo",
+    "subtitle": "Una soluzione completa per strutturare e scalare le tue vendite online.",
+    "items": {
+      "traffic": { "title": "Traffico a Pagamento", "description": "Campagne su Google, Meta e TikTok Ads focalizzate su risultati concreti." },
+      "landingPage": { "title": "Landing Page", "description": "Pagine ad alta conversione per trasformare i visitatori in clienti." },
+      "salesTraining": { "title": "Formazione Vendite", "description": "Formiamo il tuo team per chiudere più affari con maggiore efficienza." },
+      "opportunities": { "title": "Ricerca di Opportunità", "description": "Identifichiamo nicchie e opportunità di mercato per accelerare la tua crescita." }
+    }
+  }
+}

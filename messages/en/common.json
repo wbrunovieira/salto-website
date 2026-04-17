@@ -1,0 +1,5 @@
+{
+  "app": { "name": "Salto", "tagline": "Boost your sales" },
+  "actions": { "learnMore": "Learn more", "getStarted": "Get started", "contact": "Contact us", "send": "Send", "back": "Back" },
+  "errors": { "unexpected": "Unexpected error. Please try again.", "network": "Connection error. Check your internet.", "required": "This field is required." }
+}

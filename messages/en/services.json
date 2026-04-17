@@ -1,0 +1,12 @@
+{
+  "services": {
+    "title": "What we do",
+    "subtitle": "A complete solution to structure and scale your online sales.",
+    "items": {
+      "traffic": { "title": "Paid Traffic", "description": "Google, Meta and TikTok Ads campaigns focused on real results." },
+      "landingPage": { "title": "Landing Pages", "description": "High-conversion pages built to turn visitors into customers." },
+      "salesTraining": { "title": "Sales Training", "description": "We train your team to close more deals with greater efficiency." },
+      "opportunities": { "title": "Opportunity Search", "description": "We identify market niches and opportunities to accelerate your growth." }
+    }
+  }
+}

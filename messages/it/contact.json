@@ -1,0 +1,9 @@
+{
+  "contact": {
+    "title": "Parliamo?",
+    "subtitle": "Raccontaci del tuo business e scopri come Salto può potenziare le tue vendite.",
+    "form": { "name": "Il tuo nome", "email": "La tua email", "phone": "WhatsApp", "message": "Come possiamo aiutarti?", "submit": "Invia messaggio" },
+    "success": "Messaggio inviato! Ti ricontatteremo presto.",
+    "whatsapp": "Chatta su WhatsApp"
+  }
+}

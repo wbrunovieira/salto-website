@@ -1,0 +1,24 @@
+{
+  "services": {
+    "title": "O que fazemos",
+    "subtitle": "Uma solução completa para estruturar e escalar suas vendas online.",
+    "items": {
+      "traffic": {
+        "title": "Tráfego Pago",
+        "description": "Campanhas no Google, Meta e TikTok Ads focadas em resultados reais."
+      },
+      "landingPage": {
+        "title": "Landing Pages",
+        "description": "Páginas de alta conversão criadas para transformar visitantes em clientes."
+      },
+      "salesTraining": {
+        "title": "Treinamento de Vendas",
+        "description": "Capacitamos seu time para fechar mais negócios com mais eficiência."
+      },
+      "opportunities": {
+        "title": "Busca de Oportunidades",
+        "description": "Identificamos nichos e oportunidades de mercado para acelerar seu crescimento."
+      }
+    }
+  }
+}
