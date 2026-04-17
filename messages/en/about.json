@@ -1,8 +1,16 @@
 {
   "about": {
-    "title": "About Salto",
-    "description": "Salto was born to go beyond traffic management. We are strategic partners who follow the entire customer buying journey — from attraction to conversion.",
-    "mission": "Our mission is to structure and boost online business sales with strategy, technology and execution.",
-    "partner": { "label": "Technology partner", "description": "Development, automation and AI with WB Digital Solutions." }
+    "label": "About Salto",
+    "title": "Technology that sells.",
+    "titleAccent": "Strategy that scales.",
+    "philosophy": "We believe every business — of any size and segment — has a next leap to take. Salto exists to make sure yours happens.",
+    "story": "Technology is essential to reduce costs and automate processes. But the main engine of any business is selling. Salto was born to unite these two worlds in a single partner — end-to-end sales strategy, powered by the best technology available.",
+    "founderLabel": "Founder",
+    "founderName": "Bruno Vieira",
+    "founderCredential": "20+ years in sales across multiple segments · Post-grad in Sales & Marketing, FGV",
+    "partnerLabel": "Technology partner",
+    "partnerName": "WB Digital Solutions",
+    "partnerDescription": "Websites, platforms, automations and AI with the best technologies on the market. Because real technology makes a difference in results.",
+    "partnerLink": "Meet WB"
   }
 }

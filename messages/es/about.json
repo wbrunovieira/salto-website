@@ -1,8 +1,16 @@
 {
   "about": {
-    "title": "Sobre Salto",
-    "description": "Salto nació para ir más allá de la gestión de tráfico. Somos socios estratégicos que acompañan todo el viaje de compra del cliente — de la atracción a la conversión.",
-    "mission": "Nuestra misión es estructurar e impulsar las ventas de negocios en internet con estrategia, tecnología y ejecución.",
-    "partner": { "label": "Socio tecnológico", "description": "Desarrollo, automatizaciones e IA con WB Digital Solutions." }
+    "label": "Sobre Salto",
+    "title": "Tecnología que vende.",
+    "titleAccent": "Estrategia que escala.",
+    "philosophy": "Creemos que toda empresa — de cualquier tamaño y segmento — tiene un próximo salto que dar. Salto existe para asegurarse de que el tuyo suceda.",
+    "story": "La tecnología es esencial para reducir costos y automatizar procesos. Pero el principal motor de cualquier negocio es vender. Salto nació para unir estos dos mundos en un único socio — estrategia comercial de punta a punta, potenciada por la mejor tecnología disponible.",
+    "founderLabel": "Fundador",
+    "founderName": "Bruno Vieira",
+    "founderCredential": "20+ años en ventas en múltiples segmentos · Posgrado en Ventas y Marketing, FGV",
+    "partnerLabel": "Socio tecnológico",
+    "partnerName": "WB Digital Solutions",
+    "partnerDescription": "Sitios web, plataformas, automatizaciones e IA con las mejores tecnologías del mercado. Porque la tecnología real marca la diferencia en los resultados.",
+    "partnerLink": "Conoce WB"
   }
 }
