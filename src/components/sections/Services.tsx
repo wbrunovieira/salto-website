@@ -89,10 +89,10 @@ export default function Services() {
               <div
                 key={key}
                 data-col={index % 3}
-                className={`service-card group relative p-7 rounded-2xl border transition-all duration-300 hover:-translate-y-1 ${
+                className={`service-card group relative p-7 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_8px_32px_rgba(255,92,0,0.12)] ${
                   isTech
-                    ? "border-accent/30 bg-gradient-to-br from-surface to-[#1a0a00] hover:border-accent/60 hover:shadow-[0_8px_32px_rgba(255,92,0,0.15)]"
-                    : "border-border bg-surface/60 hover:border-border/80 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
+                    ? "border-border bg-gradient-to-br from-surface to-[#1a0a00]"
+                    : "border-border bg-surface/60"
                 }`}
               >
                 <div className={`service-icon w-11 h-11 mb-5 ${isTech ? "text-accent" : "text-accent/70 group-hover:text-accent"} transition-colors duration-300`}>
