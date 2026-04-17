@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5511999999999";
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5511982864581";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -31,7 +31,7 @@ export default function Contact() {
     }
   };
 
-  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Olá! Vim pelo site da Salto e gostaria de saber mais.")}`;
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t("whatsappMessage"))}`;
 
   return (
     <section id="contact" className="relative bg-[#0E0E0E] px-6 pb-32">
@@ -124,6 +124,7 @@ export default function Contact() {
                     <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.name")}</label>
                     <input
                       name="name" value={form.name} onChange={handleChange} required
+                      autoComplete="name"
                       className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.name")}
                     />
@@ -132,6 +133,7 @@ export default function Contact() {
                     <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.email")}</label>
                     <input
                       name="email" type="email" value={form.email} onChange={handleChange} required
+                      autoComplete="email"
                       className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.email")}
                     />
@@ -141,18 +143,10 @@ export default function Contact() {
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.phone")}</label>
                   <input
-                    name="phone" value={form.phone} onChange={handleChange} required
+                    name="phone" type="tel" value={form.phone} onChange={handleChange} required
+                    autoComplete="tel"
                     className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                     placeholder={t("form.phone")}
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.business")}</label>
-                  <textarea
-                    name="business" value={form.business} onChange={handleChange} rows={4}
-                    className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200 resize-none"
-                    placeholder={t("form.business")}
                   />
                 </div>
 
