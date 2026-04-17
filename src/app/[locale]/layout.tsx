@@ -37,7 +37,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${montserrat.variable} font-sans antialiased bg-[#0E0E0E] text-[#F5F5F5]`}>
+      <body className={`${montserrat.variable} font-sans antialiased bg-base text-text-primary`}>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
