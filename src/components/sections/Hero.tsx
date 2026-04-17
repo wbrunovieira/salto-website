@@ -53,25 +53,25 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <div className="flex flex-col items-center gap-1 md:gap-2 mt-14">
+        <div className="flex flex-col items-center gap-2 mt-14">
           <motion.h1
             id="hero-line1"
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight text-text-primary"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-text-primary"
           >
             {t("headlineLine1")}
           </motion.h1>
           <motion.span
             id="hero-line2"
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight text-text-primary"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-text-primary"
           >
             {t("headlineLine2")}
           </motion.span>
           <motion.span
             id="hero-accent"
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
           >
             {t("headlineAccent")}
           </motion.span>
