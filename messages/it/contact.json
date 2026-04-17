@@ -7,9 +7,9 @@
     "whatsapp": "Chatta su WhatsApp",
     "whatsappSub": "Risposta rapida",
     "form": {
-      "name": "Il tuo nome",
-      "email": "La tua email",
-      "phone": "WhatsApp con prefisso",
+      "name": "Nome",
+      "email": "Email",
+      "phone": "Telefono",
       "business": "Raccontaci un po' del tuo business",
       "submit": "Voglio la mia diagnosi gratuita",
       "submitting": "Invio in corso...",

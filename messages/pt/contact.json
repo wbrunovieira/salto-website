@@ -7,9 +7,9 @@
     "whatsapp": "Falar no WhatsApp",
     "whatsappSub": "Resposta rápida",
     "form": {
-      "name": "Seu nome",
-      "email": "Seu e-mail",
-      "phone": "WhatsApp com DDD",
+      "name": "Nome",
+      "email": "E-mail",
+      "phone": "Telefone",
       "business": "Conta um pouco sobre seu negócio",
       "submit": "Quero meu diagnóstico grátis",
       "submitting": "Enviando...",

@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
+
+const LOCALE_COUNTRY: Record<string, string> = {
+  pt: "br",
+  en: "us",
+  es: "es",
+  it: "it",
+};
 
 const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5511982864581";
 
@@ -9,6 +18,8 @@ type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function Contact() {
   const t = useTranslations("contact");
+  const locale = useLocale();
+  const defaultCountry = LOCALE_COUNTRY[locale] ?? "br";
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [state, setState] = useState<FormState>("idle");
 
@@ -125,7 +136,7 @@ export default function Contact() {
                     <input
                       id="contact-name" name="name" value={form.name} onChange={handleChange} required
                       autoComplete="name"
-                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
+                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-accent placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.name")}
                     />
                   </div>
@@ -134,19 +145,19 @@ export default function Contact() {
                     <input
                       id="contact-email" name="email" type="email" value={form.email} onChange={handleChange} required
                       autoComplete="email"
-                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
+                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-accent placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.email")}
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-phone" className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.phone")}</label>
-                  <input
-                    id="contact-phone" name="phone" type="tel" value={form.phone} onChange={handleChange} required
-                    autoComplete="tel"
-                    className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
-                    placeholder={t("form.phone")}
+                  <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.phone")}</label>
+                  <PhoneInput
+                    defaultCountry={defaultCountry}
+                    value={form.phone}
+                    onChange={(phone) => setForm((prev) => ({ ...prev, phone }))}
+                    className="phone-input-container"
                   />
                 </div>
 
