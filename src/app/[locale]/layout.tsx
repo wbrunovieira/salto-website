@@ -8,18 +8,58 @@ import Header from "@/components/layout/Header";
 import LocaleDetector from "@/components/LocaleDetector";
 import "../globals.css";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://salto.com.br";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
+  display: "swap",
+  preload: true,
 });
-
-export const metadata: Metadata = {
-  title: "Salto — Alavanque suas vendas",
-  description: "Estruturamos toda a sua jornada de vendas online.",
-};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  const titles: Record<string, string> = {
+    pt: "Salto — Alavanque suas vendas",
+    en: "Salto — Boost your sales",
+    es: "Salto — Impulsa tus ventas",
+    it: "Salto — Potenzia le tue vendite",
+  };
+
+  const descriptions: Record<string, string> = {
+    pt: "Estruturamos toda a sua jornada de vendas online — do tráfego pago à conversão.",
+    en: "We structure your entire online sales journey — from paid traffic to conversion.",
+    es: "Estructuramos todo tu viaje de ventas online — del tráfico pago a la conversión.",
+    it: "Strutturiamo l'intero percorso di vendita online — dal traffico a pagamento alla conversione.",
+  };
+
+  return {
+    title: titles[locale] ?? titles.pt,
+    description: descriptions[locale] ?? descriptions.pt,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+      languages: Object.fromEntries(
+        routing.locales.map((loc) => [loc, `${BASE_URL}/${loc}`])
+      ),
+    },
+    openGraph: {
+      title: titles[locale] ?? titles.pt,
+      description: descriptions[locale] ?? descriptions.pt,
+      locale,
+      url: `${BASE_URL}/${locale}`,
+      siteName: "Salto",
+      type: "website",
+    },
+  };
 }
 
 export default async function LocaleLayout({
