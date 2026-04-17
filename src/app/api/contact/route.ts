@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
       to: TO_EMAIL,
       replyTo: email,
       subject: `Novo contato: ${name}`,
+      tags: [{ name: "source", value: "website-contact" }],
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #0e0e0e; color: #f5f5f5; padding: 32px; border-radius: 12px;">
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px;">
