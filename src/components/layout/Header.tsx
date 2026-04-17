@@ -2,43 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { LOCALE_STORAGE_KEY } from "@/components/LocaleDetector";
 
-const LOCALE_LABELS: Record<string, string> = {
-  pt: "PT",
-  en: "EN",
-  es: "ES",
-  it: "IT",
-};
-
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const navVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
-};
-
-const navItemVariants: Variants = {
-  hidden: { y: -16, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.4, ease: EASE } },
-};
-
-const mobileMenuVariants: Variants = {
-  hidden: { opacity: 0, height: 0 },
-  visible: {
-    opacity: 1,
-    height: "auto",
-    transition: { duration: 0.35, ease: EASE },
-  },
-  exit: {
-    opacity: 0,
-    height: 0,
-    transition: { duration: 0.25, ease: "easeIn" },
-  },
-};
+const LOCALE_LABELS: Record<string, string> = { pt: "PT", en: "EN", es: "ES", it: "IT" };
 
 export default function Header({ locale }: { locale: string }) {
   const t = useTranslations();
@@ -55,7 +23,7 @@ export default function Header({ locale }: { locale: string }) {
   }, []);
 
   useEffect(() => {
-    const sections = ["hero", "services", "about", "contact"];
+    const sections = ["hero", "services", "process", "about", "contact"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -78,59 +46,36 @@ export default function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <motion.header
-      initial={{ y: -88, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: EASE }}
-      className="fixed top-0 left-0 right-0 z-50"
-    >
+    <header className="header-animate fixed top-0 left-0 right-0 z-50">
       {/* Top gradient accent line */}
       <div className="h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent" />
 
       {/* Header bar */}
-      <div
-        className={`transition-all duration-500 ${
-          scrolled
-            ? "bg-surface/80 backdrop-blur-lg border-b border-border shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
-            : "bg-transparent"
-        }`}
-      >
+      <div className={`transition-all duration-500 ${
+        scrolled
+          ? "bg-surface/80 backdrop-blur-lg border-b border-border shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
+          : "bg-transparent"
+      }`}>
         <div className="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
 
-          {/* ── Logo ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15, duration: 0.5, ease: EASE }}
-          >
+          {/* Logo */}
+          <div className="logo-animate">
             <Link href="/" className="flex items-center gap-3 group">
-              <svg
-                width="28"
-                height="38"
-                viewBox="0 0 56 76"
-                fill="none"
-                className="text-accent transition-transform duration-300 group-hover:scale-110"
-              >
+              <svg width="28" height="38" viewBox="0 0 56 76" fill="none"
+                className="text-accent transition-transform duration-300 group-hover:scale-110">
                 <rect x="19" y="36" width="18" height="38" rx="5" fill="currentColor" />
                 <polygon points="0,40 28,2 56,40" fill="currentColor" />
               </svg>
-              <span className="font-black text-[22px] tracking-tight text-text-primary leading-none">
-                SALTO
-              </span>
+              <span className="font-black text-[22px] tracking-tight text-text-primary leading-none">SALTO</span>
             </Link>
-          </motion.div>
+          </div>
 
-          {/* ── Desktop Nav ── */}
-          <motion.nav
-            variants={navVariants}
-            initial="hidden"
-            animate="visible"
-            className="hidden md:flex items-center gap-8"
-          >
-            {navLinks.map((link) => {
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link, i) => {
               const isActive = activeSection === link.section;
               return (
-                <motion.div key={link.href} variants={navItemVariants}>
+                <div key={link.href} className={`nav-item-animate-${i + 1}`}>
                   <Link
                     href={link.href}
                     className={`relative text-sm font-semibold transition-colors duration-200 group py-1 ${
@@ -142,19 +87,13 @@ export default function Header({ locale }: { locale: string }) {
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`} />
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.nav>
+          </nav>
 
-          {/* ── Right: lang switcher + CTA ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.5, ease: EASE }}
-            className="hidden md:flex items-center gap-5"
-          >
-            {/* Language switcher */}
+          {/* Right: lang switcher + CTA */}
+          <div className="right-animate hidden md:flex items-center gap-5">
             <div className="flex items-center gap-0.5 bg-surface/60 rounded-full px-2 py-1 border border-border">
               {routing.locales.map((loc) => (
                 <button
@@ -171,95 +110,79 @@ export default function Header({ locale }: { locale: string }) {
               ))}
             </div>
 
-            {/* CTA */}
             <Link
               href="/#contact"
               className="relative px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden group transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover transition-all duration-300" />
+              <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
               <span className="relative">{t("actions.getStarted")}</span>
             </Link>
-          </motion.div>
+          </div>
 
-          {/* ── Mobile hamburger ── */}
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+          {/* Mobile hamburger */}
+          <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[6px] group"
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[6px]"
             aria-label="Toggle menu"
           >
             <span className={`block h-[2px] bg-text-primary rounded-full transition-all duration-300 ${menuOpen ? "w-6 translate-y-2 rotate-45" : "w-6"}`} />
             <span className={`block h-[2px] bg-text-primary rounded-full transition-all duration-300 ${menuOpen ? "w-0 opacity-0" : "w-4"}`} />
             <span className={`block h-[2px] bg-text-primary rounded-full transition-all duration-300 ${menuOpen ? "w-6 -translate-y-2 -rotate-45" : "w-6"}`} />
-          </motion.button>
+          </button>
         </div>
 
-        {/* ── Mobile menu ── */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              key="mobile-menu"
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="md:hidden overflow-hidden bg-surface/95 backdrop-blur-lg border-t border-border"
-            >
-              <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
-                {navLinks.map((link, i) => {
-                  const isActive = activeSection === link.section;
-                  return (
-                    <motion.div
-                      key={link.href}
-                      initial={{ x: -16, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ delay: i * 0.07, ease: "easeOut" }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setMenuOpen(false)}
-                        className={`text-base font-semibold transition-colors ${
-                          isActive ? "text-accent" : "text-text-muted hover:text-text-primary"
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <div className="flex gap-1">
-                    {routing.locales.map((loc) => (
-                      <button
-                        key={loc}
-                        onClick={() => { router.replace(pathname, { locale: loc }); setMenuOpen(false); }}
-                        className={`text-xs font-bold px-3 py-1.5 rounded-full border transition-all duration-200 ${
-                          locale === loc
-                            ? "border-accent text-accent"
-                            : "border-border text-text-muted hover:border-text-muted"
-                        }`}
-                      >
-                        {LOCALE_LABELS[loc]}
-                      </button>
-                    ))}
-                  </div>
+        {/* Mobile menu — CSS grid trick para animar height desconhecida */}
+        <div className={`md:hidden grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out ${
+          menuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}>
+          <div className="overflow-hidden bg-surface/95 backdrop-blur-lg border-t border-border">
+            <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
+              {navLinks.map((link, i) => {
+                const isActive = activeSection === link.section;
+                return (
                   <Link
-                    href="/#contact"
+                    key={link.href}
+                    href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="px-5 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-accent to-accent-hover"
+                    className={`text-base font-semibold transition-colors duration-200 ${
+                      isActive ? "text-accent" : "text-text-muted hover:text-text-primary"
+                    }`}
+                    style={{ transitionDelay: menuOpen ? `${i * 40}ms` : "0ms" }}
                   >
-                    {t("actions.getStarted")}
+                    {link.label}
                   </Link>
+                );
+              })}
+
+              <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div className="flex gap-1">
+                  {routing.locales.map((loc) => (
+                    <button
+                      key={loc}
+                      onClick={() => { router.replace(pathname, { locale: loc }); setMenuOpen(false); }}
+                      className={`text-xs font-bold px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                        locale === loc
+                          ? "border-accent text-accent"
+                          : "border-border text-text-muted hover:border-text-muted"
+                      }`}
+                    >
+                      {LOCALE_LABELS[loc]}
+                    </button>
+                  ))}
                 </div>
+                <Link
+                  href="/#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-5 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-accent to-accent-hover"
+                >
+                  {t("actions.getStarted")}
+                </Link>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

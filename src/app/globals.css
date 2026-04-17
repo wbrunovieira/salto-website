@@ -37,6 +37,33 @@ body {
   50%       { opacity: 0.22; transform: translateX(-50%) scale(1.08); }
 }
 
+/* ── Header CSS animations (replace Framer Motion) ── */
+@keyframes header-enter {
+  from { transform: translateY(-88px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes fade-in-left {
+  from { transform: translateX(-24px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes fade-in-right {
+  from { transform: translateX(24px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes nav-item-in {
+  from { transform: translateY(-16px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.header-animate  { animation: header-enter  0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.logo-animate    { animation: fade-in-left   0.5s cubic-bezier(0.22,1,0.36,1) 0.15s both; }
+.right-animate   { animation: fade-in-right  0.5s cubic-bezier(0.22,1,0.36,1) 0.5s  both; }
+.nav-item-animate-1 { animation: nav-item-in 0.4s ease-out 0.30s both; }
+.nav-item-animate-2 { animation: nav-item-in 0.4s ease-out 0.38s both; }
+.nav-item-animate-3 { animation: nav-item-in 0.4s ease-out 0.46s both; }
+.nav-item-animate-4 { animation: nav-item-in 0.4s ease-out 0.54s both; }
+.nav-item-animate-5 { animation: nav-item-in 0.4s ease-out 0.62s both; }
+
 /* ── Phone input dark theme ── */
 .phone-input-container {
   --react-international-phone-background-color: #0E0E0E;

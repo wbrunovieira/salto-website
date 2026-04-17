@@ -15,9 +15,11 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://saltoup.com";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
+  weight: ["400", "700", "900"],
   variable: "--font-montserrat",
   display: "swap",
   preload: true,
+  fallback: ["Arial Black", "Arial", "sans-serif"],
 });
 
 export function generateStaticParams() {
