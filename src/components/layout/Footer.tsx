@@ -153,7 +153,7 @@ export default function Footer() {
               href="https://www.wbdigitalsolutions.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-muted/70 hover:text-accent transition-colors duration-200"
+              className="text-text-muted hover:text-accent transition-colors duration-200"
             >
               {t("partnerName")}
             </a>
