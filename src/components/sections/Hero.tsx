@@ -16,7 +16,6 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
 };
 
-
 export default function Hero() {
   const t = useTranslations("hero");
 
@@ -37,15 +36,16 @@ export default function Hero() {
       <div className="hero-ring hero-ring-4" />
       <div className="hero-ring hero-ring-5" />
 
-      {/* main content — flex-1 centers vertically inside min-h-screen */}
+      {/* content — GSAP target: #hero-inner */}
       <motion.div
+        id="hero-inner"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 flex flex-col items-center text-center max-w-5xl w-full mx-auto flex-1 justify-center pt-40 pb-32"
       >
         {/* Badge */}
-        <motion.div variants={itemVariants}>
+        <motion.div id="hero-badge" variants={itemVariants}>
           <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-[11px] font-bold tracking-[3px] uppercase text-text-muted border border-border bg-surface/50 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 animate-pulse" />
             {t("badge")}
@@ -55,18 +55,21 @@ export default function Hero() {
         {/* Headline */}
         <div className="flex flex-col items-center gap-1 md:gap-2 mt-14">
           <motion.h1
+            id="hero-line1"
             variants={itemVariants}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight text-text-primary"
           >
             {t("headlineLine1")}
           </motion.h1>
           <motion.span
+            id="hero-line2"
             variants={itemVariants}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight text-text-primary"
           >
             {t("headlineLine2")}
           </motion.span>
           <motion.span
+            id="hero-accent"
             variants={itemVariants}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
           >
@@ -76,6 +79,7 @@ export default function Hero() {
 
         {/* Subheadline */}
         <motion.p
+          id="hero-sub"
           variants={itemVariants}
           className="max-w-xl text-lg md:text-xl text-text-muted leading-relaxed mt-14"
         >
@@ -84,10 +88,10 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div
+          id="hero-cta"
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center gap-4 mt-12"
         >
-          {/* Primary */}
           <Link
             href="/#contact"
             className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
@@ -100,7 +104,6 @@ export default function Hero() {
             </svg>
           </Link>
 
-          {/* Secondary */}
           <Link
             href="/#services"
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-all duration-300 hover:-translate-y-[3px] hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
@@ -111,10 +114,9 @@ export default function Hero() {
             </svg>
           </Link>
         </motion.div>
-
       </motion.div>
 
-      {/* Scroll indicator — fora do flex-1, fica naturalmente no final */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

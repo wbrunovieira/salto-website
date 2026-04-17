@@ -1,5 +1,5 @@
 import { routing } from "@/i18n/routing";
-import HeroClient from "@/components/sections/HeroClient";
+import ScrollSceneClient from "@/components/ScrollSceneClient";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -8,7 +8,7 @@ export function generateStaticParams() {
 export default function HomePage() {
   return (
     <main>
-      <HeroClient />
+      <ScrollSceneClient />
     </main>
   );
 }

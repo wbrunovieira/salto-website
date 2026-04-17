@@ -1,12 +1,35 @@
 {
   "services": {
-    "title": "Cosa facciamo",
-    "subtitle": "Una soluzione completa per strutturare e scalare le tue vendite online.",
+    "label": "Il Metodo Salto",
+    "title": "Ogni azienda è unica.",
+    "titleAccent": "Anche la tua strategia deve esserlo.",
+    "subtitle": "Mentre altre agenzie applicano lo stesso pacchetto a tutti i clienti, Salto studia in profondità la tua azienda, il mercato e i clienti prima di creare qualsiasi azione.",
+    "contrast": "Basta con le soluzioni generiche. Ogni decisione si basa su dati reali del tuo mercato.",
     "items": {
-      "traffic": { "title": "Traffico a Pagamento", "description": "Campagne su Google, Meta e TikTok Ads focalizzate su risultati concreti." },
-      "landingPage": { "title": "Landing Page", "description": "Pagine ad alta conversione per trasformare i visitatori in clienti." },
-      "salesTraining": { "title": "Formazione Vendite", "description": "Formiamo il tuo team per chiudere più affari con maggiore efficienza." },
-      "opportunities": { "title": "Ricerca di Opportunità", "description": "Identifichiamo nicchie e opportunità di mercato per accelerare la tua crescita." }
+      "diagnosis": {
+        "title": "Diagnosi Approfondita",
+        "description": "Prima di qualsiasi azione, mappiamo la tua azienda, mercato, concorrenti e cliente ideale. Nessuna supposizione."
+      },
+      "strategy": {
+        "title": "Strategia Su Misura",
+        "description": "Nessun pacchetto predefinito. Creiamo una strategia esclusiva per la tua realtà, identità e obiettivi."
+      },
+      "ads": {
+        "title": "Annunci e Offerte",
+        "description": "Campagne, offerte e prodotti calibrati per il tuo pubblico. Dal creativo al budget, tutto orientato ai risultati."
+      },
+      "crm": {
+        "title": "CRM e Assistenza",
+        "description": "Strutturiamo il tuo processo commerciale, CRM e formazione del team per chiudere più affari con meno sforzo."
+      },
+      "metrics": {
+        "title": "Misurazione Quotidiana",
+        "description": "Performance monitorata ogni giorno. Aggiustamenti in tempo reale affinché ogni euro investito generi il massimo ritorno."
+      },
+      "tech": {
+        "title": "Tecnologia WB",
+        "description": "Automazioni, sistemi e IA tramite WB Digital Solutions — tecnologia all'avanguardia applicata direttamente alle tue vendite."
+      }
     }
   }
 }

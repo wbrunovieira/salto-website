@@ -1,23 +1,34 @@
 {
   "services": {
-    "title": "O que fazemos",
-    "subtitle": "Uma solução completa para estruturar e escalar suas vendas online.",
+    "label": "O Método Salto",
+    "title": "Cada empresa é única.",
+    "titleAccent": "A sua estratégia também deve ser.",
+    "subtitle": "Enquanto outras agências aplicam o mesmo pacote para todos os clientes, a Salto estuda profundamente o seu negócio, mercado e clientes antes de criar qualquer ação.",
+    "contrast": "Chega de soluções genéricas. Cada decisão é baseada em dados reais do seu mercado.",
     "items": {
-      "traffic": {
-        "title": "Tráfego Pago",
-        "description": "Campanhas no Google, Meta e TikTok Ads focadas em resultados reais."
+      "diagnosis": {
+        "title": "Diagnóstico Profundo",
+        "description": "Antes de qualquer ação, mapeamos seu negócio, mercado, concorrentes e cliente ideal. Sem palpites."
       },
-      "landingPage": {
-        "title": "Landing Pages",
-        "description": "Páginas de alta conversão criadas para transformar visitantes em clientes."
+      "strategy": {
+        "title": "Estratégia Sob Medida",
+        "description": "Sem pacotes prontos. Criamos uma estratégia exclusiva para a sua realidade, identidade e objetivos."
       },
-      "salesTraining": {
-        "title": "Treinamento de Vendas",
-        "description": "Capacitamos seu time para fechar mais negócios com mais eficiência."
+      "ads": {
+        "title": "Anúncios e Ofertas",
+        "description": "Campanhas, ofertas e produtos calibrados para o seu público. Do criativo ao orçamento, tudo orientado a resultado."
       },
-      "opportunities": {
-        "title": "Busca de Oportunidades",
-        "description": "Identificamos nichos e oportunidades de mercado para acelerar seu crescimento."
+      "crm": {
+        "title": "CRM e Atendimento",
+        "description": "Estruturamos seu processo comercial, CRM e treinamento de time para fechar mais negócios com menos esforço."
+      },
+      "metrics": {
+        "title": "Medição Diária",
+        "description": "Performance monitorada todos os dias. Ajustes em tempo real para que cada real investido gere o máximo de retorno."
+      },
+      "tech": {
+        "title": "Tecnologia WB",
+        "description": "Automações, sistemas e IA via WB Digital Solutions — tecnologia de ponta aplicada diretamente nas suas vendas."
       }
     }
   }

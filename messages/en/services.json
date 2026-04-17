@@ -1,12 +1,35 @@
 {
   "services": {
-    "title": "What we do",
-    "subtitle": "A complete solution to structure and scale your online sales.",
+    "label": "The Salto Method",
+    "title": "Every business is unique.",
+    "titleAccent": "Your strategy should be too.",
+    "subtitle": "While other agencies apply the same package to every client, Salto deeply studies your business, market and customers before creating any action.",
+    "contrast": "No more generic solutions. Every decision is based on real data from your market.",
     "items": {
-      "traffic": { "title": "Paid Traffic", "description": "Google, Meta and TikTok Ads campaigns focused on real results." },
-      "landingPage": { "title": "Landing Pages", "description": "High-conversion pages built to turn visitors into customers." },
-      "salesTraining": { "title": "Sales Training", "description": "We train your team to close more deals with greater efficiency." },
-      "opportunities": { "title": "Opportunity Search", "description": "We identify market niches and opportunities to accelerate your growth." }
+      "diagnosis": {
+        "title": "Deep Diagnosis",
+        "description": "Before any action, we map your business, market, competitors and ideal customer. No guesswork."
+      },
+      "strategy": {
+        "title": "Tailored Strategy",
+        "description": "No ready-made packages. We create an exclusive strategy for your reality, identity and goals."
+      },
+      "ads": {
+        "title": "Ads and Offers",
+        "description": "Campaigns, offers and products calibrated for your audience. From creative to budget, everything result-driven."
+      },
+      "crm": {
+        "title": "CRM and Service",
+        "description": "We structure your sales process, CRM and team training to close more deals with less effort."
+      },
+      "metrics": {
+        "title": "Daily Measurement",
+        "description": "Performance monitored every day. Real-time adjustments so every invested dollar generates maximum return."
+      },
+      "tech": {
+        "title": "WB Technology",
+        "description": "Automations, systems and AI via WB Digital Solutions — cutting-edge technology applied directly to your sales."
+      }
     }
   }
 }
