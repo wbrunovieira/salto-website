@@ -1,8 +1,14 @@
 {
   "hero": {
-    "headline": "Boost your online sales",
-    "subheadline": "We structure your entire online sales journey — from paid traffic to conversion.",
-    "cta": "Get started",
-    "ctaSecondary": "Learn more"
+    "badge": "Traffic · Conversion · Technology · Scale",
+    "headlineLine1": "Your business ready",
+    "headlineLine2": "for the next",
+    "headlineAccent": "leap.",
+    "subheadline": "We structure your entire online sales journey — from paid traffic to close. Strategy, technology and execution integrated in one partner.",
+    "cta": "Get my free diagnosis",
+    "ctaSecondary": "See how it works",
+    "statsProjects": "businesses accelerated",
+    "statsCountries": "countries served",
+    "statsRoi": "average ROI generated"
   }
 }

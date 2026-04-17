@@ -1,8 +1,14 @@
 {
   "hero": {
-    "headline": "Impulsa tus ventas en internet",
-    "subheadline": "Estructuramos todo tu viaje de ventas online — del tráfico pago a la conversión.",
-    "cta": "Empezar ahora",
-    "ctaSecondary": "Saber más"
+    "badge": "Tráfico · Conversión · Tecnología · Escala",
+    "headlineLine1": "Tu negocio listo",
+    "headlineLine2": "para el próximo",
+    "headlineAccent": "salto.",
+    "subheadline": "Estructuramos todo tu recorrido de ventas online — del tráfico de pago al cierre. Estrategia, tecnología y ejecución integradas en un único socio.",
+    "cta": "Quiero mi diagnóstico gratis",
+    "ctaSecondary": "Ver cómo funciona",
+    "statsProjects": "empresas aceleradas",
+    "statsCountries": "países atendidos",
+    "statsRoi": "ROI promedio generado"
   }
 }

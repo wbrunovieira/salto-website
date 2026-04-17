@@ -1,8 +1,14 @@
 {
   "hero": {
-    "headline": "Potenzia le tue vendite online",
-    "subheadline": "Strutturiamo l'intero percorso di vendita online — dal traffico a pagamento alla conversione.",
-    "cta": "Inizia ora",
-    "ctaSecondary": "Scopri di più"
+    "badge": "Traffico · Conversione · Tecnologia · Scala",
+    "headlineLine1": "La tua azienda pronta",
+    "headlineLine2": "per il prossimo",
+    "headlineAccent": "salto.",
+    "subheadline": "Strutturiamo l'intero percorso di vendita online — dal traffico a pagamento alla chiusura. Strategia, tecnologia ed esecuzione integrate in un unico partner.",
+    "cta": "Voglio la mia diagnosi gratuita",
+    "ctaSecondary": "Scopri come funziona",
+    "statsProjects": "aziende accelerate",
+    "statsCountries": "paesi serviti",
+    "statsRoi": "ROI medio generato"
   }
 }
