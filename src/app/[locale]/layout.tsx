@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
+import LocaleDetector from "@/components/LocaleDetector";
 import "../globals.css";
 
 const montserrat = Montserrat({
@@ -40,6 +41,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={`${montserrat.variable} font-sans antialiased bg-base text-text-primary`}>
         <NextIntlClientProvider messages={messages}>
+          <LocaleDetector currentLocale={locale} />
           <Header locale={locale} />
           {children}
         </NextIntlClientProvider>

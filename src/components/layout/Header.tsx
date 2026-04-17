@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { LOCALE_STORAGE_KEY } from "@/components/LocaleDetector";
 
 const LOCALE_LABELS: Record<string, string> = {
   pt: "PT",
@@ -134,7 +135,7 @@ export default function Header({ locale }: { locale: string }) {
               {routing.locales.map((loc) => (
                 <button
                   key={loc}
-                  onClick={() => router.replace(pathname, { locale: loc })}
+                  onClick={() => { localStorage.setItem(LOCALE_STORAGE_KEY, loc); router.replace(pathname, { locale: loc }); }}
                   className={`text-[11px] font-bold px-2 py-0.5 rounded-full transition-all duration-200 ${
                     locale === loc
                       ? "bg-accent text-white shadow-[0_0_12px_rgba(255,92,0,0.4)]"
