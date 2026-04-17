@@ -8,6 +8,7 @@ import HeaderClient from "@/components/layout/HeaderClient";
 import FooterClient from "@/components/layout/FooterClient";
 import LocaleDetector from "@/components/LocaleDetector";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import CookieBanner from "@/components/CookieBanner";
 import "../globals.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://saltoup.com";
@@ -92,6 +93,7 @@ export default async function LocaleLayout({
           {children}
           <FooterClient />
           <WhatsAppFloat />
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>
