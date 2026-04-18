@@ -11,7 +11,7 @@ export default function About() {
   const t = useTranslations("about");
 
   return (
-    <section id="about" className="relative bg-[#0E0E0E] px-6 pb-32">
+    <section id="about" className="relative bg-[#0E0E0E] px-6 pb-32 scroll-mt-20">
       {/* Overlap gradient */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0E0E0E] to-transparent pointer-events-none z-10" />
 
