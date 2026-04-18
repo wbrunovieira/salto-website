@@ -15,7 +15,10 @@ export default function Header({ locale }: { locale: string }) {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [activeSection, setActiveSection] = useState(() => {
+    if (typeof window === "undefined") return "hero";
+    return window.location.hash.slice(1) || "hero";
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
