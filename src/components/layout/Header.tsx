@@ -84,7 +84,7 @@ export default function Header({ locale }: { locale: string }) {
                 <div key={link.section} className={`nav-item-animate-${i + 1}`}>
                   <Link
                     href={link.href}
-                    onClick={link.section === "hero" ? (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); router.push("/"); } : undefined}
+                    onClick={link.section === "hero" ? (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); window.history.replaceState(null, "", window.location.pathname.replace(/#.*$/, "")); setActiveSection("hero"); } : undefined}
                     className={`relative text-sm font-semibold transition-colors duration-200 group py-1 ${
                       isActive ? "text-text-primary" : "text-text-muted hover:text-text-primary"
                     }`}
@@ -151,7 +151,7 @@ export default function Header({ locale }: { locale: string }) {
                   <Link
                     key={link.section}
                     href={link.href}
-                    onClick={(e) => { if (link.section === "hero") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); router.push("/"); } setMenuOpen(false); }}
+                    onClick={(e) => { if (link.section === "hero") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); window.history.replaceState(null, "", window.location.pathname.replace(/#.*$/, "")); setActiveSection("hero"); } setMenuOpen(false); }}
                     className={`text-base font-semibold transition-colors duration-200 ${
                       isActive ? "text-accent" : "text-text-muted hover:text-text-primary"
                     }`}
