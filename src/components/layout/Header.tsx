@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -60,13 +61,15 @@ export default function Header({ locale }: { locale: string }) {
 
           {/* Logo */}
           <div className="logo-animate">
-            <Link href="/" className="flex items-center gap-3 group">
-              <svg width="28" height="38" viewBox="0 0 56 76" fill="none"
-                className="text-accent transition-transform duration-300 group-hover:scale-110">
-                <rect x="19" y="36" width="18" height="38" rx="5" fill="currentColor" />
-                <polygon points="0,40 28,2 56,40" fill="currentColor" />
-              </svg>
-              <span className="font-black text-[22px] tracking-tight text-text-primary leading-none">SALTO</span>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/logo.svg"
+                alt="Salto"
+                width={120}
+                height={40}
+                priority
+                className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
           </div>
 
