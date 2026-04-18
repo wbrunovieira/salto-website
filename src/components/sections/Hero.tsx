@@ -93,7 +93,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center gap-4 mt-12"
         >
           <Link
-            href="/#contact"
+            href={{ pathname: "/", hash: "#contact" }}
             className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
@@ -105,7 +105,7 @@ export default function Hero() {
           </Link>
 
           <Link
-            href="/#services"
+            href={{ pathname: "/", hash: "#services" }}
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-all duration-300 hover:-translate-y-[3px] hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
           >
             {t("ctaSecondary")}

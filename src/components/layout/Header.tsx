@@ -38,11 +38,11 @@ export default function Header({ locale }: { locale: string }) {
   }, []);
 
   const navLinks = [
-    { href: "/",          label: t("nav.home"),     section: "hero" },
-    { href: "/#services", label: t("nav.services"), section: "services" },
-    { href: "/#process",  label: t("nav.process"),  section: "process" },
-    { href: "/#about",    label: t("nav.about"),    section: "about" },
-    { href: "/#contact",  label: t("nav.contact"),  section: "contact" },
+    { href: { pathname: "/" },                              label: t("nav.home"),     section: "hero" },
+    { href: { pathname: "/", hash: "#services" },           label: t("nav.services"), section: "services" },
+    { href: { pathname: "/", hash: "#process" },            label: t("nav.process"),  section: "process" },
+    { href: { pathname: "/", hash: "#about" },              label: t("nav.about"),    section: "about" },
+    { href: { pathname: "/", hash: "#contact" },            label: t("nav.contact"),  section: "contact" },
   ];
 
   return (
@@ -75,7 +75,7 @@ export default function Header({ locale }: { locale: string }) {
             {navLinks.map((link, i) => {
               const isActive = activeSection === link.section;
               return (
-                <div key={link.href} className={`nav-item-animate-${i + 1}`}>
+                <div key={link.section} className={`nav-item-animate-${i + 1}`}>
                   <Link
                     href={link.href}
                     className={`relative text-sm font-semibold transition-colors duration-200 group py-1 ${
@@ -111,7 +111,7 @@ export default function Header({ locale }: { locale: string }) {
             </div>
 
             <Link
-              href="/#contact"
+              href={{ pathname: "/", hash: "#contact" }}
               className="relative px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden group transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
@@ -142,7 +142,7 @@ export default function Header({ locale }: { locale: string }) {
                 const isActive = activeSection === link.section;
                 return (
                   <Link
-                    key={link.href}
+                    key={link.section}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     className={`text-base font-semibold transition-colors duration-200 ${
@@ -172,7 +172,7 @@ export default function Header({ locale }: { locale: string }) {
                   ))}
                 </div>
                 <Link
-                  href="/#contact"
+                  href={{ pathname: "/", hash: "#contact" }}
                   onClick={() => setMenuOpen(false)}
                   className="px-5 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-accent to-accent-hover"
                 >

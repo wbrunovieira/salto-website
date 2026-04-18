@@ -113,7 +113,7 @@ export default function Footer() {
               {t("contact")}
             </p>
             <Link
-              href="/#contact"
+              href={{ pathname: "/", hash: "#contact" }}
               className="group relative inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-bold text-white overflow-hidden w-fit transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
