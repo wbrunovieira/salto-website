@@ -145,7 +145,12 @@ export default function ScrollScene() {
       });
     };
 
-    initGSAP();
+    initGSAP().then(() => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    });
 
     return () => {
       killed = true;
