@@ -145,11 +145,16 @@ export default function ScrollScene() {
       });
     };
 
-    initGSAP().then(() => {
+    initGSAP().then(async () => {
       const hash = window.location.hash.slice(1);
-      if (!hash) return;
+      if (!hash || hash === "hero") return;
       const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      if (!el) return;
+      // Scroll instantâneo para a seção — evita conflito com scrub do hero
+      el.scrollIntoView({ behavior: "instant" });
+      // Atualiza ScrollTrigger com nova posição de scroll
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      ScrollTrigger.refresh();
     });
 
     return () => {
