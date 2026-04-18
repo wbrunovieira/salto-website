@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salto — Logo Integrado v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A0A;
+      font-family: 'Montserrat', sans-serif;
+      padding: 80px 64px 120px;
+      color: #f5f5f5;
+    }
+    .section { max-width: 1080px; margin: 0 auto 72px; }
+    .row-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 5px;
+      text-transform: uppercase; color: #282828;
+      margin-bottom: 24px; padding-bottom: 14px;
+      border-bottom: 1px solid #141414;
+    }
+    .card {
+      background: #0E0E0E; border: 1px solid #1a1a1a;
+      border-radius: 28px; padding: 64px 72px;
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 40px;
+    }
+    .card-light { background: #F0F0F0; }
+    .sublabel {
+      font-size: 10px; color: #2a2a2a;
+      letter-spacing: 1.5px; margin-top: 16px;
+      line-height: 1.6;
+    }
+    .tagline-el {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 5.5px; text-transform: uppercase;
+      fill: #FF5C00;
+    }
+    .tagline-el-dark { fill: #FF5C00; opacity: 0.7; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     A · Barras substituem o L — medidas precisas via JS
+════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-label">A · L substituído — barras com peso idêntico ao traço da fonte</p>
+  <div class="card">
+    <svg id="logo-a" overflow="visible"></svg>
+    <svg id="logo-a-tag" overflow="visible"></svg>
+  </div>
+  <p class="sublabel">As barras têm a mesma espessura que os traços do Montserrat 900. Medição precisa via canvas API garante alinhamento perfeito com a baseline.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     B · L como barra mais alta (stem do L = barra 3)
+     As 2 barras menores surgem no espaço entre A e L
+════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-label">B · Stem do L é a barra mais alta — 2 barras menores no espaço entre A e L</p>
+  <div class="card">
+    <svg id="logo-b" overflow="visible"></svg>
+    <svg id="logo-b-tag" overflow="visible"></svg>
+  </div>
+  <p class="sublabel">O L permanece como referência mas seu stem é a 3ª barra. O pé do L é removido. Duas barras menores preenchem o kerning A→L.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     C · Wordmark completo + L em laranja (mais sutil)
+════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-label">C · Wordmark intacto — só o L em laranja</p>
+  <div class="two-col">
+    <div class="card">
+      <svg id="logo-c" overflow="visible"></svg>
+    </div>
+    <div class="card card-light">
+      <svg id="logo-c-light" overflow="visible"></svg>
+    </div>
+  </div>
+  <p class="sublabel">Abordagem mais conservadora. O L torna-se o ponto focal laranja, remetendo à barra mais alta do símbolo. Funciona bem em todos os contextos.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HEADER SIMULATION
+════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-label">Simulação no header — escala real de uso</p>
+  <div style="background:#0E0E0E;border:1px solid #1a1a1a;border-radius:20px;
+              padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;">
+    <svg id="logo-header" overflow="visible"></svg>
+    <div style="display:flex;gap:32px;">
+      <span style="font-size:12px;color:#444;font-weight:700;">Serviços</span>
+      <span style="font-size:12px;color:#444;font-weight:700;">Processo</span>
+      <span style="font-size:12px;color:#444;font-weight:700;">Sobre</span>
+      <span style="font-size:12px;color:#444;font-weight:700;">Contato</span>
+    </div>
+    <div style="background:#FF5C00;border-radius:999px;padding:10px 20px;
+                font-size:11px;font-weight:700;color:#fff;letter-spacing:1px;">
+      Fale conosco
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Wait for Montserrat to fully load
+document.fonts.ready.then(() => {
+  // ── Measure helpers ──
+  const can = document.createElement('canvas');
+  const ctx = can.getContext('2d');
+
+  function measure(text, size) {
+    ctx.font = `900 ${size}px Montserrat, "Arial Black", sans-serif`;
+    const m = ctx.measureText(text);
+    return {
+      width:   m.width,
+      ascent:  m.actualBoundingBoxAscent,
+      descent: m.actualBoundingBoxDescent,
+    };
+  }
+
+  // ── Render a logo into an SVG element ──
+  // mode: 'replace' | 'stem' | 'color' | 'color-light'
+  function renderLogo(svgId, size, mode, tagline) {
+    const svg = document.getElementById(svgId);
+    if (!svg) return;
+
+    const mSA    = measure('SA',    size);
+    const mL     = measure('L',     size);
+    const mSAL   = measure('SAL',   size);
+    const mTO    = measure('TO',    size);
+    const mSALTO = measure('SALTO', size);
+    const mM     = measure('M',     size); // cap height reference
+
+    const capH    = mM.ascent;           // actual cap height in px
+    const baseline = capH + 4;           // SVG y for baseline
+    const descH   = mM.descent;
+    const totalH  = baseline + descH + (tagline ? 28 : 0);
+
+    // For kerning: use SALTO advance so letters kern correctly
+    // SA portion = mSAL.width - mL.width  (accounts for A-L kerning)
+    const saW  = mSAL.width - mL.width;
+    const lW   = mL.width;
+    const toW  = mSALTO.width - mSAL.width; // accounts for L-T kerning
+    const totalW = mSALTO.width;
+
+    // Bar dimensions — bars match the visual weight of the font stroke
+    // Montserrat 900 stem width ≈ 16% of cap height
+    const stemW  = Math.round(capH * 0.16);   // single bar width ≈ font stroke weight
+    const barGap = Math.round(stemW * 0.45);  // gap between bars
+
+    // Heights: 38%, 63%, 100% of cap height
+    const h1 = Math.round(capH * 0.38);
+    const h2 = Math.round(capH * 0.63);
+    const h3 = Math.round(capH * 1.00);
+
+    const totalBarsW = 3 * stemW + 2 * barGap;
+    // Center bars in L's advance width
+    const barsStartX = saW + (lW - totalBarsW) / 2;
+
+    let inner = '';
+
+    if (mode === 'replace') {
+      // SA text
+      inner += `<text x="0" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="#F5F5F5"
+        letter-spacing="-1">SA</text>`;
+
+      // Bar 1 (shortest)
+      inner += `<rect x="${barsStartX}" y="${baseline - h1}"
+        width="${stemW}" height="${h1}" rx="2"
+        fill="rgba(255,92,0,0.25)"/>`;
+
+      // Bar 2 (medium)
+      inner += `<rect x="${barsStartX + stemW + barGap}" y="${baseline - h2}"
+        width="${stemW}" height="${h2}" rx="2"
+        fill="rgba(255,92,0,0.60)"/>`;
+
+      // Bar 3 (tallest = L)
+      inner += `<rect x="${barsStartX + 2*(stemW + barGap)}" y="${baseline - h3}"
+        width="${stemW}" height="${h3}" rx="2"
+        fill="#FF5C00"/>`;
+
+      // TO text — starts where T would naturally be
+      inner += `<text x="${saW + lW}" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="#F5F5F5"
+        letter-spacing="-1">TO</text>`;
+
+    } else if (mode === 'stem') {
+      // SA text
+      inner += `<text x="0" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="#F5F5F5"
+        letter-spacing="-1">SA</text>`;
+
+      // In "stem" mode: 2 small bars fit BEFORE the L's stem position
+      // The L stem IS bar 3 — positioned at saW (left edge of L)
+      // Small bars fill the space before the L stem within L's advance
+      const stemX   = saW + lW - stemW - Math.round(lW * 0.04); // right side of L advance = stem
+      const bar2X   = stemX - barGap - stemW;
+      const bar1X   = bar2X - barGap - stemW;
+
+      inner += `<rect x="${bar1X}" y="${baseline - h1}"
+        width="${stemW}" height="${h1}" rx="2"
+        fill="rgba(255,92,0,0.25)"/>`;
+      inner += `<rect x="${bar2X}" y="${baseline - h2}"
+        width="${stemW}" height="${h2}" rx="2"
+        fill="rgba(255,92,0,0.60)"/>`;
+      // Stem of L = bar 3
+      inner += `<rect x="${stemX}" y="${baseline - h3}"
+        width="${stemW}" height="${h3}" rx="2"
+        fill="#FF5C00"/>`;
+
+      // TO text
+      inner += `<text x="${saW + lW}" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="#F5F5F5"
+        letter-spacing="-1">TO</text>`;
+
+    } else if (mode === 'color' || mode === 'color-light') {
+      const textColor = mode === 'color-light' ? '#0E0E0E' : '#F5F5F5';
+      // Full SALTO — L is orange
+      inner += `<text x="0" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="${textColor}"
+        letter-spacing="-1">SA</text>`;
+      inner += `<text x="${saW}" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="#FF5C00"
+        letter-spacing="-1">L</text>`;
+      inner += `<text x="${saW + lW}" y="${baseline}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="900" font-size="${size}" fill="${textColor}"
+        letter-spacing="-1">TO</text>`;
+    }
+
+    // Tagline
+    if (tagline) {
+      // Align tagline to start under the wordmark (after the mark)
+      inner += `<text x="0" y="${baseline + 24}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="700" font-size="9"
+        letter-spacing="5" text-transform="uppercase"
+        fill="#FF5C00">ALAVANQUE SUAS VENDAS</text>`;
+    }
+
+    svg.setAttribute('viewBox', `0 0 ${totalW + 4} ${totalH}`);
+    svg.setAttribute('width',  `${totalW + 4}`);
+    svg.setAttribute('height', `${totalH}`);
+    svg.innerHTML = inner;
+  }
+
+  // ── Render all logos ──
+  renderLogo('logo-a',      84, 'replace', false);
+  renderLogo('logo-a-tag',  84, 'replace', true);
+  renderLogo('logo-b',      84, 'stem',    false);
+  renderLogo('logo-b-tag',  84, 'stem',    true);
+  renderLogo('logo-c',      84, 'color',       false);
+  renderLogo('logo-c-light',84, 'color-light', false);
+  renderLogo('logo-header', 40, 'replace', false);
+});
+</script>
+</body>
+</html>

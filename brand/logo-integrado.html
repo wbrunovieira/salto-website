@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salto — Logo Integrado · SALTO + Barras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A0A;
+      font-family: 'Montserrat', sans-serif;
+      padding: 80px 64px 120px;
+    }
+
+    header {
+      max-width: 1080px;
+      margin: 0 auto 72px;
+      text-align: center;
+      border-bottom: 1px solid #141414;
+      padding-bottom: 40px;
+    }
+    header h1 { font-size:9px; font-weight:700; letter-spacing:6px; text-transform:uppercase; color:#282828; }
+
+    .section { max-width:1080px; margin:0 auto 72px; }
+    .label   { font-size:9px; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:#282828; margin-bottom:24px; }
+    .sublabel { font-size:10px; color:#333; margin-top:20px; letter-spacing:2px; }
+
+    .card {
+      background:#0E0E0E;
+      border:1px solid #1a1a1a;
+      border-radius:28px;
+      padding:64px 72px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+    }
+    .card-center { justify-content:center; }
+    .card-light  { background:#F0F0F0; }
+    .card-split  { display:grid; grid-template-columns:1fr 1fr; gap:1px; padding:0; overflow:hidden; }
+    .card-split .half { padding:56px 64px; display:flex; align-items:center; justify-content:center; }
+
+    /* ── FONT BASE ── */
+    .wm {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: #F5F5F5;
+      line-height: 1;
+      user-select: none;
+    }
+    .wm-dark { color: #0E0E0E; }
+
+    /* ── CONCEPT A · L substituído pelas 3 barras ──
+       As barras ocupam exatamente o espaço do L.
+       Ordem visual: S A [bar1 bar2 bar3] T O
+    */
+    .logo-a {
+      display: inline-flex;
+      align-items: flex-end;   /* baseline alignment */
+      gap: 0;
+    }
+    .logo-a .wm { font-size: 84px; letter-spacing: -1px; }
+    /* Letter-spacing pulls the last char of each segment in — compensate */
+    .logo-a .seg-sa { padding-right: 3px; }  /* space between A and bars */
+    .logo-a .seg-to { padding-left: 3px; }   /* space between bars and T */
+
+    .bars-a {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      /* optical nudge to sit on same baseline as text (~8px for descender gap) */
+      margin-bottom: 8px;
+    }
+    .bar-a1 { width:11px; height:24px; background:rgba(255,92,0,0.25); border-radius:3px 3px 0 0; flex-shrink:0; }
+    .bar-a2 { width:11px; height:38px; background:rgba(255,92,0,0.60); border-radius:3px 3px 0 0; flex-shrink:0; }
+    .bar-a3 { width:14px; height:58px; background:#FF5C00;              border-radius:3px 3px 0 0; flex-shrink:0; }
+
+    /* ── CONCEPT B · L pintado + pé removido + barras menores à esquerda ──
+       O L vira a barra mais alta. Duas barras menores ficam antes dele.
+       As barras "surgem" do espaço entre A e L.
+    */
+    .logo-b {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+    .logo-b .wm { font-size: 84px; letter-spacing: -1px; }
+
+    /* Container que substitui o L: [bar1][bar2][L-stem] */
+    .bars-b {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      margin: 0 2px;
+      margin-bottom: 8px;  /* baseline correction */
+    }
+    /* Bar 1 (ghost) — menor */
+    .bar-b1 { width:10px; height:22px; background:rgba(255,92,0,0.22); border-radius:3px 3px 0 0; flex-shrink:0; }
+    /* Bar 2 (médio) */
+    .bar-b2 { width:10px; height:36px; background:rgba(255,92,0,0.58); border-radius:3px 3px 0 0; flex-shrink:0; }
+    /* Bar 3 = traço vertical do L — mais largo, referência ao letterform */
+    .bar-b3 { width:14px; height:58px; background:#FF5C00; border-radius:3px 3px 0 0; flex-shrink:0; }
+
+    /* ── CONCEPT C · L laranja, rest branco ──
+       Mais sutil: wordmark completo, L é o único elemento colorido.
+       Cria foco visual sem desconstruir a palavra.
+    */
+    .logo-c {
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .logo-c .wm { font-size: 84px; letter-spacing: -3px; }
+    .logo-c .accent { color: #FF5C00; }
+
+    /* ── CONCEPT D · Barra pintada por dentro do L ──
+       O L continua como letra mas tem uma "barra laranja" atrás dele.
+       Efeito de highlight: como se a barra do gráfico estivesse crescendo atrás da letra.
+    */
+    .logo-d {
+      display: inline-flex;
+      align-items: baseline;
+      position: relative;
+    }
+    .logo-d .wm { font-size: 84px; letter-spacing: -3px; }
+    .l-wrap {
+      position: relative;
+      display: inline-block;
+      color: #F5F5F5;
+    }
+    /* Orange bar behind L, full height = cap height, left-aligned to L's stem */
+    .l-bar-behind {
+      position: absolute;
+      bottom: 8px; /* baseline offset */
+      left: 0;
+      width: 14px;     /* width of L's vertical stroke */
+      height: 58px;    /* cap height */
+      background: #FF5C00;
+      border-radius: 3px 3px 0 0;
+      z-index: -1;
+    }
+    /* Two smaller bars to the left — float above A */
+    .bars-d-left {
+      position: absolute;
+      bottom: 8px;
+      right: calc(100% + 4px); /* to the left of L, touching */
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .bd1 { width:9px; height:22px; background:rgba(255,92,0,0.25); border-radius:3px 3px 0 0; }
+    .bd2 { width:9px; height:36px; background:rgba(255,92,0,0.60); border-radius:3px 3px 0 0; }
+
+    /* ── TAGLINE ── */
+    .tagline {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #FF5C00;
+      margin-top: 12px;
+      display: block;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .col { display:flex; flex-direction:column; gap:12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Salto · Integração das barras no wordmark · 4 abordagens</h1>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT A · L SUBSTITUÍDO pelas 3 barras
+     SA [bar1 bar2 bar3] TO
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="label">A · L substituído pelas 3 barras</p>
+  <div class="card">
+    <div class="col">
+      <div class="logo-a">
+        <span class="wm seg-sa">SA</span>
+        <div class="bars-a">
+          <div class="bar-a1"></div>
+          <div class="bar-a2"></div>
+          <div class="bar-a3"></div>
+        </div>
+        <span class="wm seg-to">TO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+  </div>
+  <p class="sublabel">O L desaparece. As 3 barras ocupam seu espaço. A palavra ainda se lê como SALTO pelo contexto da marca.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT B · L vira a barra mais alta (stem apenas, sem pé)
+     SA [bar1 bar2 L-stem] TO  ← as barras incluem o stem do L
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="label">B · O L se torna a barra mais alta</p>
+  <div class="card">
+    <div class="col">
+      <div class="logo-b">
+        <span class="wm">SA</span>
+        <div class="bars-b">
+          <div class="bar-b1"></div>
+          <div class="bar-b2"></div>
+          <div class="bar-b3"></div>  <!-- este é o stem do L -->
+        </div>
+        <span class="wm">TO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+  </div>
+  <p class="sublabel">O traço vertical do L permanece como a 3ª barra (mais alta, mais larga, laranja cheio). Duas barras menores completam a sequência à esquerda. O L perde o pé mas mantém o stem.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT C · L pintado de laranja — abordagem mais sutil
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="label">C · L pintado — integração cromática simples</p>
+  <div class="comparison-grid">
+    <div class="card">
+      <div class="col">
+        <div class="logo-c">
+          <span class="wm">SA</span><span class="wm accent">L</span><span class="wm">TO</span>
+        </div>
+        <span class="tagline">alavanque suas vendas</span>
+      </div>
+    </div>
+    <div class="card">
+      <!-- Variação: S+A gradual, L pleno -->
+      <div class="col">
+        <div class="logo-c" style="align-items:flex-end;">
+          <span class="wm" style="color:rgba(245,245,245,0.35);">S</span>
+          <span class="wm" style="color:rgba(245,245,245,0.65);">A</span>
+          <span class="wm accent">L</span>
+          <span class="wm" style="color:rgba(245,245,245,0.65);">T</span>
+          <span class="wm" style="color:rgba(245,245,245,0.35);">O</span>
+        </div>
+        <span class="tagline" style="opacity:0.5">variação: onda cromática</span>
+      </div>
+    </div>
+  </div>
+  <p class="sublabel">Mais sutil. O L permanece intacto como letra, apenas recebe a cor laranja. Fácil de implementar. Cria um "ponto focal" natural no centro da palavra.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT D · Barra laranja cresce por trás do L
+     O L letterform existe mas a barra está "dentro" dele
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="label">D · A barra cresce por dentro do L</p>
+  <div class="card">
+    <div class="col">
+      <div class="logo-d">
+        <span class="wm">SA</span>
+        <span class="wm l-wrap">
+          <!-- Bars behind the L: 2 small bars to the left, 1 full bar = L's stem -->
+          <div class="bars-d-left">
+            <div class="bd1"></div>
+            <div class="bd2"></div>
+          </div>
+          <!-- Orange bar directly behind L's stem -->
+          <div class="l-bar-behind"></div>
+          L
+        </span>
+        <span class="wm">TO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+  </div>
+  <p class="sublabel">O L permanece como letra mas a barra laranja "emerge" por trás do stem, como se o gráfico estivesse crescendo dentro do wordmark. As duas barras menores fltuam antes do L.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     COMPARAÇÃO LADO A LADO · todos em escala menor
+════════════════════════════════════════════════════════════════ -->
+<div class="section" style="margin-bottom:0;">
+  <p class="label">Comparação direta · escala header</p>
+  <div class="card" style="flex-direction:column;align-items:flex-start;gap:40px;padding:56px 72px;">
+
+    <div style="display:flex;align-items:center;gap:32px;">
+      <span style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#282828;width:16px;">A</span>
+      <!-- Concept A small -->
+      <div style="display:inline-flex;align-items:flex-end;gap:0;">
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-1px;padding-right:2px;">SA</span>
+        <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:5px;">
+          <div style="width:7px;height:15px;background:rgba(255,92,0,0.25);border-radius:2px 2px 0 0;"></div>
+          <div style="width:7px;height:24px;background:rgba(255,92,0,0.60);border-radius:2px 2px 0 0;"></div>
+          <div style="width:9px;height:37px;background:#FF5C00;border-radius:2px 2px 0 0;"></div>
+        </div>
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-1px;padding-left:2px;">TO</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:32px;">
+      <span style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#282828;width:16px;">B</span>
+      <!-- Concept B small -->
+      <div style="display:inline-flex;align-items:flex-end;gap:0;">
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-1px;">SA</span>
+        <div style="display:flex;align-items:flex-end;gap:4px;margin:0 2px;margin-bottom:5px;">
+          <div style="width:7px;height:14px;background:rgba(255,92,0,0.22);border-radius:2px 2px 0 0;"></div>
+          <div style="width:7px;height:23px;background:rgba(255,92,0,0.58);border-radius:2px 2px 0 0;"></div>
+          <div style="width:9px;height:37px;background:#FF5C00;border-radius:2px 2px 0 0;"></div>
+        </div>
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-1px;">TO</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:32px;">
+      <span style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#282828;width:16px;">C</span>
+      <!-- Concept C small -->
+      <div style="display:inline-flex;align-items:baseline;">
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-3px;">SA</span>
+        <span style="font:900 52px/1 Montserrat;color:#FF5C00;letter-spacing:-3px;">L</span>
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-3px;">TO</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:32px;">
+      <span style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#282828;width:16px;">D</span>
+      <!-- Concept D small -->
+      <div style="display:inline-flex;align-items:flex-end;position:relative;">
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-3px;">SA</span>
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-3px;position:relative;display:inline-block;">
+          <div style="position:absolute;bottom:5px;left:0;width:9px;height:37px;background:#FF5C00;border-radius:2px 2px 0 0;z-index:-1;"></div>
+          <div style="position:absolute;bottom:5px;right:calc(100% + 3px);display:flex;align-items:flex-end;gap:3px;">
+            <div style="width:6px;height:14px;background:rgba(255,92,0,0.25);border-radius:2px 2px 0 0;"></div>
+            <div style="width:6px;height:23px;background:rgba(255,92,0,0.60);border-radius:2px 2px 0 0;"></div>
+          </div>
+          L
+        </span>
+        <span style="font:900 52px/1 Montserrat;color:#F5F5F5;letter-spacing:-3px;">TO</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

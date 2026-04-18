@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salto — Barras sobre o texto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0A0A0A; font-family: 'Montserrat', sans-serif; padding: 72px 64px 120px; }
+    .section { max-width: 1080px; margin: 0 auto 56px; }
+    .row-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
+      color: #282828; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #141414;
+    }
+    .card {
+      background: #0E0E0E; border: 1px solid #1a1a1a; border-radius: 24px;
+      padding: 56px 64px; display: flex; flex-direction: column;
+      align-items: flex-start; gap: 48px;
+    }
+    .card-light { background: #F0F0F0; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .sub { font-size: 10px; color: #2a2a2a; letter-spacing: 1px; margin-top: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<!-- V1: Barras sobre S·A·L (cada barra tem a largura da letra) -->
+<div class="section">
+  <p class="row-label">V1 · Barras com largura das letras S · A · L — ascendente da esquerda</p>
+  <div class="card"><svg id="v1a" overflow="visible"></svg><svg id="v1b" overflow="visible"></svg></div>
+  <p class="sub">Cada barra cobre exatamente uma letra (S, A, L). Alturas ascendentes. A transparência mantém o texto legível através das barras.</p>
+</div>
+
+<!-- V2: Barras centralizadas sobre o L (barra principal = L) -->
+<div class="section">
+  <p class="row-label">V2 · Barras centradas no L — o L é o pico, barras flanqueiam</p>
+  <div class="card"><svg id="v2a" overflow="visible"></svg><svg id="v2b" overflow="visible"></svg></div>
+  <p class="sub">A barra mais alta está exatamente sobre o L. Duas barras menores flanqueiam (sobre A e T). O L é o pico visual da sequência.</p>
+</div>
+
+<!-- V3: Barras largas sobre toda a palavra, alturas crescentes da esq p dir -->
+<div class="section">
+  <p class="row-label">V3 · Uma barra larga por trás — todo o wordmark como barra de fundo</p>
+  <div class="card"><svg id="v3a" overflow="visible"></svg><svg id="v3b" overflow="visible"></svg></div>
+  <p class="sub">Uma única barra de fundo (a mais alta) cresce por trás do wordmark completo. Mais clean — o texto está sobre a barra, não vice-versa.</p>
+</div>
+
+<!-- V4: Barras à direita do wordmark (como sufixo mark) -->
+<div class="section">
+  <p class="row-label">V4 · Barras como sufixo — imediatamente após o wordmark</p>
+  <div class="card"><svg id="v4a" overflow="visible"></svg></div>
+  <p class="sub">Wordmark intacto + barras como elemento sufixo. Muito coesas, sem quebrar a leitura. O símbolo "acompanha" a palavra.</p>
+</div>
+
+<!-- HEADER SIM -->
+<div class="section">
+  <p class="row-label">Simulação header — escala real</p>
+  <div style="background:#0E0E0E;border:1px solid #1a1a1a;border-radius:18px;
+              padding:0 36px;height:68px;display:flex;align-items:center;justify-content:space-between;">
+    <svg id="v-header" overflow="visible"></svg>
+    <div style="display:flex;gap:28px;">
+      <span style="font-size:11px;color:#444;font-weight:700;">Serviços</span>
+      <span style="font-size:11px;color:#444;font-weight:700;">Processo</span>
+      <span style="font-size:11px;color:#444;font-weight:700;">Sobre</span>
+      <span style="font-size:11px;color:#444;font-weight:700;">Contato</span>
+    </div>
+    <div style="background:#FF5C00;border-radius:999px;padding:9px 18px;font-size:11px;font-weight:700;color:#fff;">Fale conosco</div>
+  </div>
+</div>
+
+<script>
+document.fonts.ready.then(() => {
+  const can = document.createElement('canvas');
+  const ctx = can.getContext('2d');
+
+  function m(text, size) {
+    ctx.font = `900 ${size}px Montserrat, "Arial Black", sans-serif`;
+    return ctx.measureText(text);
+  }
+
+  function render(id, size, variant, tagline) {
+    const svg = document.getElementById(id);
+    if (!svg) return;
+
+    ctx.font = `900 ${size}px Montserrat, "Arial Black", sans-serif`;
+    const mS     = m('S', size).width;
+    const mSA    = m('SA', size).width;
+    const mSAL   = m('SAL', size).width;
+    const mSALT  = m('SALT', size).width;
+    const mSALTO = m('SALTO', size).width;
+    const mM     = ctx.measureText('M');
+    const capH   = mM.actualBoundingBoxAscent;
+    const descH  = mM.actualBoundingBoxDescent;
+    const baseline = capH + 2;
+    const totalH = baseline + descH + (tagline ? 26 : 0);
+
+    // Letter x-positions
+    const xS = 0;
+    const xA = mS;
+    const xL = mSA;
+    const xT = mSAL;
+    const xO = mSALT;
+    const xEnd = mSALTO;
+
+    // Letter widths
+    const wS = xA - xS;
+    const wA = xL - xA;
+    const wL = xT - xL;
+    const wT = xO - xT;
+    const wO = xEnd - xO;
+
+    const h1 = capH * 0.38;
+    const h2 = capH * 0.63;
+    const h3 = capH * 1.00;
+
+    let inner = '';
+
+    // ── SALTO wordmark (always white, always behind) ──
+    const wordmark = `<text x="0" y="${baseline}"
+      font-family="Montserrat, Arial Black, sans-serif"
+      font-weight="900" font-size="${size}"
+      letter-spacing="-0.5" fill="#F5F5F5">SALTO</text>`;
+
+    const wordmarkDark = `<text x="0" y="${baseline}"
+      font-family="Montserrat, Arial Black, sans-serif"
+      font-weight="900" font-size="${size}"
+      letter-spacing="-0.5" fill="#0E0E0E">SALTO</text>`;
+
+    if (variant === 'v1') {
+      // Bars cover S (short), A (medium), L (tall) — width = letter width
+      inner += wordmark;
+      // Bar over S
+      inner += `<rect x="${xS}" y="${baseline - h1}" width="${wS}" height="${h1}"
+        rx="2" fill="rgba(255,92,0,0.30)"/>`;
+      // Bar over A
+      inner += `<rect x="${xA}" y="${baseline - h2}" width="${wA}" height="${h2}"
+        rx="2" fill="rgba(255,92,0,0.42)"/>`;
+      // Bar over L (tallest)
+      inner += `<rect x="${xL}" y="${baseline - h3}" width="${wL}" height="${h3}"
+        rx="2" fill="rgba(255,92,0,0.58)"/>`;
+    }
+    else if (variant === 'v1-light') {
+      inner += wordmarkDark;
+      inner += `<rect x="${xS}" y="${baseline - h1}" width="${wS}" height="${h1}"
+        rx="2" fill="rgba(255,92,0,0.18)"/>`;
+      inner += `<rect x="${xA}" y="${baseline - h2}" width="${wA}" height="${h2}"
+        rx="2" fill="rgba(255,92,0,0.28)"/>`;
+      inner += `<rect x="${xL}" y="${baseline - h3}" width="${wL}" height="${h3}"
+        rx="2" fill="rgba(255,92,0,0.42)"/>`;
+    }
+    else if (variant === 'v2') {
+      // Bars centered on L (peak), A (mid-left), T (mid-right)
+      inner += wordmark;
+      // Bar over A
+      inner += `<rect x="${xA}" y="${baseline - h1}" width="${wA}" height="${h1}"
+        rx="2" fill="rgba(255,92,0,0.30)"/>`;
+      // Bar over L (peak)
+      inner += `<rect x="${xL}" y="${baseline - h3}" width="${wL}" height="${h3}"
+        rx="2" fill="rgba(255,92,0,0.55)"/>`;
+      // Bar over T
+      inner += `<rect x="${xT}" y="${baseline - h2}" width="${wT}" height="${h2}"
+        rx="2" fill="rgba(255,92,0,0.30)"/>`;
+    }
+    else if (variant === 'v2-light') {
+      inner += wordmarkDark;
+      inner += `<rect x="${xA}" y="${baseline - h1}" width="${wA}" height="${h1}"
+        rx="2" fill="rgba(255,92,0,0.18)"/>`;
+      inner += `<rect x="${xL}" y="${baseline - h3}" width="${wL}" height="${h3}"
+        rx="2" fill="rgba(255,92,0,0.38)"/>`;
+      inner += `<rect x="${xT}" y="${baseline - h2}" width="${wT}" height="${h2}"
+        rx="2" fill="rgba(255,92,0,0.18)"/>`;
+    }
+    else if (variant === 'v3') {
+      // Full word behind bar that grows left→right
+      // Subtle gradient bar behind entire word
+      const barH = h3;
+      inner += `<defs>
+        <linearGradient id="barGrad" x1="0" y1="0" x2="${xEnd}" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FF5C00" stop-opacity="0.10"/>
+          <stop offset="55%"  stop-color="#FF5C00" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#FF5C00" stop-opacity="0.55"/>
+        </linearGradient>
+      </defs>`;
+      inner += `<rect x="0" y="${baseline - barH}" width="${xEnd}" height="${barH}"
+        rx="4" fill="url(#barGrad)"/>`;
+      inner += wordmark;
+    }
+    else if (variant === 'v3-light') {
+      const barH = h3;
+      inner += `<defs>
+        <linearGradient id="barGradL" x1="0" y1="0" x2="${xEnd}" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FF5C00" stop-opacity="0.06"/>
+          <stop offset="55%"  stop-color="#FF5C00" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#FF5C00" stop-opacity="0.30"/>
+        </linearGradient>
+      </defs>`;
+      inner += `<rect x="0" y="${baseline - barH}" width="${xEnd}" height="${barH}"
+        rx="4" fill="url(#barGradL)"/>`;
+      inner += wordmarkDark;
+    }
+    else if (variant === 'v4') {
+      // Wordmark + bars as suffix
+      const stemW = Math.round(capH * 0.15);
+      const gap   = Math.round(stemW * 0.5);
+      const pad   = Math.round(capH * 0.18); // gap between word and bars
+      const bx    = xEnd + pad;
+      inner += wordmark;
+      inner += `<rect x="${bx}" y="${baseline - h1}"
+        width="${stemW}" height="${h1}" rx="2" fill="rgba(255,92,0,0.25)"/>`;
+      inner += `<rect x="${bx + stemW + gap}" y="${baseline - h2}"
+        width="${stemW}" height="${h2}" rx="2" fill="rgba(255,92,0,0.60)"/>`;
+      inner += `<rect x="${bx + 2*(stemW + gap)}" y="${baseline - h3}"
+        width="${stemW}" height="${h3}" rx="2" fill="#FF5C00"/>`;
+    }
+    else if (variant === 'v4-header') {
+      const stemW = Math.round(capH * 0.15);
+      const gap   = Math.round(stemW * 0.5);
+      const pad   = Math.round(capH * 0.18);
+      const bx    = xEnd + pad;
+      inner += wordmark;
+      inner += `<rect x="${bx}" y="${baseline - h1}"
+        width="${stemW}" height="${h1}" rx="2" fill="rgba(255,92,0,0.25)"/>`;
+      inner += `<rect x="${bx + stemW + gap}" y="${baseline - h2}"
+        width="${stemW}" height="${h2}" rx="2" fill="rgba(255,92,0,0.60)"/>`;
+      inner += `<rect x="${bx + 2*(stemW + gap)}" y="${baseline - h3}"
+        width="${stemW}" height="${h3}" rx="2" fill="#FF5C00"/>`;
+    }
+
+    // Tagline
+    if (tagline) {
+      inner += `<text x="0" y="${baseline + 24}"
+        font-family="Montserrat, Arial Black, sans-serif"
+        font-weight="700" font-size="9" letter-spacing="5"
+        fill="#FF5C00">ALAVANQUE SUAS VENDAS</text>`;
+    }
+
+    const stemW = Math.round(capH * 0.15);
+    const gap   = Math.round(stemW * 0.5);
+    const pad   = Math.round(capH * 0.18);
+    const totalW = (variant === 'v4' || variant === 'v4-header')
+      ? xEnd + pad + 3 * stemW + 2 * gap + 4
+      : xEnd + 4;
+
+    svg.setAttribute('viewBox', `0 0 ${totalW} ${totalH}`);
+    svg.setAttribute('width',  `${totalW}`);
+    svg.setAttribute('height', `${totalH}`);
+    svg.innerHTML = inner;
+  }
+
+  render('v1a', 84, 'v1', false);
+  render('v1b', 84, 'v1', true);
+
+  render('v2a', 84, 'v2', false);
+  render('v2b', 84, 'v2', true);
+
+  render('v3a', 84, 'v3', false);
+  render('v3b', 84, 'v3', true);
+
+  render('v4a', 84, 'v4', false);
+
+  render('v-header', 38, 'v1', false);
+});
+</script>
+</body>
+</html>

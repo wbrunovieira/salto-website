@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salto — Logo PULSO · Refinado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A0A;
+      font-family: 'Montserrat', sans-serif;
+      padding: 80px 64px 120px;
+      color: #f5f5f5;
+    }
+    .section {
+      max-width: 1080px;
+      margin: 0 auto 80px;
+    }
+    .row-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #282828;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #141414;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #1a1a1a;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-dark { background: #0E0E0E; border-color: #1a1a1a; }
+    .card-mid  { background: #141414; border-color: #202020; }
+    .card-light { background: #F0F0F0; }
+    .card-white { background: #FFFFFF; }
+    .p-xl  { padding: 72px 96px; }
+    .p-lg  { padding: 56px 72px; }
+    .p-md  { padding: 40px 56px; }
+    .p-sm  { padding: 32px 40px; }
+
+    /* ── LOGO LOCKUP SYSTEM ── */
+
+    /*
+      Design grid:
+      - Bar width (bw) = 14px
+      - Bar gap (bg)   = 8px
+      - Cap height     = 52px (matches Montserrat 900 @ ~72px font-size)
+      - Bar heights:   bar1 = 52×0.38 ≈ 20px
+                       bar2 = 52×0.63 ≈ 33px
+                       bar3 = 52×1.00 = 52px
+      - Mark width     = 3×14 + 2×8 = 58px
+      - Mark→wordmark gap = 22px (≈ 1.5× bar width, optically feels right)
+    */
+
+    .logo {
+      display: inline-flex;
+      align-items: flex-end; /* bottom-align mark to wordmark baseline */
+      gap: 22px;
+      line-height: 1;
+    }
+    .logo-mark {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      /* align mark baseline with text baseline */
+      padding-bottom: 3px; /* optical baseline correction */
+    }
+    .bar {
+      width: 14px;
+      border-radius: 3px 3px 0 0;
+      flex-shrink: 0;
+    }
+    .bar-1 { height: 20px; background: rgba(255,92,0,0.22); }
+    .bar-2 { height: 33px; background: rgba(255,92,0,0.55); }
+    .bar-3 { height: 52px; background: #FF5C00; }
+
+    .wordmark {
+      font-weight: 900;
+      font-size: 72px;
+      letter-spacing: -4px;
+      color: #F5F5F5;
+      line-height: 1;
+      user-select: none;
+    }
+    .wordmark-dark { color: #0E0E0E; }
+
+    /* Full lockup with tagline */
+    .logo-full {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .logo-full .logo-row {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 22px;
+    }
+    .tagline {
+      margin-top: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5.5px;
+      text-transform: uppercase;
+      color: #FF5C00;
+      /* align tagline under wordmark (offset by mark width + gap) */
+      padding-left: calc(58px + 22px);
+    }
+    .tagline-muted {
+      color: #3a3a3a;
+    }
+    .tagline-muted-light {
+      color: #b0b0b0;
+    }
+
+    /* Stacked (vertical) lockup */
+    .logo-stacked {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .logo-stacked .logo-mark-h {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .logo-stacked .tagline { padding-left: 0; text-align: center; margin-top: 8px; }
+
+    /* Small size variations */
+    .logo-sm { gap: 14px; }
+    .logo-sm .bar   { width: 9px; }
+    .logo-sm .bar-1 { height: 13px; }
+    .logo-sm .bar-2 { height: 21px; }
+    .logo-sm .bar-3 { height: 33px; }
+    .logo-sm .logo-mark { gap: 5px; padding-bottom: 2px; }
+    .logo-sm .wordmark  { font-size: 46px; letter-spacing: -3px; }
+
+    .logo-xs { gap: 10px; }
+    .logo-xs .bar   { width: 6px; }
+    .logo-xs .bar-1 { height: 9px; }
+    .logo-xs .bar-2 { height: 14px; }
+    .logo-xs .bar-3 { height: 22px; }
+    .logo-xs .logo-mark { gap: 4px; padding-bottom: 1px; }
+    .logo-xs .wordmark  { font-size: 30px; letter-spacing: -2px; }
+
+    /* Monochrome */
+    .mono-light .bar-1 { background: rgba(245,245,245,0.2); }
+    .mono-light .bar-2 { background: rgba(245,245,245,0.55); }
+    .mono-light .bar-3 { background: #F5F5F5; }
+    .mono-dark  .bar-1 { background: rgba(14,14,14,0.2); }
+    .mono-dark  .bar-2 { background: rgba(14,14,14,0.55); }
+    .mono-dark  .bar-3 { background: #0E0E0E; }
+
+    /* Icon badge */
+    .icon-badge {
+      width: 64px;
+      height: 64px;
+      background: #FF5C00;
+      border-radius: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 5px;
+      padding: 12px 12px 12px;
+    }
+    .icon-badge .bar   { width: 10px; }
+    .icon-badge .bar-1 { height: 14px; background: rgba(0,0,0,0.25); border-radius: 2px 2px 0 0; }
+    .icon-badge .bar-2 { height: 22px; background: rgba(0,0,0,0.55); border-radius: 2px 2px 0 0; }
+    .icon-badge .bar-3 { height: 32px; background: #0E0E0E;           border-radius: 2px 2px 0 0; }
+
+    .icon-badge-lg {
+      width: 96px;
+      height: 96px;
+      background: #FF5C00;
+      border-radius: 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 7px;
+      padding: 18px 18px 18px;
+    }
+    .icon-badge-lg .bar   { width: 15px; }
+    .icon-badge-lg .bar-1 { height: 21px; background: rgba(0,0,0,0.2);  border-radius: 3px 3px 0 0; }
+    .icon-badge-lg .bar-2 { height: 34px; background: rgba(0,0,0,0.45); border-radius: 3px 3px 0 0; }
+    .icon-badge-lg .bar-3 { height: 50px; background: #0E0E0E;           border-radius: 3px 3px 0 0; }
+
+    /* Favicon simulation */
+    .favicon {
+      width: 32px; height: 32px;
+      background: #FF5C00;
+      border-radius: 7px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 6px 6px;
+    }
+    .favicon .b { flex-shrink: 0; border-radius: 1px 1px 0 0; }
+    .favicon .b1 { width: 5px; height: 7px;  background: rgba(0,0,0,0.3); }
+    .favicon .b2 { width: 5px; height: 12px; background: rgba(0,0,0,0.55); }
+    .favicon .b3 { width: 5px; height: 17px; background: #0E0E0E; }
+
+    /* Grid helpers */
+    .flex-row   { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .flex-start { align-items: flex-start; }
+    .label-sm   { font-size: 9px; color: #282828; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+    .col        { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    .divider { border: none; border-top: 1px solid #141414; margin: 64px 0; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div style="max-width:1080px;margin:0 auto 64px;text-align:center;">
+  <p style="font-size:9px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#282828;">
+    SALTO · IDENTIDADE VISUAL · CONCEITO PULSO · REFINADO
+  </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     01 · LOGO PRINCIPAL
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">01 · Logo principal — fundo escuro</p>
+  <div class="card card-dark p-xl" style="justify-content:flex-start;">
+    <div class="logo-full">
+      <div class="logo-row">
+        <div class="logo-mark">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+        </div>
+        <span class="wordmark">SALTO</span>
+      </div>
+      <span class="tagline">alavanque suas vendas</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     02 · SEM TAGLINE (uso em header, assinatura)
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">02 · Sem tagline — para header e navegação</p>
+  <div class="flex-row">
+    <div class="card card-dark p-lg" style="flex:1;">
+      <div class="logo">
+        <div class="logo-mark">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+        </div>
+        <span class="wordmark">SALTO</span>
+      </div>
+    </div>
+    <div class="card card-mid p-lg" style="flex:1;">
+      <div class="logo">
+        <div class="logo-mark">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+        </div>
+        <span class="wordmark">SALTO</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     03 · FUNDO CLARO
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">03 · Fundo claro</p>
+  <div class="flex-row">
+    <div class="card card-light p-lg" style="flex:1;">
+      <div class="logo-full">
+        <div class="logo-row">
+          <div class="logo-mark">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+          </div>
+          <span class="wordmark wordmark-dark">SALTO</span>
+        </div>
+        <span class="tagline">alavanque suas vendas</span>
+      </div>
+    </div>
+    <div class="card card-white p-lg" style="flex:1;">
+      <div class="logo-full">
+        <div class="logo-row">
+          <div class="logo-mark">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+          </div>
+          <span class="wordmark wordmark-dark">SALTO</span>
+        </div>
+        <span class="tagline tagline-muted-light">alavanque suas vendas</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     04 · VERSÃO VERTICAL (stacked)
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">04 · Versão vertical — para redes sociais, avatar, perfil</p>
+  <div class="flex-row" style="align-items:stretch;">
+    <div class="card card-dark p-lg" style="flex:1;">
+      <div class="logo-stacked">
+        <div class="logo-mark-h">
+          <!-- Larger bars for stacked -->
+          <div style="width:18px;height:26px;background:rgba(255,92,0,0.22);border-radius:3px 3px 0 0;"></div>
+          <div style="width:18px;height:42px;background:rgba(255,92,0,0.55);border-radius:3px 3px 0 0;"></div>
+          <div style="width:18px;height:64px;background:#FF5C00;border-radius:3px 3px 0 0;"></div>
+        </div>
+        <span style="font-weight:900;font-size:80px;letter-spacing:-4px;color:#F5F5F5;line-height:1;user-select:none;">SALTO</span>
+        <span class="tagline" style="padding-left:0;text-align:center;">alavanque suas vendas</span>
+      </div>
+    </div>
+    <!-- Compact stacked for avatar -->
+    <div class="card card-dark p-md" style="width:240px;flex-shrink:0;">
+      <div class="logo-stacked">
+        <div class="logo-mark-h">
+          <div style="width:12px;height:17px;background:rgba(255,92,0,0.22);border-radius:2px 2px 0 0;"></div>
+          <div style="width:12px;height:28px;background:rgba(255,92,0,0.55);border-radius:2px 2px 0 0;"></div>
+          <div style="width:12px;height:43px;background:#FF5C00;border-radius:2px 2px 0 0;"></div>
+        </div>
+        <span style="font-weight:900;font-size:52px;letter-spacing:-3px;color:#F5F5F5;line-height:1;user-select:none;">SALTO</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     05 · TAMANHOS
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">05 · Escalas de uso</p>
+  <div class="card card-dark p-xl">
+    <div style="display:flex;flex-direction:column;gap:36px;align-items:flex-start;width:100%;">
+
+      <!-- Full size -->
+      <div style="display:flex;align-items:center;gap:32px;">
+        <span class="label-sm" style="width:80px;">Display</span>
+        <div class="logo">
+          <div class="logo-mark">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+          </div>
+          <span class="wordmark">SALTO</span>
+        </div>
+      </div>
+
+      <!-- Medium -->
+      <div style="display:flex;align-items:center;gap:32px;">
+        <span class="label-sm" style="width:80px;">Header</span>
+        <div class="logo logo-sm">
+          <div class="logo-mark logo-sm">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+          </div>
+          <span class="wordmark logo-sm">SALTO</span>
+        </div>
+      </div>
+
+      <!-- Small -->
+      <div style="display:flex;align-items:center;gap:32px;">
+        <span class="label-sm" style="width:80px;">Small</span>
+        <div class="logo logo-xs">
+          <div class="logo-mark logo-xs">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+          </div>
+          <span class="wordmark logo-xs">SALTO</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     06 · ÍCONE / APP ICON / FAVICON
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">06 · Símbolo isolado — ícone, favicon, app</p>
+  <div class="card card-dark p-lg">
+    <div class="flex-row" style="gap:40px;flex-wrap:wrap;justify-content:center;">
+
+      <div class="col">
+        <div class="icon-badge-lg">
+          <div class="bar" style="width:15px;height:21px;background:rgba(0,0,0,0.2);border-radius:3px 3px 0 0;"></div>
+          <div class="bar" style="width:15px;height:34px;background:rgba(0,0,0,0.45);border-radius:3px 3px 0 0;"></div>
+          <div class="bar" style="width:15px;height:50px;background:#0E0E0E;border-radius:3px 3px 0 0;"></div>
+        </div>
+        <span class="label-sm">96×96</span>
+      </div>
+
+      <div class="col">
+        <div class="icon-badge">
+          <div class="bar" style="width:10px;height:14px;background:rgba(0,0,0,0.25);border-radius:2px 2px 0 0;"></div>
+          <div class="bar" style="width:10px;height:22px;background:rgba(0,0,0,0.5);border-radius:2px 2px 0 0;"></div>
+          <div class="bar" style="width:10px;height:32px;background:#0E0E0E;border-radius:2px 2px 0 0;"></div>
+        </div>
+        <span class="label-sm">64×64</span>
+      </div>
+
+      <div class="col">
+        <!-- 32px -->
+        <div style="width:32px;height:32px;background:#FF5C00;border-radius:7px;display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:5px 5px 5px;">
+          <div style="width:5px;height:7px; background:rgba(0,0,0,0.3); border-radius:1px 1px 0 0;"></div>
+          <div style="width:5px;height:12px;background:rgba(0,0,0,0.55);border-radius:1px 1px 0 0;"></div>
+          <div style="width:5px;height:17px;background:#0E0E0E;border-radius:1px 1px 0 0;"></div>
+        </div>
+        <span class="label-sm">32×32</span>
+      </div>
+
+      <div class="col">
+        <!-- 16px favicon -->
+        <div style="width:16px;height:16px;background:#FF5C00;border-radius:3px;display:flex;align-items:flex-end;justify-content:center;gap:1px;padding:2px 2px 2px;">
+          <div style="width:3px;height:3px;background:rgba(0,0,0,0.3);border-radius:0;"></div>
+          <div style="width:3px;height:6px;background:rgba(0,0,0,0.55);border-radius:0;"></div>
+          <div style="width:3px;height:9px;background:#0E0E0E;border-radius:0;"></div>
+        </div>
+        <span class="label-sm">16×16</span>
+      </div>
+
+      <!-- Dark background icon (inverted) -->
+      <div class="col">
+        <div style="width:96px;height:96px;background:#0E0E0E;border:1px solid #1e1e1e;border-radius:24px;display:flex;align-items:flex-end;justify-content:center;gap:7px;padding:18px 18px 18px;">
+          <div style="width:15px;height:21px;background:rgba(255,92,0,0.22);border-radius:3px 3px 0 0;"></div>
+          <div style="width:15px;height:34px;background:rgba(255,92,0,0.55);border-radius:3px 3px 0 0;"></div>
+          <div style="width:15px;height:50px;background:#FF5C00;border-radius:3px 3px 0 0;"></div>
+        </div>
+        <span class="label-sm">dark icon</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     07 · MONOCROMÁTICO
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">07 · Monocromático — para uso em fundos coloridos ou impressão</p>
+  <div class="flex-row">
+    <!-- All white -->
+    <div class="card p-lg" style="flex:1;background:#FF5C00;">
+      <div class="logo mono-light">
+        <div class="logo-mark">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+        </div>
+        <span class="wordmark" style="color:#fff;">SALTO</span>
+      </div>
+    </div>
+    <!-- All dark (for print / light bg) -->
+    <div class="card card-white p-lg" style="flex:1;">
+      <div class="logo mono-dark">
+        <div class="logo-mark">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="bar bar-3"></div>
+        </div>
+        <span class="wordmark wordmark-dark">SALTO</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     08 · CONTEXTO DE USO
+════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <p class="row-title">08 · Simulação de contexto — como fica no header do site</p>
+  <!-- Mock header -->
+  <div style="background:#0E0E0E;border:1px solid #1a1a1a;border-radius:20px;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;">
+    <!-- Logo (header size) -->
+    <div class="logo logo-sm">
+      <div class="logo-mark logo-sm">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
+      </div>
+      <span class="wordmark logo-sm">SALTO</span>
+    </div>
+    <!-- Mock nav -->
+    <div style="display:flex;gap:32px;">
+      <span style="font-size:12px;color:#555;font-weight:700;letter-spacing:1px;">Serviços</span>
+      <span style="font-size:12px;color:#555;font-weight:700;letter-spacing:1px;">Processo</span>
+      <span style="font-size:12px;color:#555;font-weight:700;letter-spacing:1px;">Sobre</span>
+      <span style="font-size:12px;color:#555;font-weight:700;letter-spacing:1px;">Contato</span>
+    </div>
+    <!-- Mock CTA -->
+    <div style="background:#FF5C00;border-radius:999px;padding:10px 20px;font-size:11px;font-weight:700;color:#fff;letter-spacing:1px;">
+      Fale conosco
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SPEC
+════════════════════════════════════════════════════════════════ -->
+<div class="section" style="margin-bottom:0;">
+  <p class="row-title">Especificações</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+    <div style="background:#111;border:1px solid #1a1a1a;border-radius:16px;padding:28px;">
+      <p style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FF5C00;margin-bottom:16px;">Símbolo</p>
+      <div style="font-size:11px;color:#383838;line-height:2;">
+        <div>3 barras verticais</div>
+        <div>Largura: 14px (unitária)</div>
+        <div>Gap: 8px</div>
+        <div>Alturas: 20 · 33 · 52 px</div>
+        <div>Raio: 3px (topo)</div>
+        <div>Cores: 22% · 55% · 100% laranja</div>
+      </div>
+    </div>
+    <div style="background:#111;border:1px solid #1a1a1a;border-radius:16px;padding:28px;">
+      <p style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FF5C00;margin-bottom:16px;">Wordmark</p>
+      <div style="font-size:11px;color:#383838;line-height:2;">
+        <div>Montserrat 900</div>
+        <div>Letter-spacing: −4px</div>
+        <div>Cor: #F5F5F5 (escuro)</div>
+        <div>Cor: #0E0E0E (claro)</div>
+        <div>Gap símbolo→texto: 22px</div>
+        <div>Alinhamento: baseline</div>
+      </div>
+    </div>
+    <div style="background:#111;border:1px solid #1a1a1a;border-radius:16px;padding:28px;">
+      <p style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FF5C00;margin-bottom:16px;">Tagline</p>
+      <div style="font-size:11px;color:#383838;line-height:2;">
+        <div>Montserrat 700</div>
+        <div>Letter-spacing: 5.5px</div>
+        <div>Uppercase</div>
+        <div>Cor: #FF5C00 (escuro)</div>
+        <div>Recuo: alinhada ao wordmark</div>
+        <div>Margem topo: 10px</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

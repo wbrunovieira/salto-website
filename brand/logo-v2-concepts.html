@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salto — Identidade Visual v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0E0E0E;
+      font-family: 'Montserrat', sans-serif;
+      padding: 80px 48px 120px;
+      color: #f5f5f5;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    header h1 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #333;
+    }
+    header p {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #444;
+      letter-spacing: 2px;
+    }
+
+    .section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 32px;
+    }
+
+    /* ── Concept grid ── */
+    .concepts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 24px;
+      padding: 52px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #333; }
+
+    .card-label {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #2a2a2a;
+    }
+    .card-name {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #FF5C00;
+      opacity: 0.5;
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .logo-lockup.vertical {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wordmark {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 64px;
+      letter-spacing: -3px;
+      color: #F5F5F5;
+      line-height: 1;
+      user-select: none;
+    }
+    .wordmark-md {
+      font-size: 52px;
+      letter-spacing: -2px;
+    }
+    .wordmark-tight {
+      letter-spacing: -4px;
+    }
+
+    .tagline {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #FF5C00;
+    }
+    .tagline-muted {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    .card-desc {
+      font-size: 11px;
+      color: #383838;
+      text-align: center;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+      max-width: 240px;
+    }
+
+    /* ── Light background test ── */
+    .on-light {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+    }
+    .light-strip {
+      background: #F5F5F5;
+      border-radius: 24px;
+      padding: 56px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+    .light-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .light-label {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #aaa;
+      font-weight: 700;
+    }
+
+    /* ── Icon grid ── */
+    .icons-row {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .icon-card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 140px;
+    }
+    .icon-card span {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2a2a2a;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Salto — Identidade Visual v2</h1>
+  <p>6 conceitos distintos · Fundo escuro</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPTS GRID
+════════════════════════════════════════════════════════════════ -->
+<div class="concepts">
+
+  <!-- ── C1: ARCO — Trajetória do salto (parábola) ── -->
+  <div class="card">
+    <span class="card-label">C1</span>
+    <span class="card-name">ARCO</span>
+    <div class="logo-lockup">
+      <!-- Mark: parabolic arc = visually IS a leap trajectory -->
+      <svg width="52" height="64" viewBox="0 0 52 64" fill="none">
+        <!-- Parabola arc: cubic bezier -->
+        <path d="M 3,60 C 10,-4 42,-4 49,60"
+              stroke="#FF5C00" stroke-width="5" stroke-linecap="round"/>
+        <!-- Apex dot -->
+        <circle cx="26" cy="10" r="5.5" fill="#FF5C00"/>
+        <!-- Faint base line -->
+        <line x1="0" y1="60" x2="52" y2="60" stroke="#252525" stroke-width="1.5"/>
+      </svg>
+      <span class="wordmark">SALTO</span>
+    </div>
+    <span class="tagline">alavanque suas vendas</span>
+    <p class="card-desc">A trajetória do salto. A parábola representa a jornada: de onde você está para onde vai — em arco ascendente.</p>
+  </div>
+
+  <!-- ── C2: VETOR — Seta diagonal 45° ── -->
+  <div class="card">
+    <span class="card-label">C2</span>
+    <span class="card-name">VETOR</span>
+    <div class="logo-lockup">
+      <!-- Mark: 45° diagonal arrow — dynamic launch trajectory -->
+      <svg width="52" height="64" viewBox="0 0 52 64" fill="none">
+        <!-- Main vector line -->
+        <line x1="8" y1="58" x2="44" y2="8"
+              stroke="#FF5C00" stroke-width="5.5" stroke-linecap="round"/>
+        <!-- Arrowhead chevron at tip -->
+        <polyline points="28,6 44,8 46,24"
+                  fill="none" stroke="#FF5C00" stroke-width="5.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Small ground accent -->
+        <line x1="2" y1="58" x2="20" y2="58"
+              stroke="#252525" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">SALTO</span>
+    </div>
+    <span class="tagline">alavanque suas vendas</span>
+    <p class="card-desc">O vetor do crescimento. Direção diagonal — não apenas para cima, mas para a frente. Dinâmico, acelerado, preciso.</p>
+  </div>
+
+  <!-- ── C3: PULSO — Barras métricas (a terceira barra rompe) ── -->
+  <div class="card">
+    <span class="card-label">C3</span>
+    <span class="card-name">PULSO</span>
+    <div class="logo-lockup">
+      <!-- Mark: 3 ascending bars — the 3rd bar is the "breakthrough" -->
+      <svg width="46" height="64" viewBox="0 0 46 64" fill="none">
+        <!-- Bar 1: dark (past) -->
+        <rect x="2"  y="42" width="12" height="22" rx="4" fill="#1e1e1e"/>
+        <!-- Bar 2: medium (present) -->
+        <rect x="17" y="28" width="12" height="36" rx="4" fill="#2a2a2a"/>
+        <!-- Bar 3: accent (the leap moment) -->
+        <rect x="32" y="4"  width="12" height="60" rx="4" fill="#FF5C00"/>
+      </svg>
+      <span class="wordmark">SALTO</span>
+    </div>
+    <span class="tagline">alavanque suas vendas</span>
+    <p class="card-desc">O momento do salto nas métricas. Duas barras modestas e então — a ruptura em laranja. Resultado visível.</p>
+  </div>
+
+  <!-- ── C4: IMPULSO — Chevrons empilhados (aceleração) ── -->
+  <div class="card">
+    <span class="card-label">C4</span>
+    <span class="card-name">IMPULSO</span>
+    <div class="logo-lockup">
+      <!-- Mark: 3 stacked chevrons, decreasing opacity = speed/acceleration -->
+      <svg width="52" height="64" viewBox="0 0 52 64" fill="none">
+        <polyline points="6,58 26,40 46,58"
+                  stroke="#FF5C00" stroke-width="5" stroke-opacity="0.2"
+                  stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="8,44 26,26 44,44"
+                  stroke="#FF5C00" stroke-width="5" stroke-opacity="0.55"
+                  stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="10,30 26,12 42,30"
+                  stroke="#FF5C00" stroke-width="5"
+                  stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="wordmark">SALTO</span>
+    </div>
+    <span class="tagline">alavanque suas vendas</span>
+    <p class="card-desc">Aceleração em camadas. Três impulsos sobrepostos criando sensação de velocidade e momentum ascendente.</p>
+  </div>
+
+  <!-- ── C5: GLIFO — S como monograma geométrico ── -->
+  <div class="card">
+    <span class="card-label">C5</span>
+    <span class="card-name">GLIFO</span>
+    <div class="logo-lockup">
+      <!-- Mark: geometric S using two smooth quadratic arcs -->
+      <svg width="42" height="64" viewBox="0 0 42 64" fill="none">
+        <path d="M 36,12 Q 6,12 6,32 Q 6,52 36,52"
+              stroke="#FF5C00" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <!-- Short horizontal cap lines top and bottom for a clean finish -->
+        <line x1="18" y1="12" x2="36" y2="12"
+              stroke="#FF5C00" stroke-width="7" stroke-linecap="round"/>
+        <line x1="6" y1="52" x2="24" y2="52"
+              stroke="#FF5C00" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">SALTO</span>
+    </div>
+    <span class="tagline">alavanque suas vendas</span>
+    <p class="card-desc">O monograma S como símbolo próprio. Curvas simétricas com acabamento preciso — marca que funciona independente do wordmark.</p>
+  </div>
+
+  <!-- ── C6: MARCA — Wordmark puro, linha ascendente ── -->
+  <div class="card">
+    <span class="card-label">C6</span>
+    <span class="card-name">MARCA</span>
+    <!-- Pure typographic logo — the brand IS the name -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:72px;
+                   letter-spacing:-5px; color:#F5F5F5; line-height:1; user-select:none;">SALTO</span>
+      <!-- Ascending rule: thin line rising left to right -->
+      <svg width="220" height="10" viewBox="0 0 220 10" fill="none">
+        <line x1="0" y1="9" x2="175" y2="9" stroke="#252525" stroke-width="1.5"/>
+        <line x1="175" y1="9" x2="220" y2="1" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span style="font-size:9px; font-weight:700; letter-spacing:6px; text-transform:uppercase; color:#FF5C00; opacity:0.7;">
+        alavanque suas vendas
+      </span>
+    </div>
+    <p class="card-desc">O nome é a marca. Wordmark ultranegrito com regra ascendente — a linha sobe como as vendas. Autoridade máxima, zero ruído.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ICON-ONLY SIZES (como seria o favicon/app icon)
+════════════════════════════════════════════════════════════════ -->
+<div class="on-light" style="margin-bottom:48px;">
+  <p class="section-title" style="text-align:center;">símbolo isolado · escala pequena</p>
+</div>
+
+<div class="icons-row">
+  <!-- C1 ARCO icon -->
+  <div class="icon-card">
+    <svg width="64" height="64" viewBox="0 0 52 64" fill="none">
+      <path d="M 3,60 C 10,-4 42,-4 49,60" stroke="#FF5C00" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="26" cy="10" r="5.5" fill="#FF5C00"/>
+      <line x1="0" y1="60" x2="52" y2="60" stroke="#252525" stroke-width="1.5"/>
+    </svg>
+    <span>arco</span>
+  </div>
+  <!-- C2 VETOR icon -->
+  <div class="icon-card">
+    <svg width="64" height="64" viewBox="0 0 52 64" fill="none">
+      <line x1="8" y1="58" x2="44" y2="8" stroke="#FF5C00" stroke-width="5.5" stroke-linecap="round"/>
+      <polyline points="28,6 44,8 46,24" fill="none" stroke="#FF5C00" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="2" y1="58" x2="20" y2="58" stroke="#252525" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span>vetor</span>
+  </div>
+  <!-- C3 PULSO icon -->
+  <div class="icon-card">
+    <svg width="64" height="64" viewBox="0 0 46 64" fill="none">
+      <rect x="2"  y="42" width="12" height="22" rx="4" fill="#1e1e1e"/>
+      <rect x="17" y="28" width="12" height="36" rx="4" fill="#2a2a2a"/>
+      <rect x="32" y="4"  width="12" height="60" rx="4" fill="#FF5C00"/>
+    </svg>
+    <span>pulso</span>
+  </div>
+  <!-- C4 IMPULSO icon -->
+  <div class="icon-card">
+    <svg width="64" height="64" viewBox="0 0 52 64" fill="none">
+      <polyline points="6,58 26,40 46,58" stroke="#FF5C00" stroke-width="5" stroke-opacity="0.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polyline points="8,44 26,26 44,44" stroke="#FF5C00" stroke-width="5" stroke-opacity="0.55" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polyline points="10,30 26,12 42,30" stroke="#FF5C00" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span>impulso</span>
+  </div>
+  <!-- C5 GLIFO icon -->
+  <div class="icon-card">
+    <svg width="64" height="64" viewBox="0 0 42 64" fill="none">
+      <path d="M 36,12 Q 6,12 6,32 Q 6,52 36,52" stroke="#FF5C00" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <line x1="18" y1="12" x2="36" y2="12" stroke="#FF5C00" stroke-width="7" stroke-linecap="round"/>
+      <line x1="6" y1="52" x2="24" y2="52" stroke="#FF5C00" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <span>glifo</span>
+  </div>
+  <!-- C6 MARCA icon (just S from wordmark) -->
+  <div class="icon-card">
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect width="64" height="64" rx="14" fill="#FF5C00"/>
+      <!-- S inside orange badge -->
+      <path d="M 44,18 Q 18,18 18,32 Q 18,46 44,46"
+            stroke="#0E0E0E" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <line x1="28" y1="18" x2="44" y2="18" stroke="#0E0E0E" stroke-width="7" stroke-linecap="round"/>
+      <line x1="18" y1="46" x2="34" y2="46" stroke="#0E0E0E" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <span>badge</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LIGHT BACKGROUND TEST
+════════════════════════════════════════════════════════════════ -->
+<div class="on-light">
+  <p class="section-title" style="text-align:center; margin-bottom:24px;">versão em fundo claro</p>
+  <div class="light-strip">
+
+    <!-- C1 light -->
+    <div class="light-item">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <svg width="40" height="52" viewBox="0 0 52 64" fill="none">
+          <path d="M 3,60 C 10,-4 42,-4 49,60" stroke="#FF5C00" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="26" cy="10" r="5.5" fill="#FF5C00"/>
+          <line x1="0" y1="60" x2="52" y2="60" stroke="#d5d5d5" stroke-width="1.5"/>
+        </svg>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:52px;letter-spacing:-3px;color:#0E0E0E;line-height:1;">SALTO</span>
+      </div>
+      <span class="light-label" style="color:#bbb;">C1 arco</span>
+    </div>
+
+    <!-- C3 light -->
+    <div class="light-item">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <svg width="38" height="52" viewBox="0 0 46 64" fill="none">
+          <rect x="2"  y="42" width="12" height="22" rx="4" fill="#d5d5d5"/>
+          <rect x="17" y="28" width="12" height="36" rx="4" fill="#c0c0c0"/>
+          <rect x="32" y="4"  width="12" height="60" rx="4" fill="#FF5C00"/>
+        </svg>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:52px;letter-spacing:-3px;color:#0E0E0E;line-height:1;">SALTO</span>
+      </div>
+      <span class="light-label" style="color:#bbb;">C3 pulso</span>
+    </div>
+
+    <!-- C5 light -->
+    <div class="light-item">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <svg width="34" height="52" viewBox="0 0 42 64" fill="none">
+          <path d="M 36,12 Q 6,12 6,32 Q 6,52 36,52" stroke="#FF5C00" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <line x1="18" y1="12" x2="36" y2="12" stroke="#FF5C00" stroke-width="7" stroke-linecap="round"/>
+          <line x1="6"  y1="52" x2="24" y2="52" stroke="#FF5C00" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:52px;letter-spacing:-3px;color:#0E0E0E;line-height:1;">SALTO</span>
+      </div>
+      <span class="light-label" style="color:#bbb;">C5 glifo</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DESIGN RATIONALE
+════════════════════════════════════════════════════════════════ -->
+<div style="max-width:1100px; margin: 0 auto; border-top:1px solid #1a1a1a; padding-top: 64px;">
+  <p class="section-title" style="text-align:center; margin-bottom:40px;">critérios de escolha</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px;">
+    <div>
+      <p style="font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FF5C00; margin-bottom:12px;">Escalabilidade</p>
+      <p style="font-size:12px; color:#444; line-height:1.7;">O símbolo precisa funcionar em 16px (favicon) e em metros (banner). C1, C3 e C5 são os mais versáteis.</p>
+    </div>
+    <div>
+      <p style="font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FF5C00; margin-bottom:12px;">Singularidade</p>
+      <p style="font-size:12px; color:#444; line-height:1.7;">C5 (monograma S) é o mais único — não existe em nenhum concorrente direto. C1 (arco) é o mais conceitual.</p>
+    </div>
+    <div>
+      <p style="font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#FF5C00; margin-bottom:12px;">Autoridade</p>
+      <p style="font-size:12px; color:#444; line-height:1.7;">C6 (wordmark puro) transmite máxima autoridade. C3 (barras) é o mais imediato para o universo de vendas.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
