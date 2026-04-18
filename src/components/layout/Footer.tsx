@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { href: "/",          key: "home" },
@@ -59,12 +60,14 @@ export default function Footer() {
 
           {/* Col 1 — Brand */}
           <div className="flex flex-col gap-5">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <svg width="24" height="32" viewBox="0 0 56 76" fill="none" className="text-accent transition-transform duration-300 group-hover:scale-110">
-                <rect x="19" y="36" width="18" height="38" rx="5" fill="currentColor" />
-                <polygon points="0,40 28,2 56,40" fill="currentColor" />
-              </svg>
-              <span className="font-black text-xl tracking-tight text-text-primary">SALTO</span>
+            <Link href="/" className="flex items-center group w-fit">
+              <Image
+                src="/logo.svg"
+                alt="Salto"
+                width={120}
+                height={40}
+                className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
 
             <p className="text-sm text-text-muted leading-relaxed max-w-[260px]">
