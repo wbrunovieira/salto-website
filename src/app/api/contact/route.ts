@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
     // Email para Bruno
     await resend.emails.send({
-      from: `Salto Website <${FROM_EMAIL}>`,
+      from: `${name} via Salto <${FROM_EMAIL}>`,
       to: TO_EMAIL,
       replyTo: email,
       subject: `Novo contato: ${name}`,
