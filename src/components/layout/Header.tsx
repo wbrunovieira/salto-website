@@ -42,12 +42,25 @@ export default function Header({ locale }: { locale: string }) {
   }, []);
 
   const navLinks = [
-    { href: { pathname: "/", hash: "" },                    label: t("nav.home"),     section: "hero" },
-    { href: { pathname: "/", hash: "#services" },           label: t("nav.services"), section: "services" },
-    { href: { pathname: "/", hash: "#process" },            label: t("nav.process"),  section: "process" },
-    { href: { pathname: "/", hash: "#about" },              label: t("nav.about"),    section: "about" },
-    { href: { pathname: "/", hash: "#contact" },            label: t("nav.contact"),  section: "contact" },
+    { label: t("nav.home"),     section: "hero" },
+    { label: t("nav.services"), section: "services" },
+    { label: t("nav.process"),  section: "process" },
+    { label: t("nav.about"),    section: "about" },
+    { label: t("nav.contact"),  section: "contact" },
   ];
+
+  const handleNavClick = (e: React.MouseEvent, section: string) => {
+    e.preventDefault();
+    setActiveSection(section);
+    if (section === "hero") {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      window.history.replaceState(null, "", window.location.pathname.split("#")[0]);
+    } else {
+      const el = document.getElementById(section);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", window.location.pathname.split("#")[0] + "#" + section);
+    }
+  };
 
   return (
     <header className="header-animate fixed top-0 left-0 right-0 z-50">
@@ -82,16 +95,9 @@ export default function Header({ locale }: { locale: string }) {
               const isActive = activeSection === link.section;
               return (
                 <div key={link.section} className={`nav-item-animate-${i + 1}`}>
-                  <Link
-                    href={link.href}
-                    onClick={(e) => {
-                      setActiveSection(link.section);
-                      if (link.section === "hero") {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: "instant" });
-                        window.history.replaceState(null, "", window.location.pathname.replace(/#.*$/, ""));
-                      }
-                    }}
+                  <a
+                    href={link.section === "hero" ? "#" : `#${link.section}`}
+                    onClick={(e) => handleNavClick(e, link.section)}
                     className={`relative text-sm font-semibold transition-colors duration-200 group py-1 ${
                       isActive ? "text-text-primary" : "text-text-muted hover:text-text-primary"
                     }`}
@@ -100,7 +106,7 @@ export default function Header({ locale }: { locale: string }) {
                     <span className={`absolute -bottom-0.5 left-0 h-[2px] rounded-full bg-gradient-to-r from-accent to-accent-hover transition-all duration-300 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`} />
-                  </Link>
+                  </a>
                 </div>
               );
             })}
@@ -124,15 +130,15 @@ export default function Header({ locale }: { locale: string }) {
               ))}
             </div>
 
-            <Link
-              href={{ pathname: "/", hash: "#contact" }}
-              onClick={() => setActiveSection("contact")}
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "contact")}
               className="relative px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden group transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
               <span className="relative">{t("actions.getStarted")}</span>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -156,25 +162,17 @@ export default function Header({ locale }: { locale: string }) {
               {navLinks.map((link, i) => {
                 const isActive = activeSection === link.section;
                 return (
-                  <Link
+                  <a
                     key={link.section}
-                    href={link.href}
-                    onClick={(e) => {
-                      setActiveSection(link.section);
-                      setMenuOpen(false);
-                      if (link.section === "hero") {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: "instant" });
-                        window.history.replaceState(null, "", window.location.pathname.replace(/#.*$/, ""));
-                      }
-                    }}
+                    href={link.section === "hero" ? "#" : `#${link.section}`}
+                    onClick={(e) => { handleNavClick(e, link.section); setMenuOpen(false); }}
                     className={`text-base font-semibold transition-colors duration-200 ${
                       isActive ? "text-accent" : "text-text-muted hover:text-text-primary"
                     }`}
                     style={{ transitionDelay: menuOpen ? `${i * 40}ms` : "0ms" }}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 );
               })}
 
@@ -194,13 +192,13 @@ export default function Header({ locale }: { locale: string }) {
                     </button>
                   ))}
                 </div>
-                <Link
-                  href={{ pathname: "/", hash: "#contact" }}
-                  onClick={() => setMenuOpen(false)}
+                <a
+                  href="#contact"
+                  onClick={(e) => { handleNavClick(e, "contact"); setMenuOpen(false); }}
                   className="px-5 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-accent to-accent-hover"
                 >
                   {t("actions.getStarted")}
-                </Link>
+                </a>
               </div>
             </div>
           </div>
