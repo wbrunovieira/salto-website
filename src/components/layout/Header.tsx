@@ -84,7 +84,7 @@ export default function Header({ locale }: { locale: string }) {
                 <div key={link.section} className={`nav-item-animate-${i + 1}`}>
                   <Link
                     href={link.href}
-                    onClick={link.section === "hero" ? () => window.scrollTo({ top: 0, behavior: "instant" }) : undefined}
+                    onClick={link.section === "hero" ? (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); router.push("/"); } : undefined}
                     className={`relative text-sm font-semibold transition-colors duration-200 group py-1 ${
                       isActive ? "text-text-primary" : "text-text-muted hover:text-text-primary"
                     }`}
@@ -151,7 +151,7 @@ export default function Header({ locale }: { locale: string }) {
                   <Link
                     key={link.section}
                     href={link.href}
-                    onClick={() => { setMenuOpen(false); if (link.section === "hero") window.scrollTo({ top: 0, behavior: "instant" }); }}
+                    onClick={(e) => { if (link.section === "hero") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); router.push("/"); } setMenuOpen(false); }}
                     className={`text-base font-semibold transition-colors duration-200 ${
                       isActive ? "text-accent" : "text-text-muted hover:text-text-primary"
                     }`}

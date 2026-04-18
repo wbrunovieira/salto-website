@@ -37,12 +37,12 @@ export default function ScrollScene() {
       });
 
       heroTl
-        .to("#hero-badge",  { opacity: 0, y: -30,              ease: "none" }, 0)
-        .to("#hero-line1",  { opacity: 0, y: -110, x: -20,     ease: "none" }, 0)
-        .to("#hero-line2",  { opacity: 0, y: -150, x: 20,      ease: "none" }, 0.05)
-        .to("#hero-accent", { opacity: 0, scale: 1.22, y: -60,  ease: "none" }, 0.02)
-        .to("#hero-sub",    { opacity: 0, y: 70,                ease: "none" }, 0)
-        .to("#hero-cta",    { opacity: 0, y: 45, scale: 0.92,   ease: "none" }, 0);
+        .fromTo("#hero-badge",  { opacity: 1, y: 0 },              { opacity: 0, y: -30,             ease: "none" }, 0)
+        .fromTo("#hero-line1",  { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -110, x: -20,    ease: "none" }, 0)
+        .fromTo("#hero-line2",  { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -150, x: 20,     ease: "none" }, 0.05)
+        .fromTo("#hero-accent", { opacity: 1, scale: 1, y: 0 },    { opacity: 0, scale: 1.22, y: -60, ease: "none" }, 0.02)
+        .fromTo("#hero-sub",    { opacity: 1, y: 0 },              { opacity: 0, y: 70,               ease: "none" }, 0)
+        .fromTo("#hero-cta",    { opacity: 1, y: 0, scale: 1 },    { opacity: 0, y: 45, scale: 0.92,  ease: "none" }, 0);
 
       // ── Services ─────────────────────────────────────────────────
       gsap.fromTo("#services", { y: 80 }, {
