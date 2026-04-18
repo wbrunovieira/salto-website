@@ -55,6 +55,7 @@ export default function Header({ locale }: { locale: string }) {
     if (section === "hero") {
       window.scrollTo({ top: 0, behavior: "instant" });
       window.history.replaceState(null, "", window.location.pathname.split("#")[0]);
+      window.dispatchEvent(new CustomEvent("hero-reset"));
     } else {
       const el = document.getElementById(section);
       if (el) el.scrollIntoView({ behavior: "smooth" });

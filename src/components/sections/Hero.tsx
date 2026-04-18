@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -18,6 +19,13 @@ const itemVariants: Variants = {
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const [animKey, setAnimKey] = useState(0);
+
+  useEffect(() => {
+    const reset = () => setAnimKey((k) => k + 1);
+    window.addEventListener("hero-reset", reset);
+    return () => window.removeEventListener("hero-reset", reset);
+  }, []);
 
   return (
     <section
@@ -29,15 +37,18 @@ export default function Hero() {
       <div className="hero-glow-corner absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none opacity-[0.07]" />
       <div className="hero-noise absolute inset-0 pointer-events-none" />
 
-      {/* concentric rings */}
-      <div className="hero-ring hero-ring-1" />
-      <div className="hero-ring hero-ring-2" />
-      <div className="hero-ring hero-ring-3" />
-      <div className="hero-ring hero-ring-4" />
-      <div className="hero-ring hero-ring-5" />
+      {/* concentric rings — key forces CSS animation restart on hero-reset */}
+      <div key={`rings-${animKey}`} className="contents">
+        <div className="hero-ring hero-ring-1" />
+        <div className="hero-ring hero-ring-2" />
+        <div className="hero-ring hero-ring-3" />
+        <div className="hero-ring hero-ring-4" />
+        <div className="hero-ring hero-ring-5" />
+      </div>
 
       {/* content — GSAP target: #hero-inner */}
       <motion.div
+        key={`content-${animKey}`}
         id="hero-inner"
         variants={containerVariants}
         initial="hidden"
