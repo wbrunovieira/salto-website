@@ -11,9 +11,11 @@ export default function About() {
   const t = useTranslations("about");
 
   return (
-    <section id="about" className="relative bg-[#0E0E0E] px-6 pb-32 scroll-mt-20">
+    <section id="about" className="relative bg-[#141414] px-6 pb-32 scroll-mt-20">
       {/* Overlap gradient */}
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0E0E0E] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#141414] to-transparent pointer-events-none z-10" />
+      {/* Bottom divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent pointer-events-none" />
 
       <div className="max-w-6xl mx-auto pt-32">
 
