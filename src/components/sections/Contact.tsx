@@ -55,7 +55,13 @@ export default function Contact() {
   return (
     <section id="contact" className="relative bg-[#0E0E0E] px-6 pb-32 scroll-mt-20">
       {/* Overlap gradient */}
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0E0E0E] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#141414] to-transparent pointer-events-none z-10" />
+      {/* Top divider */}
+      <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-accent/25 to-transparent pointer-events-none z-20" />
+
+      {/* Subtle orange glow at top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at top, rgba(255,92,0,0.22) 0%, transparent 65%)" }} />
 
       {/* Orange glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none opacity-[0.12]"

@@ -1,68 +1,107 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 
-const STEPS = ["diagnosis", "strategy", "execution", "scale"] as const;
+const STEPS = ['diagnosis', 'strategy', 'execution', 'scale'] as const;
 
 const STEP_ICONS: Record<string, React.ReactNode> = {
   diagnosis: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="11" r="7" /><path d="m21 21-4.35-4.35" /><path d="M11 8v6M8 11h6" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="11" cy="11" r="7" />
+      <path d="m21 21-4.35-4.35" />
+      <path d="M11 8v6M8 11h6" />
     </svg>
   ),
   strategy: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
     </svg>
   ),
   execution: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polygon points="5 3 19 12 5 21 5 3" />
     </svg>
   ),
   scale: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+      <polyline points="17 6 23 6 23 12" />
     </svg>
   ),
 };
 
 export default function Process() {
-  const t = useTranslations("process");
+  const t = useTranslations('process');
 
   return (
     <section
       id="process"
       className="relative px-6 pb-32 scroll-mt-20"
-      style={{ background: "linear-gradient(to bottom, #3d1a00 0%, #1f0d00 45%, #0E0E0E 80%)" }}
+      style={{ background: 'linear-gradient(to bottom, #3d1a00 0%, #1f0d00 45%, #0E0E0E 80%)' }}
     >
       {/* Overlap gradient from services */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#3d1a00] to-transparent pointer-events-none z-10" />
-      {/* Bottom divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+      {/* Top divider */}
+      <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-accent/30 to-transparent pointer-events-none z-20" />
 
       <div className="max-w-6xl mx-auto pt-32">
-
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-24">
-          <span id="process-label" className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-[11px] font-bold tracking-[3px] uppercase text-white/70 border border-white/20 bg-white/10 mb-8">
+          <span
+            id="process-label"
+            className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-[11px] font-bold tracking-[3px] uppercase text-white/70 border border-white/20 bg-white/10 mb-8"
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
-            {t("label")}
+            {t('label')}
           </span>
 
           <div className="overflow-hidden mb-3">
-            <h2 id="process-title1" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white">
-              {t("title")}
+            <h2
+              id="process-title1"
+              className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white"
+            >
+              {t('title')}
             </h2>
           </div>
           <div className="overflow-hidden mb-10">
-            <h2 id="process-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white">
-              {t("titleAccent")}
+            <h2
+              id="process-title2"
+              className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white"
+            >
+              {t('titleAccent')}
             </h2>
           </div>
 
           <p id="process-subtitle" className="max-w-2xl text-base md:text-lg text-white/70 leading-relaxed">
-            {t("subtitle")}
+            {t('subtitle')}
           </p>
         </div>
 
@@ -107,7 +146,6 @@ export default function Process() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

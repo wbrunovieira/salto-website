@@ -48,8 +48,6 @@ export default function Services() {
     <section id="services" className="relative bg-[#0E0E0E] px-6 pb-32 scroll-mt-20">
       {/* Overlap gradient */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0E0E0E] to-transparent pointer-events-none z-10" />
-      {/* Bottom divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent pointer-events-none" />
 
       <div className="max-w-6xl mx-auto pt-32">
 

@@ -178,15 +178,15 @@ export default function ScrollScene() {
         <Services />
       </div>
 
-      <div className="-mt-[30vh] relative z-20">
+      <div className="-mt-[8vh] relative z-20">
         <Process />
       </div>
 
-      <div className="-mt-[30vh] relative z-30">
+      <div className="-mt-[8vh] relative z-30">
         <About />
       </div>
 
-      <div className="-mt-[30vh] relative z-40">
+      <div className="-mt-[8vh] relative z-40">
         <Contact />
       </div>
     </div>
