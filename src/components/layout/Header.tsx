@@ -51,7 +51,8 @@ export default function Header({ locale }: { locale: string }) {
       gsap.set(ball, { scale: 0, transformOrigin: "50% 50%" });
       gsap.timeline({ delay: 0.5 })
         .to(line, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" })
-        .to(ball, { scale: 1, duration: 0.45, ease: "back.out(1.7)" }, "-=0.15");
+        .to(ball, { scale: 1, duration: 0.45, ease: "back.out(1.7)" }, "-=0.15")
+        .to(ball, { scale: 1.35, duration: 0.7, ease: "sine.inOut", repeat: -1, yoyo: true }, "+=0.1");
     };
     animate();
   }, []);
