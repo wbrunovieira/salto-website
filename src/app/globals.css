@@ -21,7 +21,10 @@
   --font-sans: var(--font-montserrat);
 }
 
-html,
+html {
+  overflow-x: clip;
+}
+
 body {
   overflow-x: hidden;
   max-width: 100vw;

@@ -90,7 +90,7 @@ export default function Header({ locale }: { locale: string }) {
           ? "bg-surface/80 backdrop-blur-lg border-b border-border shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
           : "bg-transparent"
       }`}>
-        <div className="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-[64px] md:h-[68px] flex items-center justify-between">
 
           {/* Logo */}
           <div className="logo-animate">
@@ -99,7 +99,7 @@ export default function Header({ locale }: { locale: string }) {
                 viewBox="0 0 482 149"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-8 md:h-9 lg:h-10 w-auto transition-transform duration-300 group-hover:scale-105"
                 aria-label="Salto"
               >
                 <path
@@ -122,7 +122,7 @@ export default function Header({ locale }: { locale: string }) {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-8">
             {navLinks.map((link, i) => {
               const isActive = activeSection === link.section;
               return (
@@ -145,7 +145,7 @@ export default function Header({ locale }: { locale: string }) {
           </nav>
 
           {/* Right: lang switcher + CTA */}
-          <div className="right-animate hidden md:flex items-center gap-5">
+          <div className="right-animate hidden md:flex items-center gap-2 lg:gap-5">
             <div className="flex items-center gap-0.5 bg-surface/60 rounded-full px-2 py-1 border border-border">
               {routing.locales.map((loc) => (
                 <button
@@ -165,7 +165,7 @@ export default function Header({ locale }: { locale: string }) {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "contact")}
-              className="relative px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden group transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
+              className="relative px-3 py-1.5 lg:px-5 lg:py-2 rounded-full text-xs lg:text-sm font-bold text-white overflow-hidden group transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(255,92,0,0.35)]"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
