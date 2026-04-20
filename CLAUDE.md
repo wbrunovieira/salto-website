@@ -49,7 +49,27 @@ Translations split by **locale + namespace**: `messages/<locale>/<namespace>.jso
 Namespaces: `common`, `nav`, `hero`, `services`, `process`, `about`, `contact`, `footer`, `cookies`.
 
 ### Component pattern
-Heavy sections are split into a server wrapper + a `*Client.tsx` for anything needing `"use client"` (animations, state). Example: `Hero.tsx` + `HeroClient.tsx`.
+Heavy sections are split into a server wrapper + a `*Client.tsx`. The `*Client.tsx` file imports the server component via `dynamic(() => import(...), { ssr: false })` and provides a skeleton fallback. This keeps GSAP and Framer Motion out of the SSR bundle. Example: `Hero.tsx` + `HeroClient.tsx`, `ScrollScene.tsx` + `ScrollSceneClient.tsx`.
+
+### Animation rules
+Three layers — pick the right one:
+- **GSAP + ScrollTrigger**: scroll-linked timelines, scrubbed parallax, staggered entrance on scroll. Always dynamic-imported asynchronously to avoid SSR issues:
+  ```ts
+  const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+    import("gsap"), import("gsap/ScrollTrigger"),
+  ]);
+  ```
+  All scroll animations live in `src/components/ScrollScene.tsx`.
+- **Framer Motion**: simple entrance animations not tied to scroll (e.g. `WhatsAppFloat`, `CookieBanner`, hero badge/headline stagger). Consistent easing: `[0.22, 1, 0.36, 1]`.
+- **CSS `@keyframes`**: header enter animation, hero glow/ring effects defined in `globals.css`.
+
+### Styling notes
+Tailwind v4 has no config file — theme tokens (colors, fonts, spacing) are defined as CSS custom properties inside `src/app/globals.css` under `@theme inline { … }`. Extend the theme there, not in a config file.
+
+Key tokens: `--color-base` (#0e0e0e), `--color-surface` (#141414), `--color-border` (#252525), `--color-accent` (#ff5c00 orange), `--color-text-primary` (#f5f5f5), `--color-text-muted` (#888888). Tailwind utilities: `bg-base`, `bg-surface`, `border-border`, `bg-accent`, `text-text-primary`, `text-text-muted`.
+
+### Contact API
+`src/app/api/contact/route.ts` — in-memory rate limiting (5 req/IP/hour), honeypot field `_trap` (silent 200 on fill), sends two Resend emails (to Bruno + confirmation to visitor). Gracefully skips email if `RESEND_API_KEY` is absent.
 
 ### Environment variables
 | Variable | Required | Default |
