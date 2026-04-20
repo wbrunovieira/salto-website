@@ -7,6 +7,8 @@
     "whatsapp": "Falar no WhatsApp",
     "whatsappSub": "Resposta rápida",
     "form": {
+      "heading": "Receba seu diagnóstico gratuito",
+      "lead": "Preencha abaixo e nossa equipe entra em contato em até 24h para entender o seu momento e preparar o seu diagnóstico.",
       "name": "O seu nome",
       "email": "O seu melhor e-mail",
       "phone": "Selecione o país e digite com DDD",

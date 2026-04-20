@@ -7,6 +7,8 @@
     "whatsapp": "Chat on WhatsApp",
     "whatsappSub": "Quick response",
     "form": {
+      "heading": "Get your free diagnosis",
+      "lead": "Fill in below and our team will reach out within 24h to understand your situation and prepare your diagnosis.",
       "name": "Your name",
       "email": "Your best email",
       "phone": "Select country and enter with area code",

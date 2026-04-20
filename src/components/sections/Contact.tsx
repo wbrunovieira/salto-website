@@ -201,6 +201,10 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 className="p-8 rounded-2xl border border-border bg-surface/40 flex flex-col gap-4"
               >
+                <div className="pb-4 border-b border-border">
+                  <h3 className="text-lg font-bold text-text-primary mb-1.5">{t("form.heading")}</h3>
+                  <p className="text-sm text-text-muted leading-relaxed">{t("form.lead")}</p>
+                </div>
                 {/* Honeypot — invisível para humanos, bots preenchem */}
                 <input
                   name="_trap" value={form._trap}
