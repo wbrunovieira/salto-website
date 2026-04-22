@@ -1,11 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import HeroSkeleton from "./HeroSkeleton";
+import PageSkeleton from "./PageSkeleton";
 
 const ScrollScene = dynamic(() => import("./ScrollScene"), {
   ssr: false,
-  loading: () => <HeroSkeleton />,
+  loading: () => <PageSkeleton />,
 });
 
 export default function ScrollSceneClient() {
