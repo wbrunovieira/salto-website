@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
+
+# Stock photos (licensed, not for public repo)
+docs/plans/freepik_*

@@ -1,0 +1,7 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#0E0E0E"/>
+  <!-- Ball -->
+  <circle cx="741" cy="337" r="53" fill="#FF5C00"/>
+  <!-- Curve: from bottom-left up to the ball -->
+  <path d="M294 655 C705 797 763 484 741 309" stroke="#FF5C00" stroke-width="22" stroke-linecap="round" fill="none"/>
+</svg>

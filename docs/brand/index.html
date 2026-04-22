@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salto — Brand Assets</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap');
+
+  :root {
+    --orange: #FF5C00;
+    --dark: #0E0E0E;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --text: #F5F5F5;
+    --muted: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 60px 80px 48px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left h1 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .header-left p {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--text);
+  }
+  .header-logo svg { width: 140px; height: auto; }
+
+  /* ── Section ── */
+  section { padding: 64px 80px 0; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 0 0 40px; height: 1px; background: rgba(255,92,0,0.4); }
+  .section-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  /* ── Grid ── */
+  .grid { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  /* ── Card ── */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+  }
+  .card-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    min-height: 180px;
+    position: relative;
+  }
+  .card-preview.bg-white    { background: #FFFFFF; }
+  .card-preview.bg-dark     { background: #0E0E0E; }
+  .card-preview.bg-orange   { background: #FF5C00; }
+  .card-preview.bg-checker  {
+    background-image: linear-gradient(45deg, #333 25%, transparent 25%),
+                      linear-gradient(-45deg, #333 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #333 75%),
+                      linear-gradient(-45deg, transparent 75%, #333 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    background-color: #222;
+  }
+  .card-meta {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .card-info { font-size: 11px; color: var(--muted); font-weight: 500; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    align-self: flex-start;
+  }
+  .badge-svg  { background: rgba(255,92,0,0.12); color: var(--orange); }
+  .badge-png  { background: rgba(100,180,255,0.12); color: #64B4FF; }
+  .badge-webp { background: rgba(100,220,130,0.12); color: #64DC82; }
+  .badge-pdf  { background: rgba(220,100,100,0.12); color: #DC6464; }
+  .badge-mp4  { background: rgba(180,100,220,0.12); color: #B464DC; }
+  .badge-webm { background: rgba(220,180,100,0.12); color: #DCB464; }
+  .badge-ico  { background: rgba(200,200,100,0.12); color: #C8C864; }
+
+  /* ── Sizes row ── */
+  .sizes-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    flex-wrap: wrap;
+  }
+  .size-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .size-item span { font-size: 10px; color: var(--muted); font-weight: 600; }
+
+  /* ── Video card ── */
+  .video-preview {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  video { border-radius: 4px; }
+
+  /* ── Favicon row ── */
+  .favicon-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    flex-wrap: wrap;
+  }
+  .favicon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .favicon-item span { font-size: 10px; color: var(--muted); font-weight: 600; }
+
+  /* ── Divider ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 64px 80px 0; }
+
+  /* ── Download table ── */
+  .file-table { width: 100%; border-collapse: collapse; }
+  .file-table th {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); padding: 12px 16px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .file-table td {
+    font-size: 12px; font-weight: 500; color: var(--text); padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04); font-family: monospace;
+  }
+  .file-table tr:hover td { background: rgba(255,92,0,0.03); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Brand Assets</h1>
+    <p>Salto Symbol</p>
+  </div>
+  <div class="header-logo">
+    <svg viewBox="0 0 482 149" fill="none">
+      <path d="M392 96C466 121.6 476.5 65.3333 472.5 34" stroke="#FF5C00" stroke-width="3"/>
+      <path d="M482 39C482 44.5228 477.747 49 472.5 49C467.253 49 463 44.5228 463 39C463 33.4772 467.253 29 472.5 29C477.747 29 482 33.4772 482 39Z" fill="#FF5C00"/>
+      <path d="M38.0973 118.094C31.0943 118.06 24.3338 117.231 17.816 115.608C11.2982 113.984 5.93668 111.889 1.73138 109.321L10.9041 88.8341C14.8718 91.1614 19.2793 93.0532 24.1267 94.5094C29.0541 95.8864 33.8256 96.5862 38.4413 96.6088C41.147 96.6221 43.2567 96.4732 44.7703 96.1623C46.3638 95.7722 47.5203 95.2606 48.2396 94.6274C48.9593 93.9147 49.3215 93.0809 49.3262 92.1259C49.3336 90.6139 48.5039 89.4161 46.8369 88.5325C45.17 87.649 42.9453 86.9218 40.1627 86.3511C37.4601 85.7012 34.4789 85.05 31.2193 84.3974C27.96 83.6652 24.6619 82.7338 21.3249 81.6033C18.0676 80.4733 15.0508 78.9862 12.2744 77.1422C9.57762 75.2986 7.40085 72.9005 5.74407 69.9478C4.08769 66.9156 3.2704 63.1712 3.29222 58.7147C3.31754 53.542 4.77297 48.8538 7.65851 44.65C10.624 40.3671 14.9779 36.9664 20.7202 34.4479C26.542 31.9297 33.7503 30.6917 42.3449 30.7338C47.9952 30.7614 53.5629 31.3856 59.0481 32.6061C64.5333 33.8267 69.4583 35.6812 73.8231 38.1696L65.2479 58.5405C61.1199 56.4512 57.1086 54.8797 53.2143 53.8261C49.3995 52.7728 45.6617 52.2372 42.001 52.2193C39.2953 52.2061 37.1454 52.4343 35.5515 52.904C33.9576 53.3737 32.8005 54.0047 32.0804 54.797C31.4399 55.5897 31.1173 56.4635 31.1126 57.4184C31.1056 58.8509 31.9355 60.0089 33.6024 60.8925C35.2697 61.6964 37.4549 62.3836 40.1579 62.9539C42.9405 63.5246 45.9616 64.1363 49.2213 64.7889C52.5605 65.4419 55.8588 66.3334 59.1162 67.4635C62.3735 68.5936 65.3506 70.0805 68.0474 71.9241C70.8237 73.768 73.0403 76.1664 74.697 79.119C76.3538 82.0717 77.1715 85.7365 77.1501 90.1134C77.1251 95.2065 75.6299 99.8946 72.6644 104.178C69.7789 108.381 65.4648 111.782 59.7221 114.38C53.9799 116.899 46.7716 118.137 38.0973 118.094ZM76.3323 116.372L113.269 32.9909L140.963 33.1265L177.081 116.865L147.955 116.722L121.321 46.4002L132.303 46.4539L104.981 116.512L76.3323 116.372ZM98.1291 101.915L105.391 81.6567L143.828 81.8449L150.891 102.173L98.1291 101.915ZM181.577 116.887L181.986 33.3273L210.158 33.4652L209.856 95.1798L247.577 95.3645L247.47 117.209L181.577 116.887ZM264.419 117.292L264.721 55.5777L240.251 55.4579L240.357 33.6131L317.471 33.9905L317.364 55.8354L292.893 55.7156L292.591 117.43L264.419 117.292ZM367.013 119.704C360.248 119.671 353.967 118.566 348.168 116.389C342.449 114.212 337.49 111.164 333.291 107.244C329.093 103.244 325.813 98.5726 323.452 93.2291C321.17 87.8859 320.045 82.0709 320.075 75.784C320.106 69.4176 321.289 63.6139 323.622 58.3728C326.036 53.0526 329.361 48.4531 333.598 44.5743C337.835 40.616 342.824 37.5765 348.564 35.4559C354.384 33.3356 360.676 32.2921 367.441 32.3252C374.284 32.3587 380.566 33.4638 386.285 35.6405C392.005 37.8172 396.963 40.9054 401.162 44.9051C405.36 48.8252 408.601 53.4568 410.882 58.8C413.244 64.064 414.409 69.8792 414.378 76.2456C414.347 82.5325 413.125 88.336 410.712 93.6562C408.378 98.9768 405.092 103.616 400.855 107.575C396.618 111.453 391.629 114.453 385.889 116.574C380.149 118.694 373.857 119.738 367.013 119.704ZM367.124 96.9047C369.751 96.9175 372.18 96.4519 374.413 95.5079C376.726 94.5642 378.722 93.2211 380.401 91.4785C382.161 89.6567 383.525 87.4749 384.492 84.933C385.46 82.3115 385.952 79.3694 385.968 76.1066C385.984 72.8438 385.521 69.9367 384.578 67.3855C383.636 64.7547 382.294 62.5596 380.552 60.8002C378.889 58.9617 376.907 57.5593 374.604 56.5931C372.38 55.6272 369.955 55.1378 367.329 55.125C364.703 55.1121 362.233 55.5775 359.921 56.5212C357.688 57.4652 355.692 58.8482 353.932 60.6699C352.252 62.4125 350.928 64.5946 349.961 67.216C348.993 69.7579 348.501 72.6603 348.485 75.9231C348.47 79.1859 348.933 82.1327 349.875 84.7635C350.817 87.3148 352.12 89.5097 353.782 91.3482C355.524 93.1075 357.507 94.4701 359.73 95.436C362.034 96.4023 364.498 96.8918 367.124 96.9047Z" fill="#F5F5F5"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ── COLOR VARIANTS ── -->
+<section>
+  <p class="section-title">Variações de Cor</p>
+  <p class="section-desc">Use a variação correta para cada contexto de aplicação.</p>
+  <div class="grid">
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-checker"><img src="color/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">Color</span>
+        <span class="card-info">Laranja — fundo transparente</span>
+        <span class="badge badge-svg">SVG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-white"><img src="color/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">Color / Fundo Claro</span>
+        <span class="card-info">Uso padrão em fundos brancos</span>
+        <span class="badge badge-png">PNG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-dark"><img src="color/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">Color / Fundo Escuro</span>
+        <span class="card-info">Uso padrão em fundos escuros</span>
+        <span class="badge badge-png">PNG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-white"><img src="black/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">Black</span>
+        <span class="card-info">Versão monocromática preta</span>
+        <span class="badge badge-svg">SVG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-dark"><img src="white/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">White</span>
+        <span class="card-info">Versão monocromática branca</span>
+        <span class="badge badge-svg">SVG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-dark"><img src="reversed/on-dark/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">Reversed / Dark</span>
+        <span class="card-info">Laranja com bg escuro integrado</span>
+        <span class="badge badge-svg">SVG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:220px">
+      <div class="card-preview bg-orange"><img src="reversed/on-orange/png/symbol-256.png" style="width:100px"></div>
+      <div class="card-meta">
+        <span class="card-name">Reversed / Orange</span>
+        <span class="card-info">Branco com bg laranja integrado</span>
+        <span class="badge badge-svg">SVG</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- ── WORDMARK ── -->
+<section>
+  <p class="section-title">Wordmark</p>
+  <p class="section-desc">Logo completo — símbolo + nome. Use em cabeçalhos, documentos e apresentações.</p>
+  <div class="grid">
+
+    <div class="card" style="width:340px">
+      <div class="card-preview bg-dark" style="padding:24px 32px"><img src="color/wordmark.svg" style="width:100%;max-width:280px"></div>
+      <div class="card-meta">
+        <span class="card-name">Color / Fundo Escuro</span>
+        <span class="card-info">Laranja + branco — uso principal</span>
+        <span class="badge badge-svg">SVG</span><span class="badge badge-png">PNG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:340px">
+      <div class="card-preview bg-checker" style="padding:24px 32px"><img src="color/png/wordmark-transparent-512.png" style="width:100%;max-width:280px"></div>
+      <div class="card-meta">
+        <span class="card-name">Color / Transparente</span>
+        <span class="card-info">Fundo transparente — para overlay</span>
+        <span class="badge badge-png">PNG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:340px">
+      <div class="card-preview bg-white" style="padding:24px 32px"><img src="black/wordmark.svg" style="width:100%;max-width:280px"></div>
+      <div class="card-meta">
+        <span class="card-name">Black</span>
+        <span class="card-info">Monocromático preto — fundos claros</span>
+        <span class="badge badge-svg">SVG</span><span class="badge badge-png">PNG</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:340px">
+      <div class="card-preview bg-dark" style="padding:24px 32px"><img src="white/wordmark.svg" style="width:100%;max-width:280px"></div>
+      <div class="card-meta">
+        <span class="card-name">White</span>
+        <span class="card-info">Monocromático branco — fundos escuros</span>
+        <span class="badge badge-svg">SVG</span><span class="badge badge-png">PNG</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- ── TAMANHOS ── -->
+<section>
+  <p class="section-title">Tamanhos PNG</p>
+  <p class="section-desc">Todos os tamanhos disponíveis com fundo transparente.</p>
+  <div class="sizes-row">
+    <div class="size-item"><img src="color/png/symbol-32.png"   style="width:32px;height:32px">  <span>32px</span></div>
+    <div class="size-item"><img src="color/png/symbol-64.png"   style="width:64px;height:64px">  <span>64px</span></div>
+    <div class="size-item"><img src="color/png/symbol-128.png"  style="width:128px;height:128px"><span>128px</span></div>
+    <div class="size-item"><img src="color/png/symbol-256.png"  style="width:128px;height:128px"><span>256px</span></div>
+    <div class="size-item"><img src="color/png/symbol-512.png"  style="width:128px;height:128px"><span>512px</span></div>
+    <div class="size-item"><img src="color/png/symbol-1024.png" style="width:128px;height:128px"><span>1024px</span></div>
+    <div class="size-item"><img src="color/png/symbol-2048.png" style="width:128px;height:128px"><span>2048px</span></div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ── ANIMAÇÕES ── -->
+<section>
+  <p class="section-title">Animações</p>
+  <p class="section-desc">Linha se desenha, bola aparece. MP4 para fundos sólidos, WebM com alpha para overlay.</p>
+  <div class="grid">
+
+    <div class="card" style="width:280px">
+      <div class="card-preview bg-dark video-preview">
+        <video src="animation/symbol-dark.mp4" width="160" autoplay loop muted playsinline></video>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Dark</span>
+        <span class="card-info">600×600 · 30fps · 2s · H.264</span>
+        <span class="badge badge-mp4">MP4</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:280px">
+      <div class="card-preview bg-white video-preview">
+        <video src="animation/symbol-white.mp4" width="160" autoplay loop muted playsinline></video>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">White</span>
+        <span class="card-info">600×600 · 30fps · 2s · H.264</span>
+        <span class="badge badge-mp4">MP4</span>
+      </div>
+    </div>
+
+    <div class="card" style="width:280px">
+      <div class="card-preview bg-checker video-preview">
+        <video src="animation/symbol-transparent.webm" width="160" autoplay loop muted playsinline></video>
+      </div>
+      <div class="card-meta">
+        <span class="card-name">Transparent</span>
+        <span class="card-info">600×600 · 30fps · 2s · VP9 Alpha</span>
+        <span class="badge badge-webm">WEBM</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- ── FAVICON ── -->
+<section>
+  <p class="section-title">Favicon</p>
+  <p class="section-desc">Arquivo .ico com 3 tamanhos embutidos. PNGs para PWA e Apple Touch.</p>
+  <div class="favicon-row">
+    <div class="favicon-item"><img src="favicon/favicon-16.png"  style="width:16px;height:16px;image-rendering:pixelated"> <span>16px</span></div>
+    <div class="favicon-item"><img src="favicon/favicon-32.png"  style="width:32px;height:32px;image-rendering:pixelated"> <span>32px</span></div>
+    <div class="favicon-item"><img src="favicon/favicon-48.png"  style="width:48px;height:48px;image-rendering:pixelated"> <span>48px</span></div>
+    <div class="favicon-item"><img src="favicon/favicon-180.png" style="width:64px;height:64px"> <span>180px<br><span style="color:var(--orange)">Apple</span></span></div>
+    <div class="favicon-item"><img src="favicon/favicon-192.png" style="width:64px;height:64px"> <span>192px<br><span style="color:var(--orange)">PWA</span></span></div>
+    <div class="favicon-item"><img src="favicon/favicon-512.png" style="width:64px;height:64px"> <span>512px<br><span style="color:var(--orange)">PWA</span></span></div>
+    <div class="favicon-item" style="margin-left:24px;padding-left:24px;border-left:1px solid var(--border)">
+      <span class="badge badge-ico" style="font-size:12px;padding:6px 14px;">favicon.ico</span>
+      <span style="font-size:10px;color:var(--muted);margin-top:6px;">16 + 32 + 48</span>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ── TODOS OS ARQUIVOS ── -->
+<section>
+  <p class="section-title">Todos os Arquivos</p>
+  <p class="section-desc">Índice completo do package.</p>
+  <table class="file-table">
+    <thead>
+      <tr>
+        <th>Arquivo</th>
+        <th>Formato</th>
+        <th>Uso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>color/wordmark.svg</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Logo completo (símbolo + SALTO) — fundo escuro</td></tr>
+      <tr><td>color/png/wordmark-[256–1024].png</td><td><span class="badge badge-png">PNG</span></td><td style="color:var(--muted)">Wordmark em 3 tamanhos — fundo escuro</td></tr>
+      <tr><td>color/png/wordmark-transparent-[256–1024].png</td><td><span class="badge badge-png">PNG</span></td><td style="color:var(--muted)">Wordmark transparente — para overlay</td></tr>
+      <tr><td>black/wordmark.svg + png</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Wordmark monocromático preto</td></tr>
+      <tr><td>white/wordmark.svg + png</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Wordmark monocromático branco</td></tr>
+      <tr><td>color/symbol.svg</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Símbolo isolado — vetor escalável</td></tr>
+      <tr><td>color/symbol-layers.svg</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">SVG com camadas nomeadas (line / ball) — para animação GSAP</td></tr>
+      <tr><td>color/symbol.webp</td><td><span class="badge badge-webp">WEBP</span></td><td style="color:var(--muted)">Web moderno — alta compressão</td></tr>
+      <tr><td>color/symbol.pdf</td><td><span class="badge badge-pdf">PDF</span></td><td style="color:var(--muted)">Impressão / gráfica</td></tr>
+      <tr><td>color/png/symbol-[32–2048].png</td><td><span class="badge badge-png">PNG</span></td><td style="color:var(--muted)">7 tamanhos — fundo transparente</td></tr>
+      <tr><td>black/symbol.svg + png + webp + pdf</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Monocromático preto</td></tr>
+      <tr><td>white/symbol.svg + png + webp + pdf</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Monocromático branco</td></tr>
+      <tr><td>reversed/on-dark/ …</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Laranja com fundo escuro integrado</td></tr>
+      <tr><td>reversed/on-orange/ …</td><td><span class="badge badge-svg">SVG</span></td><td style="color:var(--muted)">Branco com fundo laranja integrado</td></tr>
+      <tr><td>favicon/favicon.ico</td><td><span class="badge badge-ico">ICO</span></td><td style="color:var(--muted)">Browser favicon (16 + 32 + 48px)</td></tr>
+      <tr><td>favicon/favicon-[16–512].png</td><td><span class="badge badge-png">PNG</span></td><td style="color:var(--muted)">Apple Touch Icon + PWA manifest</td></tr>
+      <tr><td>animation/symbol-dark.mp4</td><td><span class="badge badge-mp4">MP4</span></td><td style="color:var(--muted)">Animação draw — fundo escuro</td></tr>
+      <tr><td>animation/symbol-white.mp4</td><td><span class="badge badge-mp4">MP4</span></td><td style="color:var(--muted)">Animação draw — fundo branco</td></tr>
+      <tr><td>animation/symbol-transparent.webm</td><td><span class="badge badge-webm">WEBM</span></td><td style="color:var(--muted)">Animação draw — alpha transparente (VP9)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>
