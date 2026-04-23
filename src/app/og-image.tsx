@@ -1,10 +1,21 @@
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 export const contentType = "image/png";
 export const size = { width: 1200, height: 630 };
 
-export default function OgImage() {
+const copy: Record<string, { line1: string; accent: string }> = {
+  pt: { line1: "Seu negócio pronto para o próximo", accent: "salto." },
+  en: { line1: "Your business ready for the next",   accent: "leap."  },
+  es: { line1: "Tu negocio listo para el próximo",   accent: "salto." },
+  it: { line1: "La tua azienda pronta per il",       accent: "salto." },
+};
+
+export default function OgImage({ request }: { request: NextRequest }) {
+  const locale = new URL(request.url).searchParams.get("locale") ?? "pt";
+  const { line1, accent } = copy[locale] ?? copy.pt;
+
   return new ImageResponse(
     (
       <div
@@ -45,10 +56,10 @@ export default function OgImage() {
         {/* Headline */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
           <span style={{ color: "#F5F5F5", fontWeight: 900, fontSize: 52, letterSpacing: -2 }}>
-            Seu negócio pronto para o próximo
+            {line1}
           </span>
           <span style={{ color: "#FF5C00", fontWeight: 900, fontSize: 52, letterSpacing: -2 }}>
-            salto.
+            {accent}
           </span>
         </div>
 

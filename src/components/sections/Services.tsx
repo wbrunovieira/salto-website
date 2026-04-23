@@ -95,7 +95,7 @@ export default function Services() {
                     : "border-border bg-surface/60"
                 }`}
               >
-                <div className={`service-icon w-11 h-11 mb-5 ${isTech ? "text-accent" : "text-accent/70 group-hover:text-accent"} transition-colors duration-300`}>
+                <div aria-hidden="true" className={`service-icon w-11 h-11 mb-5 ${isTech ? "text-accent" : "text-accent/70 group-hover:text-accent"} transition-colors duration-300`}>
                   {ICONS[key]}
                 </div>
                 <h3 className="text-base font-bold text-text-primary mb-2 tracking-tight">

@@ -129,7 +129,7 @@ export default function Process() {
               </div>
 
               {/* Icon */}
-              <div className="process-step-icon w-10 h-10 mb-4 text-white/60 group-hover:text-white transition-colors duration-300">
+              <div aria-hidden="true" className="process-step-icon w-10 h-10 mb-4 text-white/60 group-hover:text-white transition-colors duration-300">
                 {STEP_ICONS[step]}
               </div>
 
