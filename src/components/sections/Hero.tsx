@@ -23,7 +23,12 @@ export default function Hero() {
   }, []);
 
   // Hide before first client paint — LCP fires on SSR render
+  // min-height locks each headline's height so clearing text during typewriter causes zero CLS
   useLayoutEffect(() => {
+    ['hero-line1', 'hero-line2', 'hero-accent'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.minHeight = el.offsetHeight + 'px';
+    });
     gsap.set(['#hero-line1', '#hero-line2', '#hero-accent'], { opacity: 0 });
     gsap.set(['#hero-badge', '#hero-sub', '#hero-cta', '#hero-scroll'], { opacity: 0, y: 32 });
   }, [animKey]);
