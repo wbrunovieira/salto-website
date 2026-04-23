@@ -3,7 +3,7 @@
     "label": "Como funciona",
     "title": "Do diagnóstico",
     "titleAccent": "ao resultado.",
-    "subtitle": "Um processo claro, orientado a dados e construído para gerar resultados reais — não apenas relatórios.",
+    "subtitle": "Um processo claro, orientado a dados e construído para gerar resultados reais, não apenas relatórios.",
     "steps": {
       "diagnosis": {
         "number": "01",
@@ -18,7 +18,7 @@
       "execution": {
         "number": "03",
         "title": "Execução",
-        "description": "Colocamos tudo em prática — anúncios, ofertas, CRM, atendimento e tecnologia integrados e rodando juntos."
+        "description": "Colocamos tudo em prática: anúncios, ofertas, CRM, atendimento e tecnologia integrados e rodando juntos."
       },
       "scale": {
         "number": "04",

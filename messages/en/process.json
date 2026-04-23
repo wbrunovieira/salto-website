@@ -3,11 +3,11 @@
     "label": "How it works",
     "title": "From diagnosis",
     "titleAccent": "to results.",
-    "subtitle": "A clear, data-driven process built to generate real results — not just reports.",
+    "subtitle": "A clear, data-driven process built to generate real results, not just reports.",
     "steps": {
       "diagnosis": { "number": "01", "title": "Diagnosis", "description": "We dive deep into your business. We map the market, competitors, ideal customer and what's already working (or not) before any action." },
       "strategy": { "number": "02", "title": "Strategy", "description": "We create an exclusive plan with clear goals, defined channels and specific actions for your current moment and objective." },
-      "execution": { "number": "03", "title": "Execution", "description": "We put everything into action — ads, offers, CRM, customer service and technology integrated and running together." },
+      "execution": { "number": "03", "title": "Execution", "description": "We put everything into action: ads, offers, CRM, customer service and technology integrated and running together." },
       "scale": { "number": "04", "title": "Scale", "description": "We measure daily, optimize in real time and scale what works. Constant growth, no guesswork." }
     }
   }
