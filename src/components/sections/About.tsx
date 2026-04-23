@@ -32,9 +32,9 @@ export default function About() {
             </h2>
           </div>
           <div className="overflow-hidden">
-            <h2 id="about-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent">
+            <p id="about-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent">
               {t("titleAccent")}
-            </h2>
+            </p>
           </div>
         </div>
 

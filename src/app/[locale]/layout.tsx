@@ -69,13 +69,13 @@ export async function generateMetadata({
       url: `${BASE_URL}/${locale}`,
       siteName: "Salto",
       type: "website",
-      images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "Salto — Alavanque suas vendas" }],
+      images: [{ url: `${BASE_URL}/og-image`, width: 1200, height: 630, alt: titles[locale] ?? titles.pt }],
     },
     twitter: {
       card: "summary_large_image",
       title: titles[locale] ?? titles.pt,
       description: descriptions[locale] ?? descriptions.pt,
-      images: [`${BASE_URL}/og-image.png`],
+      images: [`${BASE_URL}/og-image`],
     },
   };
 }
@@ -95,13 +95,20 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  const schemaDescriptions: Record<string, string> = {
+    pt: "Estratégia comercial e tecnologia integradas para alavancar as vendas do seu negócio.",
+    en: "Integrated sales strategy and technology to boost your business results.",
+    es: "Estrategia comercial y tecnología integradas para impulsar las ventas de tu negocio.",
+    it: "Strategia commerciale e tecnologia integrate per potenziare le vendite della tua azienda.",
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "Salto",
-    url: BASE_URL,
+    url: `${BASE_URL}/${locale}`,
     logo: `${BASE_URL}/icon.svg`,
-    description: "Estratégia comercial e tecnologia integradas para alavancar as vendas do seu negócio.",
+    description: schemaDescriptions[locale] ?? schemaDescriptions.pt,
     founder: { "@type": "Person", name: "Bruno Vieira" },
     sameAs: ["https://www.wbdigitalsolutions.com"],
     serviceType: ["Sales Strategy", "Digital Marketing", "CRM", "Sales Training"],

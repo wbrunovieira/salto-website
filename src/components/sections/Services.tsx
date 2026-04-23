@@ -67,9 +67,9 @@ export default function Services() {
           </div>
 
           <div className="overflow-hidden mb-10">
-            <h2 id="services-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent">
+            <p id="services-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent">
               {t("titleAccent")}
-            </h2>
+            </p>
           </div>
 
           <p id="services-subtitle" className="max-w-2xl text-base md:text-lg text-text-muted leading-relaxed mb-5">

@@ -92,12 +92,12 @@ export default function Process() {
             </h2>
           </div>
           <div className="overflow-hidden mb-10">
-            <h2
+            <p
               id="process-title2"
               className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white"
             >
               {t('titleAccent')}
-            </h2>
+            </p>
           </div>
 
           <p id="process-subtitle" className="max-w-2xl text-base md:text-lg text-white/70 leading-relaxed">

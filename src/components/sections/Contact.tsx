@@ -81,9 +81,9 @@ export default function Contact() {
             </h2>
           </div>
           <div className="overflow-hidden mb-8">
-            <h2 id="contact-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent">
+            <p id="contact-title2" className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent">
               {t("titleAccent")}
-            </h2>
+            </p>
           </div>
           <p id="contact-subtitle" className="max-w-lg text-base md:text-lg text-text-muted leading-relaxed">
             {t("subtitle")}

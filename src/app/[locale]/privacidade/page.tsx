@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade — Salto",
+  description: "Saiba como a Salto coleta, usa e protege seus dados pessoais.",
   robots: { index: false },
 };
 
