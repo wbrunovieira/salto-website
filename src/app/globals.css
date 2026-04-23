@@ -195,3 +195,11 @@ input:-webkit-autofill:active {
 .hero-ring-3 { width: 700px;  height: 700px;  --ring-opacity: 0.07; animation-delay: 1.6s; }
 .hero-ring-4 { width: 940px;  height: 940px;  --ring-opacity: 0.05; animation-delay: 2.4s; }
 .hero-ring-5 { width: 1200px; height: 1200px; --ring-opacity: 0.03; animation-delay: 3.2s; }
+
+@keyframes scroll-bounce {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50%       { opacity: 0.8; transform: translateY(10px); }
+}
+.hero-scroll-line {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
