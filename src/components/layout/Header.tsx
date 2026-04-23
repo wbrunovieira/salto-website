@@ -87,8 +87,8 @@ export default function Header({ locale }: { locale: string }) {
       {/* Header bar */}
       <div className={`transition-all duration-500 ${
         scrolled
-          ? "bg-surface/80 backdrop-blur-lg border-b border-border shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
-          : "bg-transparent"
+          ? "bg-surface/95 backdrop-blur-md border-b border-border shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
+          : "bg-base/40 backdrop-blur-sm"
       }`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-[64px] md:h-[68px] flex items-center justify-between">
 
