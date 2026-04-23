@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-const TYPE_SPEED = 0.028; // seconds per character
+const TYPE_SPEED = 0.055; // seconds per character
 
 export default function Hero() {
   const t = useTranslations("hero");
