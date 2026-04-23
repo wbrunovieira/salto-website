@@ -36,17 +36,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    pt: "Salto — Alavanque suas vendas",
-    en: "Salto — Boost your sales",
-    es: "Salto — Impulsa tus ventas",
-    it: "Salto — Potenzia le tue vendite",
+    pt: "Salto | Consultoria de Vendas e Marketing Digital",
+    en: "Salto | Sales Consulting & Digital Marketing",
+    es: "Salto | Consultoría de Ventas y Marketing Digital",
+    it: "Salto | Consulenza Vendite e Marketing Digitale",
   };
 
   const descriptions: Record<string, string> = {
-    pt: "Estruturamos toda a sua jornada de vendas online — do tráfego pago à conversão.",
-    en: "We structure your entire online sales journey — from paid traffic to conversion.",
-    es: "Estructuramos todo tu viaje de ventas online — del tráfico pago a la conversión.",
-    it: "Strutturiamo l'intero percorso di vendita online — dal traffico a pagamento alla conversione.",
+    pt: "Consultoria de vendas, marketing digital e CRM integrados. Diagnóstico 100% gratuito para PMEs. Estratégia personalizada, do tráfego pago ao fechamento.",
+    en: "Sales consulting, digital marketing and CRM integrated. 100% free diagnosis for SMBs. Customized strategy, from paid traffic to closing.",
+    es: "Consultoría de ventas, marketing digital y CRM integrados. Diagnóstico 100% gratuito para pymes. Estrategia personalizada, del tráfico pago al cierre.",
+    it: "Consulenza vendite, marketing digitale e CRM integrati. Diagnosi 100% gratuita per PMI. Strategia personalizzata, dal traffico a pagamento alla chiusura.",
   };
 
   return {
