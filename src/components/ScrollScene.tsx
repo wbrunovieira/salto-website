@@ -13,17 +13,27 @@ export default function ScrollScene() {
   useEffect(() => {
     if (!containerRef.current) return;
     let killed = false;
+    let lenisInstance: InstanceType<(typeof import("lenis"))["default"]> | null = null;
+    let lenisRaf: ((time: number) => void) | null = null;
 
     const initGSAP = async () => {
-      // GSAP carrega só aqui — não está no bundle inicial
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+      const [{ default: gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([
         import("gsap"),
         import("gsap/ScrollTrigger"),
+        import("lenis"),
       ]);
 
       if (killed) return;
 
       gsap.registerPlugin(ScrollTrigger);
+
+      // Smooth scroll — driven by GSAP ticker for perfect sync with ScrollTrigger
+      lenisInstance = new Lenis({ autoRaf: false });
+      lenisRaf = (time: number) => lenisInstance!.raf(time * 1000);
+      lenisInstance.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(lenisRaf);
+      gsap.ticker.lagSmoothing(0);
+
       requestAnimationFrame(() => ScrollTrigger.refresh());
 
       // ── Hero: letras explodem para fora ──────────────────────────
@@ -159,7 +169,10 @@ export default function ScrollScene() {
 
     return () => {
       killed = true;
-      // Cleanup async — GSAP pode não ter carregado ainda
+      if (lenisInstance) { lenisInstance.destroy(); lenisInstance = null; }
+      if (lenisRaf) {
+        import("gsap").then(({ default: gsap }) => gsap.ticker.remove(lenisRaf!)).catch(() => {});
+      }
       import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
         ScrollTrigger.getAll().forEach((t) => t.kill());
       }).catch(() => {});

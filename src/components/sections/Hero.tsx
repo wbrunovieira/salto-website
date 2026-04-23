@@ -1,19 +1,18 @@
 "use client";
 
-import { useRef, useEffect, useLayoutEffect, useState } from "react";
+import { Fragment, useRef, useEffect, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-
-const ANIM_TARGETS = [
-  "#hero-badge", "#hero-line1", "#hero-line2",
-  "#hero-accent", "#hero-sub", "#hero-cta", "#hero-scroll",
-];
 
 export default function Hero() {
   const t = useTranslations("hero");
   const [animKey, setAnimKey] = useState(0);
   const ctxRef = useRef<ReturnType<typeof gsap.context> | null>(null);
+
+  const line1   = t("headlineLine1");
+  const line2   = t("headlineLine2");
+  const accent  = t("headlineAccent");
 
   useEffect(() => {
     const reset = () => setAnimKey((k) => k + 1);
@@ -21,26 +20,61 @@ export default function Hero() {
     return () => window.removeEventListener("hero-reset", reset);
   }, []);
 
-  // Hide before browser repaints after hydration — avoids FOUC, enables SSR LCP
+  // Synchronously hide before browser repaints — enables SSR LCP on first paint
   useLayoutEffect(() => {
-    gsap.set(ANIM_TARGETS, { opacity: 0, y: 32 });
+    gsap.set(["#hero-badge", "#hero-sub", "#hero-cta", "#hero-scroll"], { opacity: 0, y: 32 });
+    gsap.set(".hero-word", { y: "110%" });
   }, [animKey]);
 
-  // Entrance timeline
   useEffect(() => {
     ctxRef.current?.revert();
+    const magneticCleanups: (() => void)[] = [];
+
     ctxRef.current = gsap.context(() => {
-      gsap.timeline({ defaults: { ease: "power3.out" } })
-        .to("#hero-badge",  { opacity: 1, y: 0, duration: 0.65 }, 0.2)
-        .to("#hero-line1",  { opacity: 1, y: 0, duration: 0.65 }, 0.32)
-        .to("#hero-line2",  { opacity: 1, y: 0, duration: 0.65 }, 0.44)
-        .to("#hero-accent", { opacity: 1, y: 0, duration: 0.65 }, 0.56)
-        .to("#hero-sub",    { opacity: 1, y: 0, duration: 0.65 }, 0.68)
-        .to("#hero-cta",    { opacity: 1, y: 0, duration: 0.65 }, 0.80)
-        .to("#hero-scroll", { opacity: 1, y: 0, duration: 0.6  }, 1.6);
+      gsap.timeline({ defaults: { ease: "power4.out" } })
+        .to("#hero-badge",             { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1)
+        .to("#hero-line1 .hero-word",  { y: "0%", duration: 0.7, stagger: 0.06 }, 0.2)
+        .to("#hero-line2 .hero-word",  { y: "0%", duration: 0.7, stagger: 0.06 }, 0.35)
+        .to("#hero-accent .hero-word", { y: "0%", duration: 0.7, stagger: 0.06 }, 0.5)
+        .to("#hero-sub",               { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 0.8)
+        .to("#hero-cta",               { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 0.95)
+        .to("#hero-scroll",            { opacity: 1, y: 0, duration: 0.6,  ease: "power3.out" }, 1.6);
     });
-    return () => ctxRef.current?.revert();
+
+    // Magnetic CTA buttons
+    document.querySelectorAll<HTMLElement>("#hero-cta > *").forEach((el) => {
+      const onMove = (e: MouseEvent) => {
+        const rect = el.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width  / 2) * 0.35;
+        const y = (e.clientY - rect.top  - rect.height / 2) * 0.35;
+        gsap.to(el, { x, y, duration: 0.3, ease: "power2.out" });
+      };
+      const onLeave = () => {
+        gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+      };
+      el.addEventListener("mousemove", onMove);
+      el.addEventListener("mouseleave", onLeave);
+      magneticCleanups.push(() => {
+        el.removeEventListener("mousemove", onMove);
+        el.removeEventListener("mouseleave", onLeave);
+      });
+    });
+
+    return () => {
+      ctxRef.current?.revert();
+      magneticCleanups.forEach((fn) => fn());
+    };
   }, [animKey]);
+
+  const splitWords = (text: string) =>
+    text.split(" ").map((word, i, arr) => (
+      <Fragment key={i}>
+        <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}>
+          <span className="hero-word" style={{ display: "inline-block" }}>{word}</span>
+        </span>
+        {i < arr.length - 1 && " "}
+      </Fragment>
+    ));
 
   return (
     <section
@@ -51,7 +85,6 @@ export default function Hero() {
       <div className="hero-glow-corner absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none opacity-[0.07]" />
       <div className="hero-noise absolute inset-0 pointer-events-none" />
 
-      {/* rings — key restarts CSS animation on hero-reset */}
       <div key={`rings-${animKey}`} className="contents">
         <div className="hero-ring hero-ring-1" />
         <div className="hero-ring hero-ring-2" />
@@ -76,19 +109,19 @@ export default function Hero() {
             id="hero-line1"
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-text-primary"
           >
-            {t("headlineLine1")}
+            {splitWords(line1)}
           </h1>
           <span
             id="hero-line2"
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-text-primary"
           >
-            {t("headlineLine2")}
+            {splitWords(line2)}
           </span>
           <span
             id="hero-accent"
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
           >
-            {t("headlineAccent")}
+            {splitWords(accent)}
           </span>
         </div>
 
@@ -105,7 +138,7 @@ export default function Hero() {
         >
           <Link
             href={{ pathname: "/", hash: "#contact" }}
-            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
+            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
             <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
@@ -117,7 +150,7 @@ export default function Hero() {
 
           <Link
             href={{ pathname: "/", hash: "#services" }}
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-all duration-300 hover:-translate-y-[3px] hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-all duration-300 hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
           >
             {t("ctaSecondary")}
             <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" viewBox="0 0 16 16" fill="none">
@@ -127,7 +160,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div
         id="hero-scroll"
         className="relative z-10 flex flex-col items-center gap-2 pb-8 pointer-events-none"

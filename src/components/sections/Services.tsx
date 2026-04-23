@@ -1,5 +1,6 @@
 "use client";
 
+import gsap from "gsap";
 import { useTranslations } from "next-intl";
 
 const ITEMS = ["diagnosis", "strategy", "ads", "crm", "metrics", "tech"] as const;
@@ -89,7 +90,17 @@ export default function Services() {
               <div
                 key={key}
                 data-col={index % 3}
-                className={`service-card group relative p-7 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_8px_32px_rgba(255,92,0,0.12)] ${
+                onMouseMove={(e) => {
+                  const el = e.currentTarget;
+                  const rect = el.getBoundingClientRect();
+                  const x = (e.clientX - rect.left) / rect.width  - 0.5;
+                  const y = (e.clientY - rect.top)  / rect.height - 0.5;
+                  gsap.to(el, { rotateX: -y * 10, rotateY: x * 10, transformPerspective: 800, duration: 0.3, ease: "power2.out" });
+                }}
+                onMouseLeave={(e) => {
+                  gsap.to(e.currentTarget, { rotateX: 0, rotateY: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
+                }}
+                className={`service-card group relative p-7 rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:border-accent/40 hover:shadow-[0_8px_32px_rgba(255,92,0,0.12)] ${
                   isTech
                     ? "border-border bg-gradient-to-br from-surface to-[#1a0a00]"
                     : "border-border bg-surface/60"
