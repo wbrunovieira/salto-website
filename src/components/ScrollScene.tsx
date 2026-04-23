@@ -5,6 +5,7 @@ import Hero from "./sections/Hero";
 import Services from "./sections/Services";
 import Process from "./sections/Process";
 import About from "./sections/About";
+import Stats from "./sections/Stats";
 import Contact from "./sections/Contact";
 
 export default function ScrollScene() {
@@ -109,6 +110,12 @@ export default function ScrollScene() {
         scrollTrigger: { trigger: "#process-grid", start: "top 80%", once: true },
       });
 
+      // ── Stats ─────────────────────────────────────────────────────
+      gsap.fromTo("[data-stat]", { opacity: 0, y: 40 }, {
+        opacity: 1, y: 0, stagger: 0.12, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: "#stats", start: "top 75%", once: true },
+      });
+
       // ── About ─────────────────────────────────────────────────────
       gsap.fromTo("#about", { y: 80 }, {
         y: 0, ease: "none",
@@ -196,6 +203,7 @@ export default function ScrollScene() {
       </div>
 
       <div className="-mt-[8vh] relative z-30">
+        <Stats />
         <About />
       </div>
 

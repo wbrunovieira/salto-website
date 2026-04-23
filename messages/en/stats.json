@@ -1,0 +1,7 @@
+{
+  "stats": {
+    "years": { "value": "20+", "label": "Years in sales" },
+    "diagnosis": { "value": "100%", "label": "Free diagnosis" },
+"pillars": { "value": "4", "label": "Integrated pillars" }
+  }
+}

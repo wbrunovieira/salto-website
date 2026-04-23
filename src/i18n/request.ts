@@ -2,7 +2,7 @@ import { cache } from "react";
 import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
-const NAMESPACES = ["common", "nav", "hero", "services", "process", "about", "contact", "footer", "cookies"] as const;
+const NAMESPACES = ["common", "nav", "hero", "services", "process", "about", "contact", "footer", "cookies", "stats"] as const;
 
 const loadMessages = cache(async (locale: string) => {
   const modules = await Promise.all(
