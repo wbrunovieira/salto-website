@@ -1,18 +1,20 @@
 "use client";
 
-import { Fragment, useRef, useEffect, useLayoutEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+
+const TYPE_SPEED = 0.028; // seconds per character
 
 export default function Hero() {
   const t = useTranslations("hero");
   const [animKey, setAnimKey] = useState(0);
   const ctxRef = useRef<ReturnType<typeof gsap.context> | null>(null);
 
-  const line1   = t("headlineLine1");
-  const line2   = t("headlineLine2");
-  const accent  = t("headlineAccent");
+  const line1  = t("headlineLine1");
+  const line2  = t("headlineLine2");
+  const accent = t("headlineAccent");
 
   useEffect(() => {
     const reset = () => setAnimKey((k) => k + 1);
@@ -20,10 +22,10 @@ export default function Hero() {
     return () => window.removeEventListener("hero-reset", reset);
   }, []);
 
-  // Synchronously hide before browser repaints — enables SSR LCP on first paint
+  // Hide before first client paint — LCP fires on SSR render
   useLayoutEffect(() => {
+    gsap.set(["#hero-line1", "#hero-line2", "#hero-accent"], { opacity: 0 });
     gsap.set(["#hero-badge", "#hero-sub", "#hero-cta", "#hero-scroll"], { opacity: 0, y: 32 });
-    gsap.set(".hero-word", { y: "110%" });
   }, [animKey]);
 
   useEffect(() => {
@@ -31,26 +33,58 @@ export default function Hero() {
     const magneticCleanups: (() => void)[] = [];
 
     ctxRef.current = gsap.context(() => {
-      gsap.timeline({ defaults: { ease: "power4.out" } })
-        .to("#hero-badge",             { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1)
-        .to("#hero-line1 .hero-word",  { y: "0%", duration: 0.7, stagger: 0.06 }, 0.2)
-        .to("#hero-line2 .hero-word",  { y: "0%", duration: 0.7, stagger: 0.06 }, 0.35)
-        .to("#hero-accent .hero-word", { y: "0%", duration: 0.7, stagger: 0.06 }, 0.5)
-        .to("#hero-sub",               { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 0.8)
-        .to("#hero-cta",               { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 0.95)
-        .to("#hero-scroll",            { opacity: 1, y: 0, duration: 0.6,  ease: "power3.out" }, 1.6);
+      const line1El  = document.getElementById("hero-line1");
+      const line2El  = document.getElementById("hero-line2");
+      const accentEl = document.getElementById("hero-accent");
+
+      // Read original text from data-text (survives partial-typed reruns)
+      const t1 = line1El?.getAttribute("data-text")  || line1;
+      const t2 = line2El?.getAttribute("data-text")  || line2;
+      const t3 = accentEl?.getAttribute("data-text") || accent;
+
+      const d1 = t1.length * TYPE_SPEED;
+      const d2 = t2.length * TYPE_SPEED;
+      const d3 = t3.length * TYPE_SPEED;
+
+      const start1 = 0.2;
+      const start2 = start1 + d1;
+      const start3 = start2 + d2;
+      const startUI = start3 + d3;
+
+      const makeTypeTween = (el: HTMLElement, text: string, delay: number) => {
+        el.textContent = "";
+        gsap.set(el, { opacity: 1 });
+        const obj = { n: 0 };
+        gsap.to(obj, {
+          n: text.length,
+          duration: text.length * TYPE_SPEED,
+          delay,
+          ease: "none",
+          onUpdate() { el.textContent = text.slice(0, Math.round(obj.n)); },
+          onComplete() { el.textContent = text; },
+        });
+      };
+
+      if (line1El)  makeTypeTween(line1El,  t1, start1);
+      if (line2El)  makeTypeTween(line2El,  t2, start2);
+      if (accentEl) makeTypeTween(accentEl, t3, start3);
+
+      gsap.to("#hero-badge",  { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", delay: startUI });
+      gsap.to("#hero-sub",    { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", delay: startUI + 0.15 });
+      gsap.to("#hero-cta",    { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", delay: startUI + 0.3 });
+      gsap.to("#hero-scroll", { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", delay: startUI + 0.8 });
     });
 
-    // Magnetic CTA buttons
+    // Magnetic CTA buttons — transition-[box-shadow] only, so CSS doesn't fight GSAP transform
     document.querySelectorAll<HTMLElement>("#hero-cta > *").forEach((el) => {
       const onMove = (e: MouseEvent) => {
         const rect = el.getBoundingClientRect();
-        const x = (e.clientX - rect.left - rect.width  / 2) * 0.35;
-        const y = (e.clientY - rect.top  - rect.height / 2) * 0.35;
-        gsap.to(el, { x, y, duration: 0.3, ease: "power2.out" });
+        const x = (e.clientX - rect.left - rect.width  / 2) * 0.45;
+        const y = (e.clientY - rect.top  - rect.height / 2) * 0.45;
+        gsap.to(el, { x, y, duration: 0.25, ease: "power2.out" });
       };
       const onLeave = () => {
-        gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.4)" });
       };
       el.addEventListener("mousemove", onMove);
       el.addEventListener("mouseleave", onLeave);
@@ -64,17 +98,7 @@ export default function Hero() {
       ctxRef.current?.revert();
       magneticCleanups.forEach((fn) => fn());
     };
-  }, [animKey]);
-
-  const splitWords = (text: string) =>
-    text.split(" ").map((word, i, arr) => (
-      <Fragment key={i}>
-        <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}>
-          <span className="hero-word" style={{ display: "inline-block" }}>{word}</span>
-        </span>
-        {i < arr.length - 1 && " "}
-      </Fragment>
-    ));
+  }, [animKey, line1, line2, accent]);
 
   return (
     <section
@@ -105,23 +129,27 @@ export default function Hero() {
         </div>
 
         <div className="flex flex-col items-center gap-2 mt-14">
+          {/* data-text preserves the full string for typewriter restarts */}
           <h1
             id="hero-line1"
+            data-text={line1}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-text-primary"
           >
-            {splitWords(line1)}
+            {line1}
           </h1>
           <span
             id="hero-line2"
+            data-text={line2}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-text-primary"
           >
-            {splitWords(line2)}
+            {line2}
           </span>
           <span
             id="hero-accent"
+            data-text={accent}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
           >
-            {splitWords(accent)}
+            {accent}
           </span>
         </div>
 
@@ -136,9 +164,10 @@ export default function Hero() {
           id="hero-cta"
           className="flex flex-col sm:flex-row items-center gap-4 mt-12"
         >
+          {/* transition-[box-shadow] only — avoids CSS fighting GSAP transform on magnetic effect */}
           <Link
             href={{ pathname: "/", hash: "#contact" }}
-            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
+            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-[box-shadow] duration-300 hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
             <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
@@ -150,7 +179,7 @@ export default function Hero() {
 
           <Link
             href={{ pathname: "/", hash: "#services" }}
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-all duration-300 hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-text-muted border border-border transition-[box-shadow,border-color,color] duration-300 hover:border-accent hover:text-text-primary hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
           >
             {t("ctaSecondary")}
             <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" viewBox="0 0 16 16" fill="none">
