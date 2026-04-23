@@ -1,9 +1,13 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
+
+const PhoneInputField = dynamic(() => import("@/components/PhoneInputField"), {
+  ssr: false,
+  loading: () => <div className="h-[48px] rounded-xl border border-border bg-[#0E0E0E] animate-pulse" />,
+});
 
 const LOCALE_COUNTRY: Record<string, string> = {
   pt: "br",
@@ -243,12 +247,11 @@ export default function Contact() {
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[11px] font-bold tracking-[2px] uppercase text-text-muted">{t("form.phone")}</label>
-                  <PhoneInput
+                  <PhoneInputField
                     defaultCountry={defaultCountry}
                     value={form.phone}
                     onChange={(phone) => setForm((prev) => ({ ...prev, phone }))}
                     placeholder={t("form.phone")}
-                    className="phone-input-container"
                   />
                 </div>
 

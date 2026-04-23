@@ -24,7 +24,7 @@ export default function ScrollScene() {
       if (killed) return;
 
       gsap.registerPlugin(ScrollTrigger);
-      ScrollTrigger.refresh();
+      requestAnimationFrame(() => ScrollTrigger.refresh());
 
       // ── Hero: letras explodem para fora ──────────────────────────
       const heroTl = gsap.timeline({
