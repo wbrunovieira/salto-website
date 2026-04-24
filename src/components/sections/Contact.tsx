@@ -42,13 +42,19 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setState("submitting");
+    const leadEventId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, locale }),
+        body: JSON.stringify({ ...form, locale, leadEventId }),
       });
-      setState(res.ok ? "success" : "error");
+      if (res.ok) {
+        window.fbq?.("track", "Lead", {}, { eventID: leadEventId });
+        setState("success");
+      } else {
+        setState("error");
+      }
     } catch {
       setState("error");
     }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import NovoContato from "@/emails/novo-contato";
 import ConfirmacaoContato from "@/emails/confirmacao-contato";
+import { sendMetaEvent } from "@/lib/meta-capi";
 
 const TO_EMAIL = "bruno@saltoup.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "contato@saltoup.com";
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
-    const { name, email, phone, locale, _trap } = await req.json();
+    const { name, email, phone, locale, leadEventId, _trap } = await req.json();
 
     // Honeypot — bots preenchem este campo oculto, humanos não
     if (_trap) {
@@ -68,6 +69,21 @@ export async function POST(req: NextRequest) {
       subject: "Recebi sua mensagem! 🚀",
       react: ConfirmacaoContato({ name, locale }),
     });
+
+    // Meta Conversions API — Lead event (server-side deduplication)
+    if (leadEventId) {
+      const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? undefined;
+      const user_agent = req.headers.get("user-agent") ?? undefined;
+      await sendMetaEvent({
+        event_name: "Lead",
+        event_id: leadEventId,
+        event_source_url: req.headers.get("referer") ?? "https://saltoup.com",
+        ip,
+        user_agent,
+        email,
+        phone,
+      });
+    }
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (err) {
