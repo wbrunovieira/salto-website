@@ -53,6 +53,9 @@ export async function generateMetadata({
   return {
     title: titles[locale] ?? titles.pt,
     description: descriptions[locale] ?? descriptions.pt,
+    other: {
+      "facebook-domain-verification": "co3zu915lv4y9u1fnz6ga9cimqg6cf",
+    },
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
       languages: Object.fromEntries(
@@ -124,7 +127,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
-        <meta name="facebook-domain-verification" content="co3zu915lv4y9u1fnz6ga9cimqg6cf" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
