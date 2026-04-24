@@ -22,6 +22,7 @@ export default function PhoneInputField({ defaultCountry, value, onChange, place
         autoComplete: "tel",
         name: "phone",
         id: "contact-phone",
+        style: { color: "#F5F5F5" },
       }}
     />
   );

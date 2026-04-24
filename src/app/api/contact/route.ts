@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
-    const { name, email, phone, _trap } = await req.json();
+    const { name, email, phone, locale, _trap } = await req.json();
 
     // Honeypot — bots preenchem este campo oculto, humanos não
     if (_trap) {
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       from: `Bruno Vieira | Salto <${FROM_EMAIL}>`,
       to: email,
       subject: "Recebi sua mensagem! 🚀",
-      react: ConfirmacaoContato({ name }),
+      react: ConfirmacaoContato({ name, locale }),
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });
