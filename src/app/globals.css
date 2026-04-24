@@ -100,7 +100,7 @@ input:-webkit-autofill:active {
 /* ── Phone input dark theme ── */
 .phone-input-container {
   --react-international-phone-background-color: #0E0E0E;
-  --react-international-phone-text-color: #FF5C00;
+  --react-international-phone-text-color: #F5F5F5;
   --react-international-phone-placeholder-color: rgba(85,85,85,0.6);
   --react-international-phone-border-color: #252525;
   --react-international-phone-border-radius: 0.75rem;
@@ -119,7 +119,7 @@ input:-webkit-autofill:active {
 
 .phone-input-container .react-international-phone-input {
   background-color: #0E0E0E !important;
-  color: #FF5C00 !important;
+  color: #F5F5F5 !important;
   border-color: #252525 !important;
   flex: 1 !important;
   height: 48px !important;

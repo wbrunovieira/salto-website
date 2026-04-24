@@ -223,7 +223,7 @@ export default function Contact() {
                     <input
                       id="contact-name" name="name" value={form.name} onChange={handleChange} required
                       autoComplete="name"
-                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-accent placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
+                      className="bg-[#0E0E0E] border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors duration-200"
                       placeholder={t("form.name")}
                     />
                   </div>
@@ -232,7 +232,7 @@ export default function Contact() {
                     <input
                       id="contact-email" name="email" type="email" value={form.email} onChange={handleChange} required
                       autoComplete="email"
-                      className={`bg-[#0E0E0E] border rounded-xl px-4 py-3 text-sm text-accent placeholder:text-text-muted/50 focus:outline-none transition-colors duration-200 ${
+                      className={`bg-[#0E0E0E] border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none transition-colors duration-200 ${
                         form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
                           ? "border-red-500/60 focus:border-red-500"
                           : "border-border focus:border-accent/50"

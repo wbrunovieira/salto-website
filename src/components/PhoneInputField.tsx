@@ -18,6 +18,11 @@ export default function PhoneInputField({ defaultCountry, value, onChange, place
       onChange={onChange}
       placeholder={placeholder}
       className="phone-input-container"
+      inputProps={{
+        autoComplete: "tel",
+        name: "phone",
+        id: "contact-phone",
+      }}
     />
   );
 }
