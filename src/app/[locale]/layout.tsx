@@ -124,6 +124,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
+        <meta name="facebook-domain-verification" content="co3zu915lv4y9u1fnz6ga9cimqg6cf" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
