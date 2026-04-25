@@ -1,9 +1,9 @@
 {
   "services": {
-    "label": "Performance su misura",
+    "label": "Consulenza commerciale su misura",
     "title": "Ogni azienda è unica.",
     "titleAccent": "Anche la tua strategia deve esserlo.",
-    "subtitle": "Mentre altre agenzie applicano lo stesso pacchetto a tutti i clienti, Salto studia in profondità la tua azienda, il mercato e i clienti prima di creare qualsiasi azione.",
+    "subtitle": "Mentre altre agenzie di marketing digitale applicano lo stesso pacchetto a tutti i clienti, Salto studia in profondità la tua azienda, il mercato e i clienti prima di creare qualsiasi strategia di vendita.",
     "contrast": "Basta con le soluzioni generiche. Ogni decisione si basa su dati reali del tuo mercato.",
     "items": {
       "diagnosis": {
@@ -16,11 +16,11 @@
       },
       "ads": {
         "title": "Annunci e Offerte",
-        "description": "Campagne, offerte e prodotti calibrati per il tuo pubblico. Dal creativo al budget, tutto orientato ai risultati."
+        "description": "Gestione del traffico a pagamento su Google e Meta calibrata per il tuo pubblico. Dal creativo al budget, tutto orientato ai risultati."
       },
       "crm": {
         "title": "CRM e Assistenza",
-        "description": "Strutturiamo il tuo processo commerciale, CRM e formazione del team per chiudere più affari con meno sforzo."
+        "description": "Strutturiamo il tuo processo commerciale, implementiamo CRM integrato con WhatsApp e formiamo il tuo team di vendita per chiudere più affari con meno sforzo."
       },
       "metrics": {
         "title": "Misurazione Quotidiana",

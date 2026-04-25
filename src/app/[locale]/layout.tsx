@@ -12,6 +12,7 @@ import CookieBanner from "@/components/CookieBanner";
 import { Analytics } from "@vercel/analytics/next";
 import ScrollToTop from "@/components/ScrollToTop";
 import MetaPixel from "@/components/MetaPixel";
+import Script from "next/script";
 import "../globals.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://saltoup.com";
@@ -37,17 +38,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    pt: "Salto | Consultoria de Vendas e Marketing Digital",
-    en: "Salto | Sales Consulting & Digital Marketing",
-    es: "Salto | Consultoría de Ventas y Marketing Digital",
-    it: "Salto | Consulenza Vendite e Marketing Digitale",
+    pt: "Salto | Consultoria de Vendas e Marketing Digital para PMEs",
+    en: "Salto | Sales Consulting & Digital Marketing for SMBs",
+    es: "Salto | Consultoría de Ventas y Marketing Digital para Pymes",
+    it: "Salto | Consulenza Vendite e Marketing Digitale per PMI",
   };
 
   const descriptions: Record<string, string> = {
-    pt: "Consultoria de vendas, marketing digital e CRM integrados. Diagnóstico 100% gratuito para PMEs. Estratégia personalizada, do tráfego pago ao fechamento.",
-    en: "Sales consulting, digital marketing and CRM integrated. 100% free diagnosis for SMBs. Customized strategy, from paid traffic to closing.",
-    es: "Consultoría de ventas, marketing digital y CRM integrados. Diagnóstico 100% gratuito para pymes. Estrategia personalizada, del tráfico pago al cierre.",
-    it: "Consulenza vendite, marketing digitale e CRM integrati. Diagnosi 100% gratuita per PMI. Strategia personalizzata, dal traffico a pagamento alla chiusura.",
+    pt: "Consultoria de vendas e marketing digital para pequenas e médias empresas focada em resultados. Estratégia comercial, tráfego pago e treinamento de vendas integrados. Diagnóstico 100% gratuito.",
+    en: "Sales consulting and digital marketing for small and medium businesses focused on results. Sales strategy, paid traffic and sales training integrated. 100% free diagnosis.",
+    es: "Consultoría de ventas y marketing digital para pequeñas y medianas empresas enfocada en resultados. Estrategia comercial, tráfico pagado y capacitación de ventas integrados. Diagnóstico 100% gratuito.",
+    it: "Consulenza vendite e marketing digitale per piccole e medie imprese focalizzata sui risultati. Strategia commerciale, traffico a pagamento e formazione vendite integrati. Diagnosi 100% gratuita.",
   };
 
   return {
@@ -132,11 +133,6 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {/* Meta Pixel — init only; PageView fired by MetaPixel component with event_id for CAPI deduplication */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','4003723679765029');`,
-          }}
-        />
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img height="1" width="1" style={{ display: "none" }}
@@ -145,6 +141,13 @@ export default async function LocaleLayout({
           />
         </noscript>
       </head>
+      <Script
+        id="meta-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','4003723679765029');`,
+        }}
+      />
       <body className={`${montserrat.variable} font-sans antialiased bg-base text-text-primary`}>
         <NextIntlClientProvider messages={messages}>
           <LocaleDetector currentLocale={locale} />
