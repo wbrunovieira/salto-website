@@ -100,10 +100,10 @@ export default function Services() {
                 onMouseLeave={(e) => {
                   gsap.to(e.currentTarget, { rotateX: 0, rotateY: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
                 }}
-                className={`service-card group relative p-7 rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:border-accent/40 hover:shadow-[0_8px_32px_rgba(255,92,0,0.12)] ${
+                className={`service-card group relative p-7 rounded-2xl border transition-[border-color,background-color,box-shadow] duration-300 hover:border-accent/40 hover:shadow-[0_8px_32px_rgba(255,92,0,0.12)] ${
                   isTech
-                    ? "border-border bg-gradient-to-br from-surface to-[#1a0a00]"
-                    : "border-border bg-surface/60"
+                    ? "border-white/[0.08] bg-gradient-to-br from-white/[0.04] to-[#1a0a00]"
+                    : "border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.05]"
                 }`}
               >
                 <div aria-hidden="true" className={`service-icon w-11 h-11 mb-5 ${isTech ? "text-accent" : "text-accent/70 group-hover:text-accent"} transition-colors duration-300`}>

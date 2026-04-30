@@ -268,7 +268,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={state === "submitting"}
-                  className="group relative w-full py-4 rounded-xl text-sm font-bold text-white overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="group relative w-full py-4 rounded-xl text-sm font-bold text-white overflow-hidden transition-all duration-300 shadow-[rgba(255,92,0,0.15)_0px_0px_0px_1px] hover:-translate-y-[2px] hover:shadow-[rgba(255,92,0,0.15)_0px_0px_0px_1px,_0px_12px_32px_rgba(255,92,0,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
                   <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />

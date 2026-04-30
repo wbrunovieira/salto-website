@@ -111,7 +111,7 @@ export default function Process() {
             <div
               key={step}
               data-step={index}
-              className="process-step group relative p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden"
+              className="process-step group relative p-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/[0.14] hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden"
             >
               {/* Large background number */}
               <span className="process-step-number absolute -top-4 -right-2 text-[120px] font-black leading-none text-white/[0.05] select-none pointer-events-none transition-all duration-500 group-hover:text-white/10 group-hover:scale-110 origin-top-right">

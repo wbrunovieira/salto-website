@@ -167,7 +167,7 @@ export default function Hero() {
           {/* transition-[box-shadow] only — avoids CSS fighting GSAP transform on magnetic effect */}
           <Link
             href={{ pathname: '/', hash: '#contact' }}
-            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-[box-shadow] duration-300 hover:shadow-[0_12px_32px_rgba(255,92,0,0.4)]"
+            className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white overflow-hidden transition-[box-shadow] duration-300 shadow-[rgba(255,92,0,0.15)_0px_0px_0px_1px] hover:shadow-[rgba(255,92,0,0.15)_0px_0px_0px_1px,_0px_12px_32px_rgba(255,92,0,0.4)]"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent-hover" />
             <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.08] transition-opacity duration-300" />
