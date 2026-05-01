@@ -1,0 +1,361 @@
+'use client';
+
+import { useEffect } from 'react';
+import { slidesIntro } from './slides/01-intro';
+import { slidesDiscovery } from './slides/02-discovery';
+import { slidesProblema } from './slides/03-problema';
+import { slidesSolucao } from './slides/04-solucao';
+import { slidesMetodo } from './slides/05-metodo';
+import { slidesFechamento } from './slides/06-fechamento';
+
+const ALL_SLIDES = [
+  slidesIntro,
+  slidesDiscovery,
+  slidesProblema,
+  slidesSolucao,
+  slidesMetodo,
+  slidesFechamento,
+].join('');
+
+const TITLES = [
+  'Capa', 'Apresentação', 'Agenda da Reunião', 'Sobre o Seu Negócio',
+  'O Cenário', 'O Custo do Problema', 'Por que Agora', 'Esforço vs Sistema',
+  'Kotler 5A', 'Por que Falha', 'Salto Pensa Diferente',
+  'Velocidade de Execução', 'Quem é a Salto', 'O Time',
+  '6 Áreas', 'CRM + Automação', 'O que Fazemos',
+  'Metodologia Tráfego', 'Playbook', 'Como Funciona',
+  '90 Dias', 'Investimento', 'Próximo Passo',
+];
+
+const SETUP_HTML = `
+<div style="width:100%;max-width:440px;padding:40px 36px;border:1px solid rgba(255,255,255,0.08);border-radius:20px;background:#141414">
+  <img src="/logo.svg" alt="Salto" style="width:140px;height:auto;margin-bottom:28px;display:block">
+  <p style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:20px">Personalizar apresentação</p>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+    <input id="inp-nome" type="text" placeholder="Nome do cliente" autocomplete="off"
+      style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:#0E0E0E;color:#F5F5F5;font-family:inherit;font-size:14px;outline:none"
+      onfocus="this.style.borderColor='rgba(255,92,0,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+    <input id="inp-empresa" type="text" placeholder="Empresa" autocomplete="off"
+      style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:#0E0E0E;color:#F5F5F5;font-family:inherit;font-size:14px;outline:none"
+      onfocus="this.style.borderColor='rgba(255,92,0,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+    <div id="logo-upload-area" onclick="document.getElementById('inp-logo').click()"
+      style="border:1px dashed rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .2s"
+      onmouseover="this.style.borderColor='rgba(255,92,0,0.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+      <input id="inp-logo" type="file" accept="image/*" style="display:none">
+      <i data-lucide="image" style="font-size:16px;color:#666;flex-shrink:0"></i>
+      <div style="flex:1;min-width:0">
+        <p id="logo-label-txt" style="font-size:13px;color:#666;margin:0">Logo do cliente (opcional)</p>
+        <img id="logo-preview" src="" alt="" style="display:none;max-height:30px;max-width:160px;object-fit:contain;margin-top:8px;border-radius:4px">
+      </div>
+    </div>
+  </div>
+  <button id="setup-ok" style="width:100%;padding:14px;border-radius:100px;border:none;background:linear-gradient(to right,#FF5C00,#FF3D00);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px">
+    Iniciar apresentação →
+  </button>
+  <p style="margin-top:14px;font-size:10px;color:#444;text-align:center">Deixe em branco para pular a personalização</p>
+</div>
+`;
+
+export default function DeckClient() {
+  useEffect(() => {
+    const w = window as typeof window & { lucide?: { createIcons: () => void }; closeMenu?: () => void };
+
+    let cur: number = 0;
+    const slides = Array.from(document.querySelectorAll('.slide')) as HTMLElement[];
+    const N = slides.length;
+
+    // ── GSAP animations ──
+    type GSAPStatic = {
+      set: (targets: NodeListOf<Element> | Element[], vars: Record<string, unknown>) => void;
+      to: (targets: Element | NodeListOf<Element> | Element[], vars: Record<string, unknown>) => void;
+    };
+    let gsap: GSAPStatic | null = null;
+
+    import('gsap').then((mod) => {
+      gsap = mod.default as unknown as GSAPStatic;
+    });
+
+    function animIn(s: HTMLElement) {
+      if (!gsap) return;
+      const els = s.querySelectorAll('[data-a]');
+      gsap.set(Array.from(els), { opacity: 0, y: 26 });
+      gsap.to(s, { opacity: 1, duration: 0.35, ease: 'power2.out' } as Record<string, unknown>);
+      gsap.to(Array.from(els), { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.1 } as Record<string, unknown>);
+    }
+
+    function animOut(s: HTMLElement, cb: () => void) {
+      if (!gsap) { cb(); return; }
+      const els = s.querySelectorAll('[data-a]');
+      gsap.to(Array.from(els), { opacity: 0, y: -14, duration: 0.18, stagger: 0.025, ease: 'power2.in' } as Record<string, unknown>);
+      gsap.to(s, { opacity: 0, duration: 0.28, ease: 'power2.in', delay: 0.04, onComplete: cb } as Record<string, unknown>);
+    }
+
+    function ui() {
+      const ctr = document.getElementById('ctr');
+      const bar = document.getElementById('bar');
+      const bp = document.getElementById('bp') as HTMLButtonElement | null;
+      const bn = document.getElementById('bn') as HTMLButtonElement | null;
+      if (ctr) ctr.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
+      if (bar) bar.style.width = ((cur + 1) / N * 100) + '%';
+      if (bp) bp.disabled = cur === 0;
+      if (bn) bn.disabled = cur === N - 1;
+      history.replaceState(null, '', '#slide-' + (cur + 1));
+      document.querySelectorAll('.hitem').forEach((el, i) => el.classList.toggle('hactive', i === cur));
+    }
+
+    function goTo(n: number) {
+      if (n < 0 || n >= N || n === cur) return;
+      const prev = slides[cur];
+      const next = slides[n];
+      prev.style.pointerEvents = 'none';
+      animOut(prev, () => {
+        prev.classList.remove('active');
+        cur = n;
+        next.classList.add('active');
+        animIn(next);
+        ui();
+      });
+    }
+
+    const bpEl = document.getElementById('bp');
+    const bnEl = document.getElementById('bn');
+    if (bpEl) bpEl.onclick = () => goTo(cur - 1);
+    if (bnEl) bnEl.onclick = () => goTo(cur + 1);
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((document.activeElement as HTMLElement)?.tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goTo(cur + 1); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(cur - 1); }
+    };
+    document.addEventListener('keydown', onKeyDown);
+
+    let tx = 0;
+    const onTouchStart = (e: TouchEvent) => { tx = e.touches[0].clientX; };
+    const onTouchEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (dx < -50) goTo(cur + 1);
+      if (dx > 50) goTo(cur - 1);
+    };
+    document.addEventListener('touchstart', onTouchStart);
+    document.addEventListener('touchend', onTouchEnd);
+
+    // ── Hamburger menu ──
+    const hlist = document.getElementById('hlist');
+    if (hlist) {
+      TITLES.forEach((t, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'hitem';
+        btn.innerHTML = `<span class="hnum">${String(i + 1).padStart(2, '0')}</span><span class="htxt">${t}</span>`;
+        btn.onclick = () => { goTo(i); closeMenu(); };
+        hlist.appendChild(btn);
+      });
+    }
+
+    function openMenu() {
+      document.getElementById('hdrawer')?.classList.add('open');
+      document.getElementById('hoverlay')?.classList.add('open');
+    }
+    function closeMenu() {
+      document.getElementById('hdrawer')?.classList.remove('open');
+      document.getElementById('hoverlay')?.classList.remove('open');
+    }
+    w.closeMenu = closeMenu;
+
+    const hbtn = document.getElementById('hbtn');
+    if (hbtn) hbtn.onclick = () => document.getElementById('hdrawer')?.classList.contains('open') ? closeMenu() : openMenu();
+    const hoverlay = document.getElementById('hoverlay');
+    if (hoverlay) hoverlay.onclick = closeMenu;
+
+    const hclose = document.getElementById('hclose');
+    if (hclose) hclose.onclick = closeMenu;
+
+    // ── Init: hash to resume slide ──
+    const hashN = parseInt(location.hash.replace('#slide-', '')) - 1;
+    cur = (hashN >= 0 && hashN < N) ? hashN : 0;
+
+    // ── Personalização ──
+    const LS = { nome: 'salto_pres_nome', emp: 'salto_pres_empresa', logo: 'salto_pres_logo' };
+    let _logoB64: string | null = null;
+
+    function applyData(nome: string, empresa: string, logo: string | null) {
+      const saltoLabel = document.getElementById('s1salto-label');
+      const companyLabel = document.getElementById('s1company-label');
+      const logoWrap = document.getElementById('s1logo-wrap');
+      const logoEl = document.getElementById('s1logo') as HTMLImageElement | null;
+      const nameGreeting = document.getElementById('s1name-greeting');
+      if (nome) {
+        if (nameGreeting) nameGreeting.textContent = nome + ', ';
+      } else {
+        if (nameGreeting) nameGreeting.textContent = '';
+      }
+      if (empresa) {
+        if (companyLabel) { companyLabel.textContent = empresa; companyLabel.style.display = 'inline'; }
+        if (saltoLabel) saltoLabel.style.display = 'inline';
+      } else {
+        if (companyLabel) companyLabel.style.display = 'none';
+        if (saltoLabel) saltoLabel.style.display = 'none';
+      }
+      if (logo) {
+        if (logoEl) logoEl.src = logo;
+        if (logoWrap) logoWrap.style.display = 'block';
+      } else {
+        if (logoWrap) logoWrap.style.display = 'none';
+      }
+    }
+
+    function showSetup() {
+      const setup = document.getElementById('setup');
+      if (setup) setup.style.display = 'flex';
+    }
+    function hideSetup() {
+      const setup = document.getElementById('setup');
+      if (setup) setup.style.display = 'none';
+    }
+
+    const inpLogo = document.getElementById('inp-logo') as HTMLInputElement | null;
+    if (inpLogo) {
+      inpLogo.addEventListener('change', function (e) {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          _logoB64 = ev.target?.result as string;
+          const prev = document.getElementById('logo-preview') as HTMLImageElement | null;
+          if (prev) { prev.src = _logoB64; prev.style.display = 'block'; }
+          const lbl = document.getElementById('logo-label-txt');
+          if (lbl) { lbl.textContent = '✓ Logo carregado'; lbl.style.color = '#FF5C00'; }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    const setupOk = document.getElementById('setup-ok');
+    if (setupOk) {
+      setupOk.onclick = function () {
+        const nome = (document.getElementById('inp-nome') as HTMLInputElement)?.value.trim() ?? '';
+        const empresa = (document.getElementById('inp-empresa') as HTMLInputElement)?.value.trim() ?? '';
+        localStorage.setItem(LS.nome, nome);
+        localStorage.setItem(LS.emp, empresa);
+        if (_logoB64) localStorage.setItem(LS.logo, _logoB64);
+        else localStorage.removeItem(LS.logo);
+        applyData(nome, empresa, _logoB64 || localStorage.getItem(LS.logo));
+        hideSetup();
+      };
+    }
+
+    ['inp-nome', 'inp-empresa'].forEach(id => {
+      document.getElementById(id)?.addEventListener('keydown', (e) => {
+        if ((e as KeyboardEvent).key === 'Enter') (document.getElementById('setup-ok') as HTMLButtonElement)?.click();
+      });
+    });
+
+    const resetBtn = document.getElementById('reset-btn');
+    if (resetBtn) {
+      resetBtn.onmouseover = () => {
+        resetBtn.style.color = 'rgba(255,255,255,0.55)';
+        resetBtn.style.borderColor = 'rgba(255,255,255,0.22)';
+      };
+      resetBtn.onmouseout = () => {
+        resetBtn.style.color = 'rgba(255,255,255,0.18)';
+        resetBtn.style.borderColor = 'rgba(255,255,255,0.06)';
+      };
+      resetBtn.onclick = function () {
+        [LS.nome, LS.emp, LS.logo].forEach(k => localStorage.removeItem(k));
+        _logoB64 = null;
+        const inpNome = document.getElementById('inp-nome') as HTMLInputElement | null;
+        const inpEmp = document.getElementById('inp-empresa') as HTMLInputElement | null;
+        if (inpNome) inpNome.value = '';
+        if (inpEmp) inpEmp.value = '';
+        const prev = document.getElementById('logo-preview') as HTMLImageElement | null;
+        if (prev) { prev.style.display = 'none'; prev.src = ''; }
+        const lbl = document.getElementById('logo-label-txt');
+        if (lbl) { lbl.textContent = 'Logo do cliente (opcional)'; lbl.style.color = '#666'; }
+        applyData('', '', null);
+        showSetup();
+      };
+    }
+
+    // ── Init check localStorage ──
+    const savedNome = localStorage.getItem(LS.nome) || '';
+    const savedEmp = localStorage.getItem(LS.emp) || '';
+    const savedLogo = localStorage.getItem(LS.logo) || null;
+
+    if (savedNome || savedEmp || savedLogo) {
+      applyData(savedNome, savedEmp, savedLogo);
+    } else {
+      showSetup();
+    }
+
+    slides[cur].classList.add('active');
+
+    // Wait for gsap to load then animate
+    import('gsap').then((mod) => {
+      gsap = mod.default as unknown as GSAPStatic;
+      animIn(slides[cur]);
+      ui();
+    });
+
+    setTimeout(() => {
+      if (w.lucide) w.lucide.createIcons();
+    }, 100);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchend', onTouchEnd);
+      delete w.closeMenu;
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Setup overlay */}
+      <div
+        id="setup"
+        style={{ position: 'fixed', inset: 0, zIndex: 999, background: '#0E0E0E', display: 'none', alignItems: 'center', justifyContent: 'center' }}
+        dangerouslySetInnerHTML={{ __html: SETUP_HTML }}
+      />
+
+      <div id="bar" />
+      <div className="noise" />
+
+      <div id="deck" dangerouslySetInnerHTML={{ __html: ALL_SLIDES }} />
+
+      {/* Nav */}
+      <div id="nav">
+        <button className="nb" id="bp">←</button>
+        <span id="ctr">01 / 23</span>
+        <button className="nb" id="bn">→</button>
+      </div>
+
+      {/* Reset button */}
+      <button
+        id="reset-btn"
+        title="Personalizar apresentação"
+        style={{
+          position: 'fixed', bottom: 28, left: 24, zIndex: 300,
+          width: 30, height: 30, borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'transparent', color: 'rgba(255,255,255,0.18)',
+          cursor: 'pointer', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', fontSize: 14, lineHeight: '1',
+          transition: 'all .25s',
+        }}
+      >↺</button>
+
+      {/* Hamburger */}
+      <button id="hbtn"><span /><span /><span /></button>
+      <div id="hoverlay" />
+      <div id="hdrawer">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px 14px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#888', margin: 0 }}>Navegar</p>
+          <button
+            id="hclose"
+            style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', color: '#888', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, lineHeight: '1' }}
+          >×</button>
+        </div>
+        <div id="hlist" />
+      </div>
+    </>
+  );
+}
