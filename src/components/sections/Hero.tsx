@@ -115,13 +115,6 @@ export default function Hero() {
       <div className="hero-glow-corner absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none opacity-[0.07]" />
       <div className="hero-noise absolute inset-0 pointer-events-none" />
 
-      <div key={`rings-${animKey}`} className="contents">
-        <div className="hero-ring hero-ring-1" />
-        <div className="hero-ring hero-ring-2" />
-        <div className="hero-ring hero-ring-3" />
-        <div className="hero-ring hero-ring-4" />
-        <div className="hero-ring hero-ring-5" />
-      </div>
 
       <div
         id="hero-inner"

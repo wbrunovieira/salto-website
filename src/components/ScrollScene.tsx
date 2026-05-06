@@ -48,12 +48,13 @@ export default function ScrollScene() {
       });
 
       heroTl
-        .fromTo("#hero-badge",  { opacity: 1, y: 0 },              { opacity: 0, y: -30,             ease: "none" }, 0)
-        .fromTo("#hero-line1",  { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -110, x: -20,    ease: "none" }, 0)
-        .fromTo("#hero-line2",  { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -150, x: 20,     ease: "none" }, 0.05)
-        .fromTo("#hero-accent", { opacity: 1, scale: 1, y: 0 },    { opacity: 0, scale: 1.22, y: -60, ease: "none" }, 0.02)
-        .fromTo("#hero-sub",    { opacity: 1, y: 0 },              { opacity: 0, y: 70,               ease: "none" }, 0)
-        .fromTo("#hero-cta",    { opacity: 1, y: 0, scale: 1 },    { opacity: 0, y: 45, scale: 0.92,  ease: "none" }, 0);
+        .fromTo("#hero-badge",      { opacity: 1, y: 0 },              { opacity: 0, y: -30,             ease: "none" }, 0)
+        .fromTo("#hero-line1",      { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -110, x: -20,    ease: "none" }, 0)
+        .fromTo("#hero-line2",      { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -150, x: 20,     ease: "none" }, 0.05)
+        .fromTo("#hero-accent",     { opacity: 1, scale: 1, y: 0 },    { opacity: 0, scale: 1.22, y: -60, ease: "none" }, 0.02)
+        .fromTo("#hero-sub",        { opacity: 1, y: 0 },              { opacity: 0, y: 70,               ease: "none" }, 0)
+        .fromTo("#hero-cta",        { opacity: 1, y: 0, scale: 1 },    { opacity: 0, y: 45, scale: 0.92,  ease: "none" }, 0)
+        .fromTo("#hero-rings-wrap", { opacity: 1 },                    { opacity: 0.5,                    ease: "none" }, 0);
 
       // ── Services ─────────────────────────────────────────────────
       gsap.fromTo("#services", { y: 80 }, {
@@ -142,6 +143,19 @@ export default function ScrollScene() {
         scrollTrigger: { trigger: "#tech-stack", start: "top 85%", once: true },
       });
 
+
+      // ── Hero rings: movimento dinâmico ao entrar em Services ────────
+      ScrollTrigger.create({
+        trigger: "#services",
+        start: "top 65%",
+        onEnter: () => gsap.to("#hero-rings-inner", {
+          y: 300, scale: 1.15, duration: 1.0, ease: "power4.out",
+        }),
+        onLeaveBack: () => gsap.to("#hero-rings-inner", {
+          y: 0, scale: 1, duration: 0.8, ease: "power3.inOut",
+        }),
+      });
+
       // ── Contact ───────────────────────────────────────────────────
       gsap.fromTo("#contact", { y: 80 }, {
         y: 0, ease: "none",
@@ -187,7 +201,22 @@ export default function ScrollScene() {
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <>
+      {/* Camada fixa de anéis do hero — dim to 50% on scroll, move on services enter */}
+      <div
+        id="hero-rings-wrap"
+        style={{ position: "fixed", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 48 }}
+      >
+        <div id="hero-rings-inner" style={{ position: "absolute", inset: 0 }}>
+          <div className="hero-ring hero-ring-1" />
+          <div className="hero-ring hero-ring-2" />
+          <div className="hero-ring hero-ring-3" />
+          <div className="hero-ring hero-ring-4" />
+          <div className="hero-ring hero-ring-5" />
+        </div>
+      </div>
+
+      <div ref={containerRef}>
       <div id="hero-wrapper" className="relative h-[150vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           <Hero />
@@ -211,5 +240,6 @@ export default function ScrollScene() {
         <Contact />
       </div>
     </div>
+    </>
   );
 }
