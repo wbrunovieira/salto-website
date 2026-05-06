@@ -33,60 +33,59 @@ export const slidesIntro = `
   <div class="wfull mw900">
     <div data-a class="badge mb8"><span class="dot"></span>QUEM ESTÁ COM VOCÊ HOJE</div>
 
-    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start">
-
-      <!-- Coluna esquerda: Bruno -->
+    <!-- Nome — sempre em destaque -->
+    <div data-a style="margin-bottom:18px;display:flex;align-items:center;gap:16px">
       <div>
-        <div data-a class="card" style="padding:30px;margin-bottom:16px">
-          <img src="/logo.svg" alt="Salto" style="width:90px;height:auto;display:block;margin-bottom:18px;opacity:0.75">
-          <p style="font-size:34px;font-weight:900;letter-spacing:-1.5px;line-height:1;margin-bottom:6px">Bruno Vieira</p>
-          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px">Fundador Salto</p>
-          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px">Fundador WB Digital Solutions</p>
-          <div class="divider" style="margin:0 0 18px"></div>
-          <p class="mu lsr" style="font-size:14px;margin-bottom:18px">"Comecei a vender com 13 anos — balconista numa loja de materiais elétricos.<br><br>Depois fui para distribuição: comprava no atacado na Zona Leste e vendia para lojas de construção na Zona Sul de SP.<br><br>São mais de 20 anos vendendo — em segmentos completamente diferentes: tecnologia, empilhadeiras, construção.<br><br>Não sou consultor que nunca vendeu. Conheço o lado de cá do balcão."</p>
-          <div style="height:1px;background:var(--border);margin-bottom:14px"></div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.6">Pai de dois filhos &nbsp;·&nbsp; Esportes de aventura &nbsp;·&nbsp; Chef formado na Itália</p>
-        </div>
+        <p style="font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1;color:var(--text)">Bruno Vieira</p>
+        <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-top:5px">Fundador Salto &nbsp;·&nbsp; Fundador WB Digital Solutions</p>
+      </div>
+    </div>
 
-        <div data-a class="card" style="padding:14px 22px">
-          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Formação</p>
-          <p style="font-size:13px;color:var(--muted);line-height:1.6">Pós-graduação em Vendas e Marketing · FGV<br>Especialista em Marketing Digital e Técnicas de Vendas</p>
+    <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:start">
+
+      <!-- Coluna esquerda: contexto/pano de fundo (dimado) -->
+      <div style="opacity:0.32;pointer-events:none">
+        <div class="card" style="padding:24px;margin-bottom:12px">
+          <img src="/logo.svg" alt="Salto" style="width:80px;height:auto;display:block;margin-bottom:14px;opacity:0.75">
+          <div class="divider" style="margin:0 0 14px"></div>
+          <p class="mu lsr" style="font-size:12px;line-height:1.7;margin-bottom:14px">"Comecei a vender com 13 anos — balconista numa loja de materiais elétricos.<br><br>Depois fui para distribuição: comprava no atacado na Zona Leste e vendia para lojas de construção na Zona Sul de SP.<br><br>São mais de 20 anos vendendo — em segmentos completamente diferentes: tecnologia, empilhadeiras, construção.<br><br>Não sou consultor que nunca vendeu. Conheço o lado de cá do balcão."</p>
+          <p style="font-size:11px;color:rgba(255,255,255,0.25);line-height:1.6">Pai de dois filhos &nbsp;·&nbsp; Esportes de aventura &nbsp;·&nbsp; Chef formado na Itália</p>
+        </div>
+        <div class="card" style="padding:12px 18px;margin-bottom:12px">
+          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Formação</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.5">Pós-graduação em Vendas e Marketing · FGV<br>Especialista em Marketing Digital e Técnicas de Vendas</p>
+        </div>
+        <div class="card" style="padding:12px 18px">
+          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Visão global</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.5">EUA · Portugal · Itália &nbsp;·&nbsp; 4 idiomas</p>
         </div>
       </div>
 
-      <!-- Coluna direita: credenciais em grid -->
+      <!-- Coluna direita: o que importa — em destaque total -->
       <div style="display:flex;flex-direction:column;gap:10px">
 
-        <div data-a class="card" style="padding:18px 22px">
-          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">+20 anos de vendas — desde os 13</p>
-          <p style="font-size:13px;color:var(--muted);line-height:1.5">Balconista de materiais elétricos → distribuição para lojas de construção (Zona Leste → Zona Sul SP) → Varejo · Tecnologia · Empilhadeiras</p>
+        <div data-a class="card card-hot" style="padding:22px 24px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">O que faço</p>
+          <p style="font-size:19px;font-weight:700;color:var(--text);line-height:1.5">Estruturo o processo comercial de PMEs para crescer de forma previsível — <span style="color:var(--accent)">do lead até o cliente recorrente.</span></p>
         </div>
 
-        <div data-a class="card" style="padding:18px 22px">
-          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Engenheiro full stack · Designer</p>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
-            <img src="/wb-logo.svg" alt="WB Digital Solutions" style="width:110px;height:auto;display:block;flex-shrink:0">
-            <div style="width:1px;height:24px;background:var(--border);flex-shrink:0"></div>
-            <div>
-              <p style="font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:4px">Empresa de tecnologia do grupo</p>
-              <a href="https://www.wbdigitalsolutions.com" target="_blank" style="font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:0.5px">wbdigitalsolutions.com ↗</a>
+        <div data-a class="card" style="padding:22px 24px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Por que faço</p>
+          <p style="font-size:16px;color:var(--muted);line-height:1.65">São mais de 20 anos vendendo — em setores completamente diferentes. Quando somei essa vivência à tecnologia e ao poder dos dados, vi que dá para melhorar cada etapa do processo comercial e acompanhar o resultado em tempo real. <span style="color:var(--text);font-weight:600">A Salto existe para levar isso às PMEs.</span></p>
+        </div>
+
+        <div data-a class="card" style="padding:22px 24px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px">Objetivo de hoje</p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:14px;font-weight:900;color:var(--accent);flex-shrink:0">→</span>
+              <span style="font-size:16px;color:var(--text);font-weight:600">Entender a sua operação</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:14px;font-weight:900;color:var(--accent);flex-shrink:0">→</span>
+              <span style="font-size:16px;color:var(--text);font-weight:600">Ver se faz sentido trabalharmos juntos</span>
             </div>
           </div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.5">Código puro, produto, UX — constrói o que propõe, sem depender de terceiros.</p>
-        </div>
-
-        <div data-a class="card" style="padding:18px 22px">
-          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Visão global</p>
-          <p style="font-size:13px;color:var(--muted);line-height:1.5">Morou nos EUA, Portugal e Itália. Fala 4 idiomas. Traz perspectiva de como mercados diferentes resolvem os mesmos problemas.</p>
-        </div>
-
-        <div data-a class="card" style="padding:14px 20px;display:flex;align-items:center;gap:16px">
-          <div style="text-align:center;flex-shrink:0">
-            <p style="font-size:22px;font-weight:900;color:var(--text);line-height:1">+20</p>
-            <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:3px">Anos vendendo</p>
-          </div>
-          <div style="width:1px;height:28px;background:var(--border);flex-shrink:0"></div>
-          <p style="font-size:12px;color:var(--muted);line-height:1.5">Em segmentos diferentes — sem depender de um único nicho.</p>
         </div>
 
       </div>
@@ -139,7 +138,7 @@ export const slidesIntro = `
         <div style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,92,0,0.35);background:rgba(255,92,0,0.08);display:flex;align-items:center;justify-content:center">
           <span style="font-size:15px;font-weight:900;color:var(--accent)">3</span>
         </div>
-        <p style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4">Decidimos juntos<br><span style="font-weight:400;color:var(--muted);font-size:13px">sem pressão, sem pressa</span></p>
+        <p style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4">Avaliamos juntos<br><span style="font-weight:400;color:var(--muted);font-size:13px">se faz sentido avançarmos</span></p>
       </div>
 
     </div>
