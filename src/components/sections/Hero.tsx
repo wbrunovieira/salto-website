@@ -15,6 +15,8 @@ export default function Hero() {
   const line1 = t('headlineLine1');
   const line2 = t('headlineLine2');
   const accent = t('headlineAccent');
+  const accentWord = accent.endsWith('.') ? accent.slice(0, -1) : accent;
+  const accentDot  = accent.endsWith('.') ? '.' : '';
 
   useEffect(() => {
     const reset = () => setAnimKey(k => k + 1);
@@ -30,6 +32,7 @@ export default function Hero() {
       if (el) el.style.minHeight = el.offsetHeight + 'px';
     });
     gsap.set(['#hero-line1', '#hero-line2', '#hero-accent'], { opacity: 0 });
+    gsap.set('#hero-dot', { opacity: 0, scale: 0 });
     gsap.set(['#hero-badge', '#hero-sub', '#hero-cta', '#hero-scroll'], { opacity: 0, y: 32 });
   }, [animKey]);
 
@@ -45,7 +48,7 @@ export default function Hero() {
       // Read original text from data-text (survives partial-typed reruns)
       const t1 = line1El?.getAttribute('data-text') || line1;
       const t2 = line2El?.getAttribute('data-text') || line2;
-      const t3 = accentEl?.getAttribute('data-text') || accent;
+      const t3 = accentEl?.getAttribute('data-text') || accentWord;
 
       const d1 = t1.length * TYPE_SPEED;
       const d2 = t2.length * TYPE_SPEED;
@@ -77,6 +80,11 @@ export default function Hero() {
       if (line1El) makeTypeTween(line1El, t1, start1);
       if (line2El) makeTypeTween(line2El, t2, start2);
       if (accentEl) makeTypeTween(accentEl, t3, start3);
+
+      // Ponto estático pop-in após o typewriter — move junto com o texto no scroll
+      if (accentDot) {
+        gsap.to('#hero-dot', { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2.5)', delay: start3 + d3 + 0.05 });
+      }
 
       gsap.to('#hero-badge', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', delay: startUI });
       gsap.to('#hero-sub', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', delay: startUI + 0.15 });
@@ -143,12 +151,22 @@ export default function Hero() {
           >
             {line2}
           </span>
-          <span
-            id="hero-accent"
-            data-text={accent}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
-          >
-            {accent}
+          <span id="hero-accent-wrap" className="inline-flex items-baseline">
+            <span
+              id="hero-accent"
+              data-text={accentWord}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight bg-gradient-to-r from-accent via-[#FF7A28] to-accent-hover bg-clip-text text-transparent"
+            >
+              {accentWord}
+            </span>
+            {accentDot && (
+              <span
+                id="hero-dot"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-black leading-tight md:leading-[0.92] tracking-tight text-accent inline-block"
+              >
+                {accentDot}
+              </span>
+            )}
           </span>
         </div>
 

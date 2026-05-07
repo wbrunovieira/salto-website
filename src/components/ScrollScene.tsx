@@ -51,7 +51,7 @@ export default function ScrollScene() {
         .fromTo("#hero-badge",      { opacity: 1, y: 0 },              { opacity: 0, y: -30,             ease: "none" }, 0)
         .fromTo("#hero-line1",      { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -110, x: -20,    ease: "none" }, 0)
         .fromTo("#hero-line2",      { opacity: 1, y: 0, x: 0 },        { opacity: 0, y: -150, x: 20,     ease: "none" }, 0.05)
-        .fromTo("#hero-accent",     { opacity: 1, scale: 1, y: 0 },    { opacity: 0, scale: 1.22, y: -60, ease: "none" }, 0.02)
+        .fromTo("#hero-accent-wrap", { opacity: 1, scale: 1, y: 0 },    { opacity: 0, scale: 1.22, y: -60, ease: "none" }, 0.02)
         .fromTo("#hero-sub",        { opacity: 1, y: 0 },              { opacity: 0, y: 70,               ease: "none" }, 0)
         .fromTo("#hero-cta",        { opacity: 1, y: 0, scale: 1 },    { opacity: 0, y: 45, scale: 0.92,  ease: "none" }, 0)
         .fromTo("#hero-rings-wrap", { opacity: 1 },                    { opacity: 0.5,                    ease: "none" }, 0);
@@ -144,16 +144,131 @@ export default function ScrollScene() {
       });
 
 
-      // ── Hero rings: movimento dinâmico ao entrar em Services ────────
+      // ── Orb: posição exata do ponto final via Range (text-center safe) ──
+      // x: um pouco à esquerda do right edge (centro do char)
+      // y: perto do bottom do char box (ponto tipograficamente fica na baseline)
+      const textEndPos = (el: HTMLElement) => {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const rects = range.getClientRects();
+        if (!rects.length) return null;
+        const last = rects[rects.length - 1];
+        return { x: last.right + 8, y: last.bottom - 16 };
+      };
+
+      // Quando orbLanded = true, o Lenis sync segue services-title2 a cada frame.
+      // textEndPos chamado UMA vez no pouso; per-frame usa só getBoundingClientRect (leve).
+      let orbLanded = false;
+      let orbTargetX = 0;
+      let orbOffsetInEl = 0;
+      const servicesTitleEl = document.getElementById("services-title2");
+
+      const syncOrb = () => {
+        if (!orbLanded || !servicesTitleEl) return;
+        const r = servicesTitleEl.getBoundingClientRect();
+        gsap.set("#hero-orb", { x: orbTargetX, y: r.top + orbOffsetInEl });
+      };
+      lenisInstance.on("scroll", syncOrb);
+
+      const orbIdleLoop = () =>
+        gsap.to("#hero-orb", { scale: 1.12, duration: 1.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+      const orbFadeOut = (dur = 0.3) => {
+        orbLanded = false;
+        gsap.killTweensOf("#hero-orb");
+        gsap.to("#hero-orb", { opacity: 0, scale: 0, duration: dur, ease: "power2.in" });
+      };
+
+      // Calcula coords de pouso (Range, uma vez) e cacheia offset para sync por frame
+      const prepOrbDock = () => {
+        if (!servicesTitleEl) return null;
+        const end = textEndPos(servicesTitleEl);
+        if (!end) return null;
+        const r = servicesTitleEl.getBoundingClientRect();
+        orbTargetX = end.x;
+        orbOffsetInEl = end.y - r.top;
+        return end;
+      };
+
+      // ── Hero rings + orb: Services ───────────────────────────────────
       ScrollTrigger.create({
         trigger: "#services",
-        start: "top 65%",
-        onEnter: () => gsap.to("#hero-rings-inner", {
-          y: 300, scale: 1.15, duration: 1.0, ease: "power4.out",
-        }),
-        onLeaveBack: () => gsap.to("#hero-rings-inner", {
-          y: 0, scale: 1, duration: 0.8, ease: "power3.inOut",
-        }),
+        start: "top 80%",
+        end: "bottom top",
+
+        onEnter() {
+          gsap.to("#hero-rings-inner", { y: 300, scale: 1.15, duration: 1.0, ease: "power4.out" });
+
+          const dotEl = document.getElementById("hero-dot");
+          if (!dotEl) return;
+          const end = prepOrbDock();
+          if (!end) return;
+
+          const dot = dotEl.getBoundingClientRect();
+          gsap.set("#hero-dot", { opacity: 0 });
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+          gsap.set("#hero-orb", {
+            xPercent: -50, yPercent: -50,
+            x: dot.left + dot.width / 2, y: dot.top + dot.height / 2,
+            opacity: 0, scale: 0.4,
+          });
+          gsap.to("#hero-orb", {
+            opacity: 1, scale: 1, duration: 0.2, ease: "power2.out",
+            onComplete() {
+              gsap.to("#hero-orb", {
+                x: end.x, y: end.y, duration: 0.9, ease: "power4.inOut",
+                onComplete() {
+                  orbLanded = true;
+                  gsap.to("#hero-orb", {
+                    scale: 1.7, duration: 0.12, ease: "power2.out", yoyo: true, repeat: 1,
+                    onComplete: orbIdleLoop,
+                  });
+                },
+              });
+            },
+          });
+        },
+
+        onLeaveBack() {
+          gsap.to("#hero-rings-inner", { y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" });
+
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+
+          const dotEl = document.getElementById("hero-dot");
+          if (!dotEl) { orbFadeOut(0.4); return; }
+
+          // Esconde o dot estático — orb vai viajar de volta até ele
+          gsap.set("#hero-dot", { opacity: 0, scale: 0 });
+          const dot = dotEl.getBoundingClientRect();
+
+          gsap.to("#hero-orb", {
+            x: dot.left + dot.width / 2,
+            y: dot.top + dot.height / 2,
+            duration: 0.85,
+            ease: "power4.inOut",
+            onComplete() {
+              // Orb chegou: swap instantâneo orb → dot com pop-in
+              gsap.set("#hero-orb", { opacity: 0, scale: 0 });
+              gsap.to("#hero-dot", { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)" });
+            },
+          });
+        },
+
+        onLeave: () => orbFadeOut(0.4),
+
+        onEnterBack() {
+          const end = prepOrbDock();
+          if (!end) return;
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+          gsap.set("#hero-orb", { xPercent: -50, yPercent: -50, x: end.x, y: end.y, opacity: 0, scale: 0.6 });
+          gsap.to("#hero-orb", {
+            opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)",
+            onComplete() { orbLanded = true; orbIdleLoop(); },
+          });
+        },
       });
 
       // ── Contact ───────────────────────────────────────────────────
@@ -202,6 +317,18 @@ export default function ScrollScene() {
 
   return (
     <>
+      {/* Orb que viaja do ponto final do headline até Services */}
+      <div
+        id="hero-orb"
+        style={{
+          position: "fixed", left: 0, top: 0,
+          width: 18, height: 18, borderRadius: "50%",
+          background: "radial-gradient(circle at 35% 35%, #ff9a44, #ff5c00)",
+          boxShadow: "0 0 20px 8px rgba(255,92,0,0.65), 0 0 50px 18px rgba(255,92,0,0.2)",
+          pointerEvents: "none", zIndex: 51, opacity: 0,
+        }}
+      />
+
       {/* Camada fixa de anéis do hero — dim to 50% on scroll, move on services enter */}
       <div
         id="hero-rings-wrap"
@@ -218,7 +345,13 @@ export default function ScrollScene() {
 
       <div ref={containerRef}>
       <div id="hero-wrapper" className="relative h-[150vh]">
-        <div className="sticky top-0 h-screen overflow-hidden">
+        <div
+          className="sticky top-0 h-screen overflow-hidden"
+          style={{
+            WebkitMaskImage: "linear-gradient(to bottom, transparent 0px, black 72px)",
+            maskImage: "linear-gradient(to bottom, transparent 0px, black 72px)",
+          }}
+        >
           <Hero />
         </div>
       </div>
