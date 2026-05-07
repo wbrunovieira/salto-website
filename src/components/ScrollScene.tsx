@@ -145,13 +145,13 @@ export default function ScrollScene() {
 
 
       // ── Orb: posição exata do ponto final via Range (text-center safe) ──
-      const textEndPos = (el: HTMLElement) => {
+      const textEndPos = (el: HTMLElement, xOff = 8, yOff = -16) => {
         const range = document.createRange();
         range.selectNodeContents(el);
         const rects = range.getClientRects();
         if (!rects.length) return null;
         const last = rects[rects.length - 1];
-        return { x: last.right + 8, y: last.bottom - 16 };
+        return { x: last.right + xOff, y: last.bottom + yOff };
       };
 
       let orbLanded = false;
@@ -161,6 +161,7 @@ export default function ScrollScene() {
 
       const servicesTitleEl = document.getElementById("services-title2");
       const processTitleEl  = document.getElementById("process-title2");
+      const aboutTitleEl    = document.getElementById("about-title2");
 
       // Lenis sync — segue o elemento âncora atual a cada frame
       const syncOrb = () => {
@@ -193,9 +194,9 @@ export default function ScrollScene() {
       };
 
       // Calcula coords de pouso e seta o âncora para sync por frame
-      const prepOrbDockFor = (el: HTMLElement | null) => {
+      const prepOrbDockFor = (el: HTMLElement | null, xOff?: number, yOff?: number) => {
         if (!el) return null;
-        const end = textEndPos(el);
+        const end = textEndPos(el, xOff, yOff);
         if (!end) return null;
         const r = el.getBoundingClientRect();
         orbAnchorEl  = el;
@@ -294,7 +295,7 @@ export default function ScrollScene() {
         end: "bottom top",
 
         onEnter() {
-          const end = prepOrbDockFor(processTitleEl);
+          const end = prepOrbDockFor(processTitleEl, 11, -19);
           if (!end) return;
           orbLanded = false;
           gsap.killTweensOf("#hero-orb");
@@ -330,7 +331,57 @@ export default function ScrollScene() {
 
         onEnterBack() {
           setOrbStyle("white");
-          const end = prepOrbDockFor(processTitleEl);
+          const end = prepOrbDockFor(processTitleEl, 11, -19);
+          if (!end) return;
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+          gsap.set("#hero-orb", { xPercent: -50, yPercent: -50, x: end.x, y: end.y, opacity: 0, scale: 0.6 });
+          gsap.to("#hero-orb", {
+            opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)",
+            onComplete() { orbLanded = true; orbIdleLoop(); },
+          });
+        },
+      });
+
+      // ── Orb: About ───────────────────────────────────────────────────
+      ScrollTrigger.create({
+        trigger: "#about",
+        start: "top 80%",
+        end: "bottom top",
+
+        onEnter() {
+          setOrbStyle("accent");
+          const end = prepOrbDockFor(aboutTitleEl);
+          if (!end) return;
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+          gsap.set("#hero-orb", { xPercent: -50, yPercent: -50, x: end.x, y: end.y, opacity: 0, scale: 0.6 });
+          gsap.to("#hero-orb", {
+            opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)",
+            onComplete() { orbLanded = true; orbIdleLoop(); },
+          });
+        },
+
+        onLeaveBack() {
+          const end = prepOrbDockFor(processTitleEl, 11, -19);
+          if (!end) return;
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+          gsap.to("#hero-orb", {
+            x: end.x, y: end.y, duration: 0.85, ease: "power4.inOut",
+            onComplete() {
+              setOrbStyle("white");
+              orbLanded = true;
+              orbIdleLoop();
+            },
+          });
+        },
+
+        onLeave: () => orbFadeOut(0.4),
+
+        onEnterBack() {
+          setOrbStyle("accent");
+          const end = prepOrbDockFor(aboutTitleEl);
           if (!end) return;
           orbLanded = false;
           gsap.killTweensOf("#hero-orb");
