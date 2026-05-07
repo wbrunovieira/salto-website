@@ -2,7 +2,7 @@
   "process": {
     "label": "Como funciona",
     "title": "Do diagnóstico",
-    "titleAccent": "ao resultado.",
+    "titleAccent": "ao resultado",
     "subtitle": "Um processo claro, orientado a dados e construído para gerar resultados reais, não apenas relatórios.",
     "steps": {
       "diagnosis": {

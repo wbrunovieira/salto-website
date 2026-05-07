@@ -2,7 +2,7 @@
   "process": {
     "label": "How it works",
     "title": "From diagnosis",
-    "titleAccent": "to results.",
+    "titleAccent": "to results",
     "subtitle": "A clear, data-driven process built to generate real results, not just reports.",
     "steps": {
       "diagnosis": { "number": "01", "title": "Diagnosis", "description": "We dive deep into your business. We map the market, competitors, ideal customer and what's already working (or not) before any action." },
