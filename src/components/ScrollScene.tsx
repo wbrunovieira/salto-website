@@ -327,7 +327,19 @@ export default function ScrollScene() {
           });
         },
 
-        onLeave: () => orbFadeOut(0.4),
+        onLeave() {
+          orbLanded = false;
+          gsap.killTweensOf("#hero-orb");
+          setOrbStyle("accent");
+          // Flutua visível por Stats — destino é About
+          gsap.to("#hero-orb", {
+            x: window.innerWidth * 0.48,
+            y: window.innerHeight * 0.44,
+            duration: 1.4,
+            ease: "power2.inOut",
+            onComplete: orbIdleLoop,
+          });
+        },
 
         onEnterBack() {
           setOrbStyle("white");
@@ -346,7 +358,7 @@ export default function ScrollScene() {
       // ── Orb: About ───────────────────────────────────────────────────
       ScrollTrigger.create({
         trigger: "#about",
-        start: "top 80%",
+        start: "top 50%",
         end: "bottom top",
 
         onEnter() {
@@ -355,10 +367,17 @@ export default function ScrollScene() {
           if (!end) return;
           orbLanded = false;
           gsap.killTweensOf("#hero-orb");
-          gsap.set("#hero-orb", { xPercent: -50, yPercent: -50, x: end.x, y: end.y, opacity: 0, scale: 0.6 });
+          // Garante visível (pode ter ficado somido se scroll rápido)
+          gsap.to("#hero-orb", { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" });
           gsap.to("#hero-orb", {
-            opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)",
-            onComplete() { orbLanded = true; orbIdleLoop(); },
+            x: end.x, y: end.y, duration: 0.9, ease: "power4.inOut",
+            onComplete() {
+              orbLanded = true;
+              gsap.to("#hero-orb", {
+                scale: 1.7, duration: 0.12, ease: "power2.out", yoyo: true, repeat: 1,
+                onComplete: orbIdleLoop,
+              });
+            },
           });
         },
 
