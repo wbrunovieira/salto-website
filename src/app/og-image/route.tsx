@@ -2,8 +2,8 @@ import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
 export const runtime = "edge";
-export const contentType = "image/png";
-export const size = { width: 1200, height: 630 };
+
+const size = { width: 1200, height: 630 };
 
 const copy: Record<string, { line1: string; accent: string }> = {
   pt: { line1: "Seu negócio pronto para o próximo", accent: "salto." },
@@ -12,8 +12,8 @@ const copy: Record<string, { line1: string; accent: string }> = {
   it: { line1: "La tua azienda pronta per il",       accent: "salto." },
 };
 
-export default function OgImage({ request }: { request: NextRequest }) {
-  const locale = new URL(request.url).searchParams.get("locale") ?? "pt";
+export async function GET(request: NextRequest) {
+  const locale = request.nextUrl.searchParams.get("locale") ?? "pt";
   const { line1, accent } = copy[locale] ?? copy.pt;
 
   return new ImageResponse(
