@@ -39,9 +39,15 @@ src/app/
     layout.tsx            # Real layout: providers, header, footer, scripts, JSON-LD
     page.tsx              # Home (single-page site)
     privacidade/page.tsx
+  deck/
+    layout.tsx            # Separate root layout — own <html>, deck.css, Lucide CDN
+    PasswordGate.tsx      # Shared password form (client component)
+    construcao/           # "Construção" sales deck
+    google-business/      # Google Business pitch deck
   api/contact/route.ts      # Contact form — rate-limited, Resend integration
+  api/deck-auth/route.ts    # POST (login) + DELETE (logout) for deck cookie auth
   api/meta-event/route.ts   # Meta Conversions API server-side relay
-  robots.ts / sitemap.ts / og-image.tsx
+  robots.ts / sitemap.ts / og-image/route.tsx
 ```
 
 `next.config.ts` wraps the config with `withNextIntl()` from `next-intl/plugin`, which wires up `src/i18n/request.ts` as the request config automatically.
@@ -86,6 +92,13 @@ Font is **Montserrat** (weights 400/700/900), loaded via `next/font/google`, exp
 ### Meta Pixel + Conversions API
 Browser pixel (`MetaPixel` component) and server-side `POST /api/meta-event` work together for deduplication. Both fire the same `event_id` so Meta counts them once. `MetaPixel` calls `window.fbq` (injected via `<Script>` in root layout) then immediately POSTs to `/api/meta-event`. The API route forwards to Meta's Graph API via `src/lib/meta-capi.ts`, hashing PII (email, phone) with SHA-256 before sending. Gracefully no-ops if `META_PIXEL_ACCESS_TOKEN` is absent.
 
+### Deck system
+Password-protected sales presentations at `/deck/construcao` and `/deck/google-business`. These live **outside** the `[locale]` routing tree — they have their own root `layout.tsx` with a separate `<html>` tag, `deck.css` (not Tailwind), and Lucide loaded from CDN via `<Script>`.
+
+Auth flow: `PasswordGate` submits a plain HTML form to `POST /api/deck-auth`. On success the API sets an httpOnly `deck_auth=ok` cookie (path `/deck`, 24h). Each deck page reads that cookie server-side and renders either `PasswordGate` or `DeckWrapper`. `DELETE /api/deck-auth` clears the cookie.
+
+Slides are defined as **template literal HTML strings** exported from `slides/*.ts` files (e.g. `slidesIntro`, `slidesDiscovery`). `DeckClient.tsx` concatenates them and injects the result via `innerHTML`, then runs vanilla JS for slide navigation, keyboard handling, and setup personalization. `data-a` on any element triggers a CSS entrance animation; `data-s="N"` marks slide number.
+
 ### Contact API
 `src/app/api/contact/route.ts` — in-memory rate limiting (5 req/IP/hour), honeypot field `_trap` (silent 200 on fill), sends two Resend emails (to Bruno + confirmation to visitor). Gracefully skips email if `RESEND_API_KEY` is absent. On successful submission the client also fires a Meta `Lead` pixel event with the same `leadEventId` for CAPI deduplication.
 
@@ -97,3 +110,4 @@ Browser pixel (`MetaPixel` component) and server-side `POST /api/meta-event` wor
 | `NEXT_PUBLIC_BASE_URL` | No | `https://saltoup.com` |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | No | `5511982864581` |
 | `RESEND_FROM_EMAIL` | No | `contato@saltoup.com` |
+| `DECK_PASSWORD` | Yes (deck auth) | — |

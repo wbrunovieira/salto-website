@@ -11,7 +11,7 @@ const ALL_SLIDES = [slidesIntro, slidesRealidade, slidesImpacto, slidesAcao].joi
 
 const TITLES = [
   'Apresentação', 'A Pergunta', 'A Realidade', 'Assim Fica no Google',
-  '5 Benefícios', 'Completo vs Incompleto', 'Como Começar', 'Próximo Passo', 'Investimento', 'Ordem de Serviço',
+  '5 Benefícios', 'Completo vs Incompleto', 'O que Você Leva', 'Investimento', 'Ordem de Serviço',
 ];
 
 export default function DeckClient() {
@@ -153,6 +153,15 @@ export default function DeckClient() {
       <div id="bar" />
       <div className="noise" />
 
+      {/* Logo Salto — fixo em todos os slides */}
+      <div style={{
+        position: 'fixed', top: 20, left: 24, zIndex: 300,
+        pointerEvents: 'none', opacity: 0.5,
+      }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.svg" alt="Salto" style={{ height: 18, width: 'auto', display: 'block' }} />
+      </div>
+
       {/* Google branding — fixo em todos os slides */}
       <div style={{
         position: 'fixed', bottom: 24, left: 24, zIndex: 300,
@@ -176,7 +185,7 @@ export default function DeckClient() {
 
       <div id="nav">
         <button className="nb" id="bp">←</button>
-        <span id="ctr">01 / 10</span>
+        <span id="ctr">01 / 09</span>
         <button className="nb" id="bn">→</button>
       </div>
 
