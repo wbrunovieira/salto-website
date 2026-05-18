@@ -21,7 +21,7 @@ export const slidesRealidade = `
         <div data-a class="card card-hot" style="padding:22px 26px;text-align:center">
           <p style="font-size:clamp(48px,6vw,72px);font-weight:900;color:var(--accent);line-height:1;margin-bottom:8px">40%</p>
           <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.5">do tempo de trabalho gasto em tarefas repetitivas</p>
-          <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:8px;letter-spacing:1px">McKinsey Global Institute</p>
+          <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:8px;letter-spacing:1px">Asana · Anatomy of Work Index</p>
         </div>
         <div data-a class="card" style="padding:16px 22px;display:flex;align-items:center;gap:18px">
           <p style="font-size:clamp(24px,3vw,38px);font-weight:900;color:var(--text);line-height:1;flex-shrink:0;white-space:nowrap">1 em 5</p>
@@ -34,92 +34,83 @@ export const slidesRealidade = `
       </div>
 
     </div>
+
+    <div data-a style="margin-top:20px;padding:16px 22px;border:1px solid rgba(255,92,0,0.2);border-radius:12px;background:rgba(255,92,0,0.04);display:flex;align-items:center;gap:16px">
+      <i data-lucide="heart" style="font-size:22px;color:var(--accent);flex-shrink:0"></i>
+      <p style="font-size:14px;color:var(--muted);line-height:1.7">
+        <span style="color:var(--text);font-weight:700">E o seu time também ganha.</span> Trabalho repetitivo é a principal causa de desmotivação. Quem é liberado disso foca no que realmente importa — e um funcionário motivado produz mais, erra menos e fica mais tempo na empresa.
+      </p>
+    </div>
+
   </div>
 </div>
 
-<!-- ════════════════ S4 — O QUE DÁ PRA AUTOMATIZAR ════════════════ -->
+<!-- ════════════════ S4 — ANTES vs DEPOIS ════════════════ -->
 <div class="slide" data-s="4">
   <div class="gco"></div>
   <div class="wfull mw900">
-    <div data-a class="badge mb6"><span class="dot"></span>EXEMPLOS REAIS</div>
-    <h2 data-a class="hl mb2">Mais do que você imagina</h2>
-    <h2 data-a class="hl hl-acc mb8">já pode ser automático.</h2>
+    <div data-a class="badge mb6"><span class="dot"></span>A TRANSFORMAÇÃO</div>
+    <h2 data-a class="hl mb2">O mesmo processo.</h2>
+    <h2 data-a class="hl hl-acc mb8">Resultado completamente diferente.</h2>
 
-    <div data-a style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="message-circle" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">WhatsApp 24h</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">FAQ, cardápio, horários sem você tocar no celular</p>
-        </div>
+    <!-- Cabeçalho das colunas -->
+    <div data-a style="display:grid;grid-template-columns:1fr 48px 1fr;gap:0;margin-bottom:10px;padding:0 4px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <i data-lucide="x-circle" style="font-size:16px;color:#ff7070;flex-shrink:0"></i>
+        <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ff7070">Sem automação</p>
       </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="calendar-check" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Agendamento online</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Cliente marca, confirma e recebe lembrete sozinho</p>
-        </div>
+      <div></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <i data-lucide="check-circle" style="font-size:16px;color:var(--accent);flex-shrink:0"></i>
+        <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">Com automação</p>
       </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="credit-card" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Cobrança automática</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Lembrete de vencimento e link de pagamento no WhatsApp</p>
-        </div>
-      </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="file-plus" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Nota fiscal</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Emite NF automaticamente quando o pedido fecha</p>
-        </div>
-      </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="instagram" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Respostas no Instagram</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">DMs e comentários respondidos na hora</p>
-        </div>
-      </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="bar-chart-2" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Relatório semanal</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Resumo do negócio toda segunda de manhã no WhatsApp</p>
-        </div>
-      </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="package" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Alerta de estoque</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Avisa quando o produto está acabando</p>
-        </div>
-      </div>
-
-      <div class="card" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="user-plus" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Cadastro de clientes</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Lead entra no formulário e já vai pro CRM e WhatsApp</p>
-        </div>
-      </div>
-
-      <div class="card card-hot" style="padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
-        <i data-lucide="link" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <div>
-          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:4px">Integração entre sistemas</p>
-          <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Pedido no iFood → planilha → WhatsApp do cliente</p>
-        </div>
-      </div>
-
     </div>
+
+    <!-- Linha 1: WhatsApp -->
+    <div data-a style="display:grid;grid-template-columns:1fr 48px 1fr;gap:0;margin-bottom:8px;align-items:center">
+      <div style="padding:14px 18px;border:1px solid rgba(255,112,112,0.2);border-radius:10px;background:rgba(255,112,112,0.04)">
+        <p style="font-size:12px;font-weight:700;color:#ff9090;margin-bottom:4px">WhatsApp</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Cliente manda mensagem às 22h. Ninguém responde. Ele vai pro concorrente.</p>
+      </div>
+      <div style="text-align:center">
+        <i data-lucide="arrow-right" style="font-size:18px;color:rgba(255,92,0,0.3)"></i>
+      </div>
+      <div style="padding:14px 18px;border:1px solid rgba(255,92,0,0.2);border-radius:10px;background:rgba(255,92,0,0.04)">
+        <p style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px">WhatsApp</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Bot responde em segundos, 24h por dia. Cliente atendido, venda garantida.</p>
+      </div>
+    </div>
+
+    <!-- Linha 2: Agendamento -->
+    <div data-a style="display:grid;grid-template-columns:1fr 48px 1fr;gap:0;margin-bottom:8px;align-items:center">
+      <div style="padding:14px 18px;border:1px solid rgba(255,112,112,0.2);border-radius:10px;background:rgba(255,112,112,0.04)">
+        <p style="font-size:12px;font-weight:700;color:#ff9090;margin-bottom:4px">Agendamento</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Funcionário liga um por um para confirmar. Perde 2h por dia. Cliente falta mesmo assim.</p>
+      </div>
+      <div style="text-align:center">
+        <i data-lucide="arrow-right" style="font-size:18px;color:rgba(255,92,0,0.3)"></i>
+      </div>
+      <div style="padding:14px 18px;border:1px solid rgba(255,92,0,0.2);border-radius:10px;background:rgba(255,92,0,0.04)">
+        <p style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px">Agendamento</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Bot confirma, lembra e reagenda sozinho. Zero falta sem aviso, zero tempo gasto.</p>
+      </div>
+    </div>
+
+    <!-- Linha 3: Cobrança -->
+    <div data-a style="display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:center">
+      <div style="padding:14px 18px;border:1px solid rgba(255,112,112,0.2);border-radius:10px;background:rgba(255,112,112,0.04)">
+        <p style="font-size:12px;font-weight:700;color:#ff9090;margin-bottom:4px">Cobrança</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Boleto venceu. Você liga constrangido, o cliente enrola, o caixa fica no vermelho.</p>
+      </div>
+      <div style="text-align:center">
+        <i data-lucide="arrow-right" style="font-size:18px;color:rgba(255,92,0,0.3)"></i>
+      </div>
+      <div style="padding:14px 18px;border:1px solid rgba(255,92,0,0.2);border-radius:10px;background:rgba(255,92,0,0.04)">
+        <p style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px">Cobrança</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Lembrete automático 3 dias antes, no dia e depois do vencimento. Pagamento em dia.</p>
+      </div>
+    </div>
+
   </div>
 </div>
 `;

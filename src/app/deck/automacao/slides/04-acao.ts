@@ -48,7 +48,7 @@ export const slidesAcao = `
     <div data-a style="padding:18px 24px;border:1px solid rgba(255,92,0,.25);border-radius:14px;background:rgba(255,92,0,.05);display:flex;align-items:center;gap:16px">
       <i data-lucide="zap" style="font-size:20px;color:var(--accent);flex-shrink:0"></i>
       <p style="font-size:var(--fs-card-desc);color:var(--text);line-height:1.7">
-        Quer ver agora? Me conta o maior processo manual do seu negócio — mostramos como automatizamos em até 15 minutos.
+        Quer ver agora? Me conta o maior processo manual do seu negócio — explicamos exatamente como ele ficaria automatizado.
       </p>
     </div>
   </div>

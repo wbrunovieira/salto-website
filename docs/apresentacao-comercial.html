@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salto — Apresentação Comercial</title>
+<link rel="icon" type="image/png" href="../public/favicon.png">
+<link rel="icon" type="image/svg+xml" href="../public/favicon-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --base:#0E0E0E;--surface:#141414;--border:rgba(255,255,255,0.08);
+  --accent:#FF5C00;--accent2:#FF7A28;--accent-dark:#FF3D00;
+  --text:#F5F5F5;--muted:#888888;
+}
+
+html,body{width:100%;height:100%;overflow:hidden;background:var(--base);color:var(--text);
+  font-family:'Montserrat','Arial Black',sans-serif;-webkit-font-smoothing:antialiased}
+
+/* ── Progress ── */
+#bar{position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(to right,var(--accent),var(--accent2));
+  z-index:300;transition:width .5s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 14px rgba(255,92,0,.5)}
+
+/* ── Noise ── */
+.noise{position:fixed;inset:0;pointer-events:none;opacity:.04;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px}
+
+/* ── Deck ── */
+#deck{width:100%;height:100%;position:relative}
+
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:56px 96px;
+  opacity:0;pointer-events:none;overflow:hidden;z-index:2}
+.slide.active{pointer-events:all}
+
+/* ── Nav ── */
+#nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:18px;z-index:300}
+.nb{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,color .2s;font-size:14px;line-height:1}
+.nb:hover{border-color:var(--accent);color:var(--accent)}
+.nb:disabled{opacity:.25;cursor:not-allowed}
+#ctr{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--muted);min-width:54px;text-align:center}
+
+/* ── Ambient ── */
+.gc{position:absolute;bottom:-10%;left:50%;width:700px;height:440px;
+  background:radial-gradient(ellipse at center,var(--accent) 0%,transparent 68%);
+  filter:blur(90px);opacity:.11;pointer-events:none;transform:translateX(-50%)}
+.gco{position:absolute;top:0;right:0;width:420px;height:420px;
+  background:radial-gradient(ellipse at top right,var(--accent),transparent 60%);
+  opacity:.05;pointer-events:none}
+
+/* ── Rings ── */
+.ring{position:absolute;left:50%;top:50%;border-radius:50%;
+  border:1px solid var(--accent);pointer-events:none;
+  animation:rb 8s ease-in-out infinite}
+@keyframes rb{
+  0%,100%{opacity:var(--ro,.06);transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:calc(var(--ro,.06)*1.8);transform:translate(-50%,-50%) scale(1.04)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* ── Shared components ── */
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;
+  border-radius:100px;border:1px solid var(--border);background:rgba(255,255,255,.03);
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+
+.hl{font-size:clamp(32px,4.5vw,66px);font-weight:900;line-height:.95;letter-spacing:-1.5px}
+.hl-acc{background:linear-gradient(to right,var(--accent),var(--accent2),var(--accent-dark));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.card{border:1px solid var(--border);background:rgba(255,255,255,.03);
+  border-radius:14px;padding:22px 26px}
+.card-hot{border-color:rgba(255,92,0,.25);background:rgba(255,92,0,.05)}
+
+.divider{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px;width:100%}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%}
+
+.svc{display:flex;align-items:flex-start;gap:11px;padding:11px 0;
+  border-bottom:1px solid var(--border)}
+.svc:last-child{border:none}
+.svc-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  flex-shrink:0;margin-top:5px}
+
+.stat-v{font-size:52px;font-weight:900;line-height:1;
+  background:linear-gradient(to bottom,#fff,rgba(255,255,255,.55));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-top:6px}
+
+.chk{display:flex;align-items:flex-start;gap:14px;padding:13px 0;
+  border-bottom:1px solid var(--border)}
+.chk:last-child{border:none}
+.chk-ico{width:22px;height:22px;border-radius:50%;background:rgba(255,92,0,.12);
+  border:1px solid rgba(255,92,0,.3);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;font-size:10px;color:var(--accent)}
+
+.flow-step{display:flex;align-items:center;gap:10px;padding:9px 13px;
+  border-radius:8px;font-size:14px;font-weight:600}
+.flow-dim{color:var(--muted);background:rgba(255,255,255,.02)}
+.flow-hot{color:var(--accent);background:rgba(255,92,0,.08);border:1px solid rgba(255,92,0,.14)}
+.flow-bad{color:#ff7070;background:rgba(255,112,112,.07)}
+
+.pain{padding:13px 20px;border-left:2px solid var(--border);
+  font-size:16px;color:var(--muted);line-height:1.5}
+.pain.hi{border-left-color:var(--accent);color:var(--text)}
+
+.tbar{height:32px;border-radius:6px;display:flex;align-items:center;
+  padding:0 13px;font-size:11px;font-weight:600}
+.tbar-s{background:rgba(255,255,255,.04);color:var(--muted)}
+.tbar-f{background:rgba(255,92,0,.11);color:var(--accent);border:1px solid rgba(255,92,0,.22)}
+
+.pstep{padding:22px 18px;border:1px solid var(--border);border-radius:12px;
+  background:rgba(255,255,255,.02);position:relative}
+.pstep:not(:last-child)::after{content:'→';position:absolute;right:-18px;top:50%;
+  transform:translateY(-50%);color:var(--accent);opacity:.4;font-size:14px}
+.pnum{font-size:38px;font-weight:900;color:var(--accent);opacity:.22;line-height:1}
+.ptitle{font-size:12px;font-weight:900;color:var(--text);margin:7px 0 5px}
+.pdesc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* Funnel */
+.funnel{display:grid;grid-template-columns:repeat(5,1fr);gap:0;width:100%}
+.fcell{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative}
+.fcell:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:28px;
+  color:var(--border);font-size:16px}
+.fstage{padding:7px 0;width:100%;text-align:center;font-size:9px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;border-radius:7px 7px 0 0}
+.fstage.fa{background:var(--accent);color:#fff}
+.fstage.fi{background:rgba(255,255,255,.05);color:var(--muted)}
+.fbubble{width:78px;height:78px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:700;text-align:center;line-height:1.3}
+.fbubble.fa{background:rgba(255,92,0,.13);border:1px solid rgba(255,92,0,.35);color:var(--accent)}
+.fbubble.fi{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted)}
+.fdesc{font-size:10px;color:var(--muted);text-align:center;line-height:1.4;padding:0 6px}
+
+/* Cycle */
+.cycle-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:700px;position:relative}
+.cycard{border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:12px;padding:18px}
+.cycard.hot{border-color:rgba(255,92,0,.25);background:rgba(255,92,0,.05)}
+.cynum{font-size:30px;font-weight:900;color:var(--accent);opacity:.35;line-height:1}
+.cytitle{font-size:13px;font-weight:900;color:var(--text);margin:4px 0 7px}
+.cydesc{font-size:11px;color:var(--muted);line-height:1.5}
+.cy-inf{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,92,0,.3);
+  background:rgba(255,92,0,.09);display:flex;align-items:center;justify-content:center;
+  font-size:22px;color:var(--accent);pointer-events:none;z-index:2}
+
+/* Next step */
+.nstep{display:flex;gap:18px;align-items:flex-start;padding:18px 22px;
+  border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.02)}
+.nnum{font-size:30px;font-weight:900;color:var(--accent);opacity:.45;line-height:1;flex-shrink:0}
+
+/* Compare table */
+.ctbl{width:100%;border-collapse:collapse}
+.ctbl th{padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;text-align:left;border-bottom:1px solid var(--border)}
+.ctbl td{padding:10px 14px;font-size:14px;border-bottom:1px solid var(--border)}
+.ctbl tr:last-child td{border:none}
+
+/* Price */
+.price-card{border:1px solid var(--border);border-radius:14px;padding:24px;background:rgba(255,255,255,.02)}
+.price-card.feat{border-color:rgba(255,92,0,.3);background:rgba(255,92,0,.05)}
+
+/* ── Hamburger ── */
+#hbtn{position:fixed;top:20px;right:24px;z-index:400;width:36px;height:36px;
+  border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;transition:border-color .2s}
+#hbtn:hover{border-color:rgba(255,255,255,.18)}
+#hbtn span{display:block;width:13px;height:1.5px;background:var(--muted);border-radius:2px;transition:background .2s}
+#hbtn:hover span{background:var(--text)}
+#hoverlay{position:fixed;inset:0;z-index:490;background:rgba(0,0,0,.55);
+  opacity:0;pointer-events:none;transition:opacity .3s}
+#hoverlay.open{opacity:1;pointer-events:all}
+#hdrawer{position:fixed;top:0;right:0;bottom:0;width:240px;z-index:500;
+  background:#141414;border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.22,1,.36,1);
+  display:flex;flex-direction:column}
+#hdrawer.open{transform:translateX(0)}
+#hlist{overflow-y:auto;flex:1;padding:6px 0}
+.hitem{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;
+  border:none;background:none;width:100%;text-align:left;transition:background .15s}
+.hitem:hover{background:rgba(255,255,255,.04)}
+.hitem.hactive{background:rgba(255,92,0,.07)}
+.hnum{font-size:9px;font-weight:700;color:var(--muted);width:16px;flex-shrink:0;font-family:'Montserrat',sans-serif}
+.hitem.hactive .hnum{color:var(--accent)}
+.htxt{font-size:12px;font-weight:600;color:var(--muted);font-family:'Montserrat',sans-serif;line-height:1.3}
+.hitem.hactive .htxt{color:var(--text)}
+
+/* ── Lucide icons ── */
+[data-lucide]{width:1em;height:1em;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;fill:none;display:inline-block;vertical-align:middle}
+
+/* utils */
+.mb2{margin-bottom:8px}.mb4{margin-bottom:16px}.mb6{margin-bottom:24px}
+.mb8{margin-bottom:32px}.mb10{margin-bottom:40px}.mt4{margin-top:16px}.mt6{margin-top:24px}
+.tc{text-align:center}.acc{color:var(--accent)}.mu{color:var(--muted)}
+.xs{font-size:12px}.sm{font-size:14px}.base{font-size:16px}
+.bold{font-weight:700}.black{font-weight:900}.upper{text-transform:uppercase}
+.ls{letter-spacing:2px}.lsr{line-height:1.6}.mxa{margin-left:auto;margin-right:auto}
+.wfull{width:100%}.mw860{max-width:860px}.mw900{max-width:900px}.mw760{max-width:760px}
+</style>
+</head>
+<body>
+
+<div id="setup" style="position:fixed;inset:0;z-index:999;background:#0E0E0E;display:none;align-items:center;justify-content:center">
+  <div style="width:100%;max-width:440px;padding:40px 36px;border:1px solid rgba(255,255,255,0.08);border-radius:20px;background:#141414">
+    <img src="../public/logo.svg" alt="Salto" style="width:140px;height:auto;margin-bottom:28px;display:block">
+    <p style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:20px">Personalizar apresentação</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+      <input id="inp-nome" type="text" placeholder="Nome do cliente" autocomplete="off"
+        style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:#0E0E0E;color:#F5F5F5;font-family:'Montserrat',sans-serif;font-size:14px;outline:none"
+        onfocus="this.style.borderColor='rgba(255,92,0,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+      <input id="inp-empresa" type="text" placeholder="Empresa" autocomplete="off"
+        style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:#0E0E0E;color:#F5F5F5;font-family:'Montserrat',sans-serif;font-size:14px;outline:none"
+        onfocus="this.style.borderColor='rgba(255,92,0,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+      <div id="logo-upload-area" onclick="document.getElementById('inp-logo').click()"
+        style="border:1px dashed rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .2s"
+        onmouseover="this.style.borderColor='rgba(255,92,0,0.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+        <input id="inp-logo" type="file" accept="image/*" style="display:none">
+        <i data-lucide="image" style="font-size:16px;color:#666;flex-shrink:0"></i>
+        <div style="flex:1;min-width:0">
+          <p id="logo-label-txt" style="font-size:13px;color:#666;margin:0">Logo do cliente (opcional)</p>
+          <img id="logo-preview" src="" alt="" style="display:none;max-height:30px;max-width:160px;object-fit:contain;margin-top:8px;border-radius:4px">
+        </div>
+      </div>
+    </div>
+    <button id="setup-ok" style="width:100%;padding:14px;border-radius:100px;border:none;background:linear-gradient(to right,#FF5C00,#FF3D00);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px">
+      Iniciar apresentação →
+    </button>
+    <p style="margin-top:14px;font-size:10px;color:#444;text-align:center">Deixe em branco para pular a personalização</p>
+  </div>
+</div>
+
+<div id="bar"></div>
+<div class="noise"></div>
+
+<div id="deck">
+
+<!-- ════════════════════════════════════════
+     S1 — CAPA
+════════════════════════════════════════ -->
+<div class="slide" data-s="1">
+  <div class="gc"></div><div class="gco"></div>
+  <div class="ring" style="width:280px;height:280px;--ro:.12;animation-delay:0s"></div>
+  <div class="ring" style="width:480px;height:480px;--ro:.08;animation-delay:.8s"></div>
+  <div class="ring" style="width:700px;height:700px;--ro:.06;animation-delay:1.6s"></div>
+  <div class="ring" style="width:950px;height:950px;--ro:.03;animation-delay:2.4s"></div>
+
+  <div style="position:relative;z-index:10;text-align:center">
+    <div data-a style="margin-bottom:32px">
+      <img src="../public/logo.svg" alt="Salto" style="width:clamp(320px,42vw,560px);height:auto;display:block;margin:0 auto">
+    </div>
+    <div data-a style="margin-bottom:16px">
+      <i data-lucide="handshake" style="font-size:28px;color:var(--accent);opacity:0.7"></i>
+    </div>
+    <p data-a class="mu" style="font-size:clamp(16px,1.6vw,20px);line-height:1.75;max-width:520px;margin:0 auto">Obrigado por reservar esse tempo.<br>Preparei essa apresentação especialmente para a nossa conversa.</p>
+    <div data-a id="s1guest-wrap" style="display:none;margin-top:28px">
+      <div style="display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)">
+        <span style="width:6px;height:6px;border-radius:50%;background:#FF5C00;flex-shrink:0"></span>
+        <span id="s1guest" style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55)"></span>
+      </div>
+    </div>
+    <div id="s1logo-wrap" style="display:none;margin-top:20px">
+      <img id="s1logo" src="" alt="" style="max-height:56px;max-width:220px;object-fit:contain;opacity:0.8;display:block;margin:0 auto">
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S2 — APRESENTAÇÃO
+════════════════════════════════════════ -->
+<div class="slide" data-s="2">
+  <div class="gco"></div>
+  <div class="wfull mw900">
+    <div data-a class="badge mb8"><span class="dot"></span>QUEM ESTÁ COM VOCÊ HOJE</div>
+
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start">
+
+      <!-- Coluna esquerda: Bruno -->
+      <div>
+        <div data-a class="card" style="padding:30px;margin-bottom:16px">
+          <img src="../public/logo.svg" alt="Salto" style="width:90px;height:auto;display:block;margin-bottom:18px;opacity:0.75">
+          <p style="font-size:34px;font-weight:900;letter-spacing:-1.5px;line-height:1;margin-bottom:6px">Bruno Vieira</p>
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px">Fundador Salto</p>
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px">Fundador WB Digital Solutions</p>
+          <div class="divider" style="margin:0 0 18px"></div>
+          <p class="mu lsr" style="font-size:14px;margin-bottom:18px">"Passei 20 anos vendendo — varejo, tecnologia, construção, empilhadeiras. Depois construí a empresa de tecnologia. Sei o que trava o resultado porque já estive dos dois lados do processo."</p>
+          <div style="height:1px;background:var(--border);margin-bottom:14px"></div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.6">Pai de dois filhos &nbsp;·&nbsp; Esportes de aventura &nbsp;·&nbsp; Chef formado na Itália</p>
+        </div>
+
+        <!-- Diferenciais humanos -->
+        <div data-a class="card" style="padding:14px 22px;display:flex;align-items:center;gap:16px">
+          <div style="text-align:center;flex-shrink:0">
+            <p style="font-size:22px;font-weight:900;color:var(--text);line-height:1">4</p>
+            <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:3px">Idiomas</p>
+          </div>
+          <div style="width:1px;height:28px;background:var(--border);flex-shrink:0"></div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.5">Viveu em outros países. Perspectiva de mercados e culturas diferentes aplicada ao seu negócio.</p>
+        </div>
+      </div>
+
+      <!-- Coluna direita: credenciais em grid -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div data-a class="card" style="padding:18px 22px">
+          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">+20 anos de vendas</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">Varejo · Tecnologia · Materiais de construção · Empilhadeiras</p>
+        </div>
+
+        <div data-a class="card" style="padding:18px 22px">
+          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Engenheiro full stack · Designer</p>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
+            <img src="../public/wb-logo.svg" alt="WB Digital Solutions" style="width:110px;height:auto;display:block;flex-shrink:0">
+            <div style="width:1px;height:24px;background:var(--border);flex-shrink:0"></div>
+            <div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:4px">Empresa de tecnologia do grupo</p>
+              <a href="https://www.wbdigitalsolutions.com" target="_blank" style="font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:0.5px">wbdigitalsolutions.com ↗</a>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">Código puro, produto, UX — constrói o que propõe, sem depender de terceiros.</p>
+        </div>
+
+        <div data-a class="card" style="padding:18px 22px">
+          <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Visão global</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">Morou nos EUA, Portugal e Itália. Fala 4 idiomas. Traz perspectiva de como mercados diferentes resolvem os mesmos problemas.</p>
+        </div>
+
+        <div data-a class="card" style="padding:14px 20px;display:flex;align-items:center;gap:16px">
+          <div style="text-align:center;flex-shrink:0">
+            <p style="font-size:22px;font-weight:900;color:var(--text);line-height:1">+20</p>
+            <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:3px">Anos vendendo</p>
+          </div>
+          <div style="width:1px;height:28px;background:var(--border);flex-shrink:0"></div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.5">Em segmentos diferentes — sem depender de um único nicho.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S3 — COMO VAI FUNCIONAR
+════════════════════════════════════════ -->
+<div class="slide" data-s="3">
+  <div class="gc" style="opacity:.07"></div>
+  <div class="wfull" style="max-width:720px;text-align:center">
+    <div data-a style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:40px">
+      <span class="badge"><span class="dot"></span>COMO VAI FUNCIONAR HOJE</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:rgba(255,255,255,.03);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        20–30 min
+      </span>
+    </div>
+
+    <h2 data-a class="hl mb2">Simples, direto</h2>
+    <h2 data-a class="hl hl-acc" style="margin-bottom:48px">e sem enrolação.</h2>
+
+    <div data-a style="display:flex;align-items:center;justify-content:center;gap:0">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;flex:1">
+        <div style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,92,0,0.35);background:rgba(255,92,0,0.08);display:flex;align-items:center;justify-content:center">
+          <span style="font-size:15px;font-weight:900;color:var(--accent)">1</span>
+        </div>
+        <p style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4">Você fala<br><span style="font-weight:400;color:var(--muted);font-size:13px">sobre o seu negócio</span></p>
+      </div>
+
+      <div style="flex:0 0 40px;display:flex;align-items:center;justify-content:center;padding-bottom:36px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;flex:1">
+        <div style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,92,0,0.35);background:rgba(255,92,0,0.08);display:flex;align-items:center;justify-content:center">
+          <span style="font-size:15px;font-weight:900;color:var(--accent)">2</span>
+        </div>
+        <p style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4">Eu apresento<br><span style="font-weight:400;color:var(--muted);font-size:13px">como a Salto trabalha</span></p>
+      </div>
+
+      <div style="flex:0 0 40px;display:flex;align-items:center;justify-content:center;padding-bottom:36px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;flex:1">
+        <div style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,92,0,0.35);background:rgba(255,92,0,0.08);display:flex;align-items:center;justify-content:center">
+          <span style="font-size:15px;font-weight:900;color:var(--accent)">3</span>
+        </div>
+        <p style="font-size:15px;font-weight:700;color:var(--text);line-height:1.4">Decidimos juntos<br><span style="font-weight:400;color:var(--muted);font-size:13px">sem pressão, sem pressa</span></p>
+      </div>
+
+    </div>
+
+    <p data-a style="margin-top:52px;font-size:14px;color:var(--muted);line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto">
+      Você pergunta o que quiser no caminho. Aqui não tem script rígido — tem conversa de verdade.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S4 — CONVERSA SOBRE A EMPRESA
+════════════════════════════════════════ -->
+<div class="slide" data-s="4">
+  <div class="gco"></div>
+  <div class="wfull mw860">
+    <div data-a class="badge mb8"><span class="dot"></span>AGORA É A SUA VEZ</div>
+    <h2 data-a class="hl mb2">Me conta sobre</h2>
+    <h2 data-a class="hl hl-acc mb10">o seu negócio.</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="store" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">O negócio hoje</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">O que você vende, para quem, e como o cliente chega até você?</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="target" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Onde quer chegar</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Qual o objetivo dos próximos 6 a 12 meses?</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="funnel" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">O processo comercial</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Como funciona hoje do lead até o fechamento?</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="alert-triangle" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">O maior gargalo</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Onde sente que o resultado está travando — leads, conversão ou retenção?</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="flask-conical" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">O que já tentou</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Que ações ou fornecedores já usou? O que funcionou e o que não veio?</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="megaphone" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Marketing</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Faz ou fez marketing digital ou offline? Depende muito de indicação — tem um processo para isso ou acontece de forma espontânea?</p>
+        </div>
+      </div>
+
+      <div data-a class="card card-hot" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="message-circle" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Algo que queira compartilhar</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Contexto que acha importante eu saber antes de apresentar?</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S5 — DORES
+════════════════════════════════════════ -->
+<div class="slide" data-s="2">
+  <div class="gco"></div>
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>O QUE ESTOU OUVINDO</div>
+    <h2 data-a class="hl mb10">O que costumo encontrar em <span class="hl-acc">empresas no seu cenário</span></h2>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div data-a class="pain" style="display:flex;align-items:center;gap:14px"><i data-lucide="trending-up" style="font-size:18px;flex-shrink:0;opacity:0.5"></i><span>"Você vende bem, mas o faturamento não cresce no ritmo que deveria."</span></div>
+      <div data-a class="pain" style="display:flex;align-items:center;gap:14px"><i data-lucide="help-circle" style="font-size:18px;flex-shrink:0;opacity:0.5"></i><span>"Já investiu em marketing — não sabe ao certo o que voltou."</span></div>
+      <div data-a class="pain hi" style="display:flex;align-items:center;gap:14px"><i data-lucide="users" style="font-size:18px;flex-shrink:0;color:var(--accent)"></i><span>"O time de vendas depende do talento individual de cada pessoa, não de um processo."</span></div>
+      <div data-a class="pain" style="display:flex;align-items:center;gap:14px"><i data-lucide="user-x" style="font-size:18px;flex-shrink:0;opacity:0.5"></i><span>"Tem clientes bons que sumiram e você não sabe por quê."</span></div>
+      <div data-a class="pain" style="display:flex;align-items:center;gap:14px"><i data-lucide="smartphone" style="font-size:18px;flex-shrink:0;opacity:0.5"></i><span>"O WhatsApp virou o CRM, o funil e o suporte ao mesmo tempo."</span></div>
+      <div data-a class="pain" style="display:flex;align-items:center;gap:14px"><i data-lucide="timer" style="font-size:18px;flex-shrink:0;opacity:0.5"></i><span>"Lead chega, vendedor demora para responder — quando responde, o cliente já foi."</span></div>
+    </div>
+    <p data-a class="mu xs mt6 tc">Me aponta qual dessas mais se aplica — define o que vou priorizar na apresentação.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S_IMPACT — O CUSTO DO PROBLEMA
+════════════════════════════════════════ -->
+<div class="slide" data-s="x">
+  <div class="gco"></div>
+  <div class="wfull mw860">
+    <div data-a class="badge mb6"><span class="dot"></span>O CUSTO DO PROBLEMA</div>
+    <h2 data-a class="hl mb2">Vamos colocar</h2>
+    <h2 data-a class="hl hl-acc mb10">um número nisso.</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="user-minus" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Leads que somem</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Se 30% dos seus leads somem por falta de follow-up — quantos fechamentos você deixa na mesa por mês?</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="users" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Clientes inativos</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Empresas típicas têm 20–30% da base parada. Reativar 10% custa menos do que adquirir um cliente novo.</p>
+        </div>
+      </div>
+
+      <div data-a class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="banknote" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Mídia sem funil</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Todo real em anúncio com processo quebrado é custo, não investimento. Quanto está saindo hoje?</p>
+        </div>
+      </div>
+
+      <div data-a class="card card-hot" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+        <i data-lucide="clock" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
+        <div>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Tempo do dono</p>
+          <p class="mu" style="font-size:13px;line-height:1.5">Quantas horas por semana você gasta em tarefas que um processo automatizaria — tempo que deveria estar em venda?</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p data-a class="mu xs mt6 tc">Esses números existem no seu negócio. Mapeamos exatamente isso no diagnóstico.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S_CE — POR QUE AGORA
+════════════════════════════════════════ -->
+<div class="slide" data-s="x">
+  <div class="gc" style="opacity:.07"></div>
+  <div class="wfull" style="max-width:720px;text-align:center">
+    <div data-a style="margin-bottom:40px">
+      <span class="badge"><span class="dot"></span>POR QUE AGORA</span>
+    </div>
+
+    <h2 data-a class="hl mb2">O que muda se isso</h2>
+    <h2 data-a class="hl hl-acc" style="margin-bottom:48px">não mudar nos próximos 90 dias?</h2>
+
+    <div data-a style="display:flex;flex-direction:column;gap:12px;margin-bottom:36px;text-align:left">
+
+      <div style="padding:18px 24px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.02);display:flex;align-items:center;gap:16px">
+        <i data-lucide="calendar" style="font-size:20px;color:var(--accent);flex-shrink:0"></i>
+        <p style="font-size:15px;color:var(--muted);line-height:1.5">Tem alguma <span style="color:var(--text);font-weight:700">meta ou temporada</span> que precisa bater ainda esse ano?</p>
+      </div>
+
+      <div style="padding:18px 24px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.02);display:flex;align-items:center;gap:16px">
+        <i data-lucide="shield-alert" style="font-size:20px;color:var(--accent);flex-shrink:0"></i>
+        <p style="font-size:15px;color:var(--muted);line-height:1.5">Algum <span style="color:var(--text);font-weight:700">concorrente</span> está avançando no seu mercado agora?</p>
+      </div>
+
+      <div style="padding:18px 24px;border:1px solid rgba(255,92,0,.25);border-radius:14px;background:rgba(255,92,0,.05);display:flex;align-items:center;gap:16px">
+        <i data-lucide="zap" style="font-size:20px;color:var(--accent);flex-shrink:0"></i>
+        <p style="font-size:15px;color:var(--muted);line-height:1.5">Seu <span style="color:var(--text);font-weight:700">time atual</span> consegue absorver mais volume sem processo definido?</p>
+      </div>
+
+    </div>
+
+    <p data-a style="font-size:13px;color:var(--muted);line-height:1.7;max-width:460px;margin:0 auto">
+      Quanto mais cedo o processo estiver rodando, mais o tempo trabalha a seu favor — não contra.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S3 — ESFORÇO VS SISTEMA
+════════════════════════════════════════ -->
+<div class="slide" data-s="3">
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>O DIAGNÓSTICO</div>
+    <h2 data-a class="hl mb2">O problema não é esforço.</h2>
+    <h2 data-a class="hl hl-acc mb10">É sistema.</h2>
+    <div data-a class="two">
+      <div>
+        <p class="xs bold upper ls mu mb4">O que você tem hoje</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="card" style="padding:11px 15px;font-size:13px">Produto bom</div>
+          <div class="card" style="padding:11px 15px;font-size:13px">Clientes satisfeitos</div>
+          <div class="card" style="padding:11px 15px;font-size:13px">Dinheiro investido em mídia</div>
+          <div class="card" style="padding:11px 15px;font-size:13px">Time de atendimento</div>
+          <div class="card" style="padding:11px 15px;font-size:13px">Dados no sistema</div>
+        </div>
+      </div>
+      <div>
+        <p class="xs bold upper ls acc mb4">O que está faltando</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="card card-hot" style="padding:11px 15px;font-size:13px">Processo de venda</div>
+          <div class="card card-hot" style="padding:11px 15px;font-size:13px">Sistema de retenção e reativação</div>
+          <div class="card card-hot" style="padding:11px 15px;font-size:13px">Funil que converte o tráfego</div>
+          <div class="card card-hot" style="padding:11px 15px;font-size:13px">Time treinado para vender</div>
+          <div class="card card-hot" style="padding:11px 15px;font-size:13px">Dados usados para decidir</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S4 — KOTLER 5A
+════════════════════════════════════════ -->
+<div class="slide" data-s="4">
+  <div class="gco"></div>
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>KOTLER 4.0 — O FUNIL MODERNO</div>
+    <h2 data-a class="hl mb2">Seu cliente passa por <span class="hl-acc">5 etapas.</span></h2>
+    <p data-a class="mu sm mb8">A maioria das empresas cuida de apenas 2.</p>
+    <div data-a class="funnel mb6">
+      <div class="fcell">
+        <div class="fstage fa">Descoberta</div>
+        <div class="fbubble fa">Eu<br>sei</div>
+        <div class="fdesc">Vê o anúncio, ouve de alguém</div>
+        <p style="margin-top:8px;font-size:9px;font-weight:700;color:var(--accent);text-align:center">✦ você investe aqui</p>
+      </div>
+      <div class="fcell">
+        <div class="fstage fi">Atração</div>
+        <div class="fbubble fi">Eu<br>gosto</div>
+        <div class="fdesc">Interesse desperta</div>
+        <p style="margin-top:8px;font-size:9px;color:var(--muted);text-align:center">⚠ cliente some</p>
+      </div>
+      <div class="fcell">
+        <div class="fstage fi">Consideração</div>
+        <div class="fbubble fi">Quero<br>saber mais</div>
+        <div class="fdesc">Pesquisa e compara</div>
+        <p style="margin-top:8px;font-size:9px;color:var(--muted);text-align:center">⚠ cliente some</p>
+      </div>
+      <div class="fcell">
+        <div class="fstage fa">Ação</div>
+        <div class="fbubble fa">Vou<br>comprar</div>
+        <div class="fdesc">Decide e compra</div>
+        <p style="margin-top:8px;font-size:9px;font-weight:700;color:var(--accent);text-align:center">✦ você tenta aqui</p>
+      </div>
+      <div class="fcell">
+        <div class="fstage fi">Apologia</div>
+        <div class="fbubble fi">Eu<br>recomendo</div>
+        <div class="fdesc">Recompra e indica</div>
+        <p style="margin-top:8px;font-size:9px;color:var(--muted);text-align:center">⚠ raramente chega</p>
+      </div>
+    </div>
+    <div data-a class="card tc" style="padding:14px 24px">
+      <p class="sm mu">O dinheiro vai embora porque o funil tem buraco. <span style="color:var(--text)">A Salto trabalha as 5 etapas.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S5 — POR QUE FALHA
+════════════════════════════════════════ -->
+<div class="slide" data-s="5">
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>O PROBLEMA DO MERCADO</div>
+    <h2 data-a class="hl mb10">O mercado vende <span class="mu" style="font-weight:900">plataforma.</span><br><span class="hl-acc">A Salto vende resultado.</span></h2>
+    <div data-a class="two">
+      <div class="card" style="opacity:.65">
+        <p class="xs bold upper ls mu mb4">O que o mercado oferece</p>
+        <div class="svc"><div class="svc-dot" style="background:var(--muted)"></div><span class="sm mu">Pacote de anúncios por plataforma</span></div>
+        <div class="svc"><div class="svc-dot" style="background:var(--muted)"></div><span class="sm mu">Posts em redes sociais</span></div>
+        <div class="svc"><div class="svc-dot" style="background:var(--muted)"></div><span class="sm mu">"Gestão de tráfego"</span></div>
+        <div class="svc"><div class="svc-dot" style="background:var(--muted)"></div><span class="sm mu">Relatórios de alcance e impressão</span></div>
+        <div class="svc" style="border:none"><div class="svc-dot" style="background:var(--muted)"></div><span class="sm mu">Entrega separada por fornecedor</span></div>
+      </div>
+      <div class="card card-hot">
+        <p class="xs bold upper ls acc mb4">Por que não funciona</p>
+        <div class="svc"><div class="svc-dot"></div><span class="sm">Tráfego sem funil é custo, não investimento</span></div>
+        <div class="svc"><div class="svc-dot"></div><span class="sm">Post sem oferta não converte</span></div>
+        <div class="svc"><div class="svc-dot"></div><span class="sm">Ninguém mexe no processo de venda</span></div>
+        <div class="svc"><div class="svc-dot"></div><span class="sm">Resultado depende do que vem depois do clique</span></div>
+        <div class="svc" style="border:none"><div class="svc-dot"></div><span class="sm">Você coordena, eles entregam em caixinhas</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S6 — SALTO PENSA DIFERENTE
+════════════════════════════════════════ -->
+<div class="slide" data-s="6">
+  <div class="gc" style="opacity:.09"></div>
+  <div class="wfull mw900 tc">
+    <div data-a class="badge mxa mb6" style="display:inline-flex"><span class="dot"></span>COMO A SALTO PENSA DIFERENTE</div>
+    <h2 data-a class="hl mb2">Não vendemos serviço.</h2>
+    <h2 data-a class="hl hl-acc mb8">Entregamos crescimento.</h2>
+    <div data-a class="card mb8" style="text-align:left;padding:22px 28px">
+      <p class="sm mu lsr">"A Salto começa pelo diagnóstico do seu negócio. O que vem depois — tráfego pago, funil, time de vendas, produto, logística — depende do que está travando o seu resultado. <span style="color:var(--text)">Você não compra um pacote. Você contrata uma parceria focada em um número: crescimento.</span>"</p>
+    </div>
+    <div class="three">
+      <div data-a class="card" style="text-align:left">
+        <p style="font-size:20px;margin-bottom:10px">🔍</p>
+        <p class="sm bold mb2">Diagnóstico antes de qualquer ação</p>
+        <p class="xs mu lsr">Entendemos o negócio antes de recomendar qualquer investimento</p>
+      </div>
+      <div data-a class="card" style="text-align:left">
+        <p style="font-size:20px;margin-bottom:10px">⚙️</p>
+        <p class="sm bold mb2">Visão de todo o processo comercial</p>
+        <p class="xs mu lsr">Do primeiro contato do lead até o cliente se tornar recorrente</p>
+      </div>
+      <div data-a class="card" style="text-align:left">
+        <p style="font-size:20px;margin-bottom:10px">📈</p>
+        <p class="sm bold mb2">Responsabilidade pelo resultado</p>
+        <p class="xs mu lsr">Não entregamos relatório de cliques. Entregamos meta acordada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S7 — VELOCIDADE DE EXECUÇÃO
+════════════════════════════════════════ -->
+<div class="slide" data-s="7">
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>PRINCÍPIO DA VELOCIDADE DE EXECUÇÃO</div>
+    <h2 data-a class="hl mb10">Enquanto outros planejam,<br><span class="hl-acc">a gente já está rodando.</span></h2>
+    <div data-a class="two mb6">
+      <div>
+        <p class="xs bold upper ls mu mb4">Mercado tradicional</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Semanas 1–2</span><div class="tbar tbar-s">Onboarding</div>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Semanas 3–4</span><div class="tbar tbar-s">Finaliza estratégia</div>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Mês 2</span><div class="tbar tbar-s">Prepara materiais</div>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Mês 3</span><div class="tbar tbar-s">Primeiros anúncios</div>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Mês 4</span><div class="tbar tbar-s">"Vamos otimizar"</div>
+          </div>
+        </div>
+        <p class="xs mu" style="margin-top:10px">Você pagou 3 meses sem ver resultado real.</p>
+      </div>
+      <div>
+        <p class="xs bold upper ls acc mb4">Salto</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Dias 1–5</span><div class="tbar tbar-f">Diagnóstico + plano</div>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Dia 6</span><div class="tbar tbar-f">Primeiras ações no ar</div>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">
+            <span class="xs mu">Dia 7+</span><div class="tbar tbar-f">Execução + medição diária</div>
+          </div>
+        </div>
+        <p class="xs acc" style="margin-top:10px;font-weight:700">Em menos de uma semana você já está em movimento.</p>
+      </div>
+    </div>
+    <div data-a class="card card-hot">
+      <p class="xs bold upper ls acc mb4">Check-in diário — não é reunião, é parceria</p>
+      <div style="display:flex;gap:0">
+        <div style="flex:1;text-align:center;padding:0 12px">
+          <p style="font-size:22px;font-weight:900;color:var(--accent)">01</p>
+          <p class="xs" style="margin-top:4px">O que a Salto fez hoje?</p>
+        </div>
+        <div style="width:1px;background:var(--border)"></div>
+        <div style="flex:1;text-align:center;padding:0 12px">
+          <p style="font-size:22px;font-weight:900;color:var(--accent)">02</p>
+          <p class="xs" style="margin-top:4px">O que você vendeu hoje?</p>
+        </div>
+        <div style="width:1px;background:var(--border)"></div>
+        <div style="flex:1;text-align:center;padding:0 12px">
+          <p style="font-size:22px;font-weight:900;color:var(--accent)">03</p>
+          <p class="xs" style="margin-top:4px">O número está andando?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S8 — QUEM É A SALTO
+════════════════════════════════════════ -->
+<div class="slide" data-s="8">
+  <div class="gco"></div>
+  <div class="wfull mw860">
+    <div data-a class="badge mb6"><span class="dot"></span>QUEM É A SALTO</div>
+    <h2 data-a class="hl mb2">Consultoria comercial para empresas que querem</h2>
+    <h2 data-a class="hl hl-acc mb10">crescer de forma estruturada.</h2>
+    <div class="two" style="grid-template-columns:1fr 1.3fr;gap:32px;align-items:start">
+      <div data-a class="card" style="padding:26px">
+        <p class="xs bold upper ls acc mb4">Founder</p>
+        <p class="black" style="font-size:22px;margin-bottom:8px">Bruno Vieira</p>
+        <p class="sm mu lsr mb4">Especialista em integrar estratégia comercial com execução real para PMEs.</p>
+        <div class="divider" style="margin:14px 0"></div>
+        <p class="xs mu lsr">Diagnóstico, estruturação de processo de venda, tráfego orientado por resultado e treinamento de times comerciais.</p>
+      </div>
+      <div>
+        <div class="three mb4" style="gap:10px">
+          <div data-a class="card tc" style="padding:18px 10px">
+            <div class="stat-v">+5</div>
+            <div class="stat-l">Anos no mercado</div>
+          </div>
+          <div data-a class="card tc" style="padding:18px 10px">
+            <div class="stat-v">47</div>
+            <div class="stat-l">Diagnósticos</div>
+          </div>
+          <div data-a class="card tc" style="padding:18px 10px">
+            <div class="stat-v">6</div>
+            <div class="stat-l">Pilares de atuação</div>
+          </div>
+        </div>
+        <div data-a class="card card-hot" style="padding:18px 22px">
+          <p class="sm mu lsr">"Diagnóstico gratuito. Plano em 48h. <span style="color:var(--text)">Execução na primeira semana.</span>"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S9 — O TIME
+════════════════════════════════════════ -->
+<div class="slide" data-s="9">
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>VALOR DA ASSESSORIA</div>
+    <h2 data-a class="hl mb2">Com a Salto, você não contrata um serviço.</h2>
+    <h2 data-a class="hl hl-acc mb8">Você ganha um time.</h2>
+    <div data-a>
+      <table class="ctbl">
+        <thead>
+          <tr>
+            <th class="mu" style="width:46%">Montando por conta</th>
+            <th class="mu" style="width:26%">Custo médio / mês</th>
+            <th class="acc" style="width:28%">Com a Salto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="mu sm">Designer gráfico</td><td style="color:#ff7070;font-size:12px">R$ 3.000–5.000</td><td class="acc sm bold">✓ Incluso</td></tr>
+          <tr><td class="mu sm">Gestor de tráfego (Google + Meta)</td><td style="color:#ff7070;font-size:12px">R$ 3.000–5.000</td><td class="acc sm bold">✓ Incluso</td></tr>
+          <tr><td class="mu sm">Copywriter</td><td style="color:#ff7070;font-size:12px">R$ 2.500–4.000</td><td class="acc sm bold">✓ Incluso</td></tr>
+          <tr><td class="mu sm">Consultor de vendas</td><td style="color:#ff7070;font-size:12px">R$ 4.000–8.000</td><td class="acc sm bold">✓ Incluso</td></tr>
+          <tr><td class="mu sm">Produtor audiovisual</td><td style="color:#ff7070;font-size:12px">R$ 2.500–4.000</td><td class="acc sm bold">✓ Incluso</td></tr>
+          <tr><td class="mu sm">Estrategista comercial</td><td style="color:#ff7070;font-size:12px">R$ 5.000–10.000</td><td class="acc sm bold">✓ Incluso</td></tr>
+          <tr>
+            <td class="black" style="font-size:13px;padding:14px">Total</td>
+            <td style="color:#ff7070;font-size:13px;font-weight:900;padding:14px">R$ 20.000–36.000</td>
+            <td class="acc black" style="font-size:13px;padding:14px">A partir de R$ [X]/mês</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p data-a class="xs mu mt4 tc">Tudo integrado. Focado no seu resultado. Sem custo de gestão de fornecedor.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S10 — 6 ÁREAS
+════════════════════════════════════════ -->
+<div class="slide" data-s="10">
+  <div class="gco"></div>
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>ONDE O CRESCIMENTO TRAVA</div>
+    <h2 data-a class="hl mb2">Crescimento trava em <span class="hl-acc">6 lugares.</span></h2>
+    <p data-a class="mu sm mb8">A maioria das empresas tem problemas em mais de um.</p>
+    <div class="three">
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:10px">📣</p>
+        <p class="sm black mb2">Aquisição</p>
+        <p class="xs mu lsr">Como clientes novos chegam até você: tráfego, orgânico, indicação, prospecção ativa.</p>
+      </div>
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:10px">🔀</p>
+        <p class="sm black mb2">Funil de vendas</p>
+        <p class="xs mu lsr">O que acontece do primeiro contato até o fechamento.</p>
+      </div>
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:10px">💡</p>
+        <p class="sm black mb2">Oferta</p>
+        <p class="xs mu lsr">O que você vende, como precifica e como apresenta ao cliente.</p>
+      </div>
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:10px">🧑‍💼</p>
+        <p class="sm black mb2">Time comercial</p>
+        <p class="xs mu lsr">Processo, script, treinamento, meta e gestão de oportunidades.</p>
+      </div>
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:10px">🔁</p>
+        <p class="sm black mb2">Retenção e reativação</p>
+        <p class="xs mu lsr">Clientes que compraram e sumiram — a mina de ouro ignorada.</p>
+      </div>
+      <div data-a class="card card-hot">
+        <p style="font-size:20px;margin-bottom:10px">📊</p>
+        <p class="sm black mb2">Dados e decisão</p>
+        <p class="xs mu lsr">O que você mede e como usa para crescer sem achismo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S11 — LEADS QUE MORREM
+════════════════════════════════════════ -->
+<div class="slide" data-s="11">
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>CRM + AUTOMAÇÃO</div>
+    <h2 data-a class="hl mb10">O lead chegou. <span class="hl-acc">E agora?</span></h2>
+    <div data-a class="two mb6">
+      <div>
+        <p class="xs bold upper ls mu mb4">Sem processo — hoje</p>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div class="flow-step flow-dim">📣 Cliente vê o anúncio</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--muted)">↓</div>
+          <div class="flow-step flow-dim">💬 Manda mensagem no WhatsApp</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--muted)">↓</div>
+          <div class="flow-step flow-dim">⏳ Vendedor vê... quando lembra</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--muted)">↓</div>
+          <div class="flow-step flow-dim">🐌 Responde horas depois</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--muted)">↓</div>
+          <div class="flow-step flow-bad">❌ Cliente comprou no concorrente</div>
+        </div>
+      </div>
+      <div>
+        <p class="xs bold upper ls acc mb4">Com a Salto</p>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div class="flow-step flow-hot">📣 Cliente vê o anúncio</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--accent)">↓</div>
+          <div class="flow-step flow-hot">🤖 CRM captura automaticamente</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--accent)">↓</div>
+          <div class="flow-step flow-hot">⚡ WhatsApp automático em segundos</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--accent)">↓</div>
+          <div class="flow-step flow-hot">📋 Pipeline visível + script pronto</div>
+          <div style="padding:3px 0 3px 16px;font-size:10px;color:var(--accent)">↓</div>
+          <div class="flow-step flow-hot">✅ Vendedor foca em fechar</div>
+        </div>
+      </div>
+    </div>
+    <div data-a class="card card-hot tc" style="padding:14px 24px">
+      <p class="sm mu">Conversão cai <span class="acc black">80%</span> se a primeira resposta demora mais de 5 minutos.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S12 — O QUE FAZEMOS
+════════════════════════════════════════ -->
+<div class="slide" data-s="12">
+  <div class="gco"></div>
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>NOSSOS SERVIÇOS</div>
+    <h2 data-a class="hl mb2">Do diagnóstico ao resultado —</h2>
+    <h2 data-a class="hl hl-acc mb8">tudo integrado.</h2>
+    <div class="two">
+      <div>
+        <div data-a class="svc"><div class="svc-dot"></div><div><p class="sm bold">Tráfego pago</p><p class="xs mu">Google e Meta orientados por meta de receita</p></div></div>
+        <div data-a class="svc"><div class="svc-dot"></div><div><p class="sm bold">Funil de conversão</p><p class="xs mu">Da chegada do lead até o fechamento estruturado</p></div></div>
+        <div data-a class="svc"><div class="svc-dot"></div><div><p class="sm bold">Estratégia de oferta</p><p class="xs mu">O que vender, como precificar, como apresentar</p></div></div>
+        <div data-a class="svc" style="border:none"><div class="svc-dot"></div><div><p class="sm bold">CRM e automação comercial</p><p class="xs mu">Captura automática, WhatsApp instantâneo, pipeline visível</p></div></div>
+      </div>
+      <div>
+        <div data-a class="svc"><div class="svc-dot"></div><div><p class="sm bold">Playbook e treinamento de vendas</p><p class="xs mu">Processo documentado, script por etapa, padrão de atendimento</p></div></div>
+        <div data-a class="svc"><div class="svc-dot"></div><div><p class="sm bold">PDV e experiência de compra</p><p class="xs mu">O que acontece quando o cliente chega</p></div></div>
+        <div data-a class="svc"><div class="svc-dot"></div><div><p class="sm bold">Construção de produto / serviço</p><p class="xs mu">Novas fontes de receita, pacotes, recorrência</p></div></div>
+        <div data-a class="svc" style="border:none"><div class="svc-dot"></div><div><p class="sm bold">Logística e entrega</p><p class="xs mu">O processo que impacta recompra e NPS</p></div></div>
+      </div>
+    </div>
+    <p data-a class="xs mu mt6 tc">Não aplicamos tudo de uma vez — o diagnóstico define o que vem primeiro.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S13 — METODOLOGIA TRÁFEGO
+════════════════════════════════════════ -->
+<div class="slide" data-s="13">
+  <div class="gc" style="opacity:.07"></div>
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>METODOLOGIA DE TRÁFEGO</div>
+    <h2 data-a class="hl mb2">Enquanto outros repetem o mesmo anúncio,</h2>
+    <h2 data-a class="hl hl-acc mb8">a gente opera um ciclo.</h2>
+    <div data-a class="cycle-wrap">
+      <div class="cycard hot">
+        <div class="cynum">01</div>
+        <div class="cytitle">Exploração</div>
+        <div class="cydesc">Testamos vários anúncios com orçamento baixo. Em <strong style="color:var(--text)">4 dias</strong> já sabemos qual direção funciona. Eliminamos o que não performa antes de gastar.</div>
+      </div>
+      <div class="cycard">
+        <div class="cynum">02</div>
+        <div class="cytitle">Lapidação</div>
+        <div class="cydesc">O anúncio vencedor está bruto. Testamos variações: título, imagem, CTA. Refinamos até extrair o máximo de resultado.</div>
+      </div>
+      <div class="cycard">
+        <div class="cynum">04</div>
+        <div class="cytitle">Extração</div>
+        <div class="cydesc">Como vender <strong style="color:var(--text)">mais para quem já comprou</strong>: upsell, cross-sell, recompra, indicação. Custo de aquisição zero.</div>
+      </div>
+      <div class="cycard hot">
+        <div class="cynum">03</div>
+        <div class="cytitle">Escala</div>
+        <div class="cydesc">Com o anúncio validado, aumentamos o investimento com confiança. Não é "botar dinheiro e torcer" — é escalar o que provou que funciona.</div>
+      </div>
+      <div class="cy-inf">∞</div>
+    </div>
+    <div data-a class="card mt4 tc" style="padding:13px 22px">
+      <p class="sm mu">Sempre há anúncios em Exploração e Lapidação rodando em paralelo. <span style="color:var(--text)">O ciclo nunca para.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S14 — PLAYBOOK
+════════════════════════════════════════ -->
+<div class="slide" data-s="14">
+  <div class="wfull mw900">
+    <div data-a class="badge mb6"><span class="dot"></span>PROCESSO E TREINAMENTO</div>
+    <h2 data-a class="hl mb2">Lead sem processo é desperdício.</h2>
+    <h2 data-a class="hl hl-acc mb4">Processo sem treinamento é papel.</h2>
+    <p data-a class="mu sm mb8" style="max-width:660px">"A maioria das empresas gera lead e depende do jeito que cada vendedor atende. Um atende bem, outro não. O resultado varia de pessoa para pessoa — e você não tem controle."</p>
+    <div class="three">
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:12px">📖</p>
+        <p class="sm black mb4">Playbook de vendas</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <p class="xs mu">• Script por canal (WhatsApp, tel, presencial)</p>
+          <p class="xs mu">• Respostas para objeções comuns</p>
+          <p class="xs mu">• Guia de qualificação de lead</p>
+          <p class="xs mu">• Documento vivo — atualizado com o time</p>
+        </div>
+      </div>
+      <div data-a class="card">
+        <p style="font-size:20px;margin-bottom:12px">⚙️</p>
+        <p class="sm black mb4">Processo padronizado</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <p class="xs mu">• Fluxo definido: quem faz, quando, como</p>
+          <p class="xs mu">• Padrão de linguagem da marca</p>
+          <p class="xs mu">• Critérios claros de qualificação</p>
+          <p class="xs mu">• Quando avançar, quando desqualificar</p>
+        </div>
+      </div>
+      <div data-a class="card card-hot">
+        <p style="font-size:20px;margin-bottom:12px">🎯</p>
+        <p class="sm black mb4">Treinamento do time</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <p class="xs mu">• Sessões práticas com simulação</p>
+          <p class="xs mu">• Feedback individualizado por vendedor</p>
+          <p class="xs mu">• Acompanhamento nas primeiras semanas</p>
+          <p class="xs mu">• Processo aplicado, não teórico</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S15 — COMO FUNCIONA
+════════════════════════════════════════ -->
+<div class="slide" data-s="15">
+  <div class="gc" style="opacity:.07"></div>
+  <div class="wfull mw900 tc">
+    <div data-a class="badge mxa mb6" style="display:inline-flex"><span class="dot"></span>NOSSO PROCESSO</div>
+    <h2 data-a class="hl mb2">Como é trabalhar</h2>
+    <h2 data-a class="hl hl-acc mb10">com a Salto</h2>
+    <div data-a class="four">
+      <div class="pstep">
+        <div class="pnum">01</div>
+        <div class="ptitle">Diagnóstico</div>
+        <div class="pdesc">Mapeamos os 6 pontos do processo comercial. Sem custo, sem compromisso.</div>
+        <p style="margin-top:10px;font-size:9px;font-weight:700;color:var(--accent)">GRATUITO</p>
+      </div>
+      <div class="pstep">
+        <div class="pnum">02</div>
+        <div class="ptitle">Estratégia</div>
+        <div class="pdesc">Definimos as prioridades — o que atacar primeiro para resultado mais rápido.</div>
+        <p style="margin-top:10px;font-size:9px;color:var(--muted)">48 horas</p>
+      </div>
+      <div class="pstep">
+        <div class="pnum">03</div>
+        <div class="ptitle">Execução</div>
+        <div class="pdesc">Implementamos ao seu lado — tráfego, funil, time, oferta, CRM. Na ordem certa.</div>
+        <p style="margin-top:10px;font-size:9px;color:var(--muted)">Semana 1</p>
+      </div>
+      <div class="pstep">
+        <div class="pnum">04</div>
+        <div class="ptitle">Crescimento</div>
+        <div class="pdesc">Medimos, ajustamos, escalamos. Check-in diário + reunião semanal.</div>
+        <p style="margin-top:10px;font-size:9px;color:var(--muted)">Contínuo</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S16 — 90 DIAS
+════════════════════════════════════════ -->
+<div class="slide" data-s="16">
+  <div class="gco"></div>
+  <div class="wfull mw860">
+    <div data-a class="badge mb6"><span class="dot"></span>RESULTADO ESPERADO</div>
+    <h2 data-a class="hl mb2">Em <span class="hl-acc">90 dias,</span></h2>
+    <h2 data-a class="hl mb8">você tem:</h2>
+    <div>
+      <div data-a class="chk"><div class="chk-ico">✓</div><div><p class="sm bold">Processo de venda documentado e aplicado pelo time</p><p class="xs mu" style="margin-top:4px">Padrão definido, script em uso, atendimento uniforme</p></div></div>
+      <div data-a class="chk"><div class="chk-ico">✓</div><div><p class="sm bold">Funil ativo gerando leads qualificados com custo controlado</p><p class="xs mu" style="margin-top:4px">Ciclo Exploração → Lapidação → Escala rodando</p></div></div>
+      <div data-a class="chk"><div class="chk-ico">✓</div><div><p class="sm bold">CRM organizado com pipeline visível</p><p class="xs mu" style="margin-top:4px">Captura automática, follow-up sem depender de memória</p></div></div>
+      <div data-a class="chk"><div class="chk-ico">✓</div><div><p class="sm bold">Oferta revisada e comunicada de forma que converte</p><p class="xs mu" style="margin-top:4px">Proposta certa para o público certo</p></div></div>
+      <div data-a class="chk" style="border:none"><div class="chk-ico">✓</div><div><p class="sm bold">Relatório de resultado — sem achismo, com dado</p><p class="xs mu" style="margin-top:4px">Decisões baseadas em número, não em intuição</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S17 — INVESTIMENTO
+════════════════════════════════════════ -->
+<div class="slide" data-s="17">
+  <div class="gc" style="opacity:.09"></div>
+  <div class="wfull mw860">
+    <div data-a class="badge mb6"><span class="dot"></span>INVESTIMENTO</div>
+    <h2 data-a class="hl mb8">Uma pergunta antes de falar de número</h2>
+    <div data-a class="card mb8" style="padding:24px 30px">
+      <p class="sm mu lsr">"Quanto está custando não ter esse processo funcionando? Um cliente fiel que sumiu. Uma campanha que não converteu. Um vendedor que passa o dia no WhatsApp sem fechar. <span style="color:var(--text)">Esse é o custo real da ausência de processo.</span>"</p>
+    </div>
+    <div data-a class="two">
+      <div class="price-card">
+        <p class="xs bold upper ls acc mb2">Diagnóstico</p>
+        <p style="font-size:44px;font-weight:900;color:var(--text);margin:8px 0">Gratuito</p>
+        <p class="xs mu lsr">1h para mapear os 6 pontos do seu processo comercial. Sem custo, sem compromisso.</p>
+      </div>
+      <div class="price-card feat">
+        <p class="xs bold upper ls acc mb2">Assessoria mensal</p>
+        <p style="font-size:36px;font-weight:900;color:var(--text);margin:8px 0;line-height:1.2">A partir de<br><span class="acc">R$ [X]</span></p>
+        <p class="xs mu lsr">Definido após diagnóstico, de acordo com o escopo. Sem contrato longo no início.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     S18 — PRÓXIMO PASSO
+════════════════════════════════════════ -->
+<div class="slide" data-s="18">
+  <div class="gc"></div>
+  <div class="ring" style="width:360px;height:360px;--ro:.07;animation-delay:0s"></div>
+  <div class="ring" style="width:600px;height:600px;--ro:.04;animation-delay:1s"></div>
+  <div style="position:relative;z-index:10;width:100%;max-width:720px;text-align:center">
+    <div data-a class="badge mxa mb6" style="display:inline-flex"><span class="dot"></span>O PRÓXIMO PASSO É SIMPLES</div>
+    <h2 data-a class="hl mb2">Começamos pelo</h2>
+    <h2 data-a class="hl hl-acc mb8">diagnóstico gratuito.</h2>
+
+    <div data-a style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;text-align:left">
+      <div class="card" style="padding:16px 20px">
+        <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">O que mais importa para você</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">Velocidade · Custo · Especialização · Referências de clientes</p>
+      </div>
+      <div class="card" style="padding:16px 20px">
+        <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Quando precisa disso funcionando</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">Qual o prazo ideal para ver os primeiros resultados?</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
+      <div data-a class="nstep">
+        <div class="nnum">01</div>
+        <div style="text-align:left">
+          <p class="sm black mb2">Diagnóstico gratuito</p>
+          <p class="xs mu">1h para mapear os 6 pontos do seu processo. Sem custo, sem compromisso.</p>
+        </div>
+      </div>
+      <div data-a class="nstep">
+        <div class="nnum">02</div>
+        <div style="text-align:left">
+          <p class="sm black mb2">Apresentação do plano</p>
+          <p class="xs mu">Em até 48h você recebe o diagnóstico e as prioridades recomendadas.</p>
+        </div>
+      </div>
+      <div data-a class="nstep" style="border-color:rgba(255,92,0,.3);background:rgba(255,92,0,.05)">
+        <div class="nnum">03</div>
+        <div style="text-align:left">
+          <p class="sm black mb2">Decisão</p>
+          <p class="xs mu">Você decide se quer avançar, com o que e quando. Sem pressão, sem contrato longo.</p>
+        </div>
+      </div>
+    </div>
+    <div data-a class="divider mb6"></div>
+    <p data-a class="xs mu">Bruno Vieira &nbsp;·&nbsp; <span class="acc bold">WhatsApp: [número]</span> &nbsp;·&nbsp; saltoup.com</p>
+  </div>
+</div>
+
+</div><!-- #deck -->
+
+<div id="nav">
+  <button class="nb" id="bp">←</button>
+  <span id="ctr">01 / 19</span>
+  <button class="nb" id="bn">→</button>
+</div>
+
+<!-- Reset personalização -->
+<button id="reset-btn" title="Personalizar apresentação"
+  style="position:fixed;bottom:28px;left:24px;z-index:300;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);background:transparent;color:rgba(255,255,255,0.18);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .25s;line-height:1"
+  onmouseover="this.style.color='rgba(255,255,255,0.55)';this.style.borderColor='rgba(255,255,255,0.22)'"
+  onmouseout="this.style.color='rgba(255,255,255,0.18)';this.style.borderColor='rgba(255,255,255,0.06)'">↺</button>
+
+<!-- Hamburger -->
+<button id="hbtn"><span></span><span></span><span></span></button>
+<div id="hoverlay"></div>
+<div id="hdrawer">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid var(--border)">
+    <p id="hdtitle" style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin:0;padding:0;border:none">Navegar</p>
+    <button onclick="closeMenu()" style="width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1">×</button>
+  </div>
+  <div id="hlist"></div>
+</div>
+
+<script>
+let cur = 0;
+const slides = Array.from(document.querySelectorAll('.slide'));
+const N = slides.length;
+
+const TITLES = [
+  'Capa','Apresentação','Agenda da Reunião','Sobre o Seu Negócio','O Cenário','O Custo do Problema','Por que Agora','Esforço vs Sistema',
+  'Kotler 5A','Por que Falha','Salto Pensa Diferente',
+  'Velocidade de Execução','Quem é a Salto','O Time',
+  '6 Áreas','CRM + Automação','O que Fazemos',
+  'Metodologia Tráfego','Playbook','Como Funciona',
+  '90 Dias','Investimento','Próximo Passo'
+];
+
+function ui() {
+  document.getElementById('ctr').textContent = String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+  document.getElementById('bar').style.width = ((cur+1)/N*100)+'%';
+  document.getElementById('bp').disabled = cur===0;
+  document.getElementById('bn').disabled = cur===N-1;
+  history.replaceState(null,'','#slide-'+(cur+1));
+  document.querySelectorAll('.hitem').forEach((el,i)=>el.classList.toggle('hactive',i===cur));
+}
+
+function animIn(s) {
+  const els = s.querySelectorAll('[data-a]');
+  gsap.set(els,{opacity:0,y:26});
+  gsap.to(s,{opacity:1,duration:.35,ease:'power2.out'});
+  gsap.to(els,{opacity:1,y:0,duration:.55,stagger:.07,ease:'power3.out',delay:.1});
+}
+
+function animOut(s,cb) {
+  const els = s.querySelectorAll('[data-a]');
+  gsap.to(els,{opacity:0,y:-14,duration:.18,stagger:.025,ease:'power2.in'});
+  gsap.to(s,{opacity:0,duration:.28,ease:'power2.in',delay:.04,onComplete:cb});
+}
+
+function goTo(n) {
+  if(n<0||n>=N||n===cur) return;
+  const prev = slides[cur], next = slides[n];
+  prev.style.pointerEvents='none';
+  animOut(prev,()=>{
+    prev.classList.remove('active');
+    cur=n;
+    next.classList.add('active');
+    animIn(next);
+    ui();
+  });
+}
+
+document.getElementById('bp').onclick = ()=>goTo(cur-1);
+document.getElementById('bn').onclick = ()=>goTo(cur+1);
+
+document.addEventListener('keydown',e=>{
+  if(document.activeElement.tagName==='INPUT') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); goTo(cur+1); }
+  if(e.key==='ArrowLeft' ||e.key==='ArrowUp')                 { e.preventDefault(); goTo(cur-1); }
+});
+
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(dx<-50) goTo(cur+1);
+  if(dx>50)  goTo(cur-1);
+});
+
+// ── Hamburger menu ──
+const hlist = document.getElementById('hlist');
+TITLES.forEach((t,i)=>{
+  const btn = document.createElement('button');
+  btn.className = 'hitem';
+  btn.innerHTML = `<span class="hnum">${String(i+1).padStart(2,'0')}</span><span class="htxt">${t}</span>`;
+  btn.onclick = ()=>{ goTo(i); closeMenu(); };
+  hlist.appendChild(btn);
+});
+
+function openMenu(){ document.getElementById('hdrawer').classList.add('open'); document.getElementById('hoverlay').classList.add('open'); }
+function closeMenu(){ document.getElementById('hdrawer').classList.remove('open'); document.getElementById('hoverlay').classList.remove('open'); }
+document.getElementById('hbtn').onclick = ()=>document.getElementById('hdrawer').classList.contains('open')?closeMenu():openMenu();
+document.getElementById('hoverlay').onclick = closeMenu;
+
+// ── Init: lê hash para retomar slide ──
+const hashN = parseInt(location.hash.replace('#slide-','')) - 1;
+cur = (hashN >= 0 && hashN < N) ? hashN : 0;
+
+// ── Personalização ──
+const LS = { nome: 'salto_pres_nome', emp: 'salto_pres_empresa', logo: 'salto_pres_logo' };
+let _logoB64 = null;
+
+function applyData(nome, empresa, logo) {
+  const guestEl   = document.getElementById('s1guest');
+  const guestWrap = document.getElementById('s1guest-wrap');
+  const logoWrap  = document.getElementById('s1logo-wrap');
+  const logoEl    = document.getElementById('s1logo');
+  if (nome || empresa) {
+    guestEl.textContent = [nome, empresa].filter(Boolean).join(' · ');
+    guestWrap.style.display = 'block';
+  } else {
+    guestWrap.style.display = 'none';
+  }
+  if (logo) {
+    logoEl.src = logo;
+    logoWrap.style.display = 'block';
+  } else {
+    logoWrap.style.display = 'none';
+  }
+}
+
+function showSetup() { document.getElementById('setup').style.display = 'flex'; }
+function hideSetup() { document.getElementById('setup').style.display = 'none'; }
+
+document.getElementById('inp-logo').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    _logoB64 = ev.target.result;
+    const prev = document.getElementById('logo-preview');
+    prev.src = _logoB64;
+    prev.style.display = 'block';
+    const lbl = document.getElementById('logo-label-txt');
+    lbl.textContent = '✓ Logo carregado';
+    lbl.style.color = '#FF5C00';
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('setup-ok').onclick = function() {
+  const nome    = document.getElementById('inp-nome').value.trim();
+  const empresa = document.getElementById('inp-empresa').value.trim();
+  localStorage.setItem(LS.nome, nome);
+  localStorage.setItem(LS.emp, empresa);
+  if (_logoB64) localStorage.setItem(LS.logo, _logoB64);
+  else localStorage.removeItem(LS.logo);
+  applyData(nome, empresa, _logoB64 || localStorage.getItem(LS.logo));
+  hideSetup();
+};
+
+['inp-nome','inp-empresa'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('setup-ok').click();
+  });
+});
+
+document.getElementById('reset-btn').onclick = function() {
+  [LS.nome, LS.emp, LS.logo].forEach(k => localStorage.removeItem(k));
+  _logoB64 = null;
+  document.getElementById('inp-nome').value = '';
+  document.getElementById('inp-empresa').value = '';
+  const prev = document.getElementById('logo-preview');
+  prev.style.display = 'none';
+  prev.src = '';
+  const lbl = document.getElementById('logo-label-txt');
+  lbl.textContent = 'Logo do cliente (opcional)';
+  lbl.style.color = '#666';
+  applyData('', '', null);
+  showSetup();
+};
+
+const savedNome = localStorage.getItem(LS.nome) || '';
+const savedEmp  = localStorage.getItem(LS.emp)  || '';
+const savedLogo = localStorage.getItem(LS.logo) || null;
+
+if (savedNome || savedEmp || savedLogo) {
+  applyData(savedNome, savedEmp, savedLogo);
+} else {
+  showSetup();
+}
+
+slides[cur].classList.add('active');
+animIn(slides[cur]);
+ui();
+lucide.createIcons();
+</script>
+</body>
+</html>
+Tecnologia sem processo é custo. Com processo, é vantagem competitiva.
+
+Com mais de 20 anos de experiência em vendas e uma empresa de tecnologia por trás — sites, apps, plataformas, automações
+e IA — percebemos um padrão que mudou tudo.
+
+A tecnologia estava impecável. Os resultados, nem sempre.
+
+O problema raramente era a ferramenta. Era o processo por trás dela.
+
+Foi aí que nasceu a Salto — não para substituir a tecnologia, mas para garantir que ela gere resultado de verdade.
+
+Estratégia de vendas, marketing e CRM integrados, alinhados com tudo de melhor que a tecnologia pode oferecer.
+
+→ Diagnóstico gratuito, sem compromisso. Link na bio.
+
+---
+#vendas #estrategiadevendas #marketingdigital #CRM
+#tecnologia #automação #inteligenciaartificial #PME
+#consultoria #gestaocomercial #salesstrategy #resultados
+#saltoassessoria

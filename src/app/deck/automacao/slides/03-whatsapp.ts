@@ -106,8 +106,8 @@ export const slidesWhatsapp = `
     <div data-a style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-bottom:36px">
 
       <div class="card" style="padding:24px 20px;text-align:center">
-        <i data-lucide="zap" style="font-size:28px;color:var(--accent);display:block;margin:0 auto 12px"></i>
-        <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:8px;text-transform:uppercase">GATILHO</p>
+        <i data-lucide="zap" style="font-size:44px;color:var(--accent);display:block;margin:0 auto 14px"></i>
+        <p style="font-size:13px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:10px;text-transform:uppercase">GATILHO</p>
         <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.6">Algo acontece — mensagem, pedido, hora do dia, formulário preenchido</p>
       </div>
 
@@ -116,8 +116,8 @@ export const slidesWhatsapp = `
       </div>
 
       <div class="card" style="padding:24px 20px;text-align:center;border-color:rgba(255,92,0,.2);background:rgba(255,92,0,.03)">
-        <i data-lucide="settings" style="font-size:28px;color:var(--accent);display:block;margin:0 auto 12px"></i>
-        <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:8px;text-transform:uppercase">PROCESSO</p>
+        <i data-lucide="settings" style="font-size:44px;color:var(--accent);display:block;margin:0 auto 14px"></i>
+        <p style="font-size:13px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:10px;text-transform:uppercase">PROCESSO</p>
         <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.6">A automação executa as regras que definimos juntos</p>
       </div>
 
@@ -126,8 +126,8 @@ export const slidesWhatsapp = `
       </div>
 
       <div class="card" style="padding:24px 20px;text-align:center">
-        <i data-lucide="send" style="font-size:28px;color:var(--accent);display:block;margin:0 auto 12px"></i>
-        <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:8px;text-transform:uppercase">AÇÃO</p>
+        <i data-lucide="send" style="font-size:44px;color:var(--accent);display:block;margin:0 auto 14px"></i>
+        <p style="font-size:13px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:10px;text-transform:uppercase">AÇÃO</p>
         <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.6">Mensagem enviada, planilha atualizada, sistema notificado</p>
       </div>
 

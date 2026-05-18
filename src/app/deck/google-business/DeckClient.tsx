@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import OSInline from './OSInline';
 import { slidesIntro } from './slides/01-intro';
 import { slidesRealidade } from './slides/02-realidade';
@@ -15,6 +15,22 @@ const TITLES = [
 ];
 
 export default function DeckClient() {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }, []);
+
+  useEffect(() => {
+    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => document.removeEventListener('fullscreenchange', onFsChange);
+  }, []);
+
   useEffect(() => {
     const w = window as typeof window & { lucide?: { createIcons: () => void }; closeMenu?: () => void };
 
@@ -205,6 +221,34 @@ export default function DeckClient() {
         <span id="ctr">01 / 09</span>
         <button className="nb" id="bn">→</button>
       </div>
+
+      <button
+        onClick={toggleFullscreen}
+        title={isFullscreen ? 'Sair do fullscreen' : 'Fullscreen'}
+        style={{
+          position: 'fixed', bottom: 24, left: 24, zIndex: 300,
+          width: 36, height: 36, borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,0.08)',
+          background: 'rgba(255,255,255,0.03)',
+          color: '#888', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'border-color .2s, color .2s',
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#FF5C00'; (e.currentTarget as HTMLButtonElement).style.color = '#FF5C00'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLButtonElement).style.color = '#888'; }}
+      >
+        {isFullscreen ? (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+            <path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+          </svg>
+        ) : (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 7V3h4"/><path d="M21 7V3h-4"/>
+            <path d="M3 17v4h4"/><path d="M21 17v4h-4"/>
+          </svg>
+        )}
+      </button>
 
       <button id="hbtn"><span /><span /><span /></button>
       <div id="hoverlay" />
