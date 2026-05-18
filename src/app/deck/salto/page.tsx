@@ -2,13 +2,12 @@ import { cookies } from 'next/headers';
 import PasswordGate from '../PasswordGate';
 import DeckWrapper from './DeckWrapper';
 
-export default async function DeckConstrucaoPage() {
+export default async function DeckSaltoPage() {
   const cookieStore = await cookies();
-  const authCookie = cookieStore.get('deck_auth');
-  const isAuthenticated = authCookie?.value === 'ok';
+  const isAuthenticated = cookieStore.get('deck_auth')?.value === 'ok';
 
   if (!isAuthenticated) {
-    return <PasswordGate returnTo="/deck/construcao" />;
+    return <PasswordGate returnTo="/deck/salto" />;
   }
 
   return <DeckWrapper />;

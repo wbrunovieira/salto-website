@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import SignaturePad, { type SignaturePadHandle } from '../SignaturePad';
+import SignaturePad, { type SignaturePadHandle } from '../google-business/SignaturePad';
 
 interface ServiceItem {
   id: number;
@@ -9,12 +9,6 @@ interface ServiceItem {
   qty: string;
   price: string;
 }
-
-const DEFAULT_SERVICES: ServiceItem[] = [
-  { id: 1, description: 'Configuração do Perfil da Empresa no Google', qty: '1', price: '' },
-  { id: 2, description: 'Estratégia de avaliações', qty: '1', price: '' },
-  { id: 3, description: 'Acompanhamento mensal', qty: '1 mês', price: '' },
-];
 
 function today() { return new Date().toLocaleDateString('pt-BR'); }
 function osNumber() {
@@ -45,7 +39,7 @@ export default function OSClient() {
   const [responsavel, setResponsavel] = useState('');
   const [telefone, setTelefone] = useState('');
   const [emailVal, setEmailVal] = useState('');
-  const [items, setItems] = useState<ServiceItem[]>(DEFAULT_SERVICES);
+  const [items, setItems] = useState<ServiceItem[]>([{ id: 1, description: '', qty: '1', price: '' }]);
   const [obs, setObs] = useState('');
   const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -398,10 +392,12 @@ export default function OSClient() {
           fontFamily: 'var(--font-deck, Montserrat, sans-serif)',
         }}
       >
-        {/* Header fora do card */}
+        {/* Header */}
         <div className="no-print" style={{ width: '100%', maxWidth: 760, marginBottom: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Salto" style={{ height: 22, opacity: 0.7 }} />
+          <a href="/deck" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="Salto" style={{ height: 22, opacity: 0.7 }} />
+          </a>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#555' }}>
             Ordem de Serviço
           </span>

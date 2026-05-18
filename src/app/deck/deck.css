@@ -34,7 +34,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--base);color:va
 .slide{position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;padding:56px 96px;
   opacity:0;pointer-events:none;overflow:hidden;z-index:2}
-.slide.active{pointer-events:all}
+.slide.active{pointer-events:all;opacity:1}
 
 /* ── Nav ── */
 #nav{position:fixed;bottom:28px;bottom:calc(28px + env(safe-area-inset-bottom,0px));

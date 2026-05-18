@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import OSInline from './OSInline';
 import { slidesIntro } from './slides/01-intro';
 import { slidesRealidade } from './slides/02-realidade';
@@ -15,35 +15,36 @@ const TITLES = [
 ];
 
 export default function DeckClient() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
-  const toggleFullscreen = useCallback(() => {
-    try {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        document.exitFullscreen().catch(() => {});
-      }
-    } catch { /* Fullscreen API not supported */ }
-  }, []);
-
   useEffect(() => {
+    const w = window as typeof window & { lucide?: { createIcons: () => void }; closeMenu?: () => void };
+
+    // ── Fullscreen — pure vanilla JS, no React state to avoid re-renders on fs change ──
+    function toggleFullscreen() {
+      try {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      } catch { /* not supported */ }
+    }
+
     const onFsChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      const isFs = !!document.fullscreenElement;
+      const fsEnter = document.getElementById('fs-enter');
+      const fsExit = document.getElementById('fs-exit');
+      if (fsEnter) fsEnter.style.display = isFs ? 'none' : 'block';
+      if (fsExit) fsExit.style.display = isFs ? 'block' : 'none';
       // Force layout recalculation on iPad after fullscreen/orientation change
       setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
     };
     document.addEventListener('fullscreenchange', onFsChange);
     document.addEventListener('webkitfullscreenchange', onFsChange);
-    return () => {
-      document.removeEventListener('fullscreenchange', onFsChange);
-      document.removeEventListener('webkitfullscreenchange', onFsChange);
-    };
-  }, []);
 
-  useEffect(() => {
-    const w = window as typeof window & { lucide?: { createIcons: () => void }; closeMenu?: () => void };
+    const fsbtn = document.getElementById('fsbtn');
+    if (fsbtn) fsbtn.onclick = toggleFullscreen;
 
+    // ── Slides ──
     let cur = 0;
     let transitioning = false;
     const slides = Array.from(document.querySelectorAll('.slide')) as HTMLElement[];
@@ -62,8 +63,8 @@ export default function DeckClient() {
       if (!gsap) { onUnlock(); return; }
       const els = s.querySelectorAll('[data-a]');
       gsap.set(Array.from(els), { opacity: 0, y: 26 });
-      gsap.to(s, { opacity: 1, duration: 0.35, ease: 'power2.out', onComplete: onUnlock } as Record<string, unknown>);
-      gsap.to(Array.from(els), { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.1 } as Record<string, unknown>);
+      // Slide visibility guaranteed by CSS (.slide.active { opacity:1 }) — only animate inner elements
+      gsap.to(Array.from(els), { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.06, onComplete: onUnlock } as Record<string, unknown>);
     }
 
     function animOut(s: HTMLElement, cb: () => void) {
@@ -96,8 +97,10 @@ export default function DeckClient() {
       prev.style.pointerEvents = 'none';
       animOut(prev, () => {
         prev.classList.remove('active');
+        prev.style.opacity = ''; // clear GSAP inline opacity so CSS controls it
         prev.style.pointerEvents = '';
         cur = n;
+        next.style.opacity = ''; // clear any stale opacity before CSS .active kicks in
         next.classList.add('active');
         animIn(next, () => { transitioning = false; });
         ui();
@@ -172,6 +175,8 @@ export default function DeckClient() {
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('fullscreenchange', onFsChange);
+      document.removeEventListener('webkitfullscreenchange', onFsChange);
       delete w.closeMenu;
     };
   }, []);
@@ -224,9 +229,12 @@ export default function DeckClient() {
       </div>
 
       <div id="deck">
-        {/* display:contents torna este div invisível no layout — slides ficam posicionados em #deck */}
-        <div dangerouslySetInnerHTML={{ __html: ALL_SLIDES }} style={{ display: 'contents' }} />
-        {/* Slide 10 — Ordem de Serviço como componente React */}
+        {/*
+          Use position:absolute instead of display:contents to avoid a Chrome bug
+          where display:contents children disappear during fullscreen transitions.
+        */}
+        <div dangerouslySetInnerHTML={{ __html: ALL_SLIDES }} style={{ position: 'absolute', inset: 0 }} />
+        {/* Slide final — Ordem de Serviço como componente React */}
         <div className="slide" style={{ overflow: 'auto', padding: 0, alignItems: 'center', justifyContent: 'flex-start' }}>
           <OSInline />
         </div>
@@ -238,9 +246,10 @@ export default function DeckClient() {
         <button className="nb" id="bn">→</button>
       </div>
 
+      {/* Fullscreen button — click handled by vanilla JS to avoid React re-renders */}
       <button
-        onClick={toggleFullscreen}
-        title={isFullscreen ? 'Sair do fullscreen' : 'Fullscreen'}
+        id="fsbtn"
+        title="Fullscreen"
         style={{
           position: 'fixed',
           bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
@@ -256,17 +265,14 @@ export default function DeckClient() {
         onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#FF5C00'; (e.currentTarget as HTMLButtonElement).style.color = '#FF5C00'; }}
         onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLButtonElement).style.color = '#888'; }}
       >
-        {isFullscreen ? (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
-            <path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
-          </svg>
-        ) : (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 7V3h4"/><path d="M21 7V3h-4"/>
-            <path d="M3 17v4h4"/><path d="M21 17v4h-4"/>
-          </svg>
-        )}
+        <svg id="fs-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 7V3h4"/><path d="M21 7V3h-4"/>
+          <path d="M3 17v4h4"/><path d="M21 17v4h-4"/>
+        </svg>
+        <svg id="fs-exit" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'none' }}>
+          <path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+          <path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+        </svg>
       </button>
 
       <button id="hbtn"><span /><span /><span /></button>

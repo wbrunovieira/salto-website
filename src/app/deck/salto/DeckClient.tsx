@@ -60,11 +60,36 @@ export default function DeckClient() {
   useEffect(() => {
     const w = window as typeof window & { lucide?: { createIcons: () => void }; closeMenu?: () => void };
 
+    // ── Fullscreen — pure vanilla JS, no React state to avoid re-renders on fs change ──
+    function toggleFullscreen() {
+      try {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      } catch { /* not supported */ }
+    }
+
+    const onFsChange = () => {
+      const isFs = !!document.fullscreenElement;
+      const fsEnter = document.getElementById('fs-enter');
+      const fsExit = document.getElementById('fs-exit');
+      if (fsEnter) fsEnter.style.display = isFs ? 'none' : 'block';
+      if (fsExit) fsExit.style.display = isFs ? 'block' : 'none';
+      setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+    };
+    document.addEventListener('fullscreenchange', onFsChange);
+    document.addEventListener('webkitfullscreenchange', onFsChange);
+
+    const fsbtn = document.getElementById('fsbtn');
+    if (fsbtn) fsbtn.onclick = toggleFullscreen;
+
+    // ── Slides ──
     let cur: number = 0;
     const slides = Array.from(document.querySelectorAll('.slide')) as HTMLElement[];
     const N = slides.length;
 
-    // ── GSAP animations ──
     type GSAPStatic = {
       set: (targets: NodeListOf<Element> | Element[], vars: Record<string, unknown>) => void;
       to: (targets: Element | NodeListOf<Element> | Element[], vars: Record<string, unknown>) => void;
@@ -79,8 +104,8 @@ export default function DeckClient() {
       if (!gsap) return;
       const els = s.querySelectorAll('[data-a]');
       gsap.set(Array.from(els), { opacity: 0, y: 26 });
-      gsap.to(s, { opacity: 1, duration: 0.35, ease: 'power2.out' } as Record<string, unknown>);
-      gsap.to(Array.from(els), { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.1 } as Record<string, unknown>);
+      // Slide visibility guaranteed by CSS (.slide.active { opacity:1 }) — only animate inner elements
+      gsap.to(Array.from(els), { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.06 } as Record<string, unknown>);
     }
 
     function animOut(s: HTMLElement, cb: () => void) {
@@ -110,7 +135,10 @@ export default function DeckClient() {
       prev.style.pointerEvents = 'none';
       animOut(prev, () => {
         prev.classList.remove('active');
+        prev.style.opacity = ''; // clear GSAP inline opacity so CSS controls it
+        prev.style.pointerEvents = '';
         cur = n;
+        next.style.opacity = ''; // clear any stale opacity before CSS .active kicks in
         next.classList.add('active');
         animIn(next);
         ui();
@@ -288,7 +316,6 @@ export default function DeckClient() {
 
     slides[cur].classList.add('active');
 
-    // Wait for gsap to load then animate
     import('gsap').then((mod) => {
       gsap = mod.default as unknown as GSAPStatic;
       animIn(slides[cur]);
@@ -303,6 +330,8 @@ export default function DeckClient() {
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('fullscreenchange', onFsChange);
+      document.removeEventListener('webkitfullscreenchange', onFsChange);
       delete w.closeMenu;
     };
   }, []);
@@ -328,17 +357,49 @@ export default function DeckClient() {
         <button className="nb" id="bn">→</button>
       </div>
 
+      {/* Fullscreen button — click handled by vanilla JS to avoid React re-renders */}
+      <button
+        id="fsbtn"
+        title="Fullscreen"
+        style={{
+          position: 'fixed',
+          bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+          left: 'calc(24px + env(safe-area-inset-left, 0px))',
+          zIndex: 300,
+          width: 36, height: 36, borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,0.08)',
+          background: 'rgba(255,255,255,0.03)',
+          color: '#888', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'border-color .2s, color .2s',
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#FF5C00'; (e.currentTarget as HTMLButtonElement).style.color = '#FF5C00'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLButtonElement).style.color = '#888'; }}
+      >
+        <svg id="fs-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 7V3h4"/><path d="M21 7V3h-4"/>
+          <path d="M3 17v4h4"/><path d="M21 17v4h-4"/>
+        </svg>
+        <svg id="fs-exit" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'none' }}>
+          <path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+          <path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+        </svg>
+      </button>
+
       {/* Reset button */}
       <button
         id="reset-btn"
         title="Personalizar apresentação"
         style={{
-          position: 'fixed', bottom: 28, left: 24, zIndex: 300,
-          width: 30, height: 30, borderRadius: '50%',
+          position: 'fixed',
+          bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+          left: 'calc(68px + env(safe-area-inset-left, 0px))',
+          zIndex: 300,
+          width: 36, height: 36, borderRadius: '50%',
           border: '1px solid rgba(255,255,255,0.06)',
           background: 'transparent', color: 'rgba(255,255,255,0.18)',
           cursor: 'pointer', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', fontSize: 14, lineHeight: '1',
+          justifyContent: 'center', fontSize: 16, lineHeight: '1',
           transition: 'all .25s',
         }}
       >↺</button>
