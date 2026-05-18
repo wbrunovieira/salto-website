@@ -40,22 +40,25 @@ export default function OrdemServicoCliente({
       <Body style={body}>
         <Container style={outer}>
 
-          {/* Header */}
-          <Section style={header}>
-            <Row>
-              <Column>
-                <Img src="https://saltoup.com/logo.svg" alt="Salto" width="120" height="37" style={{ display: 'block', marginBottom: 4 }} />
-                <Text style={logoSub}>saltoup.com</Text>
-              </Column>
-              <Column style={{ textAlign: 'right' }}>
-                <Text style={osLabel}>Ordem de Serviço</Text>
-                <Text style={osNum_}>#{osNum}</Text>
-                <Text style={osDate}>{date}</Text>
-              </Column>
-            </Row>
-          </Section>
+          {/* Single bordered wrapper — avoids split-border rendering in email clients */}
+          <Container style={wrapper}>
 
-          <Container style={card}>
+            {/* Header */}
+            <Section style={header}>
+              <Row>
+                <Column>
+                  <Img src="https://saltoup.com/logo.svg" alt="Salto" width="120" height="37" style={{ display: 'block', marginBottom: 4 }} />
+                  <Text style={logoSub}>saltoup.com</Text>
+                </Column>
+                <Column style={{ textAlign: 'right' }}>
+                  <Text style={osLabel}>Ordem de Serviço</Text>
+                  <Text style={osNum_}>#{osNum}</Text>
+                  <Text style={osDate}>{date}</Text>
+                </Column>
+              </Row>
+            </Section>
+
+            <Hr style={headerDivider} />
 
             {/* Greeting */}
             <Section style={{ padding: '32px 32px 0' }}>
@@ -148,19 +151,22 @@ const body: React.CSSProperties = {
 
 const outer: React.CSSProperties = { maxWidth: 580, margin: '0 auto' };
 
+const wrapper: React.CSSProperties = {
+  border: '1px solid #252525',
+  borderRadius: 16,
+  overflow: 'hidden',
+  backgroundColor: '#141414',
+};
+
 const header: React.CSSProperties = {
   background: 'linear-gradient(135deg, #1a0800 0%, #0e0e0e 100%)',
-  borderRadius: '16px 16px 0 0',
-  border: '1px solid #252525',
-  borderBottom: 'none',
   padding: '28px 32px',
 };
 
-const logoText: React.CSSProperties = {
-  fontSize: 22, fontWeight: 900, color: '#f5f5f5',
-  letterSpacing: -1, margin: '0 0 2px',
+const headerDivider: React.CSSProperties = {
+  borderColor: '#252525',
+  margin: 0,
 };
-const logoDot: React.CSSProperties = { color: '#FF5C00' };
 const logoSub: React.CSSProperties = {
   fontSize: 10, color: '#555', letterSpacing: 2,
   textTransform: 'uppercase' as const, margin: 0,
@@ -174,13 +180,6 @@ const osNum_: React.CSSProperties = {
 };
 const osDate: React.CSSProperties = { fontSize: 11, color: '#555', margin: 0 };
 
-const card: React.CSSProperties = {
-  backgroundColor: '#141414',
-  border: '1px solid #252525',
-  borderTop: 'none',
-  borderRadius: '0 0 16px 16px',
-  overflow: 'hidden',
-};
 
 const badgeText: React.CSSProperties = {
   fontSize: 10, fontWeight: 700, letterSpacing: 2,

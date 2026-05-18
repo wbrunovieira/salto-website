@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: `Salto OS <${FROM_EMAIL}>`,
       to: TO_EMAIL,
-      subject: `📋 Proposta OS #${osNum} — ${empresa} — Automação`,
+      subject: `📋 OS #${osNum} — ${empresa} — Automação`,
       react: OsAutomacaoInterno({ osNum, date, nomeFantasia, razaoSocial, cnpj, endereco, bairro, cidade, estado, cep, responsavel, telefone, email, items, obs, total }),
       attachments: attachment,
     });
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         from: `Bruno Vieira | Salto <${FROM_EMAIL}>`,
         to: email,
         replyTo: TO_EMAIL,
-        subject: `Sua Proposta Comercial #${osNum} — Salto Automação`,
+        subject: `Seu Pedido #${osNum} — Salto Automação`,
         react: OsAutomacaoCliente({ osNum, date, nomeFantasia, responsavel, telefone, items, obs, total }),
         attachments: attachment,
         tags: [
