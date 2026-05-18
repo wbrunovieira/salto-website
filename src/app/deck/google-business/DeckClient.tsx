@@ -136,7 +136,7 @@ export default function DeckClient() {
 
     import('gsap').then((mod) => {
       gsap = mod.default as unknown as GSAPStatic;
-      animIn(slides[cur]);
+      animIn(slides[cur], () => {});
       ui();
     });
 
