@@ -1,6 +1,6 @@
 import {
   Body, Column, Container, Head, Heading, Hr, Html,
-  Link, Preview, Row, Section, Text,
+  Img, Link, Preview, Row, Section, Text,
 } from '@react-email/components';
 
 interface OSItem { description: string; qty: string; price: string }
@@ -44,7 +44,7 @@ export default function OrdemServicoCliente({
           <Section style={header}>
             <Row>
               <Column>
-                <Text style={logoText}>SALTO<span style={logoDot}>·</span></Text>
+                <Img src="https://saltoup.com/logo.svg" alt="Salto" width="120" height="37" style={{ display: 'block', marginBottom: 4 }} />
                 <Text style={logoSub}>saltoup.com</Text>
               </Column>
               <Column style={{ textAlign: 'right' }}>
@@ -64,7 +64,7 @@ export default function OrdemServicoCliente({
                 Tudo certo, {nome}!
               </Heading>
               <Text style={subtext}>
-                {empresa ? `A ordem de serviço para <strong>${empresa}</strong> foi gerada com sucesso.` : 'Sua ordem de serviço foi gerada com sucesso.'}{' '}
+                {empresa ? <><span>A ordem de serviço para </span><strong>{empresa}</strong><span> foi gerada com sucesso.</span></> : 'Sua ordem de serviço foi gerada com sucesso.'}{' '}
                 Abaixo estão todos os detalhes do serviço contratado.
               </Text>
               <Hr style={divider} />

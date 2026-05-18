@@ -1,6 +1,6 @@
 import {
   Body, Column, Container, Head, Hr, Html,
-  Link, Preview, Row, Section, Text,
+  Img, Link, Preview, Row, Section, Text,
 } from '@react-email/components';
 
 interface OSItem { description: string; qty: string; price: string }
@@ -59,7 +59,7 @@ export default function OrdemServicoInterno({
           <Section style={header}>
             <Row>
               <Column>
-                <Text style={logoText}>SALTO<span style={logoDot}>·</span></Text>
+                <Img src="https://saltoup.com/logo.svg" alt="Salto" width="120" height="37" style={{ display: 'block', marginBottom: 4 }} />
                 <Text style={logoSub}>Nova Ordem de Serviço</Text>
               </Column>
               <Column style={{ textAlign: 'right' }}>

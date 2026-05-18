@@ -84,13 +84,33 @@ export default function OSInline() {
       // ── Header ────────────────────────────────────────
       let y = 14;
 
-      // Logo
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(19);
-      doc.setTextColor(...black);
-      doc.text('SALTO', m, y);
-      doc.setTextColor(...orange);
-      doc.text('·', m + doc.getTextWidth('SALTO') + 0.3, y);
+      // Logo — fetch SVG, recolor white→dark for PDF, render to canvas PNG
+      let logoDataUrl: string | null = null;
+      try {
+        const svgText = (await fetch('/logo.svg').then(r => r.text()))
+          .replace(/fill="#F5F5F5"/gi, 'fill="#111111"');
+        const blob = new Blob([svgText], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const img = new Image();
+        await new Promise<void>((res, rej) => { img.onload = () => res(); img.onerror = rej; img.src = url; });
+        const cvs = document.createElement('canvas');
+        cvs.width = 482; cvs.height = 149;
+        cvs.getContext('2d')!.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        logoDataUrl = cvs.toDataURL('image/png');
+      } catch { /* fallback to text */ }
+
+      if (logoDataUrl) {
+        // 482×149 → 37mm × 11.45mm
+        doc.addImage(logoDataUrl, 'PNG', m, 4, 37, 11.45);
+      } else {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(19);
+        doc.setTextColor(...black);
+        doc.text('SALTO', m, y);
+        doc.setTextColor(...orange);
+        doc.text('·', m + doc.getTextWidth('SALTO') + 0.3, y);
+      }
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8);
       doc.setTextColor(...light);
