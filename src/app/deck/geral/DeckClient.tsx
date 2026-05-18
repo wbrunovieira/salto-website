@@ -397,6 +397,12 @@ export default function DeckClient() {
           <button id="hclose" style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', color: '#888', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, lineHeight: '1' }}>×</button>
         </div>
         <div id="hlist" />
+        <div style={{ padding: '14px 20px', borderTop: '1px solid rgba(255,255,255,0.07)', marginTop: 4 }}>
+          <a href="/deck" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: '#555', fontSize: 12, fontWeight: 700, letterSpacing: 0.3 }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+            Todos os decks
+          </a>
+        </div>
       </div>
     </>
   );
