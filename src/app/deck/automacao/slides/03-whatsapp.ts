@@ -14,29 +14,29 @@ export const slidesWhatsapp = `
         <div data-a style="display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02)">
           <i data-lucide="bot" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:1px"></i>
           <div>
-            <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Menu interativo</p>
-            <p style="font-size:14px;color:var(--muted);line-height:1.5">1 pra Pedidos, 2 pra Horários, 3 pra Falar com atendente</p>
+            <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">Menu interativo</p>
+            <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">1 pra Pedidos, 2 pra Horários, 3 pra Falar com atendente</p>
           </div>
         </div>
         <div data-a style="display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02)">
           <i data-lucide="brain" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:1px"></i>
           <div>
-            <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">IA no atendimento</p>
-            <p style="font-size:14px;color:var(--muted);line-height:1.5">Responde perguntas complexas com linguagem natural</p>
+            <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">IA no atendimento</p>
+            <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Responde perguntas complexas com linguagem natural</p>
           </div>
         </div>
         <div data-a style="display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02)">
           <i data-lucide="user-check" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:1px"></i>
           <div>
-            <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Transfere para humano</p>
-            <p style="font-size:14px;color:var(--muted);line-height:1.5">Quando precisar, passa para você ou sua equipe</p>
+            <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">Transfere para humano</p>
+            <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Quando precisar, passa para você ou sua equipe</p>
           </div>
         </div>
         <div data-a style="display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border:1px solid rgba(255,92,0,.2);border-radius:10px;background:rgba(255,92,0,.04)">
           <i data-lucide="clock" style="font-size:17px;color:var(--accent);flex-shrink:0;margin-top:1px"></i>
           <div>
-            <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Atende 24/7</p>
-            <p style="font-size:14px;color:var(--muted);line-height:1.5">Sem custo de plantão, sem cliente sem resposta</p>
+            <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">Atende 24/7</p>
+            <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5">Sem custo de plantão, sem cliente sem resposta</p>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@ export const slidesWhatsapp = `
       <div class="card" style="padding:24px 20px;text-align:center">
         <i data-lucide="zap" style="font-size:28px;color:var(--accent);display:block;margin:0 auto 12px"></i>
         <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:8px;text-transform:uppercase">GATILHO</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6">Algo acontece — mensagem, pedido, hora do dia, formulário preenchido</p>
+        <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.6">Algo acontece — mensagem, pedido, hora do dia, formulário preenchido</p>
       </div>
 
       <div style="padding:0 12px;text-align:center;flex-shrink:0">
@@ -118,7 +118,7 @@ export const slidesWhatsapp = `
       <div class="card" style="padding:24px 20px;text-align:center;border-color:rgba(255,92,0,.2);background:rgba(255,92,0,.03)">
         <i data-lucide="settings" style="font-size:28px;color:var(--accent);display:block;margin:0 auto 12px"></i>
         <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:8px;text-transform:uppercase">PROCESSO</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6">A automação executa as regras que definimos juntos</p>
+        <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.6">A automação executa as regras que definimos juntos</p>
       </div>
 
       <div style="padding:0 12px;text-align:center;flex-shrink:0">
@@ -128,7 +128,7 @@ export const slidesWhatsapp = `
       <div class="card" style="padding:24px 20px;text-align:center">
         <i data-lucide="send" style="font-size:28px;color:var(--accent);display:block;margin:0 auto 12px"></i>
         <p style="font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:8px;text-transform:uppercase">AÇÃO</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6">Mensagem enviada, planilha atualizada, sistema notificado</p>
+        <p style="font-size:var(--fs-card-lg);color:var(--muted);line-height:1.6">Mensagem enviada, planilha atualizada, sistema notificado</p>
       </div>
 
     </div>
@@ -136,13 +136,13 @@ export const slidesWhatsapp = `
     <!-- Example flows -->
     <div data-a style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px">
       <div style="padding:10px 16px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border)">
-        <p style="font-size:14px;color:var(--muted);line-height:1.5"><span style="color:var(--accent);font-weight:700">→</span> Pedido no site <span style="color:var(--accent)">·</span> WhatsApp do cliente <span style="color:var(--accent)">·</span> planilha de controle <span style="color:var(--accent)">·</span> NF gerada</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5"><span style="color:var(--accent);font-weight:700">→</span> Pedido no site <span style="color:var(--accent)">·</span> WhatsApp do cliente <span style="color:var(--accent)">·</span> planilha de controle <span style="color:var(--accent)">·</span> NF gerada</p>
       </div>
       <div style="padding:10px 16px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border)">
-        <p style="font-size:14px;color:var(--muted);line-height:1.5"><span style="color:var(--accent);font-weight:700">→</span> Formulário preenchido <span style="color:var(--accent)">·</span> cadastro no CRM <span style="color:var(--accent)">·</span> mensagem de boas-vindas</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5"><span style="color:var(--accent);font-weight:700">→</span> Formulário preenchido <span style="color:var(--accent)">·</span> cadastro no CRM <span style="color:var(--accent)">·</span> mensagem de boas-vindas</p>
       </div>
       <div style="padding:10px 16px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border)">
-        <p style="font-size:14px;color:var(--muted);line-height:1.5"><span style="color:var(--accent);font-weight:700">→</span> Hora do dia <span style="color:var(--accent)">·</span> relatório gerado <span style="color:var(--accent)">·</span> enviado por e-mail ou WhatsApp</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.5"><span style="color:var(--accent);font-weight:700">→</span> Hora do dia <span style="color:var(--accent)">·</span> relatório gerado <span style="color:var(--accent)">·</span> enviado por e-mail ou WhatsApp</p>
       </div>
     </div>
 

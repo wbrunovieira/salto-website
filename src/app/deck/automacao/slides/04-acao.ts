@@ -15,7 +15,7 @@ export const slidesAcao = `
         <i data-lucide="search" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
         <div>
           <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Diagnóstico gratuito</p>
-          <p class="mu" style="font-size:15px;line-height:1.6">Mapeamos juntos quais processos fazem sentido automatizar primeiro</p>
+          <p class="mu" style="font-size:var(--fs-card-lg);line-height:1.6">Mapeamos juntos quais processos fazem sentido automatizar primeiro</p>
         </div>
       </div>
 
@@ -23,7 +23,7 @@ export const slidesAcao = `
         <i data-lucide="code" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
         <div>
           <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Desenvolvimento</p>
-          <p class="mu" style="font-size:15px;line-height:1.6">Construímos a automação do zero — bot, workflow ou integração</p>
+          <p class="mu" style="font-size:var(--fs-card-lg);line-height:1.6">Construímos a automação do zero — bot, workflow ou integração</p>
         </div>
       </div>
 
@@ -31,7 +31,7 @@ export const slidesAcao = `
         <i data-lucide="play-circle" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
         <div>
           <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Testes e entrega</p>
-          <p class="mu" style="font-size:15px;line-height:1.6">Testamos tudo antes de ligar. Você vê funcionando na sua frente.</p>
+          <p class="mu" style="font-size:var(--fs-card-lg);line-height:1.6">Testamos tudo antes de ligar. Você vê funcionando na sua frente.</p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ export const slidesAcao = `
         <i data-lucide="headphones" style="font-size:20px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
         <div>
           <p style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Suporte incluído</p>
-          <p class="mu" style="font-size:15px;line-height:1.6">30 dias de ajustes e suporte para garantir que funciona de verdade</p>
+          <p class="mu" style="font-size:var(--fs-card-lg);line-height:1.6">30 dias de ajustes e suporte para garantir que funciona de verdade</p>
         </div>
       </div>
 
@@ -47,7 +47,7 @@ export const slidesAcao = `
 
     <div data-a style="padding:18px 24px;border:1px solid rgba(255,92,0,.25);border-radius:14px;background:rgba(255,92,0,.05);display:flex;align-items:center;gap:16px">
       <i data-lucide="zap" style="font-size:20px;color:var(--accent);flex-shrink:0"></i>
-      <p style="font-size:14px;color:var(--text);line-height:1.7">
+      <p style="font-size:var(--fs-card-desc);color:var(--text);line-height:1.7">
         Quer ver agora? Me conta o maior processo manual do seu negócio — mostramos como automatizamos em até 15 minutos.
       </p>
     </div>
@@ -63,7 +63,7 @@ export const slidesAcao = `
       <span class="badge"><span class="dot"></span>INVESTIMENTO</span>
     </div>
 
-    <p data-a style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px">
+    <p data-a style="font-size:var(--fs-card-desc);color:var(--muted);line-height:1.7;margin-bottom:28px">
       Quanto custa um funcionário fazendo isso na mão por um ano?<br>
       <span style="color:var(--text);font-weight:600">Agora compare.</span>
     </p>
@@ -88,21 +88,21 @@ export const slidesAcao = `
       <div style="display:flex;flex-direction:column;gap:10px">
 
         <div data-a class="card" style="padding:14px 18px">
-          <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Bot simples</p>
+          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">Bot simples</p>
           <p style="font-size:15px;font-weight:900;color:var(--accent);margin-bottom:4px">R$ 300–500</p>
-          <p style="font-size:14px;color:var(--muted)">FAQ, horários, cardápio no WhatsApp</p>
+          <p style="font-size:var(--fs-card-desc);color:var(--muted)">FAQ, horários, cardápio no WhatsApp</p>
         </div>
 
         <div data-a class="card" style="padding:14px 18px">
-          <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Workflow completo</p>
+          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">Workflow completo</p>
           <p style="font-size:15px;font-weight:900;color:var(--accent);margin-bottom:4px">R$ 500–1.500</p>
-          <p style="font-size:14px;color:var(--muted)">Integrações entre sistemas, notificações automáticas</p>
+          <p style="font-size:var(--fs-card-desc);color:var(--muted)">Integrações entre sistemas, notificações automáticas</p>
         </div>
 
         <div data-a class="card" style="padding:14px 18px">
-          <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Sistema integrado</p>
+          <p style="font-size:var(--fs-card-title);font-weight:700;color:var(--text);margin-bottom:3px">Sistema integrado</p>
           <p style="font-size:15px;font-weight:900;color:var(--accent);margin-bottom:4px">R$ 1.500–3.000</p>
-          <p style="font-size:14px;color:var(--muted)">IA + bot + workflows + relatórios</p>
+          <p style="font-size:var(--fs-card-desc);color:var(--muted)">IA + bot + workflows + relatórios</p>
         </div>
 
       </div>
@@ -112,15 +112,15 @@ export const slidesAcao = `
     <div data-a style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
       <div style="padding:14px 18px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02);display:flex;align-items:center;gap:10px">
         <i data-lucide="check-circle" style="font-size:16px;color:var(--accent);flex-shrink:0"></i>
-        <p style="font-size:14px;color:var(--text)">Diagnóstico gratuito</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--text)">Diagnóstico gratuito</p>
       </div>
       <div style="padding:14px 18px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02);display:flex;align-items:center;gap:10px">
         <i data-lucide="check-circle" style="font-size:16px;color:var(--accent);flex-shrink:0"></i>
-        <p style="font-size:14px;color:var(--text)">Sem mensalidade obrigatória</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--text)">Sem mensalidade obrigatória</p>
       </div>
       <div style="padding:14px 18px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02);display:flex;align-items:center;gap:10px">
         <i data-lucide="check-circle" style="font-size:16px;color:var(--accent);flex-shrink:0"></i>
-        <p style="font-size:14px;color:var(--text)">Suporte 30 dias incluído</p>
+        <p style="font-size:var(--fs-card-desc);color:var(--text)">Suporte 30 dias incluído</p>
       </div>
     </div>
 

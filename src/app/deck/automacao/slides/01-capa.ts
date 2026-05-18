@@ -35,10 +35,10 @@ export const slidesCapa = `
     <p data-a style="font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:28px">AUTOMAÇÃO INTELIGENTE</p>
     <h1 data-a class="hl mb2" style="font-size:clamp(36px,5vw,68px)">Você ainda faz isso</h1>
     <h1 data-a class="hl hl-acc" style="font-size:clamp(36px,5vw,68px);margin-bottom:28px">na mão?</h1>
-    <p data-a style="font-size:clamp(14px,1.5vw,19px);color:var(--muted);max-width:560px;margin:0 auto 12px;line-height:1.85">
+    <p data-a style="font-size:clamp(22px,2.8vw,36px);font-weight:700;color:var(--text);max-width:560px;margin:0 auto 16px;line-height:1.3">
       A gente automatiza.
     </p>
-    <p data-a style="font-size:clamp(13px,1.2vw,16px);color:rgba(255,255,255,0.35);max-width:520px;margin:0 auto;line-height:1.7">
+    <p data-a style="font-size:clamp(15px,1.6vw,20px);color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7">
       Descubra o que pode ser automático no seu negócio — e quanto tempo você vai recuperar.
     </p>
   </div>
@@ -57,27 +57,27 @@ export const slidesCapa = `
     <div data-a style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:32px">
       <div class="card" style="padding:18px 16px;display:flex;align-items:flex-start;gap:12px;text-align:left">
         <i data-lucide="message-circle" style="font-size:18px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <p style="font-size:15px;color:var(--text);line-height:1.55">Responder as mesmas perguntas no WhatsApp</p>
+        <p class="clink">Responder as mesmas perguntas no WhatsApp</p>
       </div>
       <div class="card" style="padding:18px 16px;display:flex;align-items:flex-start;gap:12px;text-align:left">
         <i data-lucide="clock" style="font-size:18px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <p style="font-size:15px;color:var(--text);line-height:1.55">Lembrar clientes de pagar</p>
+        <p class="clink">Lembrar clientes de pagar</p>
       </div>
       <div class="card" style="padding:18px 16px;display:flex;align-items:flex-start;gap:12px;text-align:left">
         <i data-lucide="calendar" style="font-size:18px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <p style="font-size:15px;color:var(--text);line-height:1.55">Confirmar agendamentos um por um</p>
+        <p class="clink">Confirmar agendamentos um por um</p>
       </div>
       <div class="card" style="padding:18px 16px;display:flex;align-items:flex-start;gap:12px;text-align:left">
         <i data-lucide="file-text" style="font-size:18px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <p style="font-size:15px;color:var(--text);line-height:1.55">Preencher planilhas manualmente</p>
+        <p class="clink">Preencher planilhas manualmente</p>
       </div>
       <div class="card" style="padding:18px 16px;display:flex;align-items:flex-start;gap:12px;text-align:left">
         <i data-lucide="bell" style="font-size:18px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <p style="font-size:15px;color:var(--text);line-height:1.55">Avisar sobre pedidos prontos</p>
+        <p class="clink">Avisar sobre pedidos prontos</p>
       </div>
       <div class="card" style="padding:18px 16px;display:flex;align-items:flex-start;gap:12px;text-align:left">
         <i data-lucide="repeat" style="font-size:18px;color:var(--accent);flex-shrink:0;margin-top:2px"></i>
-        <p style="font-size:15px;color:var(--text);line-height:1.55">Copiar dado de um sistema para outro</p>
+        <p class="clink">Copiar dado de um sistema para outro</p>
       </div>
     </div>
 
