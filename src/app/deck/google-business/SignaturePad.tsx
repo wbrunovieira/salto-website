@@ -67,28 +67,32 @@ const SignaturePad = forwardRef<SignaturePadHandle, Props>(function SignaturePad
 
     const onDown = (e: PointerEvent) => {
       e.preventDefault();
-      c.setPointerCapture(e.pointerId);
+      // Algumas canetas genéricas não suportam setPointerCapture — wrap em try/catch
+      try { c.setPointerCapture(e.pointerId); } catch { /* ok */ }
       drawing.current = true;
       last.current = toCanvas(e.clientX, e.clientY);
     };
+
+    // pointermove no document para não perder o traço quando a caneta sai da borda do canvas
     const onMove = (e: PointerEvent) => {
       if (!drawing.current) return;
       e.preventDefault();
       const p = toCanvas(e.clientX, e.clientY);
       stroke(p.x, p.y);
     };
+
     const onUp = () => { drawing.current = false; last.current = null; };
 
-    c.addEventListener('pointerdown', onDown);
-    c.addEventListener('pointermove', onMove);
-    c.addEventListener('pointerup', onUp);
-    c.addEventListener('pointercancel', onUp);
+    c.addEventListener('pointerdown', onDown, { passive: false });
+    document.addEventListener('pointermove', onMove, { passive: false });
+    document.addEventListener('pointerup', onUp);
+    document.addEventListener('pointercancel', onUp);
 
     return () => {
       c.removeEventListener('pointerdown', onDown);
-      c.removeEventListener('pointermove', onMove);
-      c.removeEventListener('pointerup', onUp);
-      c.removeEventListener('pointercancel', onUp);
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+      document.removeEventListener('pointercancel', onUp);
     };
   }, [toCanvas, stroke]);
 
