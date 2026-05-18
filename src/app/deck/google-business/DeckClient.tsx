@@ -87,8 +87,13 @@ export default function DeckClient() {
     document.addEventListener('keydown', onKeyDown);
 
     let tx = 0;
-    const onTouchStart = (e: TouchEvent) => { tx = e.touches[0].clientX; };
+    let swipeBlocked = false;
+    const onTouchStart = (e: TouchEvent) => {
+      swipeBlocked = !!(e.target as HTMLElement).closest('canvas, input, button, textarea, select');
+      tx = e.touches[0].clientX;
+    };
     const onTouchEnd = (e: TouchEvent) => {
+      if (swipeBlocked) { swipeBlocked = false; return; }
       const dx = e.changedTouches[0].clientX - tx;
       if (dx < -50) goTo(cur + 1);
       if (dx > 50) goTo(cur - 1);

@@ -99,17 +99,19 @@ export default function SignaturePad({ label, height = 72 }: Props) {
           onClick={clear}
           style={{
             position: 'absolute',
-            top: 4,
+            top: 6,
             right: 6,
-            background: 'none',
-            border: 'none',
+            background: 'rgba(0,0,0,0.06)',
+            border: '1px solid #ddd',
             cursor: 'pointer',
-            fontSize: 10,
-            color: '#bbb',
+            fontSize: 11,
+            color: '#888',
             fontFamily: 'inherit',
-            padding: '1px 6px',
-            borderRadius: 4,
+            padding: '4px 10px',
+            borderRadius: 6,
             lineHeight: 1.4,
+            minWidth: 44,
+            minHeight: 28,
           }}
         >
           limpar
