@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const {
       osNum, date, nomeFantasia, razaoSocial, cnpj, endereco,
+      bairro, cidade, estado, cep,
       responsavel, telefone, email, items, obs, total, pdfBase64,
     } = data;
 
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
       from: `Salto OS <${FROM_EMAIL}>`,
       to: TO_EMAIL,
       subject: `🧾 Nova OS #${osNum} — ${empresa}`,
-      react: OrdemServicoInterno({ osNum, date, nomeFantasia, razaoSocial, cnpj, endereco, responsavel, telefone, email, items, obs, total }),
+      react: OrdemServicoInterno({ osNum, date, nomeFantasia, razaoSocial, cnpj, endereco, bairro, cidade, estado, cep, responsavel, telefone, email, items, obs, total }),
       attachments: attachment,
     });
 

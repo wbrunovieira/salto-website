@@ -12,6 +12,10 @@ interface Props {
   razaoSocial?: string;
   cnpj?: string;
   endereco?: string;
+  bairro?: string;
+  cidade?: string;
+  estado?: string;
+  cep?: string;
   responsavel?: string;
   telefone?: string;
   email?: string;
@@ -27,6 +31,10 @@ export default function OrdemServicoInterno({
   razaoSocial = '',
   cnpj = '',
   endereco = '',
+  bairro = '',
+  cidade = '',
+  estado = '',
+  cep = '',
   responsavel = 'João Silva',
   telefone = '(11) 99999-0000',
   email = 'joao@empresa.com',
@@ -78,6 +86,9 @@ export default function OrdemServicoInterno({
                 {razaoSocial && <DataRow label="Razão Social" value={razaoSocial} />}
                 {cnpj && <DataRow label="CNPJ" value={cnpj} />}
                 {endereco && <DataRow label="Endereço" value={endereco} />}
+                {bairro && <DataRow label="Bairro" value={bairro} />}
+                {(cidade || estado) && <DataRow label="Cidade / Estado" value={[cidade, estado].filter(Boolean).join(' — ')} />}
+                {cep && <DataRow label="CEP" value={cep} />}
                 {responsavel && <DataRow label="Responsável" value={responsavel} />}
                 {telefone && (
                   <Row style={dataRow}>

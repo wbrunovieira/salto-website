@@ -1,18 +1,23 @@
 'use client';
 
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, forwardRef, useImperativeHandle } from 'react';
+
+export interface SignaturePadHandle {
+  getDataURL: () => string | null;
+  isEmpty: () => boolean;
+}
 
 interface Props {
   label: string;
   height?: number;
 }
 
-export default function SignaturePad({ label, height = 72 }: Props) {
+const SignaturePad = forwardRef<SignaturePadHandle, Props>(function SignaturePad({ label, height = 72 }, ref) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawing = useRef(false);
   const last = useRef<{ x: number; y: number } | null>(null);
+  const hasStrokes = useRef(false);
 
-  // Map a client coordinate to canvas internal coordinate
   const toCanvas = useCallback((clientX: number, clientY: number) => {
     const c = canvasRef.current!;
     const r = c.getBoundingClientRect();
@@ -35,6 +40,7 @@ export default function SignaturePad({ label, height = 72 }: Props) {
       ctx.moveTo(last.current.x, last.current.y);
       ctx.lineTo(x, y);
       ctx.stroke();
+      hasStrokes.current = true;
     }
     last.current = { x, y };
   }, []);
@@ -43,7 +49,17 @@ export default function SignaturePad({ label, height = 72 }: Props) {
     const c = canvasRef.current;
     if (!c) return;
     c.getContext('2d')!.clearRect(0, 0, c.width, c.height);
+    hasStrokes.current = false;
   };
+
+  useImperativeHandle(ref, () => ({
+    getDataURL: () => {
+      const c = canvasRef.current;
+      if (!c || !hasStrokes.current) return null;
+      return c.toDataURL('image/png');
+    },
+    isEmpty: () => !hasStrokes.current,
+  }));
 
   useEffect(() => {
     const c = canvasRef.current;
@@ -120,4 +136,6 @@ export default function SignaturePad({ label, height = 72 }: Props) {
       <p style={{ fontSize: 11, color: '#888' }}>{label}</p>
     </div>
   );
-}
+});
+
+export default SignaturePad;

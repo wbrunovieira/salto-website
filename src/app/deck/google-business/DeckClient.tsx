@@ -31,17 +31,19 @@ export default function DeckClient() {
 
     import('gsap').then((mod) => { gsap = mod.default as unknown as GSAPStatic; });
 
-    function animIn(s: HTMLElement) {
-      if (!gsap) return;
+    function animIn(s: HTMLElement, onUnlock: () => void) {
+      if (!gsap) { onUnlock(); return; }
       const els = s.querySelectorAll('[data-a]');
       gsap.set(Array.from(els), { opacity: 0, y: 26 });
-      gsap.to(s, { opacity: 1, duration: 0.35, ease: 'power2.out' } as Record<string, unknown>);
+      gsap.to(s, { opacity: 1, duration: 0.35, ease: 'power2.out', onComplete: onUnlock } as Record<string, unknown>);
       gsap.to(Array.from(els), { opacity: 1, y: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.1 } as Record<string, unknown>);
     }
 
     function animOut(s: HTMLElement, cb: () => void) {
       if (!gsap) { cb(); return; }
       const els = s.querySelectorAll('[data-a]');
+      gsap.killTweensOf(Array.from(els));
+      gsap.killTweensOf(s);
       gsap.to(Array.from(els), { opacity: 0, y: -14, duration: 0.18, stagger: 0.025, ease: 'power2.in' } as Record<string, unknown>);
       gsap.to(s, { opacity: 0, duration: 0.28, ease: 'power2.in', delay: 0.04, onComplete: cb } as Record<string, unknown>);
     }
@@ -70,9 +72,8 @@ export default function DeckClient() {
         prev.style.pointerEvents = '';
         cur = n;
         next.classList.add('active');
-        animIn(next);
+        animIn(next, () => { transitioning = false; });
         ui();
-        transitioning = false;
       });
     }
 

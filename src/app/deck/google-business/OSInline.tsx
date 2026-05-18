@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import SignaturePad from './SignaturePad';
+import { useState, useRef } from 'react';
+import SignaturePad, { type SignaturePadHandle } from './SignaturePad';
 
 interface ServiceItem {
   id: number;
@@ -39,6 +39,10 @@ export default function OSInline() {
   const [razaoSocial, setRazaoSocial] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [endereco, setEndereco] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
+  const [cep, setCep] = useState('');
   // Contato
   const [responsavel, setResponsavel] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -47,6 +51,9 @@ export default function OSInline() {
   const [items, setItems] = useState<ServiceItem[]>(DEFAULT_SERVICES);
   const [obs, setObs] = useState('');
   const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  const sigClientRef = useRef<SignaturePadHandle>(null);
+  const sigBrunoRef = useRef<SignaturePadHandle>(null);
 
   const upd = (id: number, f: keyof ServiceItem, v: string) =>
     setItems(p => p.map(it => it.id === id ? { ...it, [f]: v } : it));
@@ -59,120 +66,240 @@ export default function OSInline() {
       const { default: jsPDF } = await import('jspdf');
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       const W = 210;
-      const margin = 20;
-      let y = 20;
+      const m = 20;
+      const cW = W - m * 2;
 
-      const accent = [255, 92, 0] as const;
-      const dark = [26, 26, 26] as const;
-      const muted = [120, 120, 120] as const;
+      type RGB = [number, number, number];
+      const orange: RGB     = [255, 92,  0  ];
+      const black: RGB      = [17,  17,  17 ];
+      const gray: RGB       = [110, 110, 110];
+      const light: RGB      = [160, 160, 160];
+      const vLight: RGB     = [247, 247, 247];
+      const divider: RGB    = [228, 228, 228];
 
-      // Header bar
-      doc.setFillColor(17, 17, 17);
-      doc.roundedRect(margin, y, W - margin * 2, 22, 3, 3, 'F');
+      // ── Orange top stripe ──────────────────────────────
+      doc.setFillColor(...orange);
+      doc.rect(0, 0, W, 3.5, 'F');
+
+      // ── Header ────────────────────────────────────────
+      let y = 14;
+
+      // Logo
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(14);
-      doc.setTextColor(245, 245, 245);
-      doc.text('SALTO', margin + 6, y + 14);
+      doc.setFontSize(19);
+      doc.setTextColor(...black);
+      doc.text('SALTO', m, y);
+      doc.setTextColor(...orange);
+      doc.text('·', m + doc.getTextWidth('SALTO') + 0.3, y);
+      doc.setFont('helvetica', 'normal');
       doc.setFontSize(8);
-      doc.setTextColor(...accent);
-      doc.text(`OS #${osNum}`, W - margin - 6, y + 9, { align: 'right' });
-      doc.setTextColor(...muted);
-      doc.text(date, W - margin - 6, y + 15, { align: 'right' });
-      y += 30;
+      doc.setTextColor(...light);
+      doc.text('saltoup.com', m, y + 5.5);
 
-      // Company block
-      if (nomeFantasia || razaoSocial) {
+      // OS block (right)
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7);
+      doc.setTextColor(...orange);
+      doc.text('ORDEM DE SERVIÇO', W - m, y - 5, { align: 'right' });
+      doc.setFontSize(18);
+      doc.setTextColor(...black);
+      doc.text(`#${osNum}`, W - m, y + 0.5, { align: 'right' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...light);
+      doc.text(date, W - m, y + 6.5, { align: 'right' });
+
+      y += 15;
+      doc.setDrawColor(...divider);
+      doc.setLineWidth(0.3);
+      doc.line(m, y, W - m, y);
+      y += 8;
+
+      // ── Client data ───────────────────────────────────
+      const fields: { label: string; value: string }[] = [
+        ...(nomeFantasia ? [{ label: 'NOME FANTASIA',        value: nomeFantasia }] : []),
+        ...(razaoSocial  ? [{ label: 'RAZÃO SOCIAL',         value: razaoSocial  }] : []),
+        ...(cnpj         ? [{ label: 'CNPJ',                 value: cnpj         }] : []),
+        ...(endereco     ? [{ label: 'ENDEREÇO',             value: endereco     }] : []),
+        ...(bairro       ? [{ label: 'BAIRRO',               value: bairro       }] : []),
+        ...((cidade || estado) ? [{ label: 'CIDADE / ESTADO', value: [cidade, estado].filter(Boolean).join(' — ') }] : []),
+        ...(cep          ? [{ label: 'CEP',                  value: cep          }] : []),
+        ...(responsavel  ? [{ label: 'RESPONSÁVEL',          value: responsavel  }] : []),
+        ...(telefone     ? [{ label: 'TELEFONE / WHATSAPP',  value: telefone     }] : []),
+        ...(emailVal     ? [{ label: 'E-MAIL',               value: emailVal     }] : []),
+      ];
+
+      if (fields.length > 0) {
+        doc.setFont('helvetica', 'bold');
         doc.setFontSize(7);
-        doc.setTextColor(...accent);
-        doc.setFont('helvetica', 'bold');
-        doc.text('DADOS DA EMPRESA', margin, y);
+        doc.setTextColor(...orange);
+        doc.text('DADOS DO CLIENTE', m, y);
         y += 5;
-        doc.setFillColor(245, 245, 245);
-        doc.roundedRect(margin, y, W - margin * 2, 28, 2, 2, 'F');
-        doc.setTextColor(...dark);
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'bold');
-        doc.text(nomeFantasia || razaoSocial, margin + 5, y + 8);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(...muted);
-        const details = [razaoSocial, cnpj ? `CNPJ: ${cnpj}` : '', endereco, responsavel ? `Resp: ${responsavel}` : '', telefone].filter(Boolean);
-        details.slice(0, 2).forEach((d, i) => doc.text(d, margin + 5, y + 15 + i * 5));
-        y += 36;
+
+        const rowH = 11;
+        const rows = Math.ceil(fields.length / 2);
+        const cardH = rows * rowH + 10;
+
+        doc.setFillColor(...vLight);
+        doc.roundedRect(m, y, cW, cardH, 2, 2, 'F');
+
+        fields.forEach((f, i) => {
+          const col = i % 2;
+          const row = Math.floor(i / 2);
+          const cx  = m + 6 + col * (cW / 2);
+          const fy  = y + 6 + row * rowH;
+          const maxW = cW / 2 - 12;
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(6.5);
+          doc.setTextColor(...light);
+          doc.text(f.label, cx, fy);
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(...black);
+          doc.text(doc.splitTextToSize(f.value, maxW)[0] as string, cx, fy + 5);
+
+          if (col === 0 && i + 1 < fields.length) {
+            doc.setDrawColor(...divider);
+            doc.setLineWidth(0.2);
+            doc.line(m + cW / 2, fy - 1, m + cW / 2, fy + rowH - 2);
+          }
+        });
+
+        for (let r = 1; r < rows; r++) {
+          doc.setDrawColor(...divider);
+          doc.setLineWidth(0.2);
+          doc.line(m + 5, y + 6 + r * rowH - 2, m + cW - 5, y + 6 + r * rowH - 2);
+        }
+
+        y += cardH + 8;
       }
 
-      // Services table
-      doc.setFontSize(7);
-      doc.setTextColor(...accent);
+      // ── Services table ────────────────────────────────
       doc.setFont('helvetica', 'bold');
-      doc.text('SERVIÇOS', margin, y);
+      doc.setFontSize(7);
+      doc.setTextColor(...orange);
+      doc.text('SERVIÇOS', m, y);
       y += 4;
 
-      doc.setDrawColor(200, 200, 200);
-      doc.setLineWidth(0.3);
-      doc.line(margin, y, W - margin, y);
-      y += 4;
+      // Header row
+      doc.setFillColor(...black);
+      doc.rect(m, y, cW, 8, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7);
+      doc.setTextColor(255, 255, 255);
+      doc.text('DESCRIÇÃO', m + 4, y + 5.5);
+      doc.text('QTD', m + cW * 0.68, y + 5.5, { align: 'center' });
+      doc.text('VALOR', W - m - 4, y + 5.5, { align: 'right' });
+      y += 8;
 
       const validItems = items.filter(i => i.description);
       validItems.forEach((item, idx) => {
+        const rH = 8;
+        doc.setFillColor(idx % 2 === 0 ? 255 : 250, idx % 2 === 0 ? 255 : 250, idx % 2 === 0 ? 255 : 250);
+        doc.rect(m, y, cW, rH, 'F');
+
         doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(...dark);
-        doc.text(`${idx + 1}. ${item.description}`, margin, y);
+        doc.setFontSize(8.5);
+        doc.setTextColor(...black);
+        const descLine = (doc.splitTextToSize(`${idx + 1}. ${item.description}`, cW * 0.62) as string[])[0];
+        doc.text(descLine, m + 4, y + 5.5);
+
+        doc.setTextColor(...gray);
+        doc.text(item.qty || '1', m + cW * 0.68, y + 5.5, { align: 'center' });
+
         if (item.price) {
           doc.setFont('helvetica', 'bold');
-          doc.text(`R$ ${fmtBRL(item.price)}`, W - margin, y, { align: 'right' });
+          doc.setTextColor(...black);
+          doc.text(`R$ ${fmtBRL(item.price)}`, W - m - 4, y + 5.5, { align: 'right' });
+        } else {
+          doc.setTextColor(...light);
+          doc.text('—', W - m - 4, y + 5.5, { align: 'right' });
         }
-        y += 5;
-        doc.setDrawColor(235, 235, 235);
-        doc.line(margin, y - 1, W - margin, y - 1);
+
+        doc.setDrawColor(...divider);
+        doc.setLineWidth(0.2);
+        doc.line(m, y + rH, W - m, y + rH);
+        y += rH;
       });
 
       if (total) {
-        y += 4;
-        doc.setDrawColor(...dark);
-        doc.setLineWidth(0.5);
-        doc.line(margin, y - 2, W - margin, y - 2);
+        doc.setFillColor(...orange);
+        doc.rect(m, y, cW, 10, 'F');
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.setTextColor(...muted);
-        doc.text('TOTAL', margin, y + 5);
-        doc.setFontSize(14);
-        doc.setTextColor(...accent);
-        doc.text(`R$ ${total}`, W - margin, y + 6, { align: 'right' });
-        y += 14;
-      }
-
-      if (obs) {
-        y += 4;
-        doc.setFontSize(7);
-        doc.setTextColor(...accent);
-        doc.setFont('helvetica', 'bold');
-        doc.text('OBSERVAÇÕES', margin, y);
-        y += 5;
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(...muted);
-        doc.text(obs, margin, y, { maxWidth: W - margin * 2 });
+        doc.setFontSize(8);
+        doc.setTextColor(255, 255, 255);
+        doc.text('TOTAL', m + 4, y + 6.5);
+        doc.setFontSize(13);
+        doc.text(`R$ ${total}`, W - m - 4, y + 7, { align: 'right' });
         y += 10;
       }
 
-      // Signature lines
-      y = Math.max(y + 20, 220);
-      doc.setDrawColor(180, 180, 180);
-      doc.setLineWidth(0.3);
-      doc.line(margin, y, margin + 70, y);
-      doc.line(W - margin - 70, y, W - margin, y);
-      doc.setFontSize(8);
-      doc.setTextColor(...muted);
-      doc.setFont('helvetica', 'normal');
-      doc.text(responsavel || nomeFantasia || 'Cliente', margin, y + 5);
-      doc.text('Bruno Vieira — Salto', W - margin, y + 5, { align: 'right' });
+      y += 8;
 
-      // Footer
+      // ── Observations ─────────────────────────────────
+      if (obs) {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7);
+        doc.setTextColor(...orange);
+        doc.text('OBSERVAÇÕES', m, y);
+        y += 5;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(...gray);
+        const obsLines = doc.splitTextToSize(obs, cW) as string[];
+        doc.text(obsLines, m, y);
+        y += obsLines.length * 5 + 6;
+      }
+
+      // ── Signatures ────────────────────────────────────
+      const sigY = Math.max(y + 12, 228);
+      const sigW = 72;
+      const sigH = 22;
+
+      const clientSigData = sigClientRef.current?.getDataURL() ?? null;
+      const brunoSigData  = sigBrunoRef.current?.getDataURL()  ?? null;
+
+      if (clientSigData) {
+        try { doc.addImage(clientSigData, 'PNG', m, sigY - sigH, sigW, sigH); } catch { /* skip */ }
+      }
+      doc.setDrawColor(...black);
+      doc.setLineWidth(0.5);
+      doc.line(m, sigY, m + sigW, sigY);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...black);
+      doc.text(responsavel || nomeFantasia || 'Cliente', m, sigY + 5);
+      if (nomeFantasia && responsavel) {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...light);
+        doc.text(nomeFantasia, m, sigY + 9.5);
+      }
+
+      if (brunoSigData) {
+        try { doc.addImage(brunoSigData, 'PNG', W - m - sigW, sigY - sigH, sigW, sigH); } catch { /* skip */ }
+      }
+      doc.setDrawColor(...black);
+      doc.setLineWidth(0.5);
+      doc.line(W - m - sigW, sigY, W - m, sigY);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...black);
+      doc.text('Bruno Vieira', W - m - sigW, sigY + 5);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(...light);
+      doc.text('Salto · saltoup.com', W - m - sigW, sigY + 9.5);
+
+      // ── Footer ────────────────────────────────────────
+      doc.setFillColor(...orange);
+      doc.rect(0, 288.5, W, 1.5, 'F');
+      doc.setFont('helvetica', 'normal');
       doc.setFontSize(7);
-      doc.setTextColor(180, 180, 180);
-      doc.text('Gerado por Salto · saltoup.com', W / 2, 285, { align: 'center' });
+      doc.setTextColor(190, 190, 190);
+      doc.text(`Gerado por Salto · saltoup.com · OS #${osNum} · ${date}`, W / 2, 285, { align: 'center' });
 
       return doc.output('datauristring').split(',')[1];
     } catch (e) {
@@ -188,7 +315,7 @@ export default function OSInline() {
       const res = await fetch('/api/os-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ osNum, date, nomeFantasia, razaoSocial, cnpj, endereco, responsavel, telefone, email: emailVal, items, obs, total, pdfBase64 }),
+        body: JSON.stringify({ osNum, date, nomeFantasia, razaoSocial, cnpj, endereco, bairro, cidade, estado, cep, responsavel, telefone, email: emailVal, items, obs, total, pdfBase64 }),
       });
       setEmailStatus(res.ok ? 'sent' : 'error');
       if (res.ok) setTimeout(() => setEmailStatus('idle'), 4000);
@@ -205,6 +332,9 @@ export default function OSInline() {
     razaoSocial  ? `*Razão Social:* ${razaoSocial}`   : '',
     cnpj         ? `*CNPJ:* ${cnpj}`                   : '',
     endereco     ? `*Endereço:* ${endereco}`             : '',
+    bairro       ? `*Bairro:* ${bairro}`                 : '',
+    (cidade || estado) ? `*Cidade/UF:* ${[cidade, estado].filter(Boolean).join(' — ')}` : '',
+    cep          ? `*CEP:* ${cep}`                       : '',
     responsavel  ? `*Responsável:* ${responsavel}`       : '',
     telefone     ? `*Telefone:* ${telefone}`             : '',
     emailVal     ? `*E-mail:* ${emailVal}`               : '',
@@ -261,9 +391,29 @@ export default function OSInline() {
               {lbl('CNPJ')}
               <input style={inp} value={cnpj} onChange={e => setCnpj(e.target.value)} placeholder="00.000.000/0000-00" />
             </div>
+            <div />
+          </div>
+          {/* Endereço completo */}
+          <div style={{ marginTop: 12 }}>
+            {lbl('Endereço (Rua, número)')}
+            <input style={inp} value={endereco} onChange={e => setEndereco(e.target.value)} placeholder="Rua das Flores, 123" />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 52px 110px', gap: '10px 16px', marginTop: 12 }}>
             <div>
-              {lbl('Endereço')}
-              <input style={inp} value={endereco} onChange={e => setEndereco(e.target.value)} placeholder="Rua, número, cidade - UF" />
+              {lbl('Bairro')}
+              <input style={inp} value={bairro} onChange={e => setBairro(e.target.value)} placeholder="Centro" />
+            </div>
+            <div>
+              {lbl('Cidade')}
+              <input style={inp} value={cidade} onChange={e => setCidade(e.target.value)} placeholder="São Paulo" />
+            </div>
+            <div>
+              {lbl('UF')}
+              <input style={inp} value={estado} onChange={e => setEstado(e.target.value.toUpperCase().slice(0, 2))} placeholder="SP" maxLength={2} />
+            </div>
+            <div>
+              {lbl('CEP')}
+              <input style={inp} value={cep} onChange={e => setCep(e.target.value)} placeholder="00000-000" />
             </div>
           </div>
         </div>
@@ -320,8 +470,8 @@ export default function OSInline() {
 
         {/* Signatures */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, paddingTop: 20, borderTop: '1px solid #eee' }}>
-          <SignaturePad label={responsavel || nomeFantasia || 'Assinatura do cliente'} height={64} />
-          <SignaturePad label="Bruno Vieira — Salto" height={64} />
+          <SignaturePad ref={sigClientRef} label={responsavel || nomeFantasia || 'Assinatura do cliente'} height={64} />
+          <SignaturePad ref={sigBrunoRef} label="Bruno Vieira — Salto" height={64} />
         </div>
       </div>
 
