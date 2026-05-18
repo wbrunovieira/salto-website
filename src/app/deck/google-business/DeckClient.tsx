@@ -26,6 +26,7 @@ export default function DeckClient() {
     type GSAPStatic = {
       set: (targets: NodeListOf<Element> | Element[], vars: Record<string, unknown>) => void;
       to: (targets: Element | NodeListOf<Element> | Element[], vars: Record<string, unknown>) => void;
+      killTweensOf: (targets: Element | Element[]) => void;
     };
     let gsap: GSAPStatic | null = null;
 
