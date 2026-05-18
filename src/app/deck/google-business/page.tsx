@@ -1,6 +1,11 @@
+import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import PasswordGate from '../PasswordGate';
 import DeckWrapper from './DeckWrapper';
+
+export const metadata: Metadata = {
+  title: 'Salto — Perfil no Google',
+};
 
 export default async function DeckGoogleBusinessPage() {
   const cookieStore = await cookies();

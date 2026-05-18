@@ -159,7 +159,7 @@ export default function DeckClient() {
         pointerEvents: 'none', opacity: 0.5,
       }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.svg" alt="Salto" style={{ height: 18, width: 'auto', display: 'block' }} />
+        <img src="/logo.svg" alt="Salto" style={{ height: 32, width: 'auto', display: 'block' }} />
       </div>
 
       {/* Google branding — fixo em todos os slides */}
