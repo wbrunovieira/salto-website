@@ -192,7 +192,10 @@ export default function DeckClient() {
 
       {/* Logo Salto — fixo em todos os slides */}
       <div style={{
-        position: 'fixed', top: 20, left: 24, zIndex: 300,
+        position: 'fixed',
+        top: 'calc(20px + env(safe-area-inset-top, 0px))',
+        left: 'calc(24px + env(safe-area-inset-left, 0px))',
+        zIndex: 300,
         pointerEvents: 'none', opacity: 0.5,
       }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -201,7 +204,10 @@ export default function DeckClient() {
 
       {/* Google branding — fixo em todos os slides */}
       <div style={{
-        position: 'fixed', bottom: 22, right: 24, zIndex: 300,
+        position: 'fixed',
+        bottom: 'calc(22px + env(safe-area-inset-bottom, 0px))',
+        right: 'calc(24px + env(safe-area-inset-right, 0px))',
+        zIndex: 300,
         display: 'flex', alignItems: 'center', gap: 10,
         background: 'rgba(255,255,255,0.06)',
         border: '1px solid rgba(255,255,255,0.1)',
@@ -236,7 +242,10 @@ export default function DeckClient() {
         onClick={toggleFullscreen}
         title={isFullscreen ? 'Sair do fullscreen' : 'Fullscreen'}
         style={{
-          position: 'fixed', bottom: 24, left: 24, zIndex: 300,
+          position: 'fixed',
+          bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+          left: 'calc(24px + env(safe-area-inset-left, 0px))',
+          zIndex: 300,
           width: 36, height: 36, borderRadius: '50%',
           border: '1px solid rgba(255,255,255,0.08)',
           background: 'rgba(255,255,255,0.03)',

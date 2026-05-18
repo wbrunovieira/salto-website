@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Montserrat } from 'next/font/google';
 import Script from 'next/script';
 import './deck.css';
@@ -12,6 +12,10 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Salto — Deck Comercial',
+};
+
+export const viewport: Viewport = {
+  viewportFit: 'cover',
 };
 
 export default function DeckLayout({ children }: { children: React.ReactNode }) {

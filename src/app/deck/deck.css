@@ -37,7 +37,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--base);color:va
 .slide.active{pointer-events:all}
 
 /* ── Nav ── */
-#nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+#nav{position:fixed;bottom:28px;bottom:calc(28px + env(safe-area-inset-bottom,0px));
+  left:50%;transform:translateX(-50%);
   display:flex;align-items:center;gap:18px;z-index:300}
 .nb{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
   background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;
@@ -171,7 +172,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--base);color:va
 .price-card.feat{border-color:rgba(255,92,0,.3);background:rgba(255,92,0,.05)}
 
 /* ── Hamburger ── */
-#hbtn{position:fixed;top:20px;right:24px;z-index:400;width:36px;height:36px;
+#hbtn{position:fixed;top:20px;top:calc(20px + env(safe-area-inset-top,0px));
+  right:24px;right:calc(24px + env(safe-area-inset-right,0px));z-index:400;width:36px;height:36px;
   border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);
   cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:4px;transition:border-color .2s}
