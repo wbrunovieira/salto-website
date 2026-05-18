@@ -517,6 +517,16 @@ export default function OSInline() {
         </button>
         {emailStatus === 'sent' && (
           <button
+            onClick={() => setEmailStatus('idle')}
+            title="Corrija o e-mail e reenvie"
+            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', color: '#aaa', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.61"/></svg>
+            Reenviar
+          </button>
+        )}
+        {emailStatus === 'sent' && (
+          <button
             onClick={() => setShowFicha(p => !p)}
             style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 100, border: '2px solid #FF5C00', background: showFicha ? '#FF5C00' : 'transparent', color: showFicha ? '#fff' : '#FF5C00', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
           >

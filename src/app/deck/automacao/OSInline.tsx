@@ -511,14 +511,24 @@ export default function OSInline() {
           style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 100, border: 'none', background: emailStatus === 'sent' ? '#22c55e' : emailStatus === 'error' ? '#ef4444' : 'linear-gradient(to right,#FF5C00,#FF3D00)', color: '#fff', fontSize: 12, fontWeight: 700, cursor: emailStatus === 'sending' ? 'wait' : 'pointer', fontFamily: 'inherit', opacity: emailStatus === 'sending' ? 0.7 : 1 }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          {emailStatus === 'sending' ? 'Enviando…' : emailStatus === 'sent' ? 'Proposta enviada! ✓' : emailStatus === 'error' ? 'Erro — tente novamente' : 'Enviar Proposta por E-mail'}
+          {emailStatus === 'sending' ? 'Enviando…' : emailStatus === 'sent' ? 'Pedido enviado! ✓' : emailStatus === 'error' ? 'Erro — tente novamente' : 'Enviar Pedido por E-mail'}
         </button>
+        {emailStatus === 'sent' && (
+          <button
+            onClick={() => setEmailStatus('idle')}
+            title="Corrija o e-mail e reenvie"
+            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', color: '#aaa', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.61"/></svg>
+            Reenviar
+          </button>
+        )}
       </div>
 
       {emailStatus === 'sent' && (
         <div style={{ textAlign: 'center', padding: '12px 24px', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12 }}>
-          <p style={{ fontSize: 15, fontWeight: 700, color: '#22c55e', marginBottom: 4 }}>Proposta enviada!</p>
-          <p style={{ fontSize: 12, color: '#888' }}>Enviada para bruno@saltoup.com · Proposta #{osNum}</p>
+          <p style={{ fontSize: 15, fontWeight: 700, color: '#22c55e', marginBottom: 4 }}>Pedido enviado!</p>
+          <p style={{ fontSize: 12, color: '#888' }}>Enviado para bruno@saltoup.com · OS #{osNum}</p>
         </div>
       )}
     </div>
