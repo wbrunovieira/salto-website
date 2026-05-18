@@ -45,6 +45,11 @@ export async function POST(req: NextRequest) {
         subject: `Sua Ordem de Serviço #${osNum} — Salto`,
         react: OrdemServicoCliente({ osNum, date, nomeFantasia, responsavel, telefone, items, obs, total }),
         attachments: attachment,
+        tags: [
+          { name: 'tipo', value: 'os-google' },
+          { name: 'os_num', value: String(osNum) },
+          { name: 'empresa', value: empresa.slice(0, 64) },
+        ],
       });
     }
 
