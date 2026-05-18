@@ -83,68 +83,50 @@ export const slidesServicos = `
   <div class="gco"></div>
   <div class="wfull mw900">
     <div data-a class="badge mb8"><span class="dot"></span>FRENTE 02 · AUTOMAÇÃO</div>
-    <h2 data-a class="hl mb2">Lead chega. Resposta em segundos.</h2>
-    <h2 data-a class="hl hl-acc mb10">Processo rodando — mesmo sem você.</h2>
+    <h2 data-a class="hl mb2">Qualquer processo que se repete</h2>
+    <h2 data-a class="hl hl-acc mb10">a gente automatiza.</h2>
 
-    <!-- Fluxo -->
-    <div data-a style="display:flex;align-items:center;gap:0;margin-bottom:20px;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.02)">
-      <div style="flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--border)">
-        <p style="font-size:16px;margin:0 0 4px">📱</p>
-        <p style="font-size:10px;font-weight:700;color:var(--muted);margin:0">Lead</p>
-      </div>
-      <div style="color:var(--accent);padding:0 4px;font-size:12px">→</div>
-      <div style="flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--border);background:rgba(255,92,0,0.05)">
-        <p style="font-size:16px;margin:0 0 4px">🤖</p>
-        <p style="font-size:10px;font-weight:700;color:var(--accent);margin:0">WhatsApp IA</p>
-      </div>
-      <div style="color:var(--accent);padding:0 4px;font-size:12px">→</div>
-      <div style="flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--border)">
-        <p style="font-size:16px;margin:0 0 4px">📊</p>
-        <p style="font-size:10px;font-weight:700;color:var(--muted);margin:0">CRM</p>
-      </div>
-      <div style="color:var(--accent);padding:0 4px;font-size:12px">→</div>
-      <div style="flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--border)">
-        <p style="font-size:16px;margin:0 0 4px">📅</p>
-        <p style="font-size:10px;font-weight:700;color:var(--muted);margin:0">Agendamento</p>
-      </div>
-      <div style="color:var(--accent);padding:0 4px;font-size:12px">→</div>
-      <div style="flex:1;padding:12px 8px;text-align:center">
-        <p style="font-size:16px;margin:0 0 4px">🤝</p>
-        <p style="font-size:10px;font-weight:700;color:var(--muted);margin:0">Fechamento</p>
-      </div>
-    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:700px;margin:0 auto">
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <div data-a class="card" style="padding:16px 18px">
-        <p style="font-size:22px;font-weight:900;color:var(--accent);margin:0 0 6px;line-height:1">&lt;3s</p>
-        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px">Resposta Imediata</p>
-        <p style="font-size:12px;color:var(--muted)">Nenhum lead espera por um humano para ser atendido</p>
+      <!-- Gatilho → Processo → Ação -->
+      <div data-a style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;padding:24px 28px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.02);gap:4px">
+        <div style="text-align:center">
+          <p style="font-size:28px;margin:0 0 8px">⚡</p>
+          <p style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase">Gatilho</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:6px">mensagem, pedido, hora do dia</p>
+        </div>
+        <span style="color:rgba(255,92,0,0.4);font-size:18px;padding:0 12px">→</span>
+        <div style="text-align:center">
+          <p style="font-size:28px;margin:0 0 8px">⚙️</p>
+          <p style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase">Processo</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:6px">regras que definimos juntos</p>
+        </div>
+        <span style="color:rgba(255,92,0,0.4);font-size:18px;padding:0 12px">→</span>
+        <div style="text-align:center">
+          <p style="font-size:28px;margin:0 0 8px">✅</p>
+          <p style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase">Ação</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:6px">mensagem, planilha, sistema</p>
+        </div>
       </div>
-      <div data-a class="card" style="padding:16px 18px">
-        <p style="font-size:22px;margin:0 0 6px;line-height:1">🔄</p>
-        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px">Follow-up Automático</p>
-        <p style="font-size:12px;color:var(--muted)">Sequência inteligente até o cliente decidir</p>
+
+      <!-- Exemplos de fluxo -->
+      <div data-a style="padding:14px 20px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--border)">
+        <p style="font-size:14px;color:var(--muted);line-height:1.6"><span style="color:var(--accent);font-weight:700">→</span> Pedido no site <span style="color:var(--accent)">·</span> WhatsApp do cliente <span style="color:var(--accent)">·</span> planilha atualizada <span style="color:var(--accent)">·</span> NF gerada</p>
       </div>
-      <div data-a class="card" style="padding:16px 18px">
-        <p style="font-size:22px;margin:0 0 6px;line-height:1">📈</p>
-        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px">Relatório em Tempo Real</p>
-        <p style="font-size:12px;color:var(--muted)">Veja quantos leads, em qual etapa, a qualquer momento</p>
+      <div data-a style="padding:14px 20px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--border)">
+        <p style="font-size:14px;color:var(--muted);line-height:1.6"><span style="color:var(--accent);font-weight:700">→</span> Formulário preenchido <span style="color:var(--accent)">·</span> cadastro no CRM <span style="color:var(--accent)">·</span> mensagem de boas-vindas automática</p>
       </div>
-      <div data-a class="card" style="padding:16px 18px">
-        <p style="font-size:22px;margin:0 0 6px;line-height:1">🧩</p>
-        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px">CRM Integrado</p>
-        <p style="font-size:12px;color:var(--muted)">Histórico completo de cada contato e negociação</p>
+      <div data-a style="padding:14px 20px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--border)">
+        <p style="font-size:14px;color:var(--muted);line-height:1.6"><span style="color:var(--accent);font-weight:700">→</span> Hora do dia <span style="color:var(--accent)">·</span> relatório gerado <span style="color:var(--accent)">·</span> enviado por e-mail ou WhatsApp</p>
       </div>
-      <div data-a class="card" style="padding:16px 18px">
-        <p style="font-size:22px;margin:0 0 6px;line-height:1">💰</p>
-        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px">Reduz Custo Operacional</p>
-        <p style="font-size:12px;color:var(--muted)">Escala o atendimento sem contratar mais pessoal</p>
+      <div data-a style="padding:14px 20px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--border)">
+        <p style="font-size:14px;color:var(--muted);line-height:1.6"><span style="color:var(--accent);font-weight:700">→</span> Cliente sem resposta por 2 dias <span style="color:var(--accent)">·</span> follow-up automático <span style="color:var(--accent)">·</span> reagendamento</p>
       </div>
-      <div data-a class="card card-hot" style="padding:16px 18px">
-        <p style="font-size:22px;margin:0 0 6px;line-height:1">⚡</p>
-        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 4px">Funciona 24/7</p>
-        <p style="font-size:12px;color:var(--muted)">Fora do horário, fim de semana, feriado — sem parar</p>
+
+      <div data-a style="padding:18px 22px;border:1px solid rgba(255,92,0,0.2);border-radius:12px;background:rgba(255,92,0,0.04)">
+        <p style="font-size:15px;color:var(--muted);line-height:1.6">Você não precisa entender de tecnologia. <span style="color:var(--text);font-weight:600">Só precisa saber o que quer que aconteça.</span></p>
       </div>
+
     </div>
   </div>
 </div>
@@ -218,65 +200,97 @@ export const slidesServicos = `
 </div>
 
 <!-- ════════════════════════════════════════
-     S7 — IA E DADOS
+     S7 — ANÚNCIOS ONLINE
 ════════════════════════════════════════ -->
 <div class="slide" data-s="7">
-  <div class="gc" style="background:radial-gradient(ellipse at center,#8B5CF6 0%,transparent 68%);opacity:.06"></div>
+  <div class="gc" style="background:radial-gradient(ellipse at center,#FBBC05 0%,transparent 68%);opacity:.04"></div>
   <div class="wfull mw900">
     <div data-a style="display:flex;align-items:center;gap:10px;margin-bottom:32px">
-      <span style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.5px">WB</span>
-      <span class="badge" style="border-color:rgba(139,92,246,0.25);background:rgba(139,92,246,0.05)"><span style="width:6px;height:6px;border-radius:50%;background:#8B5CF6;flex-shrink:0"></span>FRENTE 04 · IA E DADOS</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FBBC05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span class="badge" style="border-color:rgba(251,188,5,0.25);background:rgba(251,188,5,0.05)"><span style="width:6px;height:6px;border-radius:50%;background:#FBBC05;flex-shrink:0"></span>FRENTE 04 · ANÚNCIOS ONLINE</span>
     </div>
 
-    <h2 data-a class="hl mb2">Transforme dados em decisões.</h2>
-    <h2 data-a style="font-size:clamp(32px,4.5vw,66px);font-weight:900;line-height:.95;letter-spacing:-1.5px;background:linear-gradient(to right,#8B5CF6,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:40px">Obstáculos em vantagens.</h2>
+    <h2 data-a class="hl mb2">Apareça para quem já</h2>
+    <h2 data-a style="font-size:clamp(32px,4.5vw,66px);font-weight:900;line-height:.95;letter-spacing:-1.5px;background:linear-gradient(to right,#FBBC05,#F9A825);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:40px">quer comprar.</h2>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:16px;align-items:start">
 
-      <div data-a class="card" style="padding:22px 24px">
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <!-- Esquerda: onde anunciamos -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+
+        <div data-a class="card" style="padding:22px 24px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <p style="font-size:15px;font-weight:800;color:var(--text);margin:0">Google Ads</p>
           </div>
-          <div>
-            <p style="font-size:14px;font-weight:800;color:var(--text);margin:0 0 6px">Chatbot com IA</p>
-            <p style="font-size:13px;color:var(--muted);line-height:1.55">Atende, qualifica e agenda — automaticamente, 24 horas por dia, 7 dias por semana. Personalizado para o seu negócio.</p>
-          </div>
+          <p style="font-size:14px;color:var(--muted);line-height:1.55">Aparece no topo quando alguém busca o que você vende. Paga só quando clicam.</p>
         </div>
+
+        <div data-a class="card" style="padding:22px 24px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="url(#ig-grad)"/><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/><defs><linearGradient id="ig-grad" x1="0" y1="24" x2="24" y2="0"><stop offset="0%" stop-color="#F58529"/><stop offset="50%" stop-color="#DD2A7B"/><stop offset="100%" stop-color="#8134AF"/></linearGradient></defs></svg>
+            <p style="font-size:15px;font-weight:800;color:var(--text);margin:0">Instagram e Facebook</p>
+          </div>
+          <p style="font-size:14px;color:var(--muted);line-height:1.55">Anúncios visuais para quem ainda não te conhece — segmentado por interesse, localização e comportamento.</p>
+        </div>
+
+        <div data-a class="card card-hot" style="padding:18px 22px">
+          <p style="font-size:14px;color:var(--muted);line-height:1.6">Você define o orçamento. <span style="color:var(--text);font-weight:600">Você vê exatamente o que está dando retorno. </span>Nenhuma verba desperdiçada.</p>
+        </div>
+
       </div>
 
-      <div data-a class="card" style="padding:22px 24px">
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <!-- Direita: como funciona -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">COMO FUNCIONA</p>
+
+        <div data-a style="display:grid;grid-template-columns:auto 1fr;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(251,188,5,0.15)">
+          <div style="padding:16px 18px;background:rgba(251,188,5,0.06);border-right:1px solid rgba(251,188,5,0.15)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FBBC05;margin:0 0 4px;white-space:nowrap">Passo 1</p>
+            <p style="font-size:14px;font-weight:700;color:var(--text);margin:0">Definimos</p>
           </div>
-          <div>
-            <p style="font-size:14px;font-weight:800;color:var(--text);margin:0 0 6px">Análise Preditiva</p>
-            <p style="font-size:13px;color:var(--muted);line-height:1.55">Sabe o que vai acontecer antes de acontecer. Tome decisões embasadas em dados — não em feeling.</p>
+          <div style="padding:16px 18px">
+            <p style="font-size:13px;color:var(--muted);line-height:1.5;margin:0">Quem é seu cliente ideal, o quanto quer investir e qual resultado quer.</p>
           </div>
         </div>
-      </div>
 
-      <div data-a class="card" style="padding:22px 24px">
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <div data-a style="display:grid;grid-template-columns:auto 1fr;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(251,188,5,0.15)">
+          <div style="padding:16px 18px;background:rgba(251,188,5,0.06);border-right:1px solid rgba(251,188,5,0.15)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FBBC05;margin:0 0 4px;white-space:nowrap">Passo 2</p>
+            <p style="font-size:14px;font-weight:700;color:var(--text);margin:0">Criamos</p>
           </div>
-          <div>
-            <p style="font-size:14px;font-weight:800;color:var(--text);margin:0 0 6px">Gestão Inteligente de Dados</p>
-            <p style="font-size:13px;color:var(--muted);line-height:1.55">Centraliza, organiza e usa seus dados de forma estratégica. Elimina planilhas e processos manuais.</p>
+          <div style="padding:16px 18px">
+            <p style="font-size:13px;color:var(--muted);line-height:1.5;margin:0">Anúncios com texto, imagem ou vídeo — prontos para converter.</p>
           </div>
         </div>
-      </div>
 
-      <div data-a class="card card-hot" style="padding:22px 24px;border-color:rgba(139,92,246,0.25);background:rgba(139,92,246,0.05)">
-        <div style="display:flex;align-items:flex-start;gap:14px">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8v.5A3.5 3.5 0 0 0 7.5 14h.5v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4h.5a3.5 3.5 0 0 0 3.5-3.5V10a8 8 0 0 0-8-8z"/></svg>
+        <div data-a style="display:grid;grid-template-columns:auto 1fr;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(251,188,5,0.15)">
+          <div style="padding:16px 18px;background:rgba(251,188,5,0.06);border-right:1px solid rgba(251,188,5,0.15)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FBBC05;margin:0 0 4px;white-space:nowrap">Passo 3</p>
+            <p style="font-size:14px;font-weight:700;color:var(--text);margin:0">Otimizamos</p>
           </div>
-          <div>
-            <p style="font-size:14px;font-weight:800;color:var(--text);margin:0 0 6px">Assistente Virtual com IA</p>
-            <p style="font-size:13px;color:var(--muted);line-height:1.55">IA treinada com o seu negócio. Responde, vende e suporta seus clientes com a sua voz e personalidade.</p>
+          <div style="padding:16px 18px">
+            <p style="font-size:13px;color:var(--muted);line-height:1.5;margin:0">Acompanhamos resultado todo dia. O que funciona, a gente escala.</p>
+          </div>
+        </div>
+
+        <div data-a style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px">
+          <div style="text-align:center;padding:14px 8px;border:1px solid rgba(251,188,5,0.15);border-radius:10px;background:rgba(251,188,5,0.04)">
+            <p style="font-size:24px;font-weight:900;color:#FBBC05;margin:0">👁️</p>
+            <p style="font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.3">Quem viu</p>
+          </div>
+          <div style="text-align:center;padding:14px 8px;border:1px solid rgba(251,188,5,0.15);border-radius:10px;background:rgba(251,188,5,0.04)">
+            <p style="font-size:24px;font-weight:900;color:#FBBC05;margin:0">🖱️</p>
+            <p style="font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.3">Quem clicou</p>
+          </div>
+          <div style="text-align:center;padding:14px 8px;border:1px solid rgba(251,188,5,0.15);border-radius:10px;background:rgba(251,188,5,0.04)">
+            <p style="font-size:24px;font-weight:900;color:#FBBC05;margin:0">💰</p>
+            <p style="font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.3">Custo por lead</p>
           </div>
         </div>
       </div>

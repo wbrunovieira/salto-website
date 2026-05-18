@@ -137,13 +137,19 @@ export const slidesFechamento = `
         </div>
       </div>
 
-      <div data-a style="display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid rgba(255,92,0,0.2);border-radius:12px;background:rgba(255,92,0,0.04)">
-        <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,92,0,0.15);border:1px solid rgba(255,92,0,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <div data-a style="display:flex;align-items:flex-start;gap:16px;padding:16px 20px;border:1px solid rgba(255,92,0,0.2);border-radius:12px;background:rgba(255,92,0,0.04)">
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,92,0,0.15);border:1px solid rgba(255,92,0,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div style="flex:1">
-          <p style="font-size:14px;font-weight:700;color:var(--text);margin:0 0 2px">"Estou perdendo leads por demora na resposta"</p>
-          <p style="font-size:12px;color:var(--muted);margin:0">→ Começamos pela Automação com WhatsApp</p>
+          <p style="font-size:14px;font-weight:700;color:var(--text);margin:0 0 6px">"Minha equipe perde tempo em tarefas que poderiam rodar sozinhas"</p>
+          <p style="font-size:12px;color:var(--muted);margin:0 0 8px">→ Automação — processos que rodam 24h sem depender de ninguém</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:rgba(255,92,0,0.1);border:1px solid rgba(255,92,0,0.2);color:var(--accent)">⏱ Economiza tempo</span>
+            <span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:rgba(255,92,0,0.1);border:1px solid rgba(255,92,0,0.2);color:var(--accent)">💰 Reduz custo</span>
+            <span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:rgba(255,92,0,0.1);border:1px solid rgba(255,92,0,0.2);color:var(--accent)">📈 Mais performance</span>
+            <span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:rgba(255,92,0,0.1);border:1px solid rgba(255,92,0,0.2);color:var(--accent)">✅ Zero erro humano</span>
+          </div>
         </div>
       </div>
 

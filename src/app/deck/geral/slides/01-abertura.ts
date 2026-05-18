@@ -31,14 +31,14 @@ export const slidesAbertura = `
     </div>
 
     <h1 data-a style="font-size:clamp(28px,3.8vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1;color:#f5f5f5;margin-bottom:12px">
-      <span id="s1name-greeting"></span>tudo o que você precisa
+      <span id="s1name-greeting"></span>Processos e tecnologia
     </h1>
     <h1 data-a style="font-size:clamp(28px,3.8vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(to right,#FF5C00,#FF7A28,#FF3D00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:32px">
-      para crescer online.
+      que geram vendas.
     </h1>
 
-    <p data-a style="font-size:15px;color:#666;max-width:400px;margin:0 auto;line-height:1.6">
-      Estratégia comercial · Automação · Presença digital · Inteligência artificial
+    <p data-a style="font-size:16px;color:#666;max-width:620px;margin:0 auto;line-height:1.8">
+      Estratégia comercial · Treinamento de vendas · Automação · Anúncios online · Programação e websites · Inteligência artificial
     </p>
 
     <div id="s1logo-wrap" style="display:none;margin-top:28px">
@@ -48,22 +48,29 @@ export const slidesAbertura = `
 </div>
 
 <!-- ════════════════════════════════════════
-     S2 — QUEM SOMOS
+     S2 — QUEM ESTÁ COM VOCÊ
 ════════════════════════════════════════ -->
 <div class="slide" data-s="2">
   <div class="gco"></div>
   <div class="wfull mw900">
     <div data-a class="badge mb8"><span class="dot"></span>QUEM ESTÁ COM VOCÊ</div>
-    <h2 data-a class="hl mb10">Um ecossistema completo<br>para o seu negócio.</h2>
+
+    <!-- Bruno -->
+    <div data-a style="margin-bottom:20px;display:flex;align-items:center;gap:16px">
+      <div>
+        <p style="font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1;color:var(--text)">Bruno Vieira</p>
+        <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-top:5px">Fundador Salto &nbsp;·&nbsp; Fundador WB Digital Solutions</p>
+      </div>
+    </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
 
       <!-- Salto -->
-      <div data-a style="border:1px solid rgba(255,92,0,0.2);border-radius:16px;background:rgba(255,92,0,0.04);padding:28px 26px;display:flex;flex-direction:column;gap:20px">
+      <div data-a style="border:1px solid rgba(255,92,0,0.2);border-radius:16px;background:rgba(255,92,0,0.04);padding:24px 22px;display:flex;flex-direction:column;gap:16px">
         <div>
-          <img src="/logo.svg" alt="Salto" style="height:26px;width:auto;display:block;margin-bottom:14px">
-          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Estratégia Comercial</p>
-          <p style="font-size:14px;color:var(--muted);line-height:1.6">Estruturamos o processo comercial de PMEs para crescer de forma previsível — do lead ao cliente recorrente.</p>
+          <img src="/logo.svg" alt="Salto" style="height:22px;width:auto;display:block;margin-bottom:12px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Estratégia Comercial</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6">Estruturamos o processo comercial de PMEs para crescer de forma previsível — do lead ao cliente recorrente.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:7px">
           <div style="display:flex;align-items:center;gap:10px">
@@ -76,27 +83,27 @@ export const slidesAbertura = `
           </div>
           <div style="display:flex;align-items:center;gap:10px">
             <div class="svc-dot"></div>
-            <span style="font-size:13px;color:var(--text);font-weight:600">90 dias para resultado</span>
+            <span style="font-size:13px;color:var(--text);font-weight:600">Treinamento do time comercial</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
             <div class="svc-dot"></div>
-            <span style="font-size:13px;color:var(--text);font-weight:600">Treinamento do time comercial</span>
+            <span style="font-size:13px;color:var(--text);font-weight:600">Google Meu Negócio e Anúncios</span>
           </div>
         </div>
-        <div style="padding-top:14px;border-top:1px solid rgba(255,92,0,0.15)">
-          <p style="font-size:11px;color:#555">Bruno Vieira · Fundador · 20+ anos em vendas · FGV · 4 idiomas</p>
+        <div style="padding-top:12px;border-top:1px solid rgba(255,92,0,0.15)">
+          <p style="font-size:11px;color:#555">20+ anos em vendas · FGV · 4 idiomas</p>
         </div>
       </div>
 
       <!-- WB Digital -->
-      <div data-a style="border:1px solid rgba(255,255,255,0.07);border-radius:16px;background:rgba(255,255,255,0.02);padding:28px 26px;display:flex;flex-direction:column;gap:20px">
+      <div data-a style="border:1px solid rgba(100,181,246,0.2);border-radius:16px;background:rgba(100,181,246,0.03);padding:24px 22px;display:flex;flex-direction:column;gap:16px">
         <div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-            <span style="font-size:26px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1">WB</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <span style="font-size:24px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1">WB</span>
             <span style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#555">Digital Solutions</span>
           </div>
-          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#64B5F6;margin-bottom:8px">Tecnologia e Inovação</p>
-          <p style="font-size:14px;color:var(--muted);line-height:1.6">Soluções digitais premium — sites, plataformas, automação e IA — para empresas que querem crescer online.</p>
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#64B5F6;margin-bottom:6px">Tecnologia e Inovação</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6">Soluções digitais premium — sites, automação, chatbots e IA — para empresas que querem crescer online.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:7px">
           <div style="display:flex;align-items:center;gap:10px">
@@ -105,18 +112,18 @@ export const slidesAbertura = `
           </div>
           <div style="display:flex;align-items:center;gap:10px">
             <div style="width:6px;height:6px;border-radius:50%;background:#64B5F6;flex-shrink:0"></div>
-            <span style="font-size:13px;color:var(--text);font-weight:600">Automação de processos</span>
+            <span style="font-size:13px;color:var(--text);font-weight:600">Chatbots e assistentes virtuais com IA</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
             <div style="width:6px;height:6px;border-radius:50%;background:#64B5F6;flex-shrink:0"></div>
-            <span style="font-size:13px;color:var(--text);font-weight:600">Inteligência Artificial e Dados</span>
+            <span style="font-size:13px;color:var(--text);font-weight:600">Automação de processos</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
             <div style="width:6px;height:6px;border-radius:50%;background:#64B5F6;flex-shrink:0"></div>
             <span style="font-size:13px;color:var(--text);font-weight:600">Apps e sistemas customizados</span>
           </div>
         </div>
-        <div style="padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="padding-top:12px;border-top:1px solid rgba(100,181,246,0.1)">
           <p style="font-size:11px;color:#555">wbdigitalsolutions.com · Soluções premium e exclusivas</p>
         </div>
       </div>
@@ -165,7 +172,25 @@ export const slidesAbertura = `
             <p style="font-size:15px;font-weight:800;color:#f5f5f5;margin:0">Automação</p>
           </div>
         </div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin:0">WhatsApp inteligente, CRM e fluxos automáticos. Nunca perca um lead por falta de resposta.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:0">WhatsApp com IA atendendo 24h, CRM integrado e fluxos que rodam sozinhos — do lead ao fechamento sem depender de resposta manual.</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">WhatsApp inteligente com IA</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">CRM e pipeline automático</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Follow-up e agendamento automático</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Integrações: site, planilha, e-mail, NF</span>
+          </div>
+        </div>
       </div>
 
       <!-- Sites e Plataformas -->
@@ -182,18 +207,58 @@ export const slidesAbertura = `
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin:0">Presença digital exclusiva e de alta performance. Landing pages, e-commerce, sistemas sob medida.</p>
       </div>
 
-      <!-- IA e Dados -->
-      <div data-a style="border:1px solid rgba(139,92,246,0.2);border-radius:16px;background:rgba(139,92,246,0.03);padding:24px;display:flex;flex-direction:column;gap:14px">
+      <!-- Anúncios Online -->
+      <div data-a style="border:1px solid rgba(251,188,5,0.25);border-radius:16px;background:rgba(251,188,5,0.03);padding:24px;display:flex;flex-direction:column;gap:14px">
         <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:28px;height:28px;border-radius:50%;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8v.5A3.5 3.5 0 0 0 7.5 14h.5v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4h.5a3.5 3.5 0 0 0 3.5-3.5V10a8 8 0 0 0-8-8z"/></svg>
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(251,188,5,0.1);border:1px solid rgba(251,188,5,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBBC05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <div>
-            <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8B5CF6;margin:0 0 2px">Frente 04 · WB</p>
-            <p style="font-size:15px;font-weight:800;color:#f5f5f5;margin:0">IA e Dados</p>
+            <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FBBC05;margin:0 0 2px">Frente 04</p>
+            <p style="font-size:15px;font-weight:800;color:#f5f5f5;margin:0">Anúncios Online</p>
           </div>
         </div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin:0">Chatbots, análise preditiva e automação avançada. Transforme dados em decisões e obstáculos em vantagens.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:0">Apareça para quem já quer comprar o que você vende — no Google, no Instagram e no Facebook, sem desperdiçar verba.</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:#FBBC05;font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Anúncios no Google, Instagram e Facebook</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:#FBBC05;font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Você define o quanto quer investir</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:#FBBC05;font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Você vê exatamente o que está dando retorno</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Treinamento — full width -->
+      <div data-a style="grid-column:1/-1;border:1px solid rgba(255,92,0,0.3);border-radius:16px;background:rgba(255,92,0,0.05);padding:20px 24px;display:flex;align-items:center;gap:24px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,92,0,0.12);border:1px solid rgba(255,92,0,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="flex:1">
+          <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:0 0 3px">Frente 05</p>
+          <p style="font-size:15px;font-weight:800;color:#f5f5f5;margin:0 0 6px">Treinamento de Vendas e Atendimento</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:0">Seu time aprende a vender com processo — não no improviso. Roteiro de abordagem, como tratar objeções, como fazer follow-up e como fechar.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Playbook de vendas e atendimento</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Procedimentos e scripts prontos</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent);font-size:11px;font-weight:900">→</span>
+            <span style="font-size:12px;color:var(--text);font-weight:600">Treino prático com o time</span>
+          </div>
+        </div>
       </div>
 
     </div>
