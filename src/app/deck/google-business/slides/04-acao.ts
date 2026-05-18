@@ -80,7 +80,7 @@ export const slidesAcao = `
             <span style="font-size:20px;color:var(--muted);font-weight:700;align-self:center">–</span>
             <span style="font-size:clamp(48px,6vw,72px);font-weight:900;color:var(--accent);line-height:1;letter-spacing:-2px">500</span>
           </div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.6">Varia conforme o tamanho e complexidade do negócio.</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6"> </p>
         </div>
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,92,0,.2)">
           <p style="font-size:12px;color:var(--muted)">A ferramenta do Google? <span style="color:var(--text);font-weight:700">R$ 0,00 — sempre.</span></p>

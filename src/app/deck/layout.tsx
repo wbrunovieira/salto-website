@@ -28,7 +28,7 @@ export default function DeckLayout({ children }: { children: React.ReactNode }) 
       >
         {children}
         <Script
-          src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"
+          src="/lucide.min.js"
           strategy="afterInteractive"
         />
       </body>

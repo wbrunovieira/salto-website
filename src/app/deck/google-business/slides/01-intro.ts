@@ -16,11 +16,11 @@ export const slidesIntro = `
       ${GOOGLE_G_XL}
     </div>
     <p data-a style="font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:28px">Perfil da Empresa no Google</p>
-    <h1 data-a class="hl mb2" style="font-size:clamp(36px,5vw,68px)">Estar no Google</h1>
-    <h1 data-a class="hl hl-acc" style="font-size:clamp(36px,5vw,68px);margin-bottom:28px">não custa nada.</h1>
-    <p data-a style="font-size:clamp(15px,1.6vw,20px);color:var(--muted);max-width:540px;margin:0 auto;line-height:1.85">
-      A ferramenta é gratuita.<br>
-      <span style="color:var(--text);font-weight:600">Aparecer bem e converter clientes — é o que a Salto faz.</span>
+    <h1 data-a class="hl mb2" style="font-size:clamp(36px,5vw,68px)">O Google é onde</h1>
+    <h1 data-a class="hl hl-acc" style="font-size:clamp(36px,5vw,68px);margin-bottom:28px">tudo começa.</h1>
+    <p data-a style="font-size:clamp(15px,1.6vw,20px);color:var(--muted);max-width:560px;margin:0 auto;line-height:1.85">
+      A ferramenta mais usada no mundo para encontrar empresas.<br>
+      <span style="color:var(--text);font-weight:600">Antes de qualquer decisão, o cliente busca no Google.</span>
     </p>
   </div>
 

@@ -19,6 +19,7 @@ export default function DeckClient() {
     const w = window as typeof window & { lucide?: { createIcons: () => void }; closeMenu?: () => void };
 
     let cur = 0;
+    let transitioning = false;
     const slides = Array.from(document.querySelectorAll('.slide')) as HTMLElement[];
     const N = slides.length;
 
@@ -59,16 +60,19 @@ export default function DeckClient() {
     }
 
     function goTo(n: number) {
-      if (n < 0 || n >= N || n === cur) return;
+      if (n < 0 || n >= N || n === cur || transitioning) return;
+      transitioning = true;
       const prev = slides[cur];
       const next = slides[n];
       prev.style.pointerEvents = 'none';
       animOut(prev, () => {
         prev.classList.remove('active');
+        prev.style.pointerEvents = '';
         cur = n;
         next.classList.add('active');
         animIn(next);
         ui();
+        transitioning = false;
       });
     }
 
