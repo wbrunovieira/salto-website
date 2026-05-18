@@ -21,12 +21,14 @@ const EVENTS_TO_ALERT = new Set([
   'email.bounced',
   'email.delivery_delayed',
   'email.complained',
+  'email.failed',
 ]);
 
 const EVENT_LABEL: Record<string, string> = {
   'email.bounced': '❌ E-mail rejeitado (bounce)',
   'email.delivery_delayed': '⏳ Entrega com atraso',
   'email.complained': '🚨 Marcado como spam',
+  'email.failed': '💥 Falha no envio',
 };
 
 const TIPO_LABEL: Record<string, string> = {
