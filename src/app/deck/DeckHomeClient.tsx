@@ -34,6 +34,16 @@ const GERAL_ICON = (
   </div>
 );
 
+const WEBSITE_ICON = (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+    <span style={{ fontSize: 20, fontWeight: 900, color: '#fff', letterSpacing: -1, lineHeight: 1 }}>WB</span>
+    <div style={{ lineHeight: 1.1 }}>
+      <p style={{ fontSize: 7, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase' as const, color: '#792990', margin: 0 }}>Digital</p>
+      <p style={{ fontSize: 7, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase' as const, color: '#792990', margin: 0 }}>Solutions</p>
+    </div>
+  </div>
+);
+
 const DECKS = [
   {
     href: '/deck/google-business',
@@ -66,6 +76,14 @@ const DECKS = [
     sub: 'Salto + Google + Automação + WB Digital',
     icon: GERAL_ICON,
     accentColor: '#64B5F6',
+  },
+  {
+    href: '/deck/website',
+    tag: 'WB DIGITAL',
+    title: 'Websites e Plataformas',
+    sub: 'Sites, e-commerce, apps e sistemas',
+    icon: WEBSITE_ICON,
+    accentColor: '#792990',
   },
 ];
 
