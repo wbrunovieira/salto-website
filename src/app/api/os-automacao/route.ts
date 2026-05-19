@@ -37,8 +37,9 @@ export async function POST(req: NextRequest) {
     });
 
     // Email para o cliente
+    let clientEmailError: string | null = null;
     if (email) {
-      await resend.emails.send({
+      const { error: clientErr } = await resend.emails.send({
         from: `Bruno Vieira | Salto <${FROM_EMAIL}>`,
         to: email,
         replyTo: TO_EMAIL,
@@ -47,13 +48,35 @@ export async function POST(req: NextRequest) {
         attachments: attachment,
         tags: [
           { name: 'tipo', value: 'os-automacao' },
-          { name: 'os_num', value: String(osNum) },
-          { name: 'empresa', value: empresa.slice(0, 64) },
+          { name: 'os_num', value: String(osNum).replace(/[^a-zA-Z0-9_-]/g, '-') },
+          { name: 'empresa', value: empresa.slice(0, 64).replace(/[^a-zA-Z0-9_-]/g, '_') },
         ],
       });
+
+      if (clientErr) {
+        console.error('OS automacao client email error:', clientErr);
+        clientEmailError = email;
+        await resend.emails.send({
+          from: `Salto Alerta <${FROM_EMAIL}>`,
+          to: TO_EMAIL,
+          subject: `⚠️ E-mail inválido na OS #${osNum} — ${empresa}`,
+          html: `
+            <div style="font-family:sans-serif;max-width:520px;color:#1a1a1a">
+              <h2 style="color:#cc0000">⚠️ E-mail do cliente não foi entregue</h2>
+              <p>O Resend retornou erro ao tentar enviar para o endereço abaixo. Verifique e reenvie manualmente.</p>
+              <table style="border-collapse:collapse;width:100%;font-size:14px;margin-top:12px">
+                <tr style="background:#f5f5f5"><td style="padding:8px 12px;font-weight:600">OS nº</td><td style="padding:8px 12px">${osNum}</td></tr>
+                <tr><td style="padding:8px 12px;font-weight:600">Empresa</td><td style="padding:8px 12px">${empresa}</td></tr>
+                <tr style="background:#f5f5f5"><td style="padding:8px 12px;font-weight:600">E-mail inválido</td><td style="padding:8px 12px;color:#cc0000"><strong>${email}</strong></td></tr>
+                <tr><td style="padding:8px 12px;font-weight:600">Erro</td><td style="padding:8px 12px;color:#888">${clientErr.message ?? JSON.stringify(clientErr)}</td></tr>
+              </table>
+            </div>
+          `,
+        }).catch(() => {});
+      }
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, clientEmailError });
   } catch (err) {
     console.error('OS automacao email error:', err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

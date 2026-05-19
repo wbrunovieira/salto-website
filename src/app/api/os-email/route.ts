@@ -48,8 +48,8 @@ export async function POST(req: NextRequest) {
         attachments: attachment,
         tags: [
           { name: 'tipo', value: 'os-google' },
-          { name: 'os_num', value: String(osNum) },
-          { name: 'empresa', value: empresa.slice(0, 64) },
+          { name: 'os_num', value: String(osNum).replace(/[^a-zA-Z0-9_-]/g, '-') },
+          { name: 'empresa', value: empresa.slice(0, 64).replace(/[^a-zA-Z0-9_-]/g, '_') },
         ],
       });
 
