@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       ? [{ filename: `OS-${osNum}.pdf`, content: pdfBase64 }]
       : [];
 
-    // Email para Bruno
+    // Email para Bruno — sempre enviado, bloco independente
     await resend.emails.send({
       from: `Salto OS <${FROM_EMAIL}>`,
       to: TO_EMAIL,
@@ -36,24 +36,50 @@ export async function POST(req: NextRequest) {
       attachments: attachment,
     });
 
-    // Email para o cliente
+    // Email para o cliente — falha não bloqueia o de Bruno
+    let clientEmailError: string | null = null;
     if (email) {
-      await resend.emails.send({
-        from: `Bruno Vieira | Salto <${FROM_EMAIL}>`,
-        to: email,
-        replyTo: TO_EMAIL,
-        subject: `Sua Ordem de Serviço #${osNum} — Salto`,
-        react: OrdemServicoCliente({ osNum, date, nomeFantasia, responsavel, telefone, items, obs, total }),
-        attachments: attachment,
-        tags: [
-          { name: 'tipo', value: 'os-google' },
-          { name: 'os_num', value: String(osNum) },
-          { name: 'empresa', value: empresa.slice(0, 64) },
-        ],
-      });
+      try {
+        await resend.emails.send({
+          from: `Bruno Vieira | Salto <${FROM_EMAIL}>`,
+          to: email,
+          replyTo: TO_EMAIL,
+          subject: `Sua Ordem de Serviço #${osNum} — Salto`,
+          react: OrdemServicoCliente({ osNum, date, nomeFantasia, responsavel, telefone, items, obs, total }),
+          attachments: attachment,
+          tags: [
+            { name: 'tipo', value: 'os-google' },
+            { name: 'os_num', value: String(osNum) },
+            { name: 'empresa', value: empresa.slice(0, 64) },
+          ],
+        });
+      } catch (err) {
+        console.error('OS client email rejected by API:', err);
+        clientEmailError = email;
+        // Alerta direto para Bruno — webhook não captura rejeições na API
+        try {
+          await resend.emails.send({
+            from: `Salto Alerta <${FROM_EMAIL}>`,
+            to: TO_EMAIL,
+            subject: `⚠️ E-mail inválido na OS #${osNum} — ${empresa}`,
+            html: `
+              <div style="font-family:sans-serif;max-width:520px;color:#1a1a1a">
+                <h2 style="color:#cc0000">⚠️ E-mail do cliente não foi entregue</h2>
+                <p>O Resend rejeitou o endereço de e-mail na hora do envio (inválido ou malformado). O webhook não captura esse tipo de erro.</p>
+                <table style="border-collapse:collapse;width:100%;font-size:14px;margin-top:12px">
+                  <tr style="background:#f5f5f5"><td style="padding:8px 12px;font-weight:600">OS nº</td><td style="padding:8px 12px">${osNum}</td></tr>
+                  <tr><td style="padding:8px 12px;font-weight:600">Empresa</td><td style="padding:8px 12px">${empresa}</td></tr>
+                  <tr style="background:#f5f5f5"><td style="padding:8px 12px;font-weight:600">E-mail inválido</td><td style="padding:8px 12px;color:#cc0000"><strong>${email}</strong></td></tr>
+                </table>
+                <p style="margin-top:16px;font-size:13px;color:#888">Verifique o endereço e reenvie manualmente se necessário.</p>
+              </div>
+            `,
+          });
+        } catch { /* alerta falhou, log já foi feito acima */ }
+      }
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, clientEmailError });
   } catch (err) {
     console.error('OS email error:', err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

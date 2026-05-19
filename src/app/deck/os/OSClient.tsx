@@ -41,7 +41,7 @@ export default function OSClient() {
   const [emailVal, setEmailVal] = useState('');
   const [items, setItems] = useState<ServiceItem[]>([{ id: 1, description: '', qty: '1', price: '' }]);
   const [obs, setObs] = useState('');
-  const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'sent' | 'error' | 'client-error'>('idle');
 
   const sigClientRef = useRef<SignaturePadHandle>(null);
   const sigBrunoRef = useRef<SignaturePadHandle>(null);
@@ -326,8 +326,9 @@ export default function OSClient() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ osNum, date, nomeFantasia, razaoSocial, cnpj, endereco, bairro, cidade, estado, cep, responsavel, telefone, email: emailVal, items, obs, total, pdfBase64 }),
       });
-      if (res.ok) setEmailStatus('sent');
-      else setEmailStatus('error');
+      if (!res.ok) { setEmailStatus('error'); return; }
+      const json = await res.json();
+      setEmailStatus(json.clientEmailError ? 'client-error' : 'sent');
     } catch {
       setEmailStatus('error');
     }
@@ -568,13 +569,13 @@ export default function OSClient() {
             className="action-btn"
             onClick={sendEmail}
             disabled={emailStatus === 'sending' || emailStatus === 'sent'}
-            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '11px 22px', borderRadius: 100, border: 'none', background: emailStatus === 'sent' ? '#22c55e' : emailStatus === 'error' ? '#ef4444' : 'linear-gradient(to right,#FF5C00,#FF3D00)', color: '#fff', fontSize: 12, fontWeight: 700, cursor: emailStatus === 'sending' ? 'wait' : 'pointer', fontFamily: 'inherit', transition: 'opacity .2s', opacity: emailStatus === 'sending' ? 0.7 : 1, letterSpacing: 0.5 }}
+            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '11px 22px', borderRadius: 100, border: 'none', background: emailStatus === 'sent' ? '#22c55e' : emailStatus === 'client-error' ? '#f59e0b' : emailStatus === 'error' ? '#ef4444' : 'linear-gradient(to right,#FF5C00,#FF3D00)', color: '#fff', fontSize: 12, fontWeight: 700, cursor: emailStatus === 'sending' ? 'wait' : 'pointer', fontFamily: 'inherit', transition: 'opacity .2s', opacity: emailStatus === 'sending' ? 0.7 : 1, letterSpacing: 0.5 }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            {emailStatus === 'sending' ? 'Enviando…' : emailStatus === 'sent' ? 'OS enviada! ✓' : emailStatus === 'error' ? 'Erro — tente novamente' : 'Enviar por E-mail'}
+            {emailStatus === 'sending' ? 'Enviando…' : emailStatus === 'sent' ? 'OS enviada! ✓' : emailStatus === 'client-error' ? 'Enviado — verifique o e-mail ⚠' : emailStatus === 'error' ? 'Erro — tente novamente' : 'Enviar por E-mail'}
           </button>
 
-          {emailStatus === 'sent' && (
+          {(emailStatus === 'sent' || emailStatus === 'client-error') && (
             <button
               onClick={() => setEmailStatus('idle')}
               style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '11px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', color: '#aaa', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
@@ -588,7 +589,14 @@ export default function OSClient() {
         {emailStatus === 'sent' && (
           <div style={{ textAlign: 'center', padding: '12px 24px', marginTop: 12, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12 }}>
             <p style={{ fontSize: 15, fontWeight: 700, color: '#22c55e', marginBottom: 4 }}>OS enviada!</p>
-            <p style={{ fontSize: 12, color: '#888' }}>Enviado para bruno@saltoup.com · OS #{osNum}</p>
+            <p style={{ fontSize: 12, color: '#888' }}>Enviado para bruno@saltoup.com e para o cliente · OS #{osNum}</p>
+          </div>
+        )}
+
+        {emailStatus === 'client-error' && (
+          <div style={{ textAlign: 'center', padding: '12px 24px', marginTop: 12, background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.35)', borderRadius: 12 }}>
+            <p style={{ fontSize: 15, fontWeight: 700, color: '#f59e0b', marginBottom: 4 }}>⚠ E-mail do cliente inválido</p>
+            <p style={{ fontSize: 12, color: '#888' }}>Bruno recebeu a OS normalmente. O e-mail do cliente foi rejeitado — você já foi avisado. Corrija o endereço e reenvie.</p>
           </div>
         )}
       </div>
