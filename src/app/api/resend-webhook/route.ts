@@ -12,8 +12,10 @@ type ResendWebhookEvent = {
     from: string;
     to: string[];
     subject: string;
-    tags?: { name: string; value: string }[];
+    tags?: Record<string, string>;
     created_at: string;
+    bounce?: { type: string; subType: string; message: string };
+    failed?: { reason: string };
   };
 };
 
@@ -68,10 +70,10 @@ export async function POST(req: NextRequest) {
   }
 
   const { data } = event;
-  const tags = data.tags ?? [];
-  const tipo = tags.find(t => t.name === 'tipo')?.value ?? '';
-  const osNum = tags.find(t => t.name === 'os_num')?.value ?? '—';
-  const empresa = tags.find(t => t.name === 'empresa')?.value ?? '—';
+  const tags = data.tags ?? {};
+  const tipo = tags['tipo'] ?? '';
+  const osNum = tags['os_num'] ?? '—';
+  const empresa = tags['empresa'] ?? '—';
 
   // Only alert for our OS emails (both decks); ignore internal emails to Bruno
   if (!tipo.startsWith('os-')) {
@@ -81,6 +83,7 @@ export async function POST(req: NextRequest) {
   const label = EVENT_LABEL[event.type] ?? event.type;
   const tipoLabel = TIPO_LABEL[tipo] ?? tipo;
   const recipient = data.to[0] ?? '—';
+  const detail = data.bounce?.message ?? data.failed?.reason ?? null;
 
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
@@ -98,6 +101,7 @@ export async function POST(req: NextRequest) {
           <tr><td style="padding:8px 12px;font-weight:600">E-mail do cliente</td><td style="padding:8px 12px;color:#cc0000"><strong>${recipient}</strong></td></tr>
           <tr style="background:#f5f5f5"><td style="padding:8px 12px;font-weight:600">Assunto enviado</td><td style="padding:8px 12px">${data.subject}</td></tr>
           <tr><td style="padding:8px 12px;font-weight:600">Evento</td><td style="padding:8px 12px">${event.type}</td></tr>
+          ${detail ? `<tr style="background:#fff3f3"><td style="padding:8px 12px;font-weight:600">Motivo</td><td style="padding:8px 12px;color:#cc0000">${detail}</td></tr>` : ''}
           <tr style="background:#f5f5f5"><td style="padding:8px 12px;font-weight:600">ID do e-mail</td><td style="padding:8px 12px;font-size:12px;color:#666">${data.email_id}</td></tr>
         </table>
         <p style="margin-top:20px;font-size:13px;color:#888">Salto · Sistema de alertas automáticos</p>
