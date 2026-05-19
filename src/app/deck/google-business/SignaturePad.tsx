@@ -17,6 +17,7 @@ const SignaturePad = forwardRef<SignaturePadHandle, Props>(function SignaturePad
   const drawing = useRef(false);
   const last = useRef<{ x: number; y: number } | null>(null);
   const hasStrokes = useRef(false);
+  const activePointer = useRef<number | null>(null);
 
   const toCanvas = useCallback((clientX: number, clientY: number) => {
     const c = canvasRef.current!;
@@ -67,26 +68,35 @@ const SignaturePad = forwardRef<SignaturePadHandle, Props>(function SignaturePad
 
     const onDown = (e: PointerEvent) => {
       e.preventDefault();
-      // Algumas canetas genéricas não suportam setPointerCapture — wrap em try/catch
-      try { c.setPointerCapture(e.pointerId); } catch { /* ok */ }
+      // Ignora segundo toque (palma, dedo extra) — só aceita o primeiro ponteiro
+      if (activePointer.current !== null) return;
+      activePointer.current = e.pointerId;
+      try { c.setPointerCapture(e.pointerId); } catch { /* canetas genéricas podem não suportar */ }
       drawing.current = true;
       last.current = toCanvas(e.clientX, e.clientY);
     };
 
-    // pointermove no document para não perder o traço quando a caneta sai da borda do canvas
     const onMove = (e: PointerEvent) => {
-      if (!drawing.current) return;
+      if (!drawing.current || e.pointerId !== activePointer.current) return;
       e.preventDefault();
       const p = toCanvas(e.clientX, e.clientY);
       stroke(p.x, p.y);
     };
 
-    const onUp = () => { drawing.current = false; last.current = null; };
+    const onUp = (e: PointerEvent) => {
+      if (e.pointerId !== activePointer.current) return;
+      drawing.current = false;
+      last.current = null;
+      activePointer.current = null;
+    };
 
     c.addEventListener('pointerdown', onDown, { passive: false });
     document.addEventListener('pointermove', onMove, { passive: false });
     document.addEventListener('pointerup', onUp);
     document.addEventListener('pointercancel', onUp);
+    // Impede scroll/zoom enquanto assina
+    c.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+    c.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
     return () => {
       c.removeEventListener('pointerdown', onDown);
