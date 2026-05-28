@@ -9,9 +9,20 @@ import OSInlineWebsite from './OSInlineWebsite';
 const ALL_SLIDES = [slidesAbertura, slidesConteudo, slidesFechamento].join('');
 
 const TITLES = [
-  'Capa', 'Por Que Ter um Site', 'O Que Podemos Criar',
-  'Velocidade e SEO', 'Tecnologia', 'Design e UX',
-  'Hospedagem', 'Seu Projeto',
+  'Capa',
+  'Seu Endereço Digital',
+  'Visibilidade no Google',
+  'Por Que Ter um Site',
+  'Tipos de Website',
+  'Landing Page',
+  'Site Institucional',
+  'Loja Online',
+  'Código Puro',
+  'Design e UX',
+  'SEO, Velocidade e Mobile',
+  'Hospedagem e Suporte',
+  'Fechamento',
+  'Seu Projeto',
 ];
 
 const SETUP_HTML = `
@@ -144,6 +155,7 @@ export default function DeckClient() {
       if ((document.activeElement as HTMLElement)?.tagName === 'SELECT') return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goTo(cur + 1); }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(cur - 1); }
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
     };
     document.addEventListener('keydown', onKeyDown);
 
@@ -323,14 +335,10 @@ export default function DeckClient() {
         position: 'fixed',
         top: 'calc(20px + env(safe-area-inset-top, 0px))',
         left: 'calc(24px + env(safe-area-inset-left, 0px))',
-        zIndex: 300, pointerEvents: 'none', opacity: 0.5,
-        display: 'flex', alignItems: 'center', gap: 6,
+        zIndex: 300, pointerEvents: 'none', opacity: 0.7,
       }}>
-        <span style={{ fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: -0.5 }}>WB</span>
-        <div style={{ lineHeight: 1.1 }}>
-          <p style={{ fontSize: 7, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#792990', margin: 0 }}>Digital</p>
-          <p style={{ fontSize: 7, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#792990', margin: 0 }}>Solutions</p>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="https://www.wbdigitalsolutions.com/svg/logo-white.svg" alt="WB Digital Solutions" style={{ height: 28, width: 'auto', display: 'block' }} />
       </div>
 
       {/* Branding pill */}
@@ -360,7 +368,7 @@ export default function DeckClient() {
         title="Fullscreen"
         style={{
           position: 'fixed',
-          bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+          bottom: 'calc(80px + env(safe-area-inset-bottom, 0px))',
           left: 'calc(24px + env(safe-area-inset-left, 0px))',
           zIndex: 300, width: 36, height: 36, borderRadius: '50%',
           border: '1px solid rgba(255,255,255,0.08)',

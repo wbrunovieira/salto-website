@@ -11,29 +11,26 @@ export const slidesAbertura = `
   <div class="ring" style="width:950px;height:950px;--ro:.03;animation-delay:2.4s;border-color:rgba(121,41,144,0.04)"></div>
 
   <div style="position:relative;z-index:10;text-align:center">
-
-    <div data-a style="display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:36px">
-      <span style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1">WB</span>
-      <div style="line-height:1.1">
-        <p style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#792990;margin:0">Digital</p>
-        <p style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#792990;margin:0">Solutions</p>
-      </div>
-      <div style="width:1px;height:32px;background:rgba(255,255,255,0.1)"></div>
-      <img src="/logo.svg" alt="Salto" style="height:26px;width:auto;opacity:0.7">
+    <div data-a style="display:flex;align-items:center;justify-content:center;gap:40px;margin-bottom:60px">
+      <img src="https://www.wbdigitalsolutions.com/svg/logo-white.svg" alt="WB Digital Solutions" style="height:56px;width:auto">
+      <div style="width:1px;height:64px;background:rgba(255,255,255,0.12)"></div>
+      <img src="/logo.svg" alt="Salto" style="height:56px;width:auto;opacity:0.85">
     </div>
 
-    <div data-a style="margin-bottom:16px">
-      <span id="s1company-label" style="display:none;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3)"></span>
+    <div data-a style="margin-bottom:28px">
+      <span id="s1company-label" style="display:none;font-size:17px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35)"></span>
     </div>
 
-    <h1 data-a style="font-size:clamp(28px,3.8vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1;color:#f5f5f5;margin-bottom:12px">
+    <h1 data-a style="font-size:clamp(48px,6.5vw,90px);font-weight:900;letter-spacing:-2.5px;line-height:1;color:#f5f5f5;margin-bottom:18px">
       <span id="s1name-greeting"></span>Seu negócio na internet.
     </h1>
-    <h1 data-a style="font-size:clamp(28px,3.8vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(to right,#792990,#B060D0,#350450);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:32px">
+    <h1 data-a style="font-size:clamp(48px,6.5vw,90px);font-weight:900;letter-spacing:-2.5px;line-height:1;background:linear-gradient(to right,#792990,#B060D0,#350450);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:40px">
       Do jeito certo.
     </h1>
 
-    <p data-a style="font-size:19px;color:#666;max-width:620px;margin:0 auto;line-height:1.8">
+    <div class="sep" data-a style="max-width:600px;margin-left:auto;margin-right:auto;margin-bottom:36px"></div>
+
+    <p data-a style="font-size:clamp(22px,2.6vw,36px);color:#999;max-width:900px;margin:0 auto;line-height:1.8;letter-spacing:0.5px">
       Sites · Plataformas · E-commerce · Apps · Código puro · SEO · Hospedagem
     </p>
 
@@ -44,52 +41,41 @@ export const slidesAbertura = `
 </div>
 
 <!-- ════════════════════════════════════════
-     S2 — POR QUE TER UM SITE
+     S2 — SEU ENDEREÇO NA INTERNET
 ════════════════════════════════════════ -->
 <div class="slide" data-s="2">
-  <div class="gco" style="background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(121,41,144,0.08) 0%,transparent 70%)"></div>
+  <div class="gco" style="background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(121,41,144,0.09) 0%,transparent 70%)"></div>
   <div class="wfull mw900">
-    <div data-a class="badge mb8" style="border-color:rgba(121,41,144,0.35);color:#792990"><span class="dot" style="background:#792990;box-shadow:0 0 8px rgba(121,41,144,0.6)"></span>A REALIDADE DO MERCADO HOJE</div>
+    <div data-a class="badge mb8" style="border-color:rgba(121,41,144,0.35);color:#792990"><span class="dot" style="background:#792990;box-shadow:0 0 8px rgba(121,41,144,0.6)"></span>O PONTO DE PARTIDA</div>
 
-    <h2 data-a class="hl mb2">Quem não aparece online</h2>
-    <h2 data-a class="hl mb10" style="background:linear-gradient(to right,#792990,#350450);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">está perdendo clientes agora.</h2>
+    <h2 data-a class="hl mb2">Seu espaço próprio</h2>
+    <h2 data-a class="hl mb6" style="background:linear-gradient(to right,#792990,#350450);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">na internet.</h2>
+    <div class="sep" data-a></div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
 
-      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:22px">
-        <div style="font-size:30px;margin-bottom:12px">🕐</div>
-        <p style="font-size:17px;font-weight:800;color:#f5f5f5;margin:0 0 8px">Aberto 24h por dia</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0">Seu site trabalha para você enquanto você dorme. Clientes encontram, pesquisam e entram em contato a qualquer hora.</p>
+      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:28px">
+        <div style="font-size:34px;margin-bottom:14px">🏠</div>
+        <p style="font-size:22px;font-weight:800;color:#f5f5f5;margin:0 0 10px">Controle total</p>
+        <p style="font-size:19px;color:var(--muted);line-height:1.65;margin:0">Você decide o que mostrar, como mostrar e quando mostrar. Nenhuma plataforma decide por você o que aparece — ou deixa de aparecer — para o seu cliente.</p>
       </div>
 
-      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:22px">
-        <div style="font-size:30px;margin-bottom:12px">🔍</div>
-        <p style="font-size:17px;font-weight:800;color:#f5f5f5;margin:0 0 8px">Apareça no Google</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0">Quando alguém busca o que você vende, seu negócio aparece primeiro — antes dos concorrentes.</p>
+      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:28px">
+        <div style="font-size:34px;margin-bottom:14px">🎯</div>
+        <p style="font-size:22px;font-weight:800;color:#f5f5f5;margin:0 0 10px">Identidade da sua marca</p>
+        <p style="font-size:19px;color:var(--muted);line-height:1.65;margin:0">Cores, design, conteúdo — tudo alinhado à sua marca. Não um perfil genérico dentro de uma plataforma, mas um ambiente feito exclusivamente para o seu negócio.</p>
       </div>
 
-      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:22px">
-        <div style="font-size:30px;margin-bottom:12px">💼</div>
-        <p style="font-size:17px;font-weight:800;color:#f5f5f5;margin:0 0 8px">Credibilidade imediata</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0">Antes de comprar, o cliente pesquisa. Quem não tem site perde para quem tem — mesmo que o serviço seja melhor.</p>
+      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:28px">
+        <div style="font-size:34px;margin-bottom:14px">🔓</div>
+        <p style="font-size:22px;font-weight:800;color:#f5f5f5;margin:0 0 10px">Independência total</p>
+        <p style="font-size:19px;color:var(--muted);line-height:1.65;margin:0">Redes sociais mudam algoritmos, suspendem contas, cortam alcance sem aviso. Seu site é seu — ninguém muda as regras, ninguém tira do ar.</p>
       </div>
 
-      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:22px">
-        <div style="font-size:30px;margin-bottom:12px">📌</div>
-        <p style="font-size:17px;font-weight:800;color:#f5f5f5;margin:0 0 8px">Endereço digital permanente</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0">Instagram muda algoritmo, conta é bloqueada, alcance cai. Seu site é seu — ninguém tira, ninguém muda as regras.</p>
-      </div>
-
-      <div data-a style="border:1px solid rgba(121,41,144,0.2);border-radius:14px;background:rgba(121,41,144,0.04);padding:22px">
-        <div style="font-size:30px;margin-bottom:12px">📩</div>
-        <p style="font-size:17px;font-weight:800;color:#f5f5f5;margin:0 0 8px">Clientes chegam até você</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0">Formulários, WhatsApp integrado, agendamento online. O cliente achou, gostou, entrou em contato — tudo no site.</p>
-      </div>
-
-      <div data-a style="border:1px solid rgba(121,41,144,0.35);border-radius:14px;background:rgba(121,41,144,0.08);padding:22px">
-        <div style="font-size:30px;margin-bottom:12px">🌍</div>
-        <p style="font-size:17px;font-weight:800;color:#f5f5f5;margin:0 0 8px">Alcance sem fronteira</p>
-        <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0">Não fica limitado ao bairro ou ao boca a boca. Seu negócio pode alcançar clientes em qualquer cidade ou país.</p>
+      <div data-a style="border:1px solid rgba(121,41,144,0.35);border-radius:14px;background:rgba(121,41,144,0.08);padding:28px">
+        <div style="font-size:34px;margin-bottom:14px">🕐</div>
+        <p style="font-size:22px;font-weight:800;color:#f5f5f5;margin:0 0 10px">Aberto 24h por dia</p>
+        <p style="font-size:19px;color:var(--muted);line-height:1.65;margin:0">Seu site trabalha enquanto você dorme. O cliente encontra informações, produtos e entra em contato a qualquer hora — sem você precisar estar presente.</p>
       </div>
 
     </div>
